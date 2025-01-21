@@ -20,6 +20,7 @@
             base.Dispose(disposing);
         }
 
+        // Test Comment
         #region Windows Form Designer generated code
 
         /// <summary>
