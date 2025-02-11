@@ -14,10 +14,12 @@ namespace DurakCardGame
         //public string Image { get; set; }
         public string ImageLocation { get; set; } = "../../../5.jpg";
         public bool Flip { get; set; }
-        public int Width { get; set; } = 90;
-        public int Height { get; set; } = 200;
+        public int Width { get; set; } = 50;
+        public int Height { get; set; } = 100;
         public int X { get; set; }
         public int Y { get; set; }
+        //public int AddX { get; set; } = 0;
+        //public int AddY { get; set; } = 0;
         public bool wasOnTop { get; set; } = false;
 
         public Card(string suit, string value, int rank, int x, int y)

@@ -44,6 +44,8 @@
             label6 = new Label();
             button2 = new Button();
             button3 = new Button();
+            panelCurrentPlayer = new Panel();
+            panelOpponent = new Panel();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -178,7 +180,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(926, 579);
+            button2.Location = new Point(253, 726);
             button2.Name = "button2";
             button2.Size = new Size(161, 23);
             button2.TabIndex = 4;
@@ -187,18 +189,34 @@
             // 
             // button3
             // 
-            button3.Location = new Point(934, 630);
+            button3.Location = new Point(577, 726);
             button3.Name = "button3";
             button3.Size = new Size(153, 23);
             button3.TabIndex = 5;
             button3.Text = "Cheat (show hand)";
             button3.UseVisualStyleBackColor = true;
             // 
+            // panelCurrentPlayer
+            // 
+            panelCurrentPlayer.Location = new Point(150, 563);
+            panelCurrentPlayer.Name = "panelCurrentPlayer";
+            panelCurrentPlayer.Size = new Size(751, 148);
+            panelCurrentPlayer.TabIndex = 7;
+            // 
+            // panelOpponent
+            // 
+            panelOpponent.Location = new Point(152, 165);
+            panelOpponent.Name = "panelOpponent";
+            panelOpponent.Size = new Size(740, 174);
+            panelOpponent.TabIndex = 8;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1184, 761);
+            Controls.Add(panelOpponent);
+            Controls.Add(panelCurrentPlayer);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(label6);
@@ -233,5 +251,7 @@
         private Label label6;
         private Button button2;
         private Button button3;
+        private Panel panelCurrentPlayer;
+        private Panel panelOpponent;
     }
 }

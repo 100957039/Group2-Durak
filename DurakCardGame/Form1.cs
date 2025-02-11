@@ -27,19 +27,25 @@ namespace DurakCardGame
         private void button1_Click(object sender, EventArgs e)
         {
             // Create a new Card object
-            Card imgBtn = new Card("Hearts", "5", 5, 600 + y, 600 + x);
+            //Card imgBtn = new Card("Hearts", "5", 5, 150 + y, 600 + x);
+            Card imgBtn = new Card("Hearts", "5", 5, y, x);
 
             // Update y-coordinate for spacing
             y += 20;
 
             // Create the button from the Card object
             Button cardButton = imgBtn.CreateCardButton();
+            Button cardButton2 = imgBtn.CreateCardButton();
 
             // Add the button to the form
-            this.Controls.Add(cardButton);
+            panelOpponent.Controls.Add(cardButton);
+            cardButton.BringToFront();
+            panelCurrentPlayer.Controls.Add(cardButton2);
+            cardButton2.BringToFront();
+            //this.Controls.Add(cardButton);
 
             // Bring the button to the front
-            cardButton.BringToFront();
+
 
         }
 
