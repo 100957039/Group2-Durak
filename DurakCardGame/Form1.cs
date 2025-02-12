@@ -28,20 +28,20 @@ namespace DurakCardGame
         {
             // Create a new Card object
             //Card imgBtn = new Card("Hearts", "5", 5, 150 + y, 600 + x);
-            Card imgBtn = new Card("Hearts", "5", 5, y, x);
+            //Card imgBtn = new Card("Hearts", "5", 5, y, x);
 
             // Update y-coordinate for spacing
             y += 20;
 
             // Create the button from the Card object
-            Button cardButton = imgBtn.CreateCardButton();
-            Button cardButton2 = imgBtn.CreateCardButton();
+            //Button cardButton = imgBtn.CreateCardButton();
+            //Button cardButton2 = imgBtn.CreateCardButton();
 
             // Add the button to the form
-            panelOpponent.Controls.Add(cardButton);
-            cardButton.BringToFront();
-            panelCurrentPlayer.Controls.Add(cardButton2);
-            cardButton2.BringToFront();
+            //panelOpponent.Controls.Add(cardButton);
+            //cardButton.BringToFront();
+            //panelCurrentPlayer.Controls.Add(cardButton2);
+            //cardButton2.BringToFront();
             //this.Controls.Add(cardButton);
 
             // Bring the button to the front
@@ -52,6 +52,58 @@ namespace DurakCardGame
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void OnGameStart(object sender, EventArgs e)
+        {
+            String playerOneName = textBoxPlayerOne.Text;
+            String playerTwoName = textBoxPlayerTwo.Text;
+            //Deck deck = new Deck();
+            //deck.Shuffle();
+            List<Card> playerOneHand = new List<Card>();
+            List<Card> playerTwoHand = new List<Card>();
+            Player playerOne = new Player(playerOneName, playerOneHand);
+            Player playerTwo = new Player(playerTwoName, playerTwoHand);
+            Game game = new Game();
+            game.addPlayer(playerOneName);
+            game.addPlayer(playerTwoName);
+            game.startGame();
+            //foreach (Card card in game.)
+            //{
+            //    Button cardButton = card.CreateCardButton();
+            //    panelCurrentPlayer.Controls.Add(cardButton);
+            //    cardButton.BringToFront();
+            //}
+            //foreach (Card card in player)
+            int x = 0;
+            foreach (Card card in game.GetPlayer(0).Hand)
+            {
+                card.X = x;
+                Button cardButton = card.CreateCardButton();
+                cardButton.Click += (sender, e) =>
+                {
+                    // Assuming you have the player's turn logic handled
+                    game.playCard(game.GetPlayer(0).Hand.IndexOf(card));  // This gets the index of the clicked card
+                    cardButton.Enabled = false;  // Disable button once card is played
+                    // Add the card to the played cards panel
+                    panelPlayGroundAttack.Controls.Add(cardButton);
+                };
+                //cardButton.X = x;
+                cardButton.Location = new Point(x, 0);
+                panelCurrentPlayer.Controls.Add(cardButton);
+                cardButton.BringToFront();
+                x += 75;
+            }
+            x = 0;
+            foreach (Card card in game.GetPlayer(1).Hand)
+            {
+                card.X = x;
+                Button cardButton = card.CreateCardButton();
+                cardButton.Location = new Point(x, 0);
+                panelOpponent.Controls.Add(cardButton);
+                cardButton.BringToFront();
+                x += 75;
+            }
         }
     }
 }

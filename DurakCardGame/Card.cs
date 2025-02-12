@@ -13,7 +13,7 @@ namespace DurakCardGame
         public int Rank { get; set; }
         //public string Image { get; set; }
         public string ImageLocation { get; set; } = "../../../5.jpg";
-        public bool Flip { get; set; }
+        public bool Flip { get; set; } = false;
         public int Width { get; set; } = 50;
         public int Height { get; set; } = 100;
         public int X { get; set; }
@@ -22,15 +22,29 @@ namespace DurakCardGame
         //public int AddY { get; set; } = 0;
         public bool wasOnTop { get; set; } = false;
 
-        public Card(string suit, string value, int rank, int x, int y)
+        //public Card(string suit, string value, int rank, int x, int y)
+        //{
+        //    Suit = suit;
+        //    Value = value;
+        //    Rank = rank;
+        //    //Image = image;
+        //    Flip = false;
+        //    X = x;
+        //    Y = y;
+        //}
+        public Card(string suit, string value, int rank, string imageLocation)
         {
             Suit = suit;
             Value = value;
             Rank = rank;
-            //Image = image;
-            Flip = false;
-            X = x;
-            Y = y;
+            ImageLocation = imageLocation;
+        }
+
+        public Button CreateButton()
+        {
+            Button button = new Button();
+            button.Text = Value + " " + Suit;
+            return button;
         }
 
         public Button CreateCardButton()
@@ -44,6 +58,7 @@ namespace DurakCardGame
                 BackgroundImageLayout = ImageLayout.Stretch
             };
             //imgButton.BringToFront();
+            
 
             // Add mouse hover events
             imgButton.MouseEnter += (sender, e) =>

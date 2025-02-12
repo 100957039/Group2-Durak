@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
             groupBox1 = new GroupBox();
+            buttonStartGame = new Button();
             label5 = new Label();
             comboBox1 = new ComboBox();
             textBoxPLayerFour = new TextBox();
@@ -40,27 +40,20 @@
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
-            richTextBox1 = new RichTextBox();
+            richTextBox = new RichTextBox();
             label6 = new Label();
             button2 = new Button();
             button3 = new Button();
             panelCurrentPlayer = new Panel();
             panelOpponent = new Panel();
+            panelPlayGroundAttack = new Panel();
+            panelPlayGroundDefense = new Panel();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
-            // button1
-            // 
-            button1.Location = new Point(613, 357);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 0;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
-            // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(buttonStartGame);
             groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(comboBox1);
             groupBox1.Controls.Add(textBoxPLayerFour);
@@ -73,10 +66,20 @@
             groupBox1.Controls.Add(label1);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(880, 142);
+            groupBox1.Size = new Size(880, 114);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             groupBox1.Text = "groupBox1";
+            // 
+            // buttonStartGame
+            // 
+            buttonStartGame.Location = new Point(765, 72);
+            buttonStartGame.Name = "buttonStartGame";
+            buttonStartGame.Size = new Size(75, 23);
+            buttonStartGame.TabIndex = 10;
+            buttonStartGame.Text = "button4";
+            buttonStartGame.UseVisualStyleBackColor = true;
+            buttonStartGame.Click += OnGameStart;
             // 
             // label5
             // 
@@ -161,13 +164,13 @@
             label1.TabIndex = 0;
             label1.Text = "Player 1";
             // 
-            // richTextBox1
+            // richTextBox
             // 
-            richTextBox1.Location = new Point(926, 61);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(161, 488);
-            richTextBox1.TabIndex = 2;
-            richTextBox1.Text = "";
+            richTextBox.Location = new Point(926, 61);
+            richTextBox.Name = "richTextBox";
+            richTextBox.Size = new Size(161, 488);
+            richTextBox.TabIndex = 2;
+            richTextBox.Text = "";
             // 
             // label6
             // 
@@ -180,7 +183,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(253, 726);
+            button2.Location = new Point(292, 687);
             button2.Name = "button2";
             button2.Size = new Size(161, 23);
             button2.TabIndex = 4;
@@ -189,7 +192,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(577, 726);
+            button3.Location = new Point(567, 687);
             button3.Name = "button3";
             button3.Size = new Size(153, 23);
             button3.TabIndex = 5;
@@ -198,33 +201,49 @@
             // 
             // panelCurrentPlayer
             // 
-            panelCurrentPlayer.Location = new Point(150, 563);
+            panelCurrentPlayer.Location = new Point(163, 533);
             panelCurrentPlayer.Name = "panelCurrentPlayer";
             panelCurrentPlayer.Size = new Size(751, 148);
             panelCurrentPlayer.TabIndex = 7;
             // 
             // panelOpponent
             // 
-            panelOpponent.Location = new Point(152, 165);
+            panelOpponent.Location = new Point(163, 132);
             panelOpponent.Name = "panelOpponent";
-            panelOpponent.Size = new Size(740, 174);
+            panelOpponent.Size = new Size(740, 146);
             panelOpponent.TabIndex = 8;
+            // 
+            // panelPlayGroundAttack
+            // 
+            panelPlayGroundAttack.Location = new Point(163, 406);
+            panelPlayGroundAttack.Name = "panelPlayGroundAttack";
+            panelPlayGroundAttack.Size = new Size(740, 103);
+            panelPlayGroundAttack.TabIndex = 9;
+            // 
+            // panelPlayGroundDefense
+            // 
+            panelPlayGroundDefense.Location = new Point(165, 291);
+            panelPlayGroundDefense.Name = "panelPlayGroundDefense";
+            panelPlayGroundDefense.Size = new Size(738, 100);
+            panelPlayGroundDefense.TabIndex = 10;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1184, 761);
+            ClientSize = new Size(1184, 720);
+            Controls.Add(panelPlayGroundDefense);
+            Controls.Add(panelPlayGroundAttack);
             Controls.Add(panelOpponent);
             Controls.Add(panelCurrentPlayer);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(label6);
-            Controls.Add(richTextBox1);
+            Controls.Add(richTextBox);
             Controls.Add(groupBox1);
-            Controls.Add(button1);
             Margin = new Padding(3, 2, 3, 2);
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             Load += Form1_Load;
             groupBox1.ResumeLayout(false);
@@ -234,8 +253,6 @@
         }
 
         #endregion
-
-        private Button button1;
         private GroupBox groupBox1;
         private ComboBox comboBox1;
         private TextBox textBoxPLayerFour;
@@ -247,11 +264,14 @@
         private Label label2;
         private Label label1;
         private Label label5;
-        private RichTextBox richTextBox1;
+        private RichTextBox richTextBox;
         private Label label6;
         private Button button2;
         private Button button3;
         private Panel panelCurrentPlayer;
         private Panel panelOpponent;
+        private Button buttonStartGame;
+        private Panel panelPlayGroundAttack;
+        private Panel panelPlayGroundDefense;
     }
 }

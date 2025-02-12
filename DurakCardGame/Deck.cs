@@ -12,7 +12,7 @@ namespace DurakCardGame
 
         public Deck()
         {
-            string[] suits = { "Hearts", "Diamonds", "Clubs", "Spades" };
+            string[] suits = { "❤️‍", "♦️", "♣️", "♠️" };
             string[] values = { "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace" };
             int[] ranks = { 6, 7, 8, 9, 10, 11, 12, 13, 14 };
 
@@ -20,7 +20,7 @@ namespace DurakCardGame
             {
                 for (int i = 0; i < values.Length; i++)
                 {
-                    //cards.Add(new Card(suit, values[i], ranks[i], $"{values[i]}{suit[0]}.jpg"));
+                    cards.Insert(i, new Card(suit, values[i], ranks[i], "../../../cards/" + suit + "-" + values[i] +".png"));
                 }
             }
         }
@@ -28,6 +28,7 @@ namespace DurakCardGame
         public void Shuffle()
         {
             Random random = new Random();
+            //List<Card> cardList = cards.ToList(); // Convert Stack to List
             for (int i = 0; i < cards.Count; i++)
             {
                 int j = random.Next(i, cards.Count);
@@ -35,6 +36,7 @@ namespace DurakCardGame
                 cards[i] = cards[j];
                 cards[j] = temp;
             }
+            //cards = new List<Card>(cardList);
         }
 
         public Card Draw()

@@ -10,7 +10,7 @@ namespace DurakCardGame
     internal class Game
     {
         private Deck deck = new Deck();
-        private List<Player> players = new List<Player>();
+        private List<Player> players = new List<Player>() ; 
         private List<Card> playedCards = new List<Card>();
         private List<Card> played = new List<Card>();
         private String trump;
@@ -22,7 +22,7 @@ namespace DurakCardGame
 //          shuffle the cards before the game starts
             deck.Shuffle();
             //          draw a card from the deck to determine the trump
-            trump = deck.Draw().Suit;
+            //trump = deck.Draw().Suit;
 
         }
         //      add a player to the game
@@ -35,6 +35,30 @@ namespace DurakCardGame
                 hand.Add(deck.Draw());
             }
             players.Add(new Player(name, hand));
+        }
+        
+        public Card playCard(int index)
+        {
+            Card card = players[turn].Hand[index];
+            players[turn].Hand.RemoveAt(index);
+            return card;
+        }
+
+        public void startGame()
+        {
+            //      draw a card from the deck to determine the trump
+            foreach (Player player in players)
+            { 
+                int howManyCards = player.Hand.Count;
+                if (howManyCards < 6)
+                {
+                    for (int i = 0; i < 6 - howManyCards; i++)
+                    {
+                        player.Hand.Add(deck.Draw());
+                    }
+                }
+            }
+            trump = deck.Draw().Suit;
         }
 
         public Player playerTurn()
@@ -50,15 +74,10 @@ namespace DurakCardGame
             }
             return players[turn];
         }
+
+        public Player GetPlayer(int index)
+        {
+            return players[index];
+        }
     }
 }
-
-//for (int i = 0; i < 6; i++)
-//{
-//    List<Card> hand = new List<Card>();
-//    for (int j = 0; j < 6; j++)
-//    {
-//        hand.Add(deck.Draw());
-//    }
-//    players.Add(new Player($"Player {i + 1}", hand));
-//}
