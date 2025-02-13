@@ -13,6 +13,10 @@ namespace DurakCardGame
         }
         int x = 0;
         int y = 0;
+        Game game = new Game();
+        List<Panel> panels;
+        List<String> playersName;
+
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -54,7 +58,55 @@ namespace DurakCardGame
 
         }
 
-        private void OnGameStart(object sender, EventArgs e)
+        private void RefreshPanels()
+        {
+            panelCurrentPlayer.Refresh();
+            panelTwo.Refresh();
+            panelPlayGroundAttack.Refresh();
+            //panelPlayGroundDefend.Refresh();
+        }
+
+        private void FillHand()
+        {
+            game.fillHnad();
+            RefreshPanels();
+        }
+
+        private bool ValidatePlayer()
+        {
+            if (textBoxPlayerOne.Text.Trim() == "" || textBoxPlayerTwo.Text.Trim() == ""
+                || textBoxPlayerThree.Text.Trim() == "" || textBoxPLayerFour.Text.Trim() == "")
+            {
+                MessageBox.Show("Please enter player names");
+                return false;
+            }
+            else
+            {
+                if (textBoxPlayerOne.Text.Trim() != "")
+                {
+                    panels.Add(panelCurrentPlayer);
+                    playersName.Add(textBoxPlayerOne.Text);
+                }
+                if (textBoxPlayerTwo.Text.Trim() != "")
+                {
+                    panels.Add(panelOne);
+                    playersName.Add(textBoxPlayerTwo.Text);
+                }
+                if (textBoxPlayerThree.Text.Trim() != "")
+                {
+                    panels.Add(panelTwo);
+                    playersName.Add(textBoxPlayerThree.Text);
+                }
+                if (textBoxPLayerFour.Text.Trim() != "")
+                {
+                    panels.Add(panelThree);
+                    playersName.Add(textBoxPLayerFour.Text);
+                }
+                return true;
+            }
+        }
+
+       private void OnGameStart(object sender, EventArgs e)
         {
             String playerOneName = textBoxPlayerOne.Text;
             String playerTwoName = textBoxPlayerTwo.Text;
@@ -64,7 +116,7 @@ namespace DurakCardGame
             List<Card> playerTwoHand = new List<Card>();
             Player playerOne = new Player(playerOneName, playerOneHand);
             Player playerTwo = new Player(playerTwoName, playerTwoHand);
-            Game game = new Game();
+
             game.addPlayer(playerOneName);
             game.addPlayer(playerTwoName);
             game.startGame();
@@ -100,10 +152,28 @@ namespace DurakCardGame
                 card.X = x;
                 Button cardButton = card.CreateCardButton();
                 cardButton.Location = new Point(x, 0);
-                panelOpponent.Controls.Add(cardButton);
+                panelTwo.Controls.Add(cardButton);
                 cardButton.BringToFront();
                 x += 75;
             }
+
+            textBoxCountDeckCards.Text = game.deck.Count().ToString();
+        }
+
+        private void buttonFillHand_Click(object sender, EventArgs e)
+        {
+            FillHand();
+            foreach (Player player in game.players)
+            {
+                foreach (Card card in player.Hand)
+                {
+                    Button cardButton = card.CreateCardButton();
+                    panelCurrentPlayer.Controls.Add(cardButton);
+                    cardButton.BringToFront();
+                }
+            }
+            RefreshPanels();
+            textBoxCountDeckCards.Text = game.deck.Count().ToString();
         }
     }
 }

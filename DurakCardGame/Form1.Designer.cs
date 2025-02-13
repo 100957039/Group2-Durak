@@ -45,9 +45,13 @@
             button2 = new Button();
             button3 = new Button();
             panelCurrentPlayer = new Panel();
-            panelOpponent = new Panel();
+            panelTwo = new Panel();
             panelPlayGroundAttack = new Panel();
             panelPlayGroundDefense = new Panel();
+            buttonFillHand = new Button();
+            textBoxCountDeckCards = new TextBox();
+            panelOne = new Panel();
+            panelThree = new Panel();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -168,7 +172,7 @@
             // 
             richTextBox.Location = new Point(926, 61);
             richTextBox.Name = "richTextBox";
-            richTextBox.Size = new Size(161, 488);
+            richTextBox.Size = new Size(161, 109);
             richTextBox.TabIndex = 2;
             richTextBox.Text = "";
             // 
@@ -206,12 +210,12 @@
             panelCurrentPlayer.Size = new Size(751, 148);
             panelCurrentPlayer.TabIndex = 7;
             // 
-            // panelOpponent
+            // panelTwo
             // 
-            panelOpponent.Location = new Point(163, 132);
-            panelOpponent.Name = "panelOpponent";
-            panelOpponent.Size = new Size(740, 146);
-            panelOpponent.TabIndex = 8;
+            panelTwo.Location = new Point(163, 132);
+            panelTwo.Name = "panelTwo";
+            panelTwo.Size = new Size(740, 146);
+            panelTwo.TabIndex = 8;
             // 
             // panelPlayGroundAttack
             // 
@@ -227,14 +231,49 @@
             panelPlayGroundDefense.Size = new Size(738, 100);
             panelPlayGroundDefense.TabIndex = 10;
             // 
+            // buttonFillHand
+            // 
+            buttonFillHand.Location = new Point(777, 687);
+            buttonFillHand.Name = "buttonFillHand";
+            buttonFillHand.Size = new Size(75, 23);
+            buttonFillHand.TabIndex = 11;
+            buttonFillHand.Text = "Fill Hand";
+            buttonFillHand.UseVisualStyleBackColor = true;
+            buttonFillHand.Click += buttonFillHand_Click;
+            // 
+            // textBoxCountDeckCards
+            // 
+            textBoxCountDeckCards.Location = new Point(12, 147);
+            textBoxCountDeckCards.Name = "textBoxCountDeckCards";
+            textBoxCountDeckCards.Size = new Size(100, 23);
+            textBoxCountDeckCards.TabIndex = 12;
+            // 
+            // panelOne
+            // 
+            panelOne.Location = new Point(19, 190);
+            panelOne.Name = "panelOne";
+            panelOne.Size = new Size(115, 434);
+            panelOne.TabIndex = 13;
+            // 
+            // panelThree
+            // 
+            panelThree.Location = new Point(934, 188);
+            panelThree.Name = "panelThree";
+            panelThree.Size = new Size(200, 473);
+            panelThree.TabIndex = 14;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1184, 720);
+            Controls.Add(panelThree);
+            Controls.Add(panelOne);
+            Controls.Add(textBoxCountDeckCards);
+            Controls.Add(buttonFillHand);
             Controls.Add(panelPlayGroundDefense);
             Controls.Add(panelPlayGroundAttack);
-            Controls.Add(panelOpponent);
+            Controls.Add(panelTwo);
             Controls.Add(panelCurrentPlayer);
             Controls.Add(button3);
             Controls.Add(button2);
@@ -269,9 +308,13 @@
         private Button button2;
         private Button button3;
         private Panel panelCurrentPlayer;
-        private Panel panelOpponent;
+        private Panel panelTwo;
         private Button buttonStartGame;
         private Panel panelPlayGroundAttack;
         private Panel panelPlayGroundDefense;
+        private Button buttonFillHand;
+        private TextBox textBoxCountDeckCards;
+        private Panel panelOne;
+        private Panel panelThree;
     }
 }

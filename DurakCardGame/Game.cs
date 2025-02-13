@@ -9,11 +9,13 @@ namespace DurakCardGame
 {
     internal class Game
     {
-        private Deck deck = new Deck();
-        private List<Player> players = new List<Player>() ; 
+        public Deck deck = new Deck();
+        public List<Player> players = new List<Player>() ; 
         private List<Card> playedCards = new List<Card>();
         private List<Card> played = new List<Card>();
         private String trump;
+        public Player defender;
+        //private Queue<Player>
         //private List<Card> discard = new List<Card>();
         private int turn = 0;
 
@@ -44,6 +46,14 @@ namespace DurakCardGame
             return card;
         }
 
+        public void attack(Player player)
+        {
+            if (playedCards.Count > 0)
+            {
+
+            }
+        }
+
         public void startGame()
         {
             //      draw a card from the deck to determine the trump
@@ -60,6 +70,21 @@ namespace DurakCardGame
             }
             trump = deck.Draw().Suit;
         }
+        // fill hand with 6 cards
+        public void fillHnad()
+        {
+            foreach (Player player in players)
+            {
+                int howManyCards = player.Hand.Count;
+                if (howManyCards < 6)
+                {
+                    for (int i = 0; i < 6 - howManyCards; i++)
+                    {
+                        player.Hand.Add(deck.Draw());
+                    }
+                }
+            }
+        }   
 
         public Player playerTurn()
         {
