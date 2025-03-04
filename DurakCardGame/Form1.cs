@@ -108,55 +108,65 @@ namespace DurakCardGame
 
         private void OnGameStart(object sender, EventArgs e)
         {
-            ValidatePlayer();
+            //ValidatePlayer();
+            List<Panel> panels = [panelCurrentPlayer, panelOne, panelTwo, panelThree];
+            List<String> pls =  new List<string>();
+            if (textBoxPlayerOne.Text != "")
+            {
+                pls.Add(textBoxPlayerOne.Text);
+            }
+            if (textBoxPlayerTwo.Text != "")
+            {
+                pls.Add(textBoxPlayerTwo.Text);
+            }
+            if (textBoxPlayerThree.Text != "")
+            {
+                pls.Add(textBoxPlayerThree.Text);
+            }
+            if (textBoxPLayerFour.Text != "")
+            {
+                pls.Add(textBoxPLayerFour.Text);
+            }
+
             String playerOneName = textBoxPlayerOne.Text;
-            String playerTwoName = textBoxPlayerTwo.Text;
+            //String playerTwoName = textBoxPlayerTwo.Text;
             //Deck deck = new Deck();
             //deck.Shuffle();
-            List<Card> playerOneHand = new List<Card>();
-            List<Card> playerTwoHand = new List<Card>();
-            Player playerOne = new Player(playerOneName, playerOneHand);
-            Player playerTwo = new Player(playerTwoName, playerTwoHand);
-
-            game.addPlayer(playerOneName);
-            game.addPlayer(playerTwoName);
-            game.startGame();
-            //foreach (Card card in game.)
-            //{
-            //    Button cardButton = card.CreateCardButton();
-            //    panelCurrentPlayer.Controls.Add(cardButton);
-            //    cardButton.BringToFront();
-            //}
-            //foreach (Card card in player)
-            int x = 0;
-            foreach (Card card in game.GetPlayer(0).Hand)
+            for (int i = 0; i < pls.Count(); i++)
             {
-                card.X = x;
-                Button cardButton = card.CreateCardButton();
-                cardButton.Click += (sender, e) =>
+                    String playerName = pls[i];
+                game.addPlayer(playerName);
+                game.startGame();
+                int x = 0;
+                foreach (Card card in game.GetPlayer(i).Hand)
                 {
-                    // Assuming you have the player's turn logic handled
-                    game.playCard(game.GetPlayer(0).Hand.IndexOf(card));  // This gets the index of the clicked card
-                    cardButton.Enabled = false;  // Disable button once card is played
-                    // Add the card to the played cards panel
-                    panelPlayGroundAttack.Controls.Add(cardButton);
-                };
-                //cardButton.X = x;
-                cardButton.Location = new Point(x, 0);
-                panelCurrentPlayer.Controls.Add(cardButton);
-                cardButton.BringToFront();
-                x += 75;
+                    card.X = x;
+                    Button cardButton = card.CreateCardButton();
+                    cardButton.Click += (sender, e) =>
+                    {
+                        // Assuming you have the player's turn logic handled
+                        game.playCard(game.GetPlayer(0).Hand.IndexOf(card));  // This gets the index of the clicked card
+                        cardButton.Enabled = false;  // Disable button once card is played
+                                                     // Add the card to the played cards panel
+                        panelPlayGroundAttack.Controls.Add(cardButton);
+                    };
+                    cardButton.Location = new Point(x, 0);
+                    panels[i].Controls.Add(cardButton);
+                    cardButton.BringToFront();
+                    x += 75;
+                }
+                x = 0;
+
             }
-            x = 0;
-            foreach (Card card in game.GetPlayer(1).Hand)
-            {
-                card.X = x;
-                Button cardButton = card.CreateCardButton();
-                cardButton.Location = new Point(x, 0);
-                panelTwo.Controls.Add(cardButton);
-                cardButton.BringToFront();
-                x += 75;
-            }
+            //foreach (Card card in game.GetPlayer(1).Hand)
+            //{
+            //    card.X = x;
+            //    Button cardButton = card.CreateCardButton();
+            //    cardButton.Location = new Point(x, 0);
+            //    panelTwo.Controls.Add(cardButton);
+            //    cardButton.BringToFront();
+            //    x += 75;
+            //}
 
             textBoxCountDeckCards.Text = game.deck.Count().ToString();
         }
@@ -185,6 +195,12 @@ namespace DurakCardGame
         private void player1Cards_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            game.fillHand();
+            textBoxCountDeckCards.Text = game.deck.Count().ToString();
         }
     }
 }

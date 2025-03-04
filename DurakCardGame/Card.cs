@@ -12,7 +12,7 @@ namespace DurakCardGame
         public string Value { get; set; }
         public int Rank { get; set; }
         //public string Image { get; set; }
-        public string ImageLocation { get; set; } = "../../../5.jpg";
+        public string ImageLocation { get; set; }
         public bool Flip { get; set; } = false;
         public int Width { get; set; } = 50;
         public int Height { get; set; } = 100;

@@ -50,26 +50,22 @@ namespace DurakCardGame
         {
             if (playedCards.Count > 0)
             {
-                fillHand();
-                playerTurn();
+
             }
         }
 
         public void startGame()
         {
             // draw a card from the deck to determine the trump
-            foreach (Player player in players)
-            { 
-                int howManyCards = player.Hand.Count;
-                if (howManyCards < 6)
-                {
-                    for (int i = 0; i < 6 - howManyCards; i++)
-                    {
-                        player.Hand.Add(deck.Draw());
-                    }
-                }
-            }
-            trump = deck.Draw().Suit;
+            //foreach (Player player in players)
+            //{                 
+                //for (int i = 0; i < 6; i++)
+                //{
+                //    //player.Hand.Add(deck.Draw());
+                //}
+                
+            //}
+            //trump = deck.Draw().Suit;
         }
         // fill hand with 6 cards
         public void fillHand()
