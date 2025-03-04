@@ -10,7 +10,7 @@ namespace DurakCardGame
     internal class Game
     {
         public Deck deck = new Deck();
-        public List<Player> players = new List<Player>() ; 
+        public List<Player> players = new List<Player>();
         private List<Card> playedCards = new List<Card>();
         private List<Card> played = new List<Card>();
         private String trump;
@@ -21,16 +21,16 @@ namespace DurakCardGame
 
         public Game() 
         {
-//          shuffle the cards before the game starts
+            // shuffle the cards before the game starts
             deck.Shuffle();
-            //          draw a card from the deck to determine the trump
-            //trump = deck.Draw().Suit;
+            // draw a card from the deck to determine the trump
+            // trump = deck.Draw().Suit;
 
         }
-        //      add a player to the game
+        // add a player to the game
         public void addPlayer(string name)
         {
-            //     draw 6 cards from the deck and add them to the player's hand
+            // draw 6 cards from the deck and add them to the player's hand
             List<Card> hand = new List<Card>();
             for (int i = 0; i < 6; i++)
             {
@@ -50,13 +50,14 @@ namespace DurakCardGame
         {
             if (playedCards.Count > 0)
             {
-
+                fillHand();
+                playerTurn();
             }
         }
 
         public void startGame()
         {
-            //      draw a card from the deck to determine the trump
+            // draw a card from the deck to determine the trump
             foreach (Player player in players)
             { 
                 int howManyCards = player.Hand.Count;
@@ -71,7 +72,7 @@ namespace DurakCardGame
             trump = deck.Draw().Suit;
         }
         // fill hand with 6 cards
-        public void fillHnad()
+        public void fillHand()
         {
             foreach (Player player in players)
             {

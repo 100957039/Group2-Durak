@@ -68,7 +68,7 @@ namespace DurakCardGame
 
         private void FillHand()
         {
-            game.fillHnad();
+            game.fillHand();
             RefreshPanels();
         }
 
@@ -106,8 +106,9 @@ namespace DurakCardGame
             }
         }
 
-       private void OnGameStart(object sender, EventArgs e)
+        private void OnGameStart(object sender, EventArgs e)
         {
+            ValidatePlayer();
             String playerOneName = textBoxPlayerOne.Text;
             String playerTwoName = textBoxPlayerTwo.Text;
             //Deck deck = new Deck();
@@ -174,6 +175,16 @@ namespace DurakCardGame
             }
             RefreshPanels();
             textBoxCountDeckCards.Text = game.deck.Count().ToString();
+        }
+
+        private void panelTwo_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void player1Cards_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
