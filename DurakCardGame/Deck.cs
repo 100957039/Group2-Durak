@@ -12,15 +12,15 @@ namespace DurakCardGame
 
         public Deck()
         {
-            string[] suits = { "❤️‍", "♦️", "♣️", "♠️" };
-            string[] values = { "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace" };
+            string[] suits = { "H", "D", "C", "S" };
+            string[] values = { "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
             int[] ranks = { 6, 7, 8, 9, 10, 11, 12, 13, 14 };
 
             foreach (string suit in suits)
             {
                 for (int i = 0; i < values.Length; i++)
                 {
-                    cards.Insert(i, new Card(suit, values[i], ranks[i], "../../../cards/" + suit + "-" + values[i] +".png"));
+                    cards.Insert(i, new Card(suit, values[i], ranks[i], "../../../cards/" + values[i] + suit + ".png"));
                 }
             }
         }
