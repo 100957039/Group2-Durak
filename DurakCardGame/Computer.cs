@@ -16,11 +16,11 @@ namespace DurakCardGame
             Difficulty = difficulty;
         }
 
-        //public Card Logic(Card oponentCard)
-        //{
-            
-            
-            //return card;
-        //}
+        public Card Logic(Card oponentCard)
+        {
+
+            Card card = null;
+            return card;
+        }
     }
 }

@@ -15,6 +15,8 @@ namespace DurakCardGame
         private List<Card> played = new List<Card>();
         private String trump;
         public Player defender;
+        //list to store the rank that can be played during the attack
+        public List<int> allowedRank = new List<int>();
         //private Queue<Player>
         //private List<Card> discard = new List<Card>();
         private int turn = 0;
@@ -27,6 +29,20 @@ namespace DurakCardGame
             // trump = deck.Draw().Suit;
 
         }
+        // add rank that can be played during the attack
+        public void addRank(int rank)
+        {
+            allowedRank.Add(rank);
+        }
+
+        // reset allowedRank after each attack
+        public void resetRank()
+        {
+            allowedRank.Clear();
+        }
+
+
+
         // add a player to the game
         public void addPlayer(string name)
         {

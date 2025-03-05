@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DurakCardGame
 {
-    internal class Player
+    internal abstract class  Player
     {
         public string Name { get; set; }
         public List<Card> Hand { get; set; } = new List<Card>();
