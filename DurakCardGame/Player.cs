@@ -15,7 +15,7 @@ namespace DurakCardGame
         {
             Name = name;
             Hand = hand;
-            SortHand();
+            //SortHand();
         }
         public Card PlayCard(int cardIndex)
         {
@@ -27,14 +27,14 @@ namespace DurakCardGame
         public void DrawCard(Card card)
         {
             Hand.Add(card);
-            SortHand();
+            //SortHand();
         }
 
         // might work on this later
-        public void SortHand()
-        {
-            Hand.Sort((x, y) => x.Rank.CompareTo(y.Rank));
-        }
+        //public void SortHand()
+        //{
+        //    Hand.Sort((x, y) => x.Rank.CompareTo(y.Rank));
+        //}
 
 
     }

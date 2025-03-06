@@ -12,6 +12,10 @@ namespace DurakCardGame
         public Human(string name, List<Card> hand) : base(name, hand)
         {
         }
-    {
+        public void SortHand()
+        {
+            Hand.Sort((x, y) => x.Rank.CompareTo(y.Rank));
+        }
+
     }
 }
