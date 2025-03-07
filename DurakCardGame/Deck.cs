@@ -50,5 +50,11 @@ namespace DurakCardGame
         {
             return cards.Count;
         }
+
+        // to be able to add Trump card to the back of the deck
+        public void AddCard(Card card)
+        {
+            cards.Add(card);
+        }
     }
 }

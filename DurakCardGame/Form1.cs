@@ -134,7 +134,7 @@ namespace DurakCardGame
             //deck.Shuffle();
             for (int i = 0; i < pls.Count(); i++)
             {
-                    String playerName = pls[i];
+                String playerName = pls[i];
                 game.addPlayer(playerName);
                 game.startGame();
                 int x = 0;
@@ -169,6 +169,7 @@ namespace DurakCardGame
             //}
 
             textBoxCountDeckCards.Text = game.deck.Count().ToString();
+            textBoxTrump.Text = game.trump;
         }
 
         private void buttonFillHand_Click(object sender, EventArgs e)

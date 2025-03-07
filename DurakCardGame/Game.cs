@@ -13,7 +13,7 @@ namespace DurakCardGame
         public List<Player> players = new List<Player>();
         private List<Card> playedCards = new List<Card>();
         private List<Card> played = new List<Card>();
-        private String trump;
+        public String trump;
         public Player defender;
         //list to store the rank that can be played during the attack
         public List<int> allowedRank = new List<int>();
@@ -43,7 +43,7 @@ namespace DurakCardGame
 
 
 
-        // add a player to the game
+        // add a player to the game ########### DONE #############
         public void addPlayer(string name)
         {
             // draw 6 cards from the deck and add them to the player's hand
@@ -52,9 +52,10 @@ namespace DurakCardGame
             {
                 hand.Add(deck.Draw());
             }
-            players.Add(new Player(name, hand));
+            players.Add(new Human(name, hand));
         }
         
+        // Might be deleted ******************
         public Card playCard(int index)
         {
             Card card = players[turn].Hand[index];
@@ -70,20 +71,32 @@ namespace DurakCardGame
             }
         }
 
+        // ############## DONE ##############
         public void startGame()
         {
-            // draw a card from the deck to determine the trump
-            //foreach (Player player in players)
-            //{                 
-                //for (int i = 0; i < 6; i++)
-                //{
-                //    //player.Hand.Add(deck.Draw());
-                //}
-                
-            //}
-            //trump = deck.Draw().Suit;
+            // after giving each player 6 cards, draw card to set as trump suit
+            Card trumpCard = deck.Draw();
+            // set ttrump suit
+            trump = trumpCard.Suit;
+            if (trumpCard.Suit == "S")
+            {
+                trump = "Spades";
+            }else if (trumpCard.Suit == "H")
+            {
+                trump = "Hearts";
+            }else if (trumpCard.Suit == "C")
+            {
+                trump = "Clubs";
+            }
+            else
+            {
+                trump = "Diamonds";
+            }
+            // insert trump card back to the deck to be the last card
+            deck.AddCard(trumpCard);
         }
-        // fill hand with 6 cards
+
+        // fill hand with 6 cards | ##### Done ######
         public void fillHand()
         {
             foreach (Player player in players)
@@ -93,11 +106,22 @@ namespace DurakCardGame
                 {
                     for (int i = 0; i < 6 - howManyCards; i++)
                     {
+                        // check how many cards are left in the deck to break the inner loop
+                        if (deck.Count() < 1)
+                        {
+                            break; 
+                        }
                         player.Hand.Add(deck.Draw());
+                    }
+                    // check how many cards are left in the deck to break the outter loop
+                    if (deck.Count() < 1)
+                    {
+                        break;
                     }
                 }
             }
-        }   
+
+        }
 
         public Player playerTurn()
         {
