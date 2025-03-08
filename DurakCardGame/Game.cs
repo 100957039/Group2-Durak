@@ -18,8 +18,17 @@ namespace DurakCardGame
         // test 1 detemine order of attakers ends here 
         public String trump;
         public Player defender;
+
         //list to store the rank that can be played during the attack
-        public List<int> allowedRank = new List<int>();
+        // if you remove test 2, uncomment line below
+        //public List<int> allowedRank = new List<int>();  
+        // test 2 change list to String "easier access maybe" allowedRank.Contains(rank.ToString())
+        private String allowedRankAttack = "";
+        private String Separator = "|";
+        // allowed suit to defend
+        private String allowedSuitDefend = "";
+        // test 2 change list to String "easier access maybe"
+
         //private Queue<Player>
         //private List<Card> discard = new List<Card>();
         private int turn = 0;
@@ -32,14 +41,86 @@ namespace DurakCardGame
             // trump = deck.Draw().Suit;
 
         }
-        // add rank that can be played during the attack
+        // add rank that can be played during the attack  
+        // reset allowedRank after each attack ((((((this will be used in attack method, NOT DEFEND)))))))))
+        // because attacker needs to match RANK, while defender needs to match SUIT
+        //attacker
         public void addRank(int rank)
         {
-            allowedRank.Add(rank);
+            //allowedRank.Add(rank);
+            allowedRankAttack += rank.ToString() + Separator;
+        }
+
+        // reset allowedRank after each attack ((((((this will be used in attack method, NOT DEFEND)))))))))
+        // because attacker needs to match RANK, while defender needs to match SUIT
+        public void resetRank()
+        {
+            //allowedRank.Clear();
+            allowedRankAttack = "";
+        }
+
+        //check if the player can still attack
+        public bool canStillAttack(List<Card> hand)
+        {
+            bool canAttack = false;
+            foreach (Card card in hand)
+            {
+                if (allowedRankAttack.Contains(card.Rank.ToString() + Separator))
+                {
+                    canAttack = true;
+                }
+            }
+            return canAttack;
+        }
+
+        //defender 
+        public void addSuit(String suit)
+        {
+            allowedSuitDefend += suit;
+        }
+
+        // reset suit once the attack has ended
+        public void resetSuit()
+        {
+            allowedSuitDefend = "";
+        }
+        // check if the player has the proper suit to defend
+        public bool canStillDefend(List<Card> hand, Card attackedBy)
+        {
+            bool canDefend = false;
+            foreach (Card card in hand)
+            {
+                // if the attackedBy is a trump card
+                if (attackedBy.Suit == trump )
+                {
+                    if (attackedBy.Rank < card.Rank)
+                    {
+                        canDefend = true;
+                        break;
+                    }  
+                }
+                // if the attackedBy is not trump card
+                else
+                {
+                    //if the defender has higher rank than the played card from the same suit
+                    if (allowedSuitDefend.Contains(card.Rank.ToString()) && attackedBy.Rank < card.Rank)
+                    {
+                        canDefend = true;
+                        break;
+                    // if the attacker did not play a trump card, and defender can use trump to defend
+                    }else if (card.Suit == trump)
+                    {
+                        canDefend = true;
+                        break;
+                    }
+                }
+            }
+            return canDefend;
         }
 
         // test 1 starts here
         // choose first attacker base on their hand, who has the lowest trump card
+        // only used when the game start, it probably needs to be (private) and executed in startGame()
         public String chooseFirstAttacker()
         {
             // 15 is a random number just to compare with, it could be a 100 or 1000
@@ -50,9 +131,11 @@ namespace DurakCardGame
                 foreach (Card card in players[i].Hand)
                 {
                     //Console.WriteLine(card.Suit);
+                    // check if the card is trump suit
                     if (card.Suit == trump[0].ToString())
                     {
                         //Console.WriteLine(card.Value + " " + card.Suit, card.Rank < lowestTrumpCard);
+                        // check if it is lower than the assigned value
                         if (card.Rank < lowestTrumpCard)
                         {
                             //Console.WriteLine(card.Rank);
@@ -85,17 +168,13 @@ namespace DurakCardGame
             String names = "";
             foreach (Player player in AttackerQueue)
             {
-                names += player.Name + " ";
+                names += player.Name + " | ";
             }
-            return names;
+            return "Attack Order: " + names;
         }
         // test one ends here
 
-        // reset allowedRank after each attack
-        public void resetRank()
-        {
-            allowedRank.Clear();
-        }
+        
 
 
 
