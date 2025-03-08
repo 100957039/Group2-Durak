@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DurakCardGame
 {
+/// <summary>
+/// I think this is done. the only change we may need is to remove CanAttack property
+/// </summary>
     internal abstract class  Player
     {
         public string Name { get; set; }

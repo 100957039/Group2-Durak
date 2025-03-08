@@ -170,6 +170,13 @@ namespace DurakCardGame
 
             textBoxCountDeckCards.Text = game.deck.Count().ToString();
             textBoxTrump.Text = game.trump;
+            // to be deleted, safe to deleted, referenced only here in this block
+            String namesOrder = game.chooseFirstAttacker();
+            // show order of attack
+            textBoxOrderNames.Text = namesOrder;
+            // display the trump card 
+            panelDeck.Controls.Add(game.deck.cards[game.deck.Count() - 1].CreateCardButton());
+            // to be deleted
         }
 
         private void buttonFillHand_Click(object sender, EventArgs e)

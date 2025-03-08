@@ -40,6 +40,10 @@ namespace DurakCardGame
             ImageLocation = imageLocation;
         }
 
+        /// <summary>
+        ///  to be deleted, No longer needed.  (CreateButton)
+        /// </summary>
+        /// <returns></returns>
         public Button CreateButton()
         {
             Button button = new Button();

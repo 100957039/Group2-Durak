@@ -13,6 +13,9 @@ namespace DurakCardGame
         public List<Player> players = new List<Player>();
         private List<Card> playedCards = new List<Card>();
         private List<Card> played = new List<Card>();
+        // test 1 detemine order of attakers starts here
+        public Queue<Player> AttackerQueue = new Queue<Player>();
+        // test 1 detemine order of attakers ends here 
         public String trump;
         public Player defender;
         //list to store the rank that can be played during the attack
@@ -34,6 +37,59 @@ namespace DurakCardGame
         {
             allowedRank.Add(rank);
         }
+
+        // test 1 starts here
+        // choose first attacker base on their hand, who has the lowest trump card
+        public String chooseFirstAttacker()
+        {
+            // 15 is a random number just to compare with, it could be a 100 or 1000
+            int lowestTrumpCard = 15;
+            // store index of the player who has the lowest trump card
+            int playerIndex = -1;
+            for (int i = 0; i <players.Count(); i++) { 
+                foreach (Card card in players[i].Hand)
+                {
+                    //Console.WriteLine(card.Suit);
+                    if (card.Suit == trump[0].ToString())
+                    {
+                        //Console.WriteLine(card.Value + " " + card.Suit, card.Rank < lowestTrumpCard);
+                        if (card.Rank < lowestTrumpCard)
+                        {
+                            //Console.WriteLine(card.Rank);
+                            lowestTrumpCard = card.Rank;
+                            playerIndex = i;
+                        }
+                    }
+                }
+            }
+            // if no player has a trump card, the first one to attack will be the first player inserted 
+            if (playerIndex == -1)
+            {
+                playerIndex = 0;
+            }
+
+            // add player to the queue 
+            // player.Count() - playerIndex => take only the player that are after this index 
+            for (int i = 0; i < players.Count() - playerIndex; i++)
+            {
+                // take only the players at and after this index
+                AttackerQueue.Enqueue(players[i + playerIndex]);
+            }
+            // add rest of the player before that index to the queue
+            int playersLeft = players.Count() - AttackerQueue.Count();
+            Console.WriteLine(playersLeft +" " + players.Count() + " " + AttackerQueue.Count());
+            for (int i = 0; i < playersLeft; i++) 
+            {
+                AttackerQueue.Enqueue(players[i]);
+            }
+            String names = "";
+            foreach (Player player in AttackerQueue)
+            {
+                names += player.Name + " ";
+            }
+            return names;
+        }
+        // test one ends here
 
         // reset allowedRank after each attack
         public void resetRank()
@@ -80,17 +136,17 @@ namespace DurakCardGame
             trump = trumpCard.Suit;
             if (trumpCard.Suit == "S")
             {
-                trump = "Spades";
+                trump = "Spades " + trumpCard.Rank.ToString();
             }else if (trumpCard.Suit == "H")
             {
-                trump = "Hearts";
+                trump = "Hearts " + trumpCard.Rank.ToString();
             }else if (trumpCard.Suit == "C")
             {
-                trump = "Clubs";
+                trump = "Clubs " + trumpCard.Rank.ToString();
             }
             else
             {
-                trump = "Diamonds";
+                trump = "Diamonds " + trumpCard.Rank.ToString();
             }
             // insert trump card back to the deck to be the last card
             deck.AddCard(trumpCard);

@@ -56,7 +56,11 @@
             panelThree = new Panel();
             textBoxTrump = new TextBox();
             contextMenuStrip1 = new ContextMenuStrip(components);
+            textBoxOrderNames = new TextBox();
+            toolStrip1 = new ToolStrip();
+            panelDeck = new Panel();
             groupBox1.SuspendLayout();
+            panelThree.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -228,9 +232,9 @@
             // 
             // panelTwo
             // 
-            panelTwo.Location = new Point(163, 132);
+            panelTwo.Location = new Point(163, 147);
             panelTwo.Name = "panelTwo";
-            panelTwo.Size = new Size(740, 146);
+            panelTwo.Size = new Size(740, 131);
             panelTwo.TabIndex = 8;
             // 
             // panelPlayGroundAttack
@@ -273,9 +277,10 @@
             // 
             // panelThree
             // 
-            panelThree.Location = new Point(934, 188);
+            panelThree.Controls.Add(toolStrip1);
+            panelThree.Location = new Point(934, 225);
             panelThree.Name = "panelThree";
-            panelThree.Size = new Size(200, 473);
+            panelThree.Size = new Size(200, 270);
             panelThree.TabIndex = 14;
             // 
             // textBoxTrump
@@ -290,11 +295,35 @@
             contextMenuStrip1.Name = "contextMenuStrip1";
             contextMenuStrip1.Size = new Size(61, 4);
             // 
+            // textBoxOrderNames
+            // 
+            textBoxOrderNames.Location = new Point(921, 183);
+            textBoxOrderNames.Name = "textBoxOrderNames";
+            textBoxOrderNames.Size = new Size(251, 23);
+            textBoxOrderNames.TabIndex = 16;
+            // 
+            // toolStrip1
+            // 
+            toolStrip1.Location = new Point(0, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new Size(200, 25);
+            toolStrip1.TabIndex = 0;
+            toolStrip1.Text = "toolStrip1";
+            // 
+            // panelDeck
+            // 
+            panelDeck.Location = new Point(949, 556);
+            panelDeck.Name = "panelDeck";
+            panelDeck.Size = new Size(179, 100);
+            panelDeck.TabIndex = 17;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1184, 738);
+            Controls.Add(panelDeck);
+            Controls.Add(textBoxOrderNames);
             Controls.Add(textBoxTrump);
             Controls.Add(panelThree);
             Controls.Add(panelOne);
@@ -316,6 +345,8 @@
             Load += Form1_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            panelThree.ResumeLayout(false);
+            panelThree.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -348,5 +379,8 @@
         private Button button1;
         private TextBox textBoxTrump;
         private ContextMenuStrip contextMenuStrip1;
+        private TextBox textBoxOrderNames;
+        private ToolStrip toolStrip1;
+        private Panel panelDeck;
     }
 }

@@ -8,7 +8,7 @@ namespace DurakCardGame
 {
     internal class Deck
     {
-        private List<Card> cards = new List<Card>();
+        public List<Card> cards = new List<Card>();
 
         public Deck()
         {
