@@ -246,13 +246,18 @@ namespace DurakCardGame
         // fill hand with 6 cards | ##### Done ######
         public void fillHand()
         {
+            
             foreach (Player player in players)
             {
+                
                 int howManyCards = player.Hand.Count;
+                Console.WriteLine("before loop: " + player.Name + " "+ howManyCards.ToString());
                 if (howManyCards < 6)
                 {
-                    for (int i = 0; i < 6 - howManyCards; i++)
+                    //Console.WriteLine()
+                    for (int i = 0; i < (6 - howManyCards); i++)
                     {
+                        Console.WriteLine("before loop: " + (6 - howManyCards).ToString());
                         // check how many cards are left in the deck to break the inner loop
                         if (deck.Count() < 1)
                         {
