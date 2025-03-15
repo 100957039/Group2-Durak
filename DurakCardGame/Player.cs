@@ -13,7 +13,7 @@ namespace DurakCardGame
     {
         public string Name { get; set; }
         public List<Card> Hand { get; set; } = new List<Card>();
-        public bool CanAttacker { get; set; } = false;
+        public bool CanAttack { get; set; } = false;
 
         public Player(string name, List<Card> hand) 
         {

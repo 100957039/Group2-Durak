@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -212,10 +213,12 @@ namespace DurakCardGame
 
         public void attack(Player player)
         {
-            if (playedCards.Count > 0)
-            {
+            //take the attacker out of the queue
+            Player attacker = AttackerQueue.ElementAt(0);
+            AttackerQueue.Dequeue();
 
-            }
+
+
         }
 
         // ############## DONE ##############
@@ -293,5 +296,23 @@ namespace DurakCardGame
         {
             return players[index];
         }
+
+        // test start attack March 15th
+        public void GameBegin()
+        {
+            int playersLeft = 0;
+            foreach (Player player in players) {
+                if (player.Hand.Count() > 0) { 
+                 playersLeft ++;
+                }
+            }
+            // only one left = lost
+            int numberToStopGame = 1;
+            while (playersLeft > numberToStopGame)
+            {
+
+            }
+        }
+        // test start attack ends here
     }
 }

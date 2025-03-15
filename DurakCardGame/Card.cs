@@ -22,6 +22,9 @@ namespace DurakCardGame
         //public int AddY { get; set; } = 0;
         public bool wasOnTop { get; set; } = false;
 
+        // can play card in his/her turn only
+        public bool canPlay { get; set; } = false;
+
         //public Card(string suit, string value, int rank, int x, int y)
         //{
         //    Suit = suit;
@@ -61,30 +64,10 @@ namespace DurakCardGame
                 BackgroundImage = Image.FromFile(ImageLocation),
                 BackgroundImageLayout = ImageLayout.Stretch
             };
-            //imgButton.BringToFront();
-            
 
             // Add mouse hover events
             imgButton.MouseEnter += (sender, e) =>
             {
-
-                //Console.WriteLine("hjgfh");
-                Control parent = imgButton.Parent;
-                if (parent != null)
-                {
-                    int currentIndex = parent.Controls.GetChildIndex(imgButton);
-                    int lastIndex = parent.Controls.Count - 1;
-
-                    if (currentIndex < lastIndex) // Means something is on top of it
-                    {
-                        wasOnTop = false;
-                        imgButton.BringToFront(); // Bring to front
-                    }
-                    else
-                    {
-                        wasOnTop = true; // Already on top, do nothing
-                    }
-                }
 
                 imgButton.Location = new Point(X, Y - 10); // Move slightly up
             };
@@ -93,11 +76,6 @@ namespace DurakCardGame
             imgButton.MouseLeave += (sender, e) =>
             {
                 imgButton.Location = new Point(X, Y); // Reset position
-
-                if (!wasOnTop) // If it was not originally on top, move it back
-                {
-                    imgButton.SendToBack();
-                }
             };
 
             return imgButton;
