@@ -192,7 +192,7 @@ namespace DurakCardGame
         }
 
         // add a computer to the game ########### DONE #############
-        public void addCompter(string name, String difficulty)
+        public void addComputer(string name, String difficulty)
         {
             // draw 6 cards from the deck and add them to the player's hand
             List<Card> hand = new List<Card>();
@@ -204,11 +204,12 @@ namespace DurakCardGame
         }
 
         // Might be deleted ******************
-        public Card playCard(int index)
+        public void playCard(int playerIndex, int cardIndex)
         {
-            Card card = players[turn].Hand[index];
-            players[turn].Hand.RemoveAt(index);
-            return card;
+            Console.WriteLine(playerIndex);
+            //Card card = players[playerIndex].Hand[cardIndex];
+            //players[playerIndex].Hand.RemoveAt(cardIndex);
+            //return card;
         }
 
         public void attack(Player player)

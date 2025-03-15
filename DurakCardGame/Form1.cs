@@ -142,30 +142,44 @@ namespace DurakCardGame
             //deck.Shuffle();
             for (int i = 0; i < pls.Count(); i++)
             {
+                int playerIndex = i;  // Copy i to a local variable
                 String playerName = pls[i];
                 game.addPlayer(playerName);
                 game.startGame();
                 int x = 0;
-                foreach (Card card in game.GetPlayer(i).Hand)
+
+                foreach (Card card in game.GetPlayer(playerIndex).Hand)
                 {
+                    //Console.WriteLine(game.GetPlayer(playerIndex).Name + " " + card.Value);
                     card.X = x;
                     Button cardButton = card.CreateCardButton();
+
                     cardButton.Click += (sender, e) =>
                     {
-                        // Assuming you have the player's turn logic handled
-                        game.playCard(game.GetPlayer(0).Hand.IndexOf(card));  // This gets the index of the clicked card
-                        cardButton.Enabled = false;  // Disable button once card is played
-                                                     // Add the card to the played cards panel
-                        panelPlayGroundAttack.Controls.Add(cardButton);
+                        Console.WriteLine(playerIndex);
+                        cardButton.Enabled = false;
+                        //Console.WriteLine();
+                        //Console.WriteLine(game.GetPlayer(playerIndex).Name);
+                        // the first in the queue is always the attacker
+                        // the second in the queue is always the defender
+                        if (game.AttackerQueue.ToArray()[1].Name.Equals(game.GetPlayer(playerIndex).Name))
+                        {
+                            panelPlayGroundDefense.Controls.Add(cardButton);
+                        }
+                        else
+                        {
+                            panelPlayGroundAttack.Controls.Add(cardButton);
+                        }
+                        
                     };
+
                     cardButton.Location = new Point(x, 0);
-                    panels[i].Controls.Add(cardButton);
+                    panels[playerIndex].Controls.Add(cardButton);
                     cardButton.BringToFront();
                     x += 75;
                 }
-                x = 0;
-
             }
+
             //foreach (Card card in game.GetPlayer(1).Hand)
             //{
             //    card.X = x;
@@ -201,7 +215,7 @@ namespace DurakCardGame
                     cardButton.Click += (sender, e) =>
                     {
                         // Assuming you have the player's turn logic handled
-                        game.playCard(game.GetPlayer(0).Hand.IndexOf(card));  // This gets the index of the clicked card
+                        game.playCard(i, game.GetPlayer(i).Hand.IndexOf(card));  // This gets the index of the clicked card
                         cardButton.Enabled = false;  // Disable button once card is played
                                                      // Add the card to the played cards panel
                         panelPlayGroundAttack.Controls.Add(cardButton);

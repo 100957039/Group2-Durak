@@ -81,5 +81,19 @@ namespace DurakCardGame
             return imgButton;
         }
 
+        //public void ChangePosition(x)
+        //{
+        //    Button cardButton = CreateCardButton();
+        //    cardButton.Click += (sender, e) =>
+        //    {
+        //        cardButton.Enabled = false;  // disable button once card is played
+        //                                     // Add the card to the played cards panel
+        //        panelPlayGroundAttack.Controls.Add(cardButton);
+        //    };
+        //    cardButton.Location = new Point(x, 0);
+        //    panels[i].Controls.Add(cardButton);
+        //    cardButton.BringToFront();
+        //}
+
     }
 }
