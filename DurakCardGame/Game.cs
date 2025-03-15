@@ -34,6 +34,14 @@ namespace DurakCardGame
         //private List<Card> discard = new List<Card>();
         private int turn = 0;
 
+        //######################### GUI variable #############################
+        // DO NOT FORGET TO RESET ALL THE VALUES AFTER THE ATTACK IS OVER
+        public int AttackerXAxis { get; set; } = 0;
+        public int AttackerYAxis { get; set; } = 0;
+        public int DefenderXAxis { get; set; } = 0;
+        public int DefenderYAxis { get; set; } = 0;
+        // DO NOT FORGET TO RESET ALL THE VALUES AFTER THE ATTACK IS OVER
+
         public Game() 
         {
             // shuffle the cards before the game starts

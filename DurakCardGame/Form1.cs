@@ -142,7 +142,7 @@ namespace DurakCardGame
             //deck.Shuffle();
             for (int i = 0; i < pls.Count(); i++)
             {
-                int playerIndex = i;  // Copy i to a local variable
+                int playerIndex = i;
                 String playerName = pls[i];
                 game.addPlayer(playerName);
                 game.startGame();
@@ -150,35 +150,53 @@ namespace DurakCardGame
 
                 foreach (Card card in game.GetPlayer(playerIndex).Hand)
                 {
-                    //Console.WriteLine(game.GetPlayer(playerIndex).Name + " " + card.Value);
-                    card.X = x;
+                    card.X = x;  
+
                     Button cardButton = card.CreateCardButton();
 
                     cardButton.Click += (sender, e) =>
                     {
-                        Console.WriteLine(playerIndex);
                         cardButton.Enabled = false;
-                        //Console.WriteLine();
-                        //Console.WriteLine(game.GetPlayer(playerIndex).Name);
-                        // the first in the queue is always the attacker
-                        // the second in the queue is always the defender
-                        if (game.AttackerQueue.ToArray()[1].Name.Equals(game.GetPlayer(playerIndex).Name))
+
+                        // determine whether the player is attacker or defender
+                        // in queue, index 0 is alway the attacker
+                        // and index 1 is always the defender 
+                        bool isDefender = game.AttackerQueue.ToArray()[1].Name.Equals(game.GetPlayer(playerIndex).Name);
+
+                        // card's position when attack starts
+                        // to defender panel
+                        if (isDefender)
                         {
+                            // ##########3not working as it should ###################
+                            cardButton.Location = new Point(game.DefenderXAxis, cardButton.Location.Y);
                             panelPlayGroundDefense.Controls.Add(cardButton);
+                            game.DefenderXAxis += 75;
+                            //Console.WriteLine($"Defender X: {game.DefenderXAxis}");
                         }
+                        // to attacker panel
                         else
                         {
+                            // ##########3not working as it should ###################
+                            cardButton.Location = new Point(game.AttackerXAxis, cardButton.Location.Y);
                             panelPlayGroundAttack.Controls.Add(cardButton);
+                            Console.WriteLine("");
+                            Console.WriteLine($"Attacker X: {game.AttackerXAxis}");
+                            Console.WriteLine($"card X: {cardButton.Location.X}");
+                            game.AttackerXAxis += 75;
+                            
                         }
-                        
                     };
 
+                    // Set initial position for each card
                     cardButton.Location = new Point(x, 0);
                     panels[playerIndex].Controls.Add(cardButton);
                     cardButton.BringToFront();
+
+                    // Update x for the next card's position
                     x += 75;
                 }
             }
+
 
             //foreach (Card card in game.GetPlayer(1).Hand)
             //{
