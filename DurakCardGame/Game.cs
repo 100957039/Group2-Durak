@@ -14,8 +14,16 @@ namespace DurakCardGame
         public List<Player> players = new List<Player>();
         private List<Card> playedCards = new List<Card>();
         private List<Card> played = new List<Card>();
+
+        //################################################# TEST #################################
+        // cards played during single attack, then removed after the attack ends
+        public List<Card> attackCards = new List<Card>();
+        // cards used to defend during single attack, then removed after the attack ends
+        public List<Card> defenceCards = new List<Card>();
+        //################################################# TEST #################################
+
         // test 1 detemine order of attakers starts here
-        public Queue<Player> AttackerQueue = new Queue<Player>();
+        public List<Player> AttackerQueue = new List<Player>();
         // test 1 detemine order of attakers ends here 
         public String trump;
         public Player defender;
@@ -32,7 +40,7 @@ namespace DurakCardGame
 
         //private Queue<Player>
         //private List<Card> discard = new List<Card>();
-        private int turn = 0;
+        public int turn { get; set; } = 0;
 
         //######################### GUI variable #############################
         // DO NOT FORGET TO RESET ALL THE VALUES AFTER THE ATTACK IS OVER
@@ -41,7 +49,7 @@ namespace DurakCardGame
         public int DefenderXAxis { get; set; } = 0;
         public int DefenderYAxis { get; set; } = 0;
         // DO NOT FORGET TO RESET ALL THE VALUES AFTER THE ATTACK IS OVER
-
+        
         public Game() 
         {
             // shuffle the cards before the game starts
@@ -74,9 +82,10 @@ namespace DurakCardGame
             bool canAttack = false;
             foreach (Card card in hand)
             {
-                if (allowedRankAttack.Contains(card.Rank.ToString() + Separator))
+                if (attackCards.Any(attackCard=> attackCard.Rank == card.Rank))
                 {
                     canAttack = true;
+                    break;
                 }
             }
             return canAttack;
@@ -159,25 +168,32 @@ namespace DurakCardGame
             {
                 playerIndex = 0;
             }
+            Console.WriteLine("has lowest trump card: "+players[playerIndex].Name + " card: "+ lowestTrumpCard.ToString());
+
+            turn = playerIndex;
 
             // add player to the queue 
-            // player.Count() - playerIndex => take only the player that are after this index 
+             //player.Count() - playerIndex => take only the player that are after this index
             for (int i = 0; i < players.Count() - playerIndex; i++)
             {
                 // take only the players at and after this index
-                AttackerQueue.Enqueue(players[i + playerIndex]);
+                AttackerQueue.Add(players[i + playerIndex]);
+                Console.WriteLine("add to queue: " + players[i + playerIndex].Name);
             }
             // add rest of the player before that index to the queue
             int playersLeft = players.Count() - AttackerQueue.Count();
-            Console.WriteLine(playersLeft +" " + players.Count() + " " + AttackerQueue.Count());
-            for (int i = 0; i < playersLeft; i++) 
+            Console.WriteLine(playersLeft + " " + players.Count() + " " + AttackerQueue.Count());
+            for (int i = 0; i < playersLeft; i++)
             {
-                AttackerQueue.Enqueue(players[i]);
+                AttackerQueue.Add(players[i]);
             }
+            //Console.WriteLine("game.cs : "+AttackerQueue.ToArray());
             String names = "";
             foreach (Player player in AttackerQueue)
             {
                 names += player.Name + " | ";
+                //Console.WriteLine("game.cs : " + player.Name);
+                //Console.WriteLine(AttackerQueue.ToArray());
             }
             return "Attack Order: " + names;
         }
@@ -224,7 +240,7 @@ namespace DurakCardGame
         {
             //take the attacker out of the queue
             Player attacker = AttackerQueue.ElementAt(0);
-            AttackerQueue.Dequeue();
+            AttackerQueue.RemoveAt(0);
 
 
 
