@@ -14,7 +14,6 @@ namespace DurakCardGame
             Application.Run(new Form1());
             //Application.Run(new DurakGUI());
 
-            // Hello everybody
         }
     }
 }
