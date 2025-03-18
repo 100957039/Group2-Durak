@@ -144,6 +144,12 @@ namespace DurakCardGame
             //String playerTwoName = textBoxPlayerTwo.Text;
             //Deck deck = new Deck();
             //deck.Shuffle();
+            // ###################################################################################################################
+            // ###################################### difference between attacker and defender ###################################
+            // ###################################################################################################################
+            // determine how will attack, how will defend (later move to Game.cs class)
+            int differenceBetweenAttackerDefender = 1;
+
             for (int i = 0; i < pls.Count(); i++)
             {
                 int playerIndex = i;
@@ -181,13 +187,27 @@ namespace DurakCardGame
                         if (isDefender)
                         {
                             // ##########3not working as it should ###################
-                            if (game.turn == playerIndex)
+                            if (game.players[game.turn].Name == game.players[playerIndex].Name)
                             {
                                 cardButton.Enabled = false;
                                 cardButton.Location = new Point(game.DefenderXAxis, cardButton.Location.Y);
                                 panelPlayGroundDefense.Controls.Add(cardButton);
                                 game.DefenderXAxis += 75;
-                                game.turn = playerIndex - 1;
+                                // if the attacker is the last in the list, defender will be the first
+                                int attackerIndex = playerIndex - differenceBetweenAttackerDefender;
+                                Console.WriteLine("----------------------------------");
+                                Console.WriteLine("attackerIndex: " + attackerIndex);
+                                if (attackerIndex < 0)
+                                {
+                                    //Console.WriteLine("game.players.Count(): " + game.players.Count());
+                                    //Console.WriteLine("(attackerIndex - game.players.Count()): " + (attackerIndex - game.players.Count()));
+                                    attackerIndex = (game.players.Count() + attackerIndex);
+                                    //Console.WriteLine("before absolute value Def: " + attackerIndex);
+                                    attackerIndex = Math.Abs(attackerIndex);
+                                    //Console.WriteLine("after absolute value Def: " + attackerIndex);
+                                }
+                                //Console.WriteLine("value Def: " + attackerIndex);
+                                game.turn = attackerIndex;
                             }
                                 
                             //Console.WriteLine($"Defender X: {game.DefenderXAxis}");
@@ -196,19 +216,30 @@ namespace DurakCardGame
                         else
                         {
                             // ##########3not working as it should ###################
-                            if (game.turn == playerIndex)
+                            if (game.players[game.turn].Name == game.players[playerIndex].Name)
                             {
                                 cardButton.Enabled = false;
                                 cardButton.Location = new Point(game.AttackerXAxis, cardButton.Location.Y);
                                 panelPlayGroundAttack.Controls.Add(cardButton);
                                 Console.WriteLine("");
-                                Console.WriteLine($"Attacker X: {game.AttackerXAxis}");
-                                Console.WriteLine($"card X: {cardButton.Location.X}");
+                                //Console.WriteLine($"Attacker X: {game.AttackerXAxis}");
+                                //Console.WriteLine($"card X: {cardButton.Location.X}");
                                 game.AttackerXAxis += 75;
-                                game.turn = playerIndex+1;
+                                int defenderIndex = playerIndex + differenceBetweenAttackerDefender;
+                                
+                                Console.WriteLine("----------------------------------");
+                                Console.WriteLine("index Att: " + defenderIndex);
+                                if (defenderIndex >= game.players.Count())
+                                {
+                                    defenderIndex = Math.Abs(game.players.Count() - defenderIndex);
+                                    Console.WriteLine("absolute value Att: " + (game.players.Count() - defenderIndex));
+                                }
+                                game.turn = defenderIndex;
                             }
+                            
 
                         }
+                        Console.WriteLine("game turn: " + game.turn);
                         //game.AttackerQueue.RemoveAt(0);
                         //foreach (Card card in game.AttackerQueue[playerIndex+2].Hand) {
                         //    Console.WriteLine(card.Value);
