@@ -272,22 +272,22 @@
             // 
             panelOne.Location = new Point(12, 269);
             panelOne.Name = "panelOne";
-            panelOne.Size = new Size(537, 187);
+            panelOne.Size = new Size(147, 187);
             panelOne.TabIndex = 13;
             // 
             // panelThree
             // 
             panelThree.Controls.Add(toolStrip1);
-            panelThree.Location = new Point(567, 269);
+            panelThree.Location = new Point(921, 269);
             panelThree.Name = "panelThree";
-            panelThree.Size = new Size(567, 226);
+            panelThree.Size = new Size(213, 226);
             panelThree.TabIndex = 14;
             // 
             // toolStrip1
             // 
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(567, 25);
+            toolStrip1.Size = new Size(213, 25);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 

@@ -191,6 +191,7 @@ namespace DurakCardGame
                             {
                                 cardButton.Enabled = false;
                                 cardButton.Location = new Point(game.DefenderXAxis, cardButton.Location.Y);
+                                card.X = cardButton.Location.X;
                                 panelPlayGroundDefense.Controls.Add(cardButton);
                                 game.DefenderXAxis += 75;
                                 // if the attacker is the last in the list, defender will be the first
@@ -220,6 +221,7 @@ namespace DurakCardGame
                             {
                                 cardButton.Enabled = false;
                                 cardButton.Location = new Point(game.AttackerXAxis, cardButton.Location.Y);
+                                card.X = cardButton.Location.X;
                                 panelPlayGroundAttack.Controls.Add(cardButton);
                                 Console.WriteLine("");
                                 //Console.WriteLine($"Attacker X: {game.AttackerXAxis}");
