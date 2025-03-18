@@ -242,11 +242,12 @@ namespace DurakCardGame
                         // to attacker panel
                         else
                         {
-                            bool canAttack = true;
-                            foreach (int allowedRank in game.allowedRankAttack)
+                            bool canAttack = false;
+                            for (int i =0; i < game.allowedRankAttack.Count(); i++)
                             {
-                                if (allowedRank == card.Rank)
+                                if (game.allowedRankAttack[i] == card.Rank)
                                 {
+                                    canAttack = true;
                                     // #################################
                                     if (game.players[game.turn].Name == game.players[playerIndex].Name)
                                     {
@@ -274,10 +275,14 @@ namespace DurakCardGame
                                         game.turn = defenderIndex;
                                     }
                                     // add rank to allowed
-                                    game.allowedRankAttack.Add(card.Rank);
-                                    Console.WriteLine("can attack");
+                                    
                                     // #######################################
                                 }
+                            }
+                            if (canAttack)
+                            {
+                                game.allowedRankAttack.Add(card.Rank);
+                                Console.WriteLine("can attack");
                             }
 
                             if (game.allowedRankAttack.Count() == 0)
