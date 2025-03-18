@@ -11,9 +11,12 @@ namespace DurakCardGame
     internal class Game
     {
         public Deck deck = new Deck();
+        
         public List<Player> players = new List<Player>();
+        // all the played cards will be stored here for AI 
         private List<Card> playedCards = new List<Card>();
-        private List<Card> played = new List<Card>();
+        //temprary store cards to campare the atack and defence
+        public List<Card> played = new List<Card>();
 
         //################################################# TEST #################################
         // cards played during single attack, then removed after the attack ends
@@ -32,10 +35,10 @@ namespace DurakCardGame
         // if you remove test 2, uncomment line below
         //public List<int> allowedRank = new List<int>();  
         // test 2 change list to String "easier access maybe" allowedRank.Contains(rank.ToString())
-        private String allowedRankAttack = "";
+        public List<int> allowedRankAttack = new List<int>();
         private String Separator = "|";
         // allowed suit to defend
-        private String allowedSuitDefend = "";
+        public String allowedSuitDefend = "";
         // test 2 change list to String "easier access maybe"
 
         //private Queue<Player>
@@ -65,7 +68,7 @@ namespace DurakCardGame
         public void addRank(int rank)
         {
             //allowedRank.Add(rank);
-            allowedRankAttack += rank.ToString() + Separator;
+            allowedRankAttack.Add(rank);
         }
 
         // reset allowedRank after each attack ((((((this will be used in attack method, NOT DEFEND)))))))))
@@ -73,7 +76,7 @@ namespace DurakCardGame
         public void resetRank()
         {
             //allowedRank.Clear();
-            allowedRankAttack = "";
+            allowedRankAttack.Clear();
         }
 
         //check if the player can still attack
@@ -134,6 +137,20 @@ namespace DurakCardGame
                 }
             }
             return canDefend;
+        }
+
+        //compare attackers card with defender's
+        public bool defendAttack(Card attackerCard, Card defenderCard)
+        {
+            if (defenderCard.Suit.Equals(trump) && !attackerCard.Suit.Equals(trump))
+            {
+                return true;
+            }
+            else
+            {
+                return defenderCard.Rank >= attackerCard.Rank;
+            }
+            
         }
 
         // test 1 starts here
