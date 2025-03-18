@@ -15,6 +15,8 @@ namespace DurakCardGame
         public List<Card> Hand { get; set; } = new List<Card>();
         public bool CanAttack { get; set; } = false;
 
+        public bool DisableHand { get; set; } = true;
+
         public Player(string name, List<Card> hand) 
         {
             Name = name;

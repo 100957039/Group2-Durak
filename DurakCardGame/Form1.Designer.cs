@@ -54,10 +54,10 @@
             textBoxCountDeckCards = new TextBox();
             panelOne = new Panel();
             panelThree = new Panel();
+            toolStrip1 = new ToolStrip();
             textBoxTrump = new TextBox();
             contextMenuStrip1 = new ContextMenuStrip(components);
             textBoxOrderNames = new TextBox();
-            toolStrip1 = new ToolStrip();
             panelDeck = new Panel();
             groupBox1.SuspendLayout();
             panelThree.SuspendLayout();
@@ -270,18 +270,26 @@
             // 
             // panelOne
             // 
-            panelOne.Location = new Point(19, 190);
+            panelOne.Location = new Point(12, 269);
             panelOne.Name = "panelOne";
-            panelOne.Size = new Size(140, 321);
+            panelOne.Size = new Size(147, 187);
             panelOne.TabIndex = 13;
             // 
             // panelThree
             // 
             panelThree.Controls.Add(toolStrip1);
-            panelThree.Location = new Point(934, 225);
+            panelThree.Location = new Point(921, 269);
             panelThree.Name = "panelThree";
-            panelThree.Size = new Size(200, 270);
+            panelThree.Size = new Size(213, 226);
             panelThree.TabIndex = 14;
+            // 
+            // toolStrip1
+            // 
+            toolStrip1.Location = new Point(0, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new Size(213, 25);
+            toolStrip1.TabIndex = 0;
+            toolStrip1.Text = "toolStrip1";
             // 
             // textBoxTrump
             // 
@@ -301,14 +309,6 @@
             textBoxOrderNames.Name = "textBoxOrderNames";
             textBoxOrderNames.Size = new Size(251, 23);
             textBoxOrderNames.TabIndex = 16;
-            // 
-            // toolStrip1
-            // 
-            toolStrip1.Location = new Point(0, 0);
-            toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(200, 25);
-            toolStrip1.TabIndex = 0;
-            toolStrip1.Text = "toolStrip1";
             // 
             // panelDeck
             // 
