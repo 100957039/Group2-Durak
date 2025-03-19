@@ -122,7 +122,7 @@ namespace DurakCardGame
             panels.Add(panelThree);
 
 
-            List<String> pls =  new List<string>();
+            List<String> pls = new List<string>();
             if (textBoxPlayerOne.Text != "")
             {
                 pls.Add(textBoxPlayerOne.Text);
@@ -162,210 +162,10 @@ namespace DurakCardGame
                 //{
                 //    Console.WriteLine("form1.cs" + player.Name);
                 //}
-
-                foreach (Card card in game.GetPlayer(playerIndex).Hand)
-                {
-                    card.X = x;  
-
-                    Button cardButton = card.CreateCardButton();
-                    //Console.WriteLine(game.AttackerQueue.ToArray());
-                    //if (!game.AttackerQueue[0].Name.Equals(game.GetPlayer(playerIndex).Name))
-                    //{
-                    //    cardButton.Enabled = false;
-                    //}
-                    cardButton.Click += (sender, e) =>
-                    {
-                        
-
-                        // determine whether the player is attacker or defender
-                        // in queue, index 0 is alway the attacker
-                        // and index 1 is always the defender 
-                        bool isDefender = game.AttackerQueue.ToArray()[1].Name.Equals(game.GetPlayer(playerIndex).Name);
-
-                        // card's position when attack starts
-                        // to defender panel
-                        if (isDefender)
-                        {
-                            // ##########3not working as it should ###################
-                            if (game.players[game.turn].Name == game.players[playerIndex].Name)
-                            {
-                                cardButton.Enabled = false;
-                                cardButton.Location = new Point(game.DefenderXAxis, cardButton.Location.Y);
-                                card.X = cardButton.Location.X;
-                                panelPlayGroundDefense.Controls.Add(cardButton);
-                                game.DefenderXAxis += 75;
-                                // if the attacker is the last in the list, defender will be the first
-                                int attackerIndex = playerIndex - differenceBetweenAttackerDefender;
-                                Console.WriteLine("----------------------------------");
-                                Console.WriteLine("attackerIndex: " + attackerIndex);
-                                if (attackerIndex < 0)
-                                {
-                                    //Console.WriteLine("game.players.Count(): " + game.players.Count());
-                                    //Console.WriteLine("(attackerIndex - game.players.Count()): " + (attackerIndex - game.players.Count()));
-                                    attackerIndex = (game.players.Count() + attackerIndex);
-                                    //Console.WriteLine("before absolute value Def: " + attackerIndex);
-                                    attackerIndex = Math.Abs(attackerIndex);
-                                    //Console.WriteLine("after absolute value Def: " + attackerIndex);
-                                }
-                                //Console.WriteLine("value Def: " + attackerIndex);
-                                game.turn = attackerIndex;
-                                game.allowedRankAttack.Add(card.Rank);
-                            }
-
-                            //###############################################################################################
-                            //####################################### Defend attack #########################################
-                            //###############################################################################################
-                            // add card to compare it with attacker's card
-                            game.played.Add(card);
-                            Player defender = game.players[playerIndex];
-                            Card attackerCard = game.played[0];
-                            Console.WriteLine("game.canStillDefend" + game.canStillDefend(defender.Hand, attackerCard));
-                            if (game.canStillDefend(defender.Hand, attackerCard))
-                            {
-                                Console.WriteLine("can still defend");
-                                // == 2 means attacker and defender each played a card
-                                if (game.played.Count() == 2)
-                                {
-                                    Card defenderCard = game.played[1];
-                                    bool sucDef = game.defendAttack(attackerCard, defenderCard);
-                                    Console.WriteLine("defenece: " + sucDef);
-                                }
-                            }
-
-
-                            //###############################################################################################
-                            //####################################### Defend attack #########################################
-                            //###############################################################################################
-
-                            //Console.WriteLine($"Defender X: {game.DefenderXAxis}");
-                        }
-                        // to attacker panel
-                        else
-                        {
-                            bool canAttack = false;
-                            for (int i =0; i < game.allowedRankAttack.Count(); i++)
-                            {
-                                if (game.allowedRankAttack[i] == card.Rank)
-                                {
-                                    canAttack = true;
-                                    // #################################
-                                    if (game.players[game.turn].Name == game.players[playerIndex].Name)
-                                    {
-                                        cardButton.Enabled = false;
-                                        cardButton.Location = new Point(game.AttackerXAxis, cardButton.Location.Y);
-                                        card.X = cardButton.Location.X;
-                                        panelPlayGroundAttack.Controls.Add(cardButton);
-
-                                        // add card to the list to compare it with the defender's card
-                                        game.played.Add(card);
-
-                                        Console.WriteLine("");
-                                        //Console.WriteLine($"Attacker X: {game.AttackerXAxis}");
-                                        //Console.WriteLine($"card X: {cardButton.Location.X}");
-                                        game.AttackerXAxis += 75;
-                                        int defenderIndex = playerIndex + differenceBetweenAttackerDefender;
-
-                                        Console.WriteLine("----------------------------------");
-                                        Console.WriteLine("index Att: " + defenderIndex);
-                                        if (defenderIndex >= game.players.Count())
-                                        {
-                                            defenderIndex = Math.Abs(game.players.Count() - defenderIndex);
-                                            Console.WriteLine("absolute value Att: " + (game.players.Count() - defenderIndex));
-                                        }
-                                        game.turn = defenderIndex;
-                                    }
-                                    // add rank to allowed
-                                    
-                                    // #######################################
-                                }
-                            }
-                            if (canAttack)
-                            {
-                                game.allowedRankAttack.Add(card.Rank);
-                                Console.WriteLine("can attack");
-                            }
-
-                            if (game.allowedRankAttack.Count() == 0)
-                            {
-                                // #################################
-                                if (game.players[game.turn].Name == game.players[playerIndex].Name)
-                                {
-                                    cardButton.Enabled = false;
-                                    cardButton.Location = new Point(game.AttackerXAxis, cardButton.Location.Y);
-                                    card.X = cardButton.Location.X;
-                                    panelPlayGroundAttack.Controls.Add(cardButton);
-
-                                    // add card to the list to compare it with the defender's card
-                                    game.played.Add(card);
-
-                                    Console.WriteLine("");
-                                    //Console.WriteLine($"Attacker X: {game.AttackerXAxis}");
-                                    //Console.WriteLine($"card X: {cardButton.Location.X}");
-                                    game.AttackerXAxis += 75;
-                                    int defenderIndex = playerIndex + differenceBetweenAttackerDefender;
-
-                                    Console.WriteLine("----------------------------------");
-                                    Console.WriteLine("index Att: " + defenderIndex);
-                                    if (defenderIndex >= game.players.Count())
-                                    {
-                                        defenderIndex = Math.Abs(game.players.Count() - defenderIndex);
-                                        Console.WriteLine("absolute value Att: " + (game.players.Count() - defenderIndex));
-                                    }
-                                    game.turn = defenderIndex;
-                                }
-                                // add rank to allowed
-                                game.allowedRankAttack.Add(card.Rank);
-                                Console.WriteLine("can attack");
-                                // #######################################
-                            }
-
-                        }
-                        Console.WriteLine("game turn: " + game.turn);
-                        //game.AttackerQueue.RemoveAt(0);
-                        //foreach (Card card in game.AttackerQueue[playerIndex+2].Hand) {
-                        //    Console.WriteLine(card.Value);
-                        //    cardButton.Enabled = true;
-                        //}
-                    };
-
-                    //disable hand
-
-                    //enable hand
-
-                    // Set initial position for each card
-                    // just for positioning the players if we have only two
-                    //Console.WriteLine(pls.Count());
-                    if (pls.Count() != 2)
-                    {
-                        //Console.WriteLine("not two");
-                        
-                        cardButton.Location = new Point(x, 0);
-                        panels[playerIndex].Controls.Add(cardButton);
-                        cardButton.BringToFront();
-                    }
-                    // just for positioning the players if we have only two
-                    else
-                    {
-                        //checked if it's the second player, assign the play to panel 3
-                        if (playerIndex == 1)
-                        {
-                            cardButton.Location = new Point(x, 0);
-                            panels[playerIndex + 1].Controls.Add(cardButton);
-                        }
-                        else
-                        {
-                            //cardButton.BringToFront();
-                            cardButton.Location = new Point(x, 0);
-                            panels[playerIndex].Controls.Add(cardButton);
-                        }
-                        
-                    }
-
-                    // Update x for the next card's position
-                    //String namesOrder = game.chooseFirstAttacker();
-                    //textBoxOrderNames.Text = namesOrder;
-                    x += 75;
-                }
+                //////here
+                ///    ref from $$$$$$$ GROK AI $$$$$$$
+                InitializePlayerCards(game, playerIndex, panels, pls, differenceBetweenAttackerDefender, ref x);
+                //////here
             }
 
 
@@ -391,11 +191,167 @@ namespace DurakCardGame
             // to be deleted
         }
 
+        private void InitializePlayerCards(Game game, int playerIndex, List<Panel> panels, List<string> pls, int differenceBetweenAttackerDefender, ref int x)
+        {
+            foreach (Card card in game.GetPlayer(playerIndex).Hand)
+            {
+                card.X = x;
+
+                Button cardButton = card.CreateCardButton();
+
+                cardButton.Click += (sender, e) =>
+                {
+                    bool isDefender = game.AttackerQueue.ToArray()[1].Name.Equals(game.GetPlayer(playerIndex).Name);
+
+                    if (isDefender)
+                    {
+                        if (game.players[game.turn].Name == game.players[playerIndex].Name)
+                        {
+                            Player defender = game.players[playerIndex];
+                            Card attackerCard = game.played[0];
+                            if (game.canStillDefend(defender.Hand, attackerCard))
+                            {
+                                Console.WriteLine("                 ");
+                                Console.WriteLine("can still defend");
+
+                                if (game.played.Count() == 1)
+                                {
+                                    bool sucDef = game.defendAttack(attackerCard, card);
+                                    if (sucDef)
+                                    {
+                                        cardButton.Enabled = false;
+                                        cardButton.Location = new Point(game.DefenderXAxis, cardButton.Location.Y);
+                                        card.X = cardButton.Location.X;
+                                        panelPlayGroundDefense.Controls.Add(cardButton);
+                                        game.DefenderXAxis += 75;
+
+                                        int attackerIndex = playerIndex - differenceBetweenAttackerDefender;
+                                        if (attackerIndex < 0)
+                                        {
+                                            attackerIndex = (game.players.Count() + attackerIndex);
+                                            attackerIndex = Math.Abs(attackerIndex);
+                                        }
+                                        game.turn = attackerIndex;
+                                        game.allowedRankAttack.Add(card.Rank);
+
+                                        // discard and store it in a list
+                                        //when the defender losses, takes all the cards and add them to his hand
+                                        game.playedCards.Add(card);
+                                        //remove from defender's hand
+                                        game.players[playerIndex].Hand.Remove(card);
+
+                                        game.played.Add(card);
+                                        game.played.Clear();
+                                    }
+                                    else
+                                    {
+                                        foreach (Card card in game.playedCards)
+                                        {
+                                            game.players[playerIndex].Hand.Add(card);
+                                        }
+                                        Console.WriteLine("game.players[playerIndex].Hand.Count(): "+ game.players[playerIndex].Hand.Count());
+                                    }
+                                    Console.WriteLine("defenece: " + sucDef);
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        bool canAttack = false;
+                        for (int i = 0; i < game.allowedRankAttack.Count(); i++)
+                        {
+                            if (game.allowedRankAttack[i] == card.Rank)
+                            {
+                                canAttack = true;
+                                if (game.players[game.turn].Name == game.players[playerIndex].Name)
+                                {
+                                    //add card to played card, if attacker wins, loser takes all the cards
+                                    game.playedCards.Add(card);
+                                    // remove from the attackers hand
+                                    game.players[playerIndex].Hand.Remove(card);
+
+                                    cardButton.Enabled = false;
+                                    cardButton.Location = new Point(game.AttackerXAxis, cardButton.Location.Y);
+                                    card.X = cardButton.Location.X;
+                                    panelPlayGroundAttack.Controls.Add(cardButton);
+
+                                    game.played.Add(card);
+
+                                    game.AttackerXAxis += 75;
+                                    int defenderIndex = playerIndex + differenceBetweenAttackerDefender;
+
+                                    if (defenderIndex >= game.players.Count())
+                                    {
+                                        defenderIndex = Math.Abs(game.players.Count() - defenderIndex);
+                                    }
+                                    game.turn = defenderIndex;
+                                }
+                            }
+                        }
+                        if (canAttack)
+                        {
+                            game.allowedRankAttack.Add(card.Rank);
+                            Console.WriteLine("            ");
+                            Console.WriteLine("can attack");
+                        }
+
+                        if (game.allowedRankAttack.Count() == 0)
+                        {
+                            if (game.players[game.turn].Name == game.players[playerIndex].Name)
+                            {
+                                cardButton.Enabled = false;
+                                cardButton.Location = new Point(game.AttackerXAxis, cardButton.Location.Y);
+                                card.X = cardButton.Location.X;
+                                panelPlayGroundAttack.Controls.Add(cardButton);
+
+                                game.played.Add(card);
+
+                                game.AttackerXAxis += 75;
+                                int defenderIndex = playerIndex + differenceBetweenAttackerDefender;
+
+                                if (defenderIndex >= game.players.Count())
+                                {
+                                    defenderIndex = Math.Abs(game.players.Count() - defenderIndex);
+                                }
+                                game.turn = defenderIndex;
+                            }
+                            game.allowedRankAttack.Add(card.Rank);
+                            Console.WriteLine("can attack");
+                        }
+                    }
+                    Console.WriteLine("game turn: " + game.turn);
+                };
+
+                if (pls.Count() != 2)
+                {
+                    cardButton.Location = new Point(x, 0);
+                    panels[playerIndex].Controls.Add(cardButton);
+                    cardButton.BringToFront();
+                }
+                else
+                {
+                    if (playerIndex == 1)
+                    {
+                        cardButton.Location = new Point(x, 0);
+                        panels[playerIndex + 1].Controls.Add(cardButton);
+                    }
+                    else
+                    {
+                        cardButton.Location = new Point(x, 0);
+                        panels[playerIndex].Controls.Add(cardButton);
+                    }
+                }
+
+                x += 75;
+            }
+        }
+
         private void buttonFillHand_Click(object sender, EventArgs e)
         {
             FillHand();
             //foreach (Player player in game.players)
-            for (int i = 0; i < game.players.Count(); i++) 
+            for (int i = 0; i < game.players.Count(); i++)
             {
                 int x = 0;
                 foreach (Card card in game.players[i].Hand)
@@ -447,6 +403,11 @@ namespace DurakCardGame
         {
             game.fillHand();
             textBoxCountDeckCards.Text = game.deck.Count().ToString();
+        }
+
+        private void textBoxTrump_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
