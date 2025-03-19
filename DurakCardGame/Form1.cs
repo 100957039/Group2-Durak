@@ -123,10 +123,12 @@ namespace DurakCardGame
                         {
                             Player defender = game.players[playerIndex];
                             Card attackerCard = game.played[0];
+
+                            Console.WriteLine(game.canStillDefend(defender.Hand, attackerCard));
                             if (game.canStillDefend(defender.Hand, attackerCard))
                             {
-                                Console.WriteLine("                 ");
-                                Console.WriteLine("can still defend");
+                                Console.WriteLine(game.canStillDefend(defender.Hand, attackerCard));
+                                Console.WriteLine("If worked.  Can still defend");
 
                                 if (game.played.Count() == 1)
                                 {
@@ -165,7 +167,7 @@ namespace DurakCardGame
                                     Console.WriteLine("defenece: " + sucDef);
                                 }
                                 bool nextRound = game.canStillDefend(defender.Hand, attackerCard);
-                                if (nextRound)
+                                if (!nextRound)
                                 {
                                     //// add cards to the loser, but not working because it's either if or else not both. it should be add to next round button
                                     //foreach (Card card in game.playedCards)
@@ -176,6 +178,11 @@ namespace DurakCardGame
 
                                     buttonNextRound.Enabled = true;
                                 }
+                            } 
+                            else
+                            {
+                                Console.WriteLine("Else worked.");
+                                buttonNextRound.Enabled = true;
                             }
                         }
                     }
