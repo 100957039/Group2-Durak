@@ -297,6 +297,7 @@
             textBoxTrump.Name = "textBoxTrump";
             textBoxTrump.Size = new Size(100, 23);
             textBoxTrump.TabIndex = 15;
+            textBoxTrump.TextChanged += textBoxTrump_TextChanged;
             // 
             // contextMenuStrip1
             // 

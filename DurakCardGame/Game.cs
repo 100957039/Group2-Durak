@@ -14,7 +14,7 @@ namespace DurakCardGame
         
         public List<Player> players = new List<Player>();
         // all the played cards will be stored here for AI 
-        private List<Card> playedCards = new List<Card>();
+        public List<Card> playedCards = new List<Card>();
         //temprary store cards to campare the atack and defence
         public List<Card> played = new List<Card>();
 
@@ -112,7 +112,7 @@ namespace DurakCardGame
             foreach (Card card in hand)
             {
                 // if the attackedBy is a trump card
-                if (attackedBy.Suit == trump )
+                if (attackedBy.Suit.Equals(trump) && card.Suit.Equals(trump) )
                 {
                     if (attackedBy.Rank < card.Rank)
                     {
@@ -124,7 +124,7 @@ namespace DurakCardGame
                 else
                 {
                     //if the defender has higher rank than the played card from the same suit
-                    if (allowedSuitDefend.Contains(card.Rank.ToString()) && attackedBy.Rank < card.Rank)
+                    if (attackedBy.Suit.Equals(card.Suit) && attackedBy.Rank < card.Rank)
                     {
                         canDefend = true;
                         break;
@@ -142,13 +142,40 @@ namespace DurakCardGame
         //compare attackers card with defender's
         public bool defendAttack(Card attackerCard, Card defenderCard)
         {
-            if (defenderCard.Suit.Equals(trump) && !attackerCard.Suit.Equals(trump))
+            //attacker's card is trump
+            if (attackerCard.Suit.Equals(trump))
             {
-                return true;
+                //defenders card is trump
+                if (defenderCard.Suit.Equals(trump))
+                {
+                    Console.WriteLine("attacker card 1: " + attackerCard.Suit + " " + attackerCard.Rank + " | " + defenderCard.Suit + " " + defenderCard.Rank);
+                    return defenderCard.Rank > attackerCard.Rank;
+                }
+                //defender's card is not trump
+                else
+                {
+                    Console.WriteLine("attacker card 2: " + attackerCard.Suit + " " + attackerCard.Rank + " | " + defenderCard.Suit + " " + defenderCard.Rank);
+                    return false;
+                }
             }
+            // attacker's card not trump
             else
             {
-                return defenderCard.Rank >= attackerCard.Rank;
+                // if defender plays trump vs attacker not trump
+                if (defenderCard.Suit.Equals(trump))
+                {
+                    Console.WriteLine("attacker card 3: " + attackerCard.Suit + " " + attackerCard.Rank + " | " + defenderCard.Suit + " " + defenderCard.Rank);
+
+                    return true;
+                }
+                // if defender and attacker do not play a trump card
+                else
+                {
+                    Console.WriteLine("suit: " + defenderCard.Suit);
+                    Console.WriteLine("tump suit fom game: " + trump);
+                    Console.WriteLine("attacker card 4: " + attackerCard.Suit + " " + attackerCard.Rank + " | " + defenderCard.Suit + " " + defenderCard.Rank);
+                    return defenderCard.Rank > attackerCard.Rank && defenderCard.Suit.Equals(attackerCard.Suit);
+                }
             }
             
         }
@@ -185,7 +212,7 @@ namespace DurakCardGame
             {
                 playerIndex = 0;
             }
-            Console.WriteLine("has lowest trump card: "+players[playerIndex].Name + " card: "+ lowestTrumpCard.ToString());
+            //Console.WriteLine("has lowest trump card: "+players[playerIndex].Name + " card: "+ lowestTrumpCard.ToString());
 
             turn = playerIndex;
 
@@ -270,21 +297,23 @@ namespace DurakCardGame
             Card trumpCard = deck.Draw();
             // set ttrump suit
             trump = trumpCard.Suit;
-            if (trumpCard.Suit == "S")
-            {
-                trump = "Spades " + trumpCard.Rank.ToString();
-            }else if (trumpCard.Suit == "H")
-            {
-                trump = "Hearts " + trumpCard.Rank.ToString();
-            }else if (trumpCard.Suit == "C")
-            {
-                trump = "Clubs " + trumpCard.Rank.ToString();
-            }
-            else
-            {
-                trump = "Diamonds " + trumpCard.Rank.ToString();
-            }
+            ////////////################################ might use lines below ####################
+            //if (trumpCard.Suit == "S")
+            //{
+            //    trump = "Spades " + trumpCard.Rank.ToString();
+            //}else if (trumpCard.Suit == "H")
+            //{
+            //    trump = "Hearts " + trumpCard.Rank.ToString();
+            //}else if (trumpCard.Suit == "C")
+            //{
+            //    trump = "Clubs " + trumpCard.Rank.ToString();
+            //}
+            //else
+            //{
+            //    trump = "Diamonds " + trumpCard.Rank.ToString();
+            //}
             // insert trump card back to the deck to be the last card
+            ////////////################################ might use lines below ####################
             deck.AddCard(trumpCard);
         }
 
@@ -336,6 +365,7 @@ namespace DurakCardGame
 
         public Player GetPlayer(int index)
         {
+            Console.WriteLine("index: "+index);
             return players[index];
         }
 
