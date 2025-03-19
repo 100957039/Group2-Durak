@@ -123,7 +123,7 @@
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(121, 23);
             comboBox1.TabIndex = 8;
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            //comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // textBoxPLayerFour
             // 
@@ -261,7 +261,7 @@
             buttonFillHand.TabIndex = 11;
             buttonFillHand.Text = "Fill Hand";
             buttonFillHand.UseVisualStyleBackColor = true;
-            buttonFillHand.Click += buttonFillHand_Click;
+            buttonFillHand.Click += fill_hand_works;
             // 
             // textBoxCountDeckCards
             // 
@@ -299,7 +299,7 @@
             textBoxTrump.Name = "textBoxTrump";
             textBoxTrump.Size = new Size(100, 23);
             textBoxTrump.TabIndex = 15;
-            textBoxTrump.TextChanged += textBoxTrump_TextChanged;
+            //textBoxTrump.TextChanged += textBoxTrump_TextChanged;
             // 
             // contextMenuStrip1
             // 
@@ -357,7 +357,7 @@
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
-            Load += Form1_Load;
+            //Load += Form1_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             panelThree.ResumeLayout(false);

@@ -1,6 +1,3 @@
-using System.Security.Cryptography.X509Certificates;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
-
 namespace DurakCardGame
 {
     public partial class Form1 : Form
@@ -11,6 +8,8 @@ namespace DurakCardGame
             InitializeComponent();
 
         }
+        // defender index to pass card to once lost
+        int defenderIndexToPassCards = -1;
         int x = 0;
         int y = 0;
         Game game = new Game();
@@ -18,49 +17,14 @@ namespace DurakCardGame
         List<String> playersName;
 
 
-        private void label1_Click(object sender, EventArgs e)
-        {
+        
 
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            // Create a new Card object
-            //Card imgBtn = new Card("Hearts", "5", 5, 150 + y, 600 + x);
-            //Card imgBtn = new Card("Hearts", "5", 5, y, x);
-
-            // Update y-coordinate for spacing
-            y += 20;
-
-            // Create the button from the Card object
-            //Button cardButton = imgBtn.CreateCardButton();
-            //Button cardButton2 = imgBtn.CreateCardButton();
-
-            // Add the button to the form
-            //panelOpponent.Controls.Add(cardButton);
-            //cardButton.BringToFront();
-            //panelCurrentPlayer.Controls.Add(cardButton2);
-            //cardButton2.BringToFront();
-            //this.Controls.Add(cardButton);
-
-            // Bring the button to the front
-
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void RefreshPanels()
         {
             //panelCurrentPlayer.Refresh();
+            panelTwo.Controls.Clear();
             panelCurrentPlayer.Controls.Clear();
             panelTwo.Refresh();
             panelPlayGroundAttack.Refresh();
@@ -74,43 +38,6 @@ namespace DurakCardGame
             //RefreshPanels();
         }
 
-        private bool ValidatePlayer()
-        {
-            if (textBoxPlayerOne.Text.Trim() == "" || textBoxPlayerTwo.Text.Trim() == ""
-                || textBoxPlayerThree.Text.Trim() == "" || textBoxPLayerFour.Text.Trim() == "")
-            {
-                MessageBox.Show("Please enter player names");
-                return false;
-            }
-            else
-            {
-                if (textBoxPlayerOne.Text.Trim() != "")
-                {
-                    panels.Add(panelCurrentPlayer);
-                    playersName.Add(textBoxPlayerOne.Text);
-                }
-                if (textBoxPlayerTwo.Text.Trim() != "")
-                {
-                    panels.Add(panelOne);
-                    playersName.Add(textBoxPlayerTwo.Text);
-                }
-                if (textBoxPlayerThree.Text.Trim() != "")
-                {
-                    panels.Add(panelTwo);
-                    playersName.Add(textBoxPlayerThree.Text);
-                }
-                if (textBoxPLayerFour.Text.Trim() != "")
-                {
-                    panels.Add(panelThree);
-                    playersName.Add(textBoxPLayerFour.Text);
-                }
-                return true;
-            }
-        }
-
-        //disable hand
-
-        //enable hand
 
         private void OnGameStart(object sender, EventArgs e)
         {
@@ -157,14 +84,9 @@ namespace DurakCardGame
                 game.addPlayer(playerName);
                 game.startGame();
                 int x = 0;
-
-                //foreach (Player player in game.AttackerQueue)
-                //{
-                //    Console.WriteLine("form1.cs" + player.Name);
-                //}
                 //////here
                 ///    ref from $$$$$$$ GROK AI $$$$$$$
-                InitializePlayerCards(game, playerIndex, panels, pls, differenceBetweenAttackerDefender, ref x);
+                InitializePlayerCards(game, playerIndex, differenceBetweenAttackerDefender, ref x);
                 //////here
             }
 
@@ -181,7 +103,7 @@ namespace DurakCardGame
             // to be deleted
         }
 
-        private void InitializePlayerCards(Game game, int playerIndex, List<Panel> panels, List<string> pls, int differenceBetweenAttackerDefender, ref int x)
+        private void InitializePlayerCards(Game game, int playerIndex, int differenceBetweenAttackerDefender, ref int x)
         {
             foreach (Card card in game.GetPlayer(playerIndex).Hand)
             {
@@ -195,6 +117,8 @@ namespace DurakCardGame
 
                     if (isDefender)
                     {
+                        //global variable to store defender index, to pass card after attack is done
+                        defenderIndexToPassCards = playerIndex;
                         if (game.players[game.turn].Name == game.players[playerIndex].Name)
                         {
                             Player defender = game.players[playerIndex];
@@ -243,11 +167,11 @@ namespace DurakCardGame
                                 bool nextRound = game.canStillDefend(defender.Hand, attackerCard);
                                 if (nextRound)
                                 {
-                                    // add cards to the loser, but not working because it's either if or else not both. it should be add to next round button
-                                    foreach (Card card in game.playedCards)
-                                    {
-                                        game.players[playerIndex].Hand.Add(card);
-                                    }
+                                    //// add cards to the loser, but not working because it's either if or else not both. it should be add to next round button
+                                    //foreach (Card card in game.playedCards)
+                                    //{
+                                    //    game.players[playerIndex].Hand.Add(card);
+                                    //}
                                     Console.WriteLine("game.players[playerIndex].Hand.Count(): " + game.players[playerIndex].Hand.Count());
 
                                     buttonNextRound.Enabled = true;
@@ -338,7 +262,7 @@ namespace DurakCardGame
                     Console.WriteLine("game turn: " + game.turn);
                 };
 
-                if (pls.Count() != 2)
+                if (game.players.Count() != 2)
                 {
                     cardButton.Location = new Point(x, 0);
                     panels[playerIndex].Controls.Add(cardButton);
@@ -362,23 +286,18 @@ namespace DurakCardGame
             }
         }
 
-        private void buttonFillHand_Click(object sender, EventArgs e)
+        private void fill_hand_works(object sender, EventArgs e)
         {
-            ///it will break the code, leave for later to remove safely 
-            List<String> pls = new List<string>();
             FillHand();
             int differenceBetweenAttackerDefender = 1;
 
-            for (int i = 0; i < game.players.Count(); i++)
+            for (int playerIndex = 0; playerIndex < game.players.Count(); playerIndex++)
             {
-                int playerIndex = i;
-                String playerName = game.players[i].Name;
-                pls.Add(playerName);
                 int x = 0;
 
                 //////here
                 ///    ref from $$$$$$$ GROK AI $$$$$$$
-                InitializePlayerCards(game, playerIndex, panels, pls, differenceBetweenAttackerDefender, ref x);
+                InitializePlayerCards(game, playerIndex, differenceBetweenAttackerDefender, ref x);
                 //////here
             }
 
@@ -386,15 +305,6 @@ namespace DurakCardGame
             textBoxCountDeckCards.Text = game.deck.Count().ToString();
         }
 
-        private void panelTwo_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void player1Cards_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
@@ -402,22 +312,38 @@ namespace DurakCardGame
             textBoxCountDeckCards.Text = game.deck.Count().ToString();
         }
 
-        private void textBoxTrump_TextChanged(object sender, EventArgs e)
-        {
 
-        }
-
+        // go to next round: 1- add cards to loser, 2- delete cards from game.playedCard
         private void buttonNextRound_Click(object sender, EventArgs e)
         {
+            // add cards to the loser, but not working because it's either if or else not both. it should be add to next round button
+            foreach (Card card in game.playedCards)
+            {
+                game.players[defenderIndexToPassCards].Hand.Add(card);
+            }
+            // clear list of the played cards in game class
+            game.playedCards.Clear();
+
             foreach (Player player in game.players)
             {
                 Console.WriteLine(player.Name + " : " + player.Hand.Count());
             }
+
+            
             FillHand();
+            int differenceBetweenAttackerDefender = 1;
 
-            // transfer played cards to loser
+            for (int playerIndex = 0; playerIndex < game.players.Count(); playerIndex++)
+            {
+                int x = 0;
 
+                //////here
+                ///    ref from $$$$$$$ GROK AI $$$$$$$
+                InitializePlayerCards(game, playerIndex, differenceBetweenAttackerDefender, ref x);
+                //////here
+            }
 
+            textBoxCountDeckCards.Text = game.deck.Count().ToString();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -426,6 +352,7 @@ namespace DurakCardGame
             {
                 Console.WriteLine(player.Name + " : " + player.Hand.Count());
             }
+            Console.WriteLine("game.played cards count: " + game.playedCards.Count());
         }
     }
 }
