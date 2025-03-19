@@ -169,16 +169,6 @@ namespace DurakCardGame
             }
 
 
-            //foreach (Card card in game.GetPlayer(1).Hand)
-            //{
-            //    card.X = x;
-            //    Button cardButton = card.CreateCardButton();
-            //    cardButton.Location = new Point(x, 0);
-            //    panelTwo.Controls.Add(cardButton);
-            //    cardButton.BringToFront();
-            //    x += 75;
-            //}
-
             textBoxCountDeckCards.Text = game.deck.Count().ToString();
             textBoxTrump.Text = game.trump;
             // to be deleted, safe to deleted, referenced only here in this block
@@ -220,6 +210,13 @@ namespace DurakCardGame
                                     if (sucDef)
                                     {
                                         cardButton.Enabled = false;
+                                        // discard and store it in a list
+                                        //when the defender losses, takes all the cards and add them to his hand
+                                        game.playedCards.Add(card);
+                                        //remove from defender's hand
+                                        game.players[playerIndex].Hand.Remove(card);
+                                        Console.WriteLine("defenderHand: " + game.players[playerIndex].Hand.Count());
+
                                         cardButton.Location = new Point(game.DefenderXAxis, cardButton.Location.Y);
                                         card.X = cardButton.Location.X;
                                         panelPlayGroundDefense.Controls.Add(cardButton);
@@ -234,30 +231,33 @@ namespace DurakCardGame
                                         game.turn = attackerIndex;
                                         game.allowedRankAttack.Add(card.Rank);
 
-                                        // discard and store it in a list
-                                        //when the defender losses, takes all the cards and add them to his hand
-                                        game.playedCards.Add(card);
-                                        //remove from defender's hand
-                                        game.players[playerIndex].Hand.Remove(card);
+
 
                                         game.played.Add(card);
                                         game.played.Clear();
                                     }
-                                    else
-                                    {
-                                        foreach (Card card in game.playedCards)
-                                        {
-                                            game.players[playerIndex].Hand.Add(card);
-                                        }
-                                        Console.WriteLine("game.players[playerIndex].Hand.Count(): "+ game.players[playerIndex].Hand.Count());
-                                    }
+
+
                                     Console.WriteLine("defenece: " + sucDef);
+                                }
+                                bool nextRound = game.canStillDefend(defender.Hand, attackerCard);
+                                if (nextRound)
+                                {
+                                    // add cards to the loser, but not working because it's either if or else not both. it should be add to next round button
+                                    foreach (Card card in game.playedCards)
+                                    {
+                                        game.players[playerIndex].Hand.Add(card);
+                                    }
+                                    Console.WriteLine("game.players[playerIndex].Hand.Count(): " + game.players[playerIndex].Hand.Count());
+
+                                    buttonNextRound.Enabled = true;
                                 }
                             }
                         }
                     }
                     else
                     {
+                        // allow attack if the player has cards that he can play
                         bool canAttack = false;
                         for (int i = 0; i < game.allowedRankAttack.Count(); i++)
                         {
@@ -270,8 +270,11 @@ namespace DurakCardGame
                                     game.playedCards.Add(card);
                                     // remove from the attackers hand
                                     game.players[playerIndex].Hand.Remove(card);
+                                    Console.WriteLine("attckerHand: " + game.players[playerIndex].Hand.Count());
 
                                     cardButton.Enabled = false;
+                                    //
+                                    Console.WriteLine("attacker: " + game.players[playerIndex].Hand.Count());
                                     cardButton.Location = new Point(game.AttackerXAxis, cardButton.Location.Y);
                                     card.X = cardButton.Location.X;
                                     panelPlayGroundAttack.Controls.Add(cardButton);
@@ -286,6 +289,12 @@ namespace DurakCardGame
                                         defenderIndex = Math.Abs(game.players.Count() - defenderIndex);
                                     }
                                     game.turn = defenderIndex;
+
+                                    bool nextRound = game.canStillAttack(game.players[playerIndex].Hand);
+                                    if (nextRound)
+                                    {
+                                        buttonNextRound.Enabled = true;
+                                    }
                                 }
                             }
                         }
@@ -296,11 +305,17 @@ namespace DurakCardGame
                             Console.WriteLine("can attack");
                         }
 
+                        // allow attack if no card has been played yet
                         if (game.allowedRankAttack.Count() == 0)
                         {
                             if (game.players[game.turn].Name == game.players[playerIndex].Name)
                             {
+                                //add card to played card, if attacker wins, loser takes all the cards
+                                game.playedCards.Add(card);
+                                // remove from the attackers hand
+                                game.players[playerIndex].Hand.Remove(card);
                                 cardButton.Enabled = false;
+                                Console.WriteLine("attacker: " + game.players[playerIndex].Hand.Count());
                                 cardButton.Location = new Point(game.AttackerXAxis, cardButton.Location.Y);
                                 card.X = cardButton.Location.X;
                                 panelPlayGroundAttack.Controls.Add(cardButton);
@@ -317,7 +332,7 @@ namespace DurakCardGame
                                 game.turn = defenderIndex;
                             }
                             game.allowedRankAttack.Add(card.Rank);
-                            Console.WriteLine("can attack");
+                            //Console.WriteLine("can attack");
                         }
                     }
                     Console.WriteLine("game turn: " + game.turn);
@@ -349,43 +364,25 @@ namespace DurakCardGame
 
         private void buttonFillHand_Click(object sender, EventArgs e)
         {
+            ///it will break the code, leave for later to remove safely 
+            List<String> pls = new List<string>();
             FillHand();
-            //foreach (Player player in game.players)
+            int differenceBetweenAttackerDefender = 1;
+
             for (int i = 0; i < game.players.Count(); i++)
             {
+                int playerIndex = i;
+                String playerName = game.players[i].Name;
+                pls.Add(playerName);
                 int x = 0;
-                foreach (Card card in game.players[i].Hand)
-                {
-                    card.X = x;
-                    Button cardButton = card.CreateCardButton();
-                    cardButton.Click += (sender, e) =>
-                    {
-                        // Assuming you have the player's turn logic handled
-                        game.playCard(i, game.GetPlayer(i).Hand.IndexOf(card));  // This gets the index of the clicked card
-                        cardButton.Enabled = false;  // Disable button once card is played
-                                                     // Add the card to the played cards panel
-                        panelPlayGroundAttack.Controls.Add(cardButton);
-                    };
-                    cardButton.Location = new Point(x, 0);
-                    panels[i].Controls.Add(cardButton);
-                    cardButton.BringToFront();
-                    x += 75;
-                }
-                x = 0;
 
+                //////here
+                ///    ref from $$$$$$$ GROK AI $$$$$$$
+                InitializePlayerCards(game, playerIndex, panels, pls, differenceBetweenAttackerDefender, ref x);
+                //////here
             }
-            //int panelIndex = 0;
-            //foreach (Player player in game.players)
-            //{
-            //    foreach (Card card in player.Hand)
-            //    {
-            //        Button cardButton = card.CreateCardButton();
-            //        panels[panelIndex].Controls.Add(cardButton);
-            //        cardButton.BringToFront();
-            //    }
-            //    panelIndex++;
-            //}
-            //RefreshPanels();
+
+
             textBoxCountDeckCards.Text = game.deck.Count().ToString();
         }
 
@@ -408,6 +405,27 @@ namespace DurakCardGame
         private void textBoxTrump_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonNextRound_Click(object sender, EventArgs e)
+        {
+            foreach (Player player in game.players)
+            {
+                Console.WriteLine(player.Name + " : " + player.Hand.Count());
+            }
+            FillHand();
+
+            // transfer played cards to loser
+
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            foreach (Player player in game.players)
+            {
+                Console.WriteLine(player.Name + " : " + player.Hand.Count());
+            }
         }
     }
 }

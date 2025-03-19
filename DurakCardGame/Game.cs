@@ -14,6 +14,7 @@ namespace DurakCardGame
         
         public List<Player> players = new List<Player>();
         // all the played cards will be stored here for AI 
+        // if defender loses, transfer cards to the loser, then clear after each trun (do not forget to transfer to AI)
         public List<Card> playedCards = new List<Card>();
         //temprary store cards to campare the atack and defence
         public List<Card> played = new List<Card>();

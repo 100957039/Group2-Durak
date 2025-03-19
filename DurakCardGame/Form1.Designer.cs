@@ -59,6 +59,7 @@
             contextMenuStrip1 = new ContextMenuStrip(components);
             textBoxOrderNames = new TextBox();
             panelDeck = new Panel();
+            buttonNextRound = new Button();
             groupBox1.SuspendLayout();
             panelThree.SuspendLayout();
             SuspendLayout();
@@ -222,6 +223,7 @@
             button3.TabIndex = 5;
             button3.Text = "Cheat (show hand)";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // panelCurrentPlayer
             // 
@@ -318,11 +320,23 @@
             panelDeck.Size = new Size(179, 100);
             panelDeck.TabIndex = 17;
             // 
+            // buttonNextRound
+            // 
+            buttonNextRound.Enabled = false;
+            buttonNextRound.Location = new Point(930, 698);
+            buttonNextRound.Name = "buttonNextRound";
+            buttonNextRound.Size = new Size(134, 23);
+            buttonNextRound.TabIndex = 18;
+            buttonNextRound.Text = "Next Round";
+            buttonNextRound.UseVisualStyleBackColor = true;
+            buttonNextRound.Click += buttonNextRound_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1184, 738);
+            Controls.Add(buttonNextRound);
             Controls.Add(panelDeck);
             Controls.Add(textBoxOrderNames);
             Controls.Add(textBoxTrump);
@@ -383,5 +397,6 @@
         private TextBox textBoxOrderNames;
         private ToolStrip toolStrip1;
         private Panel panelDeck;
+        private Button buttonNextRound;
     }
 }

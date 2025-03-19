@@ -127,7 +127,7 @@ namespace DurakCardGame
         {
             pnlPlayerSelect.Visible = false;
             pnlCustomize.Visible = true;
-            ShowIcons();
+            //ShowIcons();
         }
 
         /// <summary>
