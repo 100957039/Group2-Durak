@@ -35,9 +35,9 @@ namespace DurakCardGame
             InitializeComponent();
         }
 
-        //
+        //*******************************************************************************************************************************************************
         // Main Menu
-        //
+        //*******************************************************************************************************************************************************
 
         /// <summary>
         /// Moves to Player Select from Main Menu
@@ -48,6 +48,7 @@ namespace DurakCardGame
         {
             pnlMainMenu.Visible = false;
             pnlPlayerSelect.Visible = true;
+            pnlPlayerSelect.BringToFront();
         }
 
         /// <summary>
@@ -75,6 +76,7 @@ namespace DurakCardGame
         {
             pnlMainMenu.Visible = false;
             pnlOptions.Visible = true;
+            pnlOptions.BringToFront();
         }
 
         /// <summary>
@@ -101,11 +103,12 @@ namespace DurakCardGame
         {
             pnlOptions.Visible = false;
             pnlMainMenu.Visible = true;
+            pnlMainMenu.BringToFront();
         }
 
-        //
+        //*******************************************************************************************************************************************************
         // Player Select
-        //
+        //*******************************************************************************************************************************************************
 
         /// <summary>
         /// Moves to Main Menu from Player Select
@@ -116,6 +119,7 @@ namespace DurakCardGame
         {
             pnlPlayerSelect.Visible = false;
             pnlMainMenu.Visible = true;
+            pnlMainMenu.BringToFront();
         }
 
         /// <summary>
@@ -127,6 +131,7 @@ namespace DurakCardGame
         {
             pnlPlayerSelect.Visible = false;
             pnlCustomize.Visible = true;
+            pnlCustomize.BringToFront();
             //ShowIcons();
         }
 
@@ -224,9 +229,9 @@ namespace DurakCardGame
             numAI = 3;
         }
 
-        //
+        //*******************************************************************************************************************************************************
         // Customize
-        //
+        //*******************************************************************************************************************************************************
 
         /// <summary>
         /// Moves to Player Select from Customize Screen
@@ -237,9 +242,10 @@ namespace DurakCardGame
         {
             pnlCustomize.Visible = false;
             pnlPlayerSelect.Visible = true;
+            pnlPlayerSelect.BringToFront();
             iconPage = 0;
         }
-   
+
         /// <summary>
         /// Moves to Game from Customize Screen
         /// </summary>
@@ -249,16 +255,21 @@ namespace DurakCardGame
         {
             pnlCustomize.Visible = false;
             pnlGame.Visible = true;
+            pnlGame.BringToFront();
             iconPage = 0;
         }
 
+        /// <summary>
+        /// Displays the icons players can choose on the customization page
+        /// (Not priority so will continue later)
+        /// </summary>
         private void ShowIcons()
         {
             int iconSize = 50;
-            int[] iconLocationX = {34, 90, 146};
-            int[] iconLocationY = {13, 69, 0};
+            int[] iconLocationX = { 34, 90, 146 };
+            int[] iconLocationY = { 13, 69, 0 };
             List<PictureBox> iconList = new List<PictureBox>();
-            List<PictureBox> panelList = new List<PictureBox>() {pbPlayer1SelectedIcon, pbPlayer2SelectedIcon, pbPlayer3SelectedIcon, pbPlayer4SelectedIcon};
+            List<PictureBox> panelList = new List<PictureBox>() { pbPlayer1SelectedIcon, pbPlayer2SelectedIcon, pbPlayer3SelectedIcon, pbPlayer4SelectedIcon };
             String iconLocation = "../../../GUI_Images/Icons/";
             String[] icons = ["Acorn_Boy.jpg", "Beard_Man.jpg", "Inventor.jpg", "Queen.jpg", "Skull_Man.jpg", "Surprise.jpg", "Robot_Knight.jpg"];
 
@@ -278,17 +289,17 @@ namespace DurakCardGame
 
                     //iconList[i + j].Click += (sender, e) =>
                     //{
-                            
+
                     //};
                 }
 
             }
         }
-            
 
-        //
+
+        //*******************************************************************************************************************************************************
         // Game
-        //
+        //*******************************************************************************************************************************************************
 
         /// <summary>
         /// Brings up an alert and lets player return to Main Menu
@@ -303,6 +314,25 @@ namespace DurakCardGame
             {
                 pnlGame.Visible = false;
                 pnlMainMenu.Visible = true;
+                pnlMainMenu.BringToFront();
+            }
+        }
+
+
+        private void GameSetup()
+        {
+
+        }
+
+        /// <summary>
+        /// Gets a players hand and displays it
+        /// </summary>
+        /// <param name="hand"></param>
+        private void DisplayHand(List<Card> hand)
+        {
+            foreach (Card card in hand)
+            {
+
             }
         }
     }

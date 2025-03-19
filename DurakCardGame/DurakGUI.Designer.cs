@@ -101,22 +101,16 @@
             lblPlayer4Cards = new Label();
             btnPlayer4Bg = new Button();
             pnlCustomize = new Panel();
-            this.lblCustomize = new Label();
-            this.btnCustomizeBg = new Button();
+            lblCustomize = new Label();
+            btnCustomizeBg = new Button();
             gbPlayer1Customize = new GroupBox();
+            lblPlayer1NameC = new Label();
+            tbPlayer1Name = new TextBox();
+            lblPlayer1Icon = new Label();
             pbPlayer1SelectedIcon = new PictureBox();
-            this.lblPlayer1NameC = new Label();
-            this.lblPlayer1Icon = new Label();
             pnlPlayer1IconSelect = new Panel();
             btnPlayer1ArrowL = new Button();
             btnPlayer1ArrowR = new Button();
-            tbPlayer1Name = new TextBox();
-            btnBackN = new Button();
-            btnConfirmN = new Button();
-            pnlOptions = new Panel();
-            lblOptions = new Label();
-            btnBack = new Button();
-            btnOptionsBg = new Button();
             gbPlayer2Customize = new GroupBox();
             lblPlayer2NameC = new Label();
             tbPlayer2Name = new TextBox();
@@ -131,11 +125,11 @@
             lblPlayer3Icon = new Label();
             pbPlayer3SelectedIcon = new PictureBox();
             pnlPlayer3IconSelect = new Panel();
-            this.btnPlayer3ArrowL = new Button();
-            this.btnPlayer3ArrowR = new Button();
+            btnPlayer3ArrowL = new Button();
+            btnPlayer3ArrowR = new Button();
             gbPlayer4Customize = new GroupBox();
-            this.lblPlayer4NameC = new Label();
-            this.tbPlayer4Name = new TextBox();
+            lblPlayer4NameC = new Label();
+            tbPlayer4Name = new TextBox();
             lblPlayer4Icon = new Label();
             pbPlayer4SelectedIcon = new PictureBox();
             pnlPlayer4IconSelect = new Panel();
@@ -147,6 +141,12 @@
             pictureBox42 = new PictureBox();
             btnPlayer4ArrowL = new Button();
             btnPlayer4ArrowR = new Button();
+            btnBackN = new Button();
+            btnConfirmN = new Button();
+            pnlOptions = new Panel();
+            lblOptions = new Label();
+            btnBack = new Button();
+            btnOptionsBg = new Button();
             pnlMainMenu.SuspendLayout();
             pnlPlayerSelect.SuspendLayout();
             gbNumAI.SuspendLayout();
@@ -174,7 +174,6 @@
             gbPlayer1Customize.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbPlayer1SelectedIcon).BeginInit();
             pnlPlayer1IconSelect.SuspendLayout();
-            pnlOptions.SuspendLayout();
             gbPlayer2Customize.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbPlayer2SelectedIcon).BeginInit();
             pnlPlayer2IconSelect.SuspendLayout();
@@ -190,6 +189,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox40).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox41).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox42).BeginInit();
+            pnlOptions.SuspendLayout();
             SuspendLayout();
             // 
             // pnlMainMenu
@@ -1135,8 +1135,8 @@
             pnlCustomize.AutoScroll = true;
             pnlCustomize.BackColor = SystemColors.Control;
             pnlCustomize.BackgroundImage = (Image)resources.GetObject("pnlCustomize.BackgroundImage");
-            pnlCustomize.Controls.Add(this.lblCustomize);
-            pnlCustomize.Controls.Add(this.btnCustomizeBg);
+            pnlCustomize.Controls.Add(lblCustomize);
+            pnlCustomize.Controls.Add(btnCustomizeBg);
             pnlCustomize.Controls.Add(gbPlayer1Customize);
             pnlCustomize.Controls.Add(gbPlayer2Customize);
             pnlCustomize.Controls.Add(gbPlayer3Customize);
@@ -1147,39 +1147,40 @@
             pnlCustomize.Name = "pnlCustomize";
             pnlCustomize.Size = new Size(1082, 753);
             pnlCustomize.TabIndex = 33;
+            pnlCustomize.Visible = false;
             // 
             // lblCustomize
             // 
-            this.lblCustomize.BackColor = Color.Black;
-            this.lblCustomize.Font = new Font("Castellar", 36F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.lblCustomize.ForeColor = Color.White;
-            this.lblCustomize.Location = new Point(233, 44);
-            this.lblCustomize.Name = "lblCustomize";
-            this.lblCustomize.Size = new Size(615, 148);
-            this.lblCustomize.TabIndex = 32;
-            this.lblCustomize.Text = "PLAYER CUSTOMIZATION";
-            this.lblCustomize.TextAlign = ContentAlignment.TopCenter;
+            lblCustomize.BackColor = Color.Black;
+            lblCustomize.Font = new Font("Castellar", 36F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblCustomize.ForeColor = Color.White;
+            lblCustomize.Location = new Point(233, 44);
+            lblCustomize.Name = "lblCustomize";
+            lblCustomize.Size = new Size(615, 148);
+            lblCustomize.TabIndex = 32;
+            lblCustomize.Text = "PLAYER CUSTOMIZATION";
+            lblCustomize.TextAlign = ContentAlignment.TopCenter;
             // 
             // btnCustomizeBg
             // 
-            this.btnCustomizeBg.BackColor = Color.Black;
-            this.btnCustomizeBg.Enabled = false;
-            this.btnCustomizeBg.FlatAppearance.BorderSize = 10;
-            this.btnCustomizeBg.FlatStyle = FlatStyle.Flat;
-            this.btnCustomizeBg.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.btnCustomizeBg.ForeColor = Color.White;
-            this.btnCustomizeBg.Location = new Point(218, 34);
-            this.btnCustomizeBg.Name = "btnCustomizeBg";
-            this.btnCustomizeBg.Size = new Size(646, 169);
-            this.btnCustomizeBg.TabIndex = 33;
-            this.btnCustomizeBg.UseVisualStyleBackColor = false;
+            btnCustomizeBg.BackColor = Color.Black;
+            btnCustomizeBg.Enabled = false;
+            btnCustomizeBg.FlatAppearance.BorderSize = 10;
+            btnCustomizeBg.FlatStyle = FlatStyle.Flat;
+            btnCustomizeBg.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnCustomizeBg.ForeColor = Color.White;
+            btnCustomizeBg.Location = new Point(218, 34);
+            btnCustomizeBg.Name = "btnCustomizeBg";
+            btnCustomizeBg.Size = new Size(646, 169);
+            btnCustomizeBg.TabIndex = 33;
+            btnCustomizeBg.UseVisualStyleBackColor = false;
             // 
             // gbPlayer1Customize
             // 
             gbPlayer1Customize.BackColor = Color.Black;
-            gbPlayer1Customize.Controls.Add(this.lblPlayer1NameC);
+            gbPlayer1Customize.Controls.Add(lblPlayer1NameC);
             gbPlayer1Customize.Controls.Add(tbPlayer1Name);
-            gbPlayer1Customize.Controls.Add(this.lblPlayer1Icon);
+            gbPlayer1Customize.Controls.Add(lblPlayer1Icon);
             gbPlayer1Customize.Controls.Add(pbPlayer1SelectedIcon);
             gbPlayer1Customize.Controls.Add(pnlPlayer1IconSelect);
             gbPlayer1Customize.Font = new Font("Castellar", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -1191,6 +1192,34 @@
             gbPlayer1Customize.TabStop = false;
             gbPlayer1Customize.Text = "Player 1";
             // 
+            // lblPlayer1NameC
+            // 
+            lblPlayer1NameC.Font = new Font("Copperplate Gothic Light", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPlayer1NameC.Location = new Point(11, 41);
+            lblPlayer1NameC.Name = "lblPlayer1NameC";
+            lblPlayer1NameC.Size = new Size(95, 30);
+            lblPlayer1NameC.TabIndex = 22;
+            lblPlayer1NameC.Text = "Name";
+            // 
+            // tbPlayer1Name
+            // 
+            tbPlayer1Name.Font = new Font("Copperplate Gothic Light", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tbPlayer1Name.Location = new Point(13, 74);
+            tbPlayer1Name.MaxLength = 10;
+            tbPlayer1Name.Name = "tbPlayer1Name";
+            tbPlayer1Name.Size = new Size(230, 40);
+            tbPlayer1Name.TabIndex = 21;
+            tbPlayer1Name.Text = "Player 1";
+            // 
+            // lblPlayer1Icon
+            // 
+            lblPlayer1Icon.Font = new Font("Copperplate Gothic Light", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPlayer1Icon.Location = new Point(11, 129);
+            lblPlayer1Icon.Name = "lblPlayer1Icon";
+            lblPlayer1Icon.Size = new Size(95, 30);
+            lblPlayer1Icon.TabIndex = 23;
+            lblPlayer1Icon.Text = "Icon";
+            // 
             // pbPlayer1SelectedIcon
             // 
             pbPlayer1SelectedIcon.BackColor = Color.White;
@@ -1201,24 +1230,6 @@
             pbPlayer1SelectedIcon.SizeMode = PictureBoxSizeMode.StretchImage;
             pbPlayer1SelectedIcon.TabIndex = 39;
             pbPlayer1SelectedIcon.TabStop = false;
-            // 
-            // lblPlayer1NameC
-            // 
-            this.lblPlayer1NameC.Font = new Font("Copperplate Gothic Light", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.lblPlayer1NameC.Location = new Point(11, 41);
-            this.lblPlayer1NameC.Name = "lblPlayer1NameC";
-            this.lblPlayer1NameC.Size = new Size(95, 30);
-            this.lblPlayer1NameC.TabIndex = 22;
-            this.lblPlayer1NameC.Text = "Name";
-            // 
-            // lblPlayer1Icon
-            // 
-            this.lblPlayer1Icon.Font = new Font("Copperplate Gothic Light", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.lblPlayer1Icon.Location = new Point(11, 129);
-            this.lblPlayer1Icon.Name = "lblPlayer1Icon";
-            this.lblPlayer1Icon.Size = new Size(95, 30);
-            this.lblPlayer1Icon.TabIndex = 23;
-            this.lblPlayer1Icon.Text = "Icon";
             // 
             // pnlPlayer1IconSelect
             // 
@@ -1260,99 +1271,6 @@
             btnPlayer1ArrowR.TextAlign = ContentAlignment.TopCenter;
             btnPlayer1ArrowR.UseVisualStyleBackColor = false;
             // 
-            // tbPlayer1Name
-            // 
-            tbPlayer1Name.Font = new Font("Copperplate Gothic Light", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            tbPlayer1Name.Location = new Point(13, 74);
-            tbPlayer1Name.MaxLength = 10;
-            tbPlayer1Name.Name = "tbPlayer1Name";
-            tbPlayer1Name.Size = new Size(230, 40);
-            tbPlayer1Name.TabIndex = 21;
-            tbPlayer1Name.Text = "Player 1";
-            // 
-            // btnBackN
-            // 
-            btnBackN.BackColor = Color.Black;
-            btnBackN.FlatAppearance.BorderSize = 5;
-            btnBackN.FlatStyle = FlatStyle.Flat;
-            btnBackN.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnBackN.ForeColor = Color.White;
-            btnBackN.Location = new Point(50, 643);
-            btnBackN.Name = "btnBackN";
-            btnBackN.Size = new Size(128, 60);
-            btnBackN.TabIndex = 9;
-            btnBackN.Text = "Back";
-            btnBackN.UseVisualStyleBackColor = false;
-            btnBackN.Click += BtnBackNClick;
-            // 
-            // btnConfirmN
-            // 
-            btnConfirmN.BackColor = Color.Black;
-            btnConfirmN.FlatAppearance.BorderSize = 5;
-            btnConfirmN.FlatStyle = FlatStyle.Flat;
-            btnConfirmN.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnConfirmN.ForeColor = Color.White;
-            btnConfirmN.Location = new Point(852, 643);
-            btnConfirmN.Name = "btnConfirmN";
-            btnConfirmN.Size = new Size(192, 60);
-            btnConfirmN.TabIndex = 16;
-            btnConfirmN.Text = "Confirm";
-            btnConfirmN.UseVisualStyleBackColor = false;
-            btnConfirmN.Click += BtnConfirmNClick;
-            // 
-            // pnlOptions
-            // 
-            pnlOptions.AutoScroll = true;
-            pnlOptions.BackColor = SystemColors.Control;
-            pnlOptions.BackgroundImage = (Image)resources.GetObject("pnlOptions.BackgroundImage");
-            pnlOptions.Controls.Add(lblOptions);
-            pnlOptions.Controls.Add(btnBack);
-            pnlOptions.Controls.Add(btnOptionsBg);
-            pnlOptions.Location = new Point(0, 0);
-            pnlOptions.Name = "pnlOptions";
-            pnlOptions.Size = new Size(1082, 753);
-            pnlOptions.TabIndex = 13;
-            // 
-            // lblOptions
-            // 
-            lblOptions.BackColor = Color.Black;
-            lblOptions.Font = new Font("Castellar", 48F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblOptions.ForeColor = Color.White;
-            lblOptions.Location = new Point(325, 118);
-            lblOptions.Name = "lblOptions";
-            lblOptions.Size = new Size(427, 85);
-            lblOptions.TabIndex = 12;
-            lblOptions.Text = "Options";
-            // 
-            // btnBack
-            // 
-            btnBack.BackColor = Color.Black;
-            btnBack.FlatAppearance.BorderSize = 5;
-            btnBack.FlatStyle = FlatStyle.Flat;
-            btnBack.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnBack.ForeColor = Color.White;
-            btnBack.Location = new Point(476, 601);
-            btnBack.Name = "btnBack";
-            btnBack.Size = new Size(129, 60);
-            btnBack.TabIndex = 10;
-            btnBack.Text = "Back";
-            btnBack.UseVisualStyleBackColor = false;
-            btnBack.Click += BtnBackOClick;
-            // 
-            // btnOptionsBg
-            // 
-            btnOptionsBg.BackColor = Color.Black;
-            btnOptionsBg.Enabled = false;
-            btnOptionsBg.FlatAppearance.BorderSize = 10;
-            btnOptionsBg.FlatStyle = FlatStyle.Flat;
-            btnOptionsBg.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnOptionsBg.ForeColor = Color.White;
-            btnOptionsBg.Location = new Point(314, 108);
-            btnOptionsBg.Name = "btnOptionsBg";
-            btnOptionsBg.Size = new Size(455, 107);
-            btnOptionsBg.TabIndex = 13;
-            btnOptionsBg.UseVisualStyleBackColor = false;
-            // 
             // gbPlayer2Customize
             // 
             gbPlayer2Customize.BackColor = Color.Black;
@@ -1368,7 +1286,7 @@
             gbPlayer2Customize.Size = new Size(256, 378);
             gbPlayer2Customize.TabIndex = 41;
             gbPlayer2Customize.TabStop = false;
-            gbPlayer2Customize.Text = "Player 1";
+            gbPlayer2Customize.Text = "Player 2";
             // 
             // lblPlayer2NameC
             // 
@@ -1464,7 +1382,7 @@
             gbPlayer3Customize.Size = new Size(256, 378);
             gbPlayer3Customize.TabIndex = 40;
             gbPlayer3Customize.TabStop = false;
-            gbPlayer3Customize.Text = "Player 1";
+            gbPlayer3Customize.Text = "Player 3";
             // 
             // lblPlayer3NameC
             // 
@@ -1508,8 +1426,8 @@
             // pnlPlayer3IconSelect
             // 
             pnlPlayer3IconSelect.BackColor = Color.White;
-            pnlPlayer3IconSelect.Controls.Add(this.btnPlayer3ArrowL);
-            pnlPlayer3IconSelect.Controls.Add(this.btnPlayer3ArrowR);
+            pnlPlayer3IconSelect.Controls.Add(btnPlayer3ArrowL);
+            pnlPlayer3IconSelect.Controls.Add(btnPlayer3ArrowR);
             pnlPlayer3IconSelect.Location = new Point(13, 224);
             pnlPlayer3IconSelect.Name = "pnlPlayer3IconSelect";
             pnlPlayer3IconSelect.Size = new Size(230, 132);
@@ -1517,39 +1435,39 @@
             // 
             // btnPlayer3ArrowL
             // 
-            this.btnPlayer3ArrowL.BackColor = Color.Black;
-            this.btnPlayer3ArrowL.FlatAppearance.BorderSize = 0;
-            this.btnPlayer3ArrowL.FlatStyle = FlatStyle.Flat;
-            this.btnPlayer3ArrowL.Font = new Font("Castellar", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.btnPlayer3ArrowL.ForeColor = Color.White;
-            this.btnPlayer3ArrowL.Location = new Point(7, 47);
-            this.btnPlayer3ArrowL.Name = "btnPlayer3ArrowL";
-            this.btnPlayer3ArrowL.Size = new Size(20, 38);
-            this.btnPlayer3ArrowL.TabIndex = 35;
-            this.btnPlayer3ArrowL.Text = "<";
-            this.btnPlayer3ArrowL.TextAlign = ContentAlignment.TopCenter;
-            this.btnPlayer3ArrowL.UseVisualStyleBackColor = false;
+            btnPlayer3ArrowL.BackColor = Color.Black;
+            btnPlayer3ArrowL.FlatAppearance.BorderSize = 0;
+            btnPlayer3ArrowL.FlatStyle = FlatStyle.Flat;
+            btnPlayer3ArrowL.Font = new Font("Castellar", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPlayer3ArrowL.ForeColor = Color.White;
+            btnPlayer3ArrowL.Location = new Point(7, 47);
+            btnPlayer3ArrowL.Name = "btnPlayer3ArrowL";
+            btnPlayer3ArrowL.Size = new Size(20, 38);
+            btnPlayer3ArrowL.TabIndex = 35;
+            btnPlayer3ArrowL.Text = "<";
+            btnPlayer3ArrowL.TextAlign = ContentAlignment.TopCenter;
+            btnPlayer3ArrowL.UseVisualStyleBackColor = false;
             // 
             // btnPlayer3ArrowR
             // 
-            this.btnPlayer3ArrowR.BackColor = Color.Black;
-            this.btnPlayer3ArrowR.FlatAppearance.BorderSize = 0;
-            this.btnPlayer3ArrowR.FlatStyle = FlatStyle.Flat;
-            this.btnPlayer3ArrowR.Font = new Font("Castellar", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.btnPlayer3ArrowR.ForeColor = Color.White;
-            this.btnPlayer3ArrowR.Location = new Point(203, 47);
-            this.btnPlayer3ArrowR.Name = "btnPlayer3ArrowR";
-            this.btnPlayer3ArrowR.Size = new Size(20, 38);
-            this.btnPlayer3ArrowR.TabIndex = 37;
-            this.btnPlayer3ArrowR.Text = ">";
-            this.btnPlayer3ArrowR.TextAlign = ContentAlignment.TopCenter;
-            this.btnPlayer3ArrowR.UseVisualStyleBackColor = false;
+            btnPlayer3ArrowR.BackColor = Color.Black;
+            btnPlayer3ArrowR.FlatAppearance.BorderSize = 0;
+            btnPlayer3ArrowR.FlatStyle = FlatStyle.Flat;
+            btnPlayer3ArrowR.Font = new Font("Castellar", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPlayer3ArrowR.ForeColor = Color.White;
+            btnPlayer3ArrowR.Location = new Point(203, 47);
+            btnPlayer3ArrowR.Name = "btnPlayer3ArrowR";
+            btnPlayer3ArrowR.Size = new Size(20, 38);
+            btnPlayer3ArrowR.TabIndex = 37;
+            btnPlayer3ArrowR.Text = ">";
+            btnPlayer3ArrowR.TextAlign = ContentAlignment.TopCenter;
+            btnPlayer3ArrowR.UseVisualStyleBackColor = false;
             // 
             // gbPlayer4Customize
             // 
             gbPlayer4Customize.BackColor = Color.Black;
-            gbPlayer4Customize.Controls.Add(this.lblPlayer4NameC);
-            gbPlayer4Customize.Controls.Add(this.tbPlayer4Name);
+            gbPlayer4Customize.Controls.Add(lblPlayer4NameC);
+            gbPlayer4Customize.Controls.Add(tbPlayer4Name);
             gbPlayer4Customize.Controls.Add(lblPlayer4Icon);
             gbPlayer4Customize.Controls.Add(pbPlayer4SelectedIcon);
             gbPlayer4Customize.Controls.Add(pnlPlayer4IconSelect);
@@ -1560,26 +1478,26 @@
             gbPlayer4Customize.Size = new Size(256, 378);
             gbPlayer4Customize.TabIndex = 40;
             gbPlayer4Customize.TabStop = false;
-            gbPlayer4Customize.Text = "Player 1";
+            gbPlayer4Customize.Text = "Player 4";
             // 
             // lblPlayer4NameC
             // 
-            this.lblPlayer4NameC.Font = new Font("Copperplate Gothic Light", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.lblPlayer4NameC.Location = new Point(11, 41);
-            this.lblPlayer4NameC.Name = "lblPlayer4NameC";
-            this.lblPlayer4NameC.Size = new Size(95, 30);
-            this.lblPlayer4NameC.TabIndex = 22;
-            this.lblPlayer4NameC.Text = "Name";
+            lblPlayer4NameC.Font = new Font("Copperplate Gothic Light", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPlayer4NameC.Location = new Point(11, 41);
+            lblPlayer4NameC.Name = "lblPlayer4NameC";
+            lblPlayer4NameC.Size = new Size(95, 30);
+            lblPlayer4NameC.TabIndex = 22;
+            lblPlayer4NameC.Text = "Name";
             // 
             // tbPlayer4Name
             // 
-            this.tbPlayer4Name.Font = new Font("Copperplate Gothic Light", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.tbPlayer4Name.Location = new Point(13, 74);
-            this.tbPlayer4Name.MaxLength = 10;
-            this.tbPlayer4Name.Name = "tbPlayer4Name";
-            this.tbPlayer4Name.Size = new Size(230, 40);
-            this.tbPlayer4Name.TabIndex = 21;
-            this.tbPlayer4Name.Text = "Player 4";
+            tbPlayer4Name.Font = new Font("Copperplate Gothic Light", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tbPlayer4Name.Location = new Point(13, 74);
+            tbPlayer4Name.MaxLength = 10;
+            tbPlayer4Name.Name = "tbPlayer4Name";
+            tbPlayer4Name.Size = new Size(230, 40);
+            tbPlayer4Name.TabIndex = 21;
+            tbPlayer4Name.Text = "Player 4";
             // 
             // lblPlayer4Icon
             // 
@@ -1695,14 +1613,98 @@
             btnPlayer4ArrowR.TextAlign = ContentAlignment.TopCenter;
             btnPlayer4ArrowR.UseVisualStyleBackColor = false;
             // 
+            // btnBackN
+            // 
+            btnBackN.BackColor = Color.Black;
+            btnBackN.FlatAppearance.BorderSize = 5;
+            btnBackN.FlatStyle = FlatStyle.Flat;
+            btnBackN.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnBackN.ForeColor = Color.White;
+            btnBackN.Location = new Point(50, 643);
+            btnBackN.Name = "btnBackN";
+            btnBackN.Size = new Size(128, 60);
+            btnBackN.TabIndex = 9;
+            btnBackN.Text = "Back";
+            btnBackN.UseVisualStyleBackColor = false;
+            btnBackN.Click += BtnBackNClick;
+            // 
+            // btnConfirmN
+            // 
+            btnConfirmN.BackColor = Color.Black;
+            btnConfirmN.FlatAppearance.BorderSize = 5;
+            btnConfirmN.FlatStyle = FlatStyle.Flat;
+            btnConfirmN.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnConfirmN.ForeColor = Color.White;
+            btnConfirmN.Location = new Point(852, 643);
+            btnConfirmN.Name = "btnConfirmN";
+            btnConfirmN.Size = new Size(192, 60);
+            btnConfirmN.TabIndex = 16;
+            btnConfirmN.Text = "Confirm";
+            btnConfirmN.UseVisualStyleBackColor = false;
+            btnConfirmN.Click += BtnConfirmNClick;
+            // 
+            // pnlOptions
+            // 
+            pnlOptions.AutoScroll = true;
+            pnlOptions.BackColor = SystemColors.Control;
+            pnlOptions.BackgroundImage = (Image)resources.GetObject("pnlOptions.BackgroundImage");
+            pnlOptions.Controls.Add(lblOptions);
+            pnlOptions.Controls.Add(btnBack);
+            pnlOptions.Controls.Add(btnOptionsBg);
+            pnlOptions.Location = new Point(0, 0);
+            pnlOptions.Name = "pnlOptions";
+            pnlOptions.Size = new Size(1082, 753);
+            pnlOptions.TabIndex = 13;
+            pnlOptions.Visible = false;
+            // 
+            // lblOptions
+            // 
+            lblOptions.BackColor = Color.Black;
+            lblOptions.Font = new Font("Castellar", 48F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblOptions.ForeColor = Color.White;
+            lblOptions.Location = new Point(325, 118);
+            lblOptions.Name = "lblOptions";
+            lblOptions.Size = new Size(427, 85);
+            lblOptions.TabIndex = 12;
+            lblOptions.Text = "Options";
+            // 
+            // btnBack
+            // 
+            btnBack.BackColor = Color.Black;
+            btnBack.FlatAppearance.BorderSize = 5;
+            btnBack.FlatStyle = FlatStyle.Flat;
+            btnBack.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnBack.ForeColor = Color.White;
+            btnBack.Location = new Point(476, 601);
+            btnBack.Name = "btnBack";
+            btnBack.Size = new Size(129, 60);
+            btnBack.TabIndex = 10;
+            btnBack.Text = "Back";
+            btnBack.UseVisualStyleBackColor = false;
+            btnBack.Click += BtnBackOClick;
+            // 
+            // btnOptionsBg
+            // 
+            btnOptionsBg.BackColor = Color.Black;
+            btnOptionsBg.Enabled = false;
+            btnOptionsBg.FlatAppearance.BorderSize = 10;
+            btnOptionsBg.FlatStyle = FlatStyle.Flat;
+            btnOptionsBg.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnOptionsBg.ForeColor = Color.White;
+            btnOptionsBg.Location = new Point(314, 108);
+            btnOptionsBg.Name = "btnOptionsBg";
+            btnOptionsBg.Size = new Size(455, 107);
+            btnOptionsBg.TabIndex = 13;
+            btnOptionsBg.UseVisualStyleBackColor = false;
+            // 
             // DurakGUI
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(1082, 753);
-            Controls.Add(pnlCustomize);
             Controls.Add(pnlMainMenu);
+            Controls.Add(pnlCustomize);
             Controls.Add(pnlOptions);
             Controls.Add(pnlPlayerSelect);
             Controls.Add(pnlGame);
@@ -1742,7 +1744,6 @@
             gbPlayer1Customize.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbPlayer1SelectedIcon).EndInit();
             pnlPlayer1IconSelect.ResumeLayout(false);
-            pnlOptions.ResumeLayout(false);
             gbPlayer2Customize.ResumeLayout(false);
             gbPlayer2Customize.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbPlayer2SelectedIcon).EndInit();
@@ -1761,6 +1762,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox40).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox41).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox42).EndInit();
+            pnlOptions.ResumeLayout(false);
             ResumeLayout(false);
         }
 
