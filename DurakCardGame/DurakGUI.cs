@@ -252,7 +252,7 @@ namespace DurakCardGame
             iconPage = 0;
         }
 
-        private void ShowIcons(Panel iconSelect)
+        private void ShowIcons()
         {
             int iconSize = 50;
             int[] iconLocationX = {34, 90, 146};
