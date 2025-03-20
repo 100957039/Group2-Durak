@@ -341,13 +341,15 @@ namespace DurakCardGame
         // example [player_1, player_2, player_3, current_player_attacker] => defender_index (3 + 3) out of rnage
         // example [current_player_defender, player_2, player_3, player_4] => attacker_index (0 - 3) out of range
         public int CalculateNextPlayerIndex(int currentIndex, int differenceDistanceBetweenNextPlayer, bool currentPlayerDefender)
-        { 
+        {
+            Console.WriteLine(" ");
+            Console.WriteLine("currentIndex: " + currentIndex + " distance: " + differenceDistanceBetweenNextPlayer + "  players.Count() " + players.Count() + " isCurrentPlayerDefender: " + currentPlayerDefender);
             if (currentPlayerDefender)
             {
                 int nextAttackerIndex = currentIndex - differenceDistanceBetweenNextPlayer;
                 if (nextAttackerIndex < 0)
                 {
-                    nextAttackerIndex =  players.Count() - nextAttackerIndex;
+                    nextAttackerIndex =  players.Count() - Math.Abs(nextAttackerIndex);
                 }
                 Console.WriteLine("GameLogic.cs| nextAttackerIndex: " + nextAttackerIndex);
                 return nextAttackerIndex;
@@ -365,6 +367,69 @@ namespace DurakCardGame
             
         }
 
+
+        //can attck with this card
+        public bool CanAttackWithThisCard(Card attackCard)
+        {
+            // check cards played in attcak panel
+            foreach (Card card in cardsAttack)
+            {
+                if (card.Rank == attackCard.Rank)
+                {
+                    return true;
+                }
+            }
+            // check cards played in defend panel 
+            foreach (Card card in cardsDefend)
+            {
+                if (card.Rank == attackCard.Rank)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // can defend with this card
+        public bool CanDefendWithThisCard(Card defendCard, Card attackCard)
+        {
+            // if attack card is trump 
+            if (attackCard.Suit == trump) {
+                if ((defendCard.Suit == trump) & (defendCard.Rank > attackCard.Rank))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            // not trump card
+            else { 
+                if (defendCard.Suit != trump)
+                {
+                    if (defendCard.Suit  == attackCard.Suit)
+                    {
+                        if (defendCard.Rank > attackCard.Rank)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                // it means this card is a trump
+                else {
+                    return true;
+                }
+            }
+        }
 
         // ####################################################################
         // if there is time left implement later

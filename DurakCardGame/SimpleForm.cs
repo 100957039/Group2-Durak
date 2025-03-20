@@ -94,6 +94,28 @@ namespace DurakCardGame
                 card.X = xAxis;
 
                 Button cardButton = card.CreateCardButton();
+                // ******************************************
+                //Duplicated code, needs not work on it later
+                bool defenderIndex = game.defenderIndex == game.turnIndex;
+                if (defenderIndex)
+                {
+                    Card lastAttackedCard = game.cardsAttack[game.cardsAttack.Count()-1];
+                    if (!game.CanDefendWithThisCard(card, lastAttackedCard))
+                    {
+                        cardButton.Enabled = false;
+                    }
+                }
+                else
+                {
+                    //check if the attacker can use this card to attack
+                    if (game.cardsAttack.Count() != 0 & (!game.CanAttackWithThisCard(card)))
+                    {
+                        cardButton.Enabled = false;
+                    }
+                }
+
+                //Duplicated code, needs not work on it later
+                // ******************************************
 
                 cardButton.Click += (sender, e) =>
                 {
@@ -118,11 +140,15 @@ namespace DurakCardGame
                                 game.cardsAttack.Clear();
                                 Console.WriteLine("attacker cant attack again, next attacker index: ", game.turnIndex + game.distanceIndexDiffernceBetweenAttackerDefender);
                                 // I think game.turnIndx should be + 1 not game.distance....
-                                game.turnIndex = game.CalculateNextPlayerIndex(game.turnIndex, game.distanceIndexDiffernceBetweenAttackerDefender, defenderIndex);
+                                game.turnIndex = game.defenderIndex;
+                                // ***************************** DO NOT FORGET to CHANGE the DEFENDER INDEX 
+                                game.defenderIndex = game.CalculateNextPlayerIndex(game.turnIndex, game.distanceIndexDiffernceBetweenAttackerDefender, false);
+                                // I think the code above will do    
+                                /// CHNAGE INDEX HERE FOR THE DEFENDER
+                                // ***************************** DO NOT FORGET to CHANGE the DEFENDER INDEX 
 
-                                // ***************************** DO NOT FORGET to CHANGE the DEFENDER INDEX 
-                                    /// CHNAGE INDEX HERE FOR THE DEFENDER
-                                // ***************************** DO NOT FORGET to CHANGE the DEFENDER INDEX 
+                                // *********** fill hand after each attack *********
+                                //game.fillHand();
 
                             }
                             // other players might be able to attack ########### leave for later ############# 
@@ -143,44 +169,47 @@ namespace DurakCardGame
                         // else attacker
                         else
                         {
-                            currentPlayer.PlayCard2(card);
-                            game.cardsAttack.Add(card);
-                            // check if the defender can defend this card
-                            Player defender = game.players[game.defenderIndex];
-                            bool canDefend = game.canStillDefend(defender.Hand, card);
+                            
+                                currentPlayer.PlayCard2(card);
+                                game.cardsAttack.Add(card);
+                                // check if the defender can defend this card
+                                Player defender = game.players[game.defenderIndex];
+                                bool canDefend = game.canStillDefend(defender.Hand, card);
 
-                            //change turn to the defender after playing a card
-                            game.turnIndex = game.CalculateNextPlayerIndex(game.turnIndex, game.distanceIndexDiffernceBetweenAttackerDefender, defenderIndex);
+                                //change turn to the defender after playing a card
+                                game.turnIndex = game.CalculateNextPlayerIndex(game.turnIndex, game.distanceIndexDiffernceBetweenAttackerDefender, defenderIndex);
 
-                            //if defender no longer able to defend, take all the played cards
-                            if (!canDefend)
-                            {
-                                foreach (Card card in game.cardsDefend)
+                                //if defender no longer able to defend, take all the played cards
+                                if (!canDefend)
                                 {
-                                    defender.DrawCard(card);
-                                }
-                                game.cardsDefend.Clear();
+                                    foreach (Card card in game.cardsDefend)
+                                    {
+                                        defender.DrawCard(card);
+                                    }
+                                    game.cardsDefend.Clear();
 
-                                foreach (Card card in game.cardsAttack)
+                                    foreach (Card card in game.cardsAttack)
+                                    {
+                                        defender.DrawCard(card);
+                                    }
+                                    game.cardsAttack.Clear();
+
+                                    //the defender lost, he no longer is able to be the next attacker
+                                    //the next attacker will be the player after the current defender
+                                    // change distance to 2
+                                    game.distanceIndexDiffernceBetweenAttackerDefender = 2;
+                                    game.turnIndex = 1 + game.CalculateNextPlayerIndex(game.turnIndex, game.distanceIndexDiffernceBetweenAttackerDefender, defenderIndex);
+                                    // change distance back to 1
+                                    game.distanceIndexDiffernceBetweenAttackerDefender = 1;
+
+                                }
+                                else
                                 {
-                                    defender.DrawCard(card);
+                                    PrintPlayersHand();
+                                    displayPlayedCards();
                                 }
-                                game.cardsAttack.Clear();
-
-                                //the defender lost, he no longer is able to be the next attacker
-                                //the next attacker will be the player after the current defender
-                                // change distance to 2
-                                game.distanceIndexDiffernceBetweenAttackerDefender = 2;
-                                game.turnIndex = 1 + game.CalculateNextPlayerIndex(game.turnIndex, game.distanceIndexDiffernceBetweenAttackerDefender, defenderIndex);
-                                // change distance back to 1
-                                game.distanceIndexDiffernceBetweenAttackerDefender = 1;
-
-                            }
-                            else
-                            {
-                                PrintPlayersHand();
-                                displayPlayedCards();
-                            }
+                            
+                            
                         }
                         displayCurrentPlayerHand();
                     }
