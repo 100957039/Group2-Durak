@@ -11,6 +11,11 @@ using System.Threading.Tasks;
 // 3- after determining the TRUMP card, RUN (chooseFirstAttacker()) whoever has the lowest trump card
 // 4- RUN (GameEnded()) if TRUE, game ends, if not => step 5
 // 5- check if list variable |cardsAttack| is empty => can attack else RUN (canStillAttack())
+
+
+// IMPORTANT NOTES
+// 1- after each attack, DO NOT FORGET To chnage the DEFENDER index to the next defender
+
 namespace DurakCardGame
 {
     internal class GameLogic
@@ -33,7 +38,7 @@ namespace DurakCardGame
 
         //difference between players index to go back and forth between the attacker and defender 
         //usefull if there are other players who can join the attack, otherwise useless
-        public int distanceIndexDiffernceBetweenAttackerDefender { get; set; } = 0;
+        public int distanceIndexDiffernceBetweenAttackerDefender { get; set; } = 1;
 
         // during one attack, who else can attack too
         public List<Player> CanAlsoAttack = new List<Player>();
@@ -190,13 +195,13 @@ namespace DurakCardGame
             //determin the defender (((((((attacker will not work))))))))))
             int calculateDefenderIndex = playerIndex + 1;
             // if attacker is the last player in the list
-            if (players.Count() < calculateDefenderIndex) {
+            if (players.Count() <= calculateDefenderIndex) {
                 // the defender will be the first player in the list
                 defenderIndex = 0;
             }
             else
             {
-                defenderIndex = playerIndex;
+                defenderIndex = calculateDefenderIndex;
             }
             
 
@@ -330,6 +335,34 @@ namespace DurakCardGame
             int numberToStopGame = 1;
 
             return playersLeft == numberToStopGame;
+        }
+
+
+        // example [player_1, player_2, player_3, current_player_attacker] => defender_index (3 + 3) out of rnage
+        // example [current_player_defender, player_2, player_3, player_4] => attacker_index (0 - 3) out of range
+        public int CalculateNextPlayerIndex(int currentIndex, int differenceDistanceBetweenNextPlayer, bool currentPlayerDefender)
+        { 
+            if (currentPlayerDefender)
+            {
+                int nextAttackerIndex = currentIndex - differenceDistanceBetweenNextPlayer;
+                if (nextAttackerIndex < 0)
+                {
+                    nextAttackerIndex =  players.Count() - nextAttackerIndex;
+                }
+                Console.WriteLine("GameLogic.cs| nextAttackerIndex: " + nextAttackerIndex);
+                return nextAttackerIndex;
+            }
+            else
+            {
+                int nextDefenderIndex = currentIndex + differenceDistanceBetweenNextPlayer;
+                if (nextDefenderIndex >= players.Count())
+                {
+                    nextDefenderIndex -= players.Count();
+                }
+                Console.WriteLine("GameLogic.cs| nextDefenderIndex: " + nextDefenderIndex);
+                return nextDefenderIndex;
+            }
+            
         }
 
 

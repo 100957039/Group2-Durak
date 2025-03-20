@@ -38,15 +38,16 @@
             textBox2 = new TextBox();
             textBoxTurn = new TextBox();
             textBoxTrump = new TextBox();
+            buttonPlayedCards = new Button();
             SuspendLayout();
             // 
             // button1
             // 
-            button1.Location = new Point(0, 0);
+            button1.Location = new Point(179, 30);
             button1.Name = "button1";
-            button1.Size = new Size(75, 23);
+            button1.Size = new Size(73, 23);
             button1.TabIndex = 0;
-            button1.Text = "button1";
+            button1.Text = "Turns";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
@@ -68,6 +69,7 @@
             button3.TabIndex = 2;
             button3.Text = "console.log";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // panelDefend
             // 
@@ -106,23 +108,34 @@
             // 
             // textBoxTurn
             // 
-            textBoxTurn.Location = new Point(919, 129);
+            textBoxTurn.Location = new Point(831, 129);
             textBoxTurn.Name = "textBoxTurn";
-            textBoxTurn.Size = new Size(100, 23);
+            textBoxTurn.Size = new Size(188, 23);
             textBoxTurn.TabIndex = 8;
             // 
             // textBoxTrump
             // 
-            textBoxTrump.Location = new Point(919, 71);
+            textBoxTrump.Location = new Point(831, 71);
             textBoxTrump.Name = "textBoxTrump";
-            textBoxTrump.Size = new Size(100, 23);
+            textBoxTrump.Size = new Size(188, 23);
             textBoxTrump.TabIndex = 9;
+            // 
+            // buttonPlayedCards
+            // 
+            buttonPlayedCards.Location = new Point(295, 30);
+            buttonPlayedCards.Name = "buttonPlayedCards";
+            buttonPlayedCards.Size = new Size(113, 23);
+            buttonPlayedCards.TabIndex = 10;
+            buttonPlayedCards.Text = "Played Cards";
+            buttonPlayedCards.UseVisualStyleBackColor = true;
+            buttonPlayedCards.Click += buttonPlayedCards_Click;
             // 
             // SimpleForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1084, 631);
+            Controls.Add(buttonPlayedCards);
             Controls.Add(textBoxTrump);
             Controls.Add(textBoxTurn);
             Controls.Add(textBox2);
@@ -151,5 +164,6 @@
         private TextBox textBox2;
         private TextBox textBoxTurn;
         private TextBox textBoxTrump;
+        private Button buttonPlayedCards;
     }
 }
