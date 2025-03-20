@@ -39,8 +39,9 @@ namespace DurakCardGame
         {
             string playerOne = "1";
             string playerTwo = "2";
-            List<String> playersList = new List<String>{"1", "2", "3", "4"};
-            foreach (String player in playersList) {
+            List<String> playersList = new List<String> { "1", "2", "3", "4" };
+            foreach (String player in playersList)
+            {
                 game.addPlayer(player);
             }
         }
@@ -48,6 +49,7 @@ namespace DurakCardGame
         //STEP #2
         public void startGame()
         {
+            game = new GameLogic();
             addPlayers();
             game.determinTrumpCard();
             string attacker = game.chooseFirstAttacker();
@@ -124,153 +126,157 @@ namespace DurakCardGame
             Console.WriteLine("    ");
             Player currentPlayer = game.players[game.turnIndex];
             int xAxis = 0;
+            //String winners = "";
             foreach (Card card in currentPlayer.Hand)
             {
-                card.X = xAxis;
-
-                Button cardButton = card.CreateCardButton();
-                // ******************************************
-                //Duplicated code, needs not work on it later 
-                // cardButton.Click += (sender, e) => should be inside this if statement 
-                // it will no effect anything, but it's good practice 
-                bool defenderIndex = game.defenderIndex == game.turnIndex;
-                if (defenderIndex)
+                if (currentPlayer.Hand.Count() > 0)
                 {
-                    int lastCardIndex = game.cardsAttack.Count() - 1;
-                    if (lastCardIndex >= 0)
+                    card.X = xAxis;
+
+                    Button cardButton = card.CreateCardButton();
+                    // ******************************************
+                    //Duplicated code, needs not work on it later 
+                    // cardButton.Click += (sender, e) => should be inside this if statement 
+                    // it will no effect anything, but it's good practice 
+                    bool defenderIndex = game.defenderIndex == game.turnIndex;
+                    if (defenderIndex)
                     {
-                        Card lastAttackedCard = game.cardsAttack[game.cardsAttack.Count() - 1];
-                        if (!game.CanDefendWithThisCard(card, lastAttackedCard))
+                        int lastCardIndex = game.cardsAttack.Count() - 1;
+                        if (lastCardIndex >= 0)
+                        {
+                            Card lastAttackedCard = game.cardsAttack[game.cardsAttack.Count() - 1];
+                            if (!game.CanDefendWithThisCard(card, lastAttackedCard))
+                            {
+                                cardButton.Enabled = false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        //check if the attacker can use this card to attack
+                        if (game.cardsAttack.Count() != 0 & (!game.CanAttackWithThisCard(card)))
                         {
                             cardButton.Enabled = false;
                         }
                     }
-                }
-                else
-                {
-                    //check if the attacker can use this card to attack
-                    if (game.cardsAttack.Count() != 0 & (!game.CanAttackWithThisCard(card)))
-                    {
-                        cardButton.Enabled = false;
-                    }
-                }
-                //Duplicated code, needs not work on it later
-                // ******************************************
+                    //Duplicated code, needs not work on it later
+                    // ******************************************
 
-                cardButton.Click += (sender, e) =>
-                {
-                    // ckeck if the game ended
-                    bool endGame = game.GameEnded();
-                    if (!endGame)
+                    cardButton.Click += (sender, e) =>
                     {
-                        //check if player is attacker or defender
-                        bool defenderIndex = game.defenderIndex == game.turnIndex;
-                        if (defenderIndex)
+                        // ckeck if the game ended
+                        bool endGame = game.GameEnded();
+                        if (!endGame)
                         {
-                            currentPlayer.PlayCard2(card);
-                            game.cardsDefend.Add(card);
-                            // attacker index 
-                            Console.WriteLine("1 calculate");
-                            int attackerIndex = game.CalculateNextPlayerIndex(game.turnIndex, game.distanceIndexDiffernceBetweenAttackerDefender, defenderIndex);
-                            //check if the player can attack the defender again
-                            bool canAttackAgain = game.canStillAttack(game.players[attackerIndex].Hand);
-                            if (!canAttackAgain)
+                            //check if player is attacker or defender
+                            bool defenderIndex = game.defenderIndex == game.turnIndex;
+                            if (defenderIndex)
                             {
-                                // remove all the played cards
-                                game.cardsDefend.Clear();
-                                game.cardsAttack.Clear();
-                                //Console.WriteLine("attacker cant attack again, next attacker index: ");
-                                Console.WriteLine("SimpleForm.cs => attcker cann't attack again, run fill hand run");
-                                game.fillHand();
-                                // I think game.turnIndx should be + 1 not game.distance....
-                                game.turnIndex = game.defenderIndex;
-                                // ***************************** DO NOT FORGET to CHANGE the DEFENDER INDEX 
-                                Console.WriteLine("2 calculate");
-                                game.defenderIndex = game.CalculateNextPlayerIndex(game.turnIndex, game.distanceIndexDiffernceBetweenAttackerDefender, false);
-                                // I think the code above will do    
-                                /// CHNAGE INDEX HERE FOR THE DEFENDER
-                                // ***************************** DO NOT FORGET to CHANGE the DEFENDER INDEX 
+                                currentPlayer.PlayCard2(card);
+                                game.cardsDefend.Add(card);
+                                // attacker index 
+                                Console.WriteLine("1 calculate");
+                                int attackerIndex = game.CalculateNextPlayerIndex(game.turnIndex, game.distanceIndexDiffernceBetweenAttackerDefender, defenderIndex);
+                                //check if the player can attack the defender again
+                                bool canAttackAgain = game.canStillAttack(game.players[attackerIndex].Hand);
+                                if (!canAttackAgain)
+                                {
+                                    // remove all the played cards
+                                    game.cardsDefend.Clear();
+                                    game.cardsAttack.Clear();
+                                    //Console.WriteLine("attacker cant attack again, next attacker index: ");
+                                    Console.WriteLine("SimpleForm.cs => attcker cann't attack again, run fill hand run");
+                                    game.fillHand();
+                                    // I think game.turnIndx should be + 1 not game.distance....
+                                    game.turnIndex = game.defenderIndex;
+                                    // ***************************** DO NOT FORGET to CHANGE the DEFENDER INDEX 
+                                    Console.WriteLine("2 calculate");
+                                    game.defenderIndex = game.CalculateNextPlayerIndex(game.turnIndex, game.distanceIndexDiffernceBetweenAttackerDefender, false);
+                                    // I think the code above will do    
+                                    /// CHNAGE INDEX HERE FOR THE DEFENDER
+                                    // ***************************** DO NOT FORGET to CHANGE the DEFENDER INDEX 
 
+                                }
+                                // other players might be able to attack ########### leave for later ############# 
+                                else
+                                {
+                                    displayPlayedCards();
+                                    /// use below this line (distanceIndexDiffernceBetweenAttackerDefender)
+                                    /// do not forget to code for the other attacker as well above this line
+                                    /// if the player can attack again, change turn 
+                                    /// 
+                                    //int attackerIndex = game.CalculateNextPlayerIndex(game.turnIndex, game.distanceIndexDiffernceBetweenAttackerDefender, defenderIndex);
+                                    Console.WriteLine("turnIndex: " + attackerIndex);
+                                    game.turnIndex = attackerIndex;
+                                    //if (turnIndex + )
+                                    //game.turnIndex = 
+                                }
                             }
-                            // other players might be able to attack ########### leave for later ############# 
+                            // else attacker
                             else
                             {
-                                displayPlayedCards();
-                                /// use below this line (distanceIndexDiffernceBetweenAttackerDefender)
-                                /// do not forget to code for the other attacker as well above this line
-                                /// if the player can attack again, change turn 
-                                /// 
-                                //int attackerIndex = game.CalculateNextPlayerIndex(game.turnIndex, game.distanceIndexDiffernceBetweenAttackerDefender, defenderIndex);
-                                Console.WriteLine("turnIndex: " + attackerIndex);
-                                game.turnIndex = attackerIndex;
-                                //if (turnIndex + )
-                                //game.turnIndex = 
-                            }
-                        }
-                        // else attacker
-                        else
-                        {
 
-                            currentPlayer.PlayCard2(card);
-                            game.cardsAttack.Add(card);
-                            // check if the defender can defend this card
-                            Player defender = game.players[game.defenderIndex];
-                            bool canDefend = game.canStillDefend(defender.Hand, card);
+                                currentPlayer.PlayCard2(card);
+                                game.cardsAttack.Add(card);
+                                // check if the defender can defend this card
+                                Player defender = game.players[game.defenderIndex];
+                                bool canDefend = game.canStillDefend(defender.Hand, card);
 
 
-                            //if defender no longer able to defend, take all the played cards
-                            if (!canDefend)
-                            {
-                                foreach (Card card in game.cardsDefend)
+                                //if defender no longer able to defend, take all the played cards
+                                if (!canDefend)
                                 {
-                                    defender.DrawCard(card);
-                                }
-                                game.cardsDefend.Clear();
+                                    foreach (Card card in game.cardsDefend)
+                                    {
+                                        defender.DrawCard(card);
+                                    }
+                                    game.cardsDefend.Clear();
 
-                                foreach (Card card in game.cardsAttack)
+                                    foreach (Card card in game.cardsAttack)
+                                    {
+                                        defender.DrawCard(card);
+                                    }
+                                    game.cardsAttack.Clear();
+
+                                    Console.WriteLine("SimpleForm.cs => defender cann't defend again, run fill hand run");
+                                    game.fillHand();
+
+                                    Console.WriteLine("4 calculate");
+                                    //the defender lost, he no longer is able to be the next attacker
+                                    //the next attacker will be the player after the current defender
+                                    // change distance to 2
+                                    game.distanceIndexDiffernceBetweenAttackerDefender = 2;
+                                    game.turnIndex = game.CalculateNextPlayerIndex(game.turnIndex, game.distanceIndexDiffernceBetweenAttackerDefender, defenderIndex);
+                                    // change distance back to 1
+                                    game.distanceIndexDiffernceBetweenAttackerDefender = 1;
+
+                                }
+                                else
                                 {
-                                    defender.DrawCard(card);
+                                    Console.WriteLine("3 calculate");
+                                    //change turn to the defender after playing a card
+                                    game.turnIndex = game.CalculateNextPlayerIndex(game.turnIndex, game.distanceIndexDiffernceBetweenAttackerDefender, defenderIndex);
+
+                                    PrintPlayersHand();
+                                    displayPlayedCards();
                                 }
-                                game.cardsAttack.Clear();
 
-                                Console.WriteLine("SimpleForm.cs => defender cann't defend again, run fill hand run");
-                                game.fillHand();
-
-                                Console.WriteLine("4 calculate");
-                                //the defender lost, he no longer is able to be the next attacker
-                                //the next attacker will be the player after the current defender
-                                // change distance to 2
-                                game.distanceIndexDiffernceBetweenAttackerDefender = 2;
-                                game.turnIndex = game.CalculateNextPlayerIndex(game.turnIndex, game.distanceIndexDiffernceBetweenAttackerDefender, defenderIndex);
-                                // change distance back to 1
-                                game.distanceIndexDiffernceBetweenAttackerDefender = 1;
 
                             }
-                            else
-                            {
-                                Console.WriteLine("3 calculate");
-                                //change turn to the defender after playing a card
-                                game.turnIndex = game.CalculateNextPlayerIndex(game.turnIndex, game.distanceIndexDiffernceBetweenAttackerDefender, defenderIndex);
-
-                                PrintPlayersHand();
-                                displayPlayedCards();
-                            }
-
-
+                            displayCurrentPlayerHand();
                         }
-                        displayCurrentPlayerHand();
-                    }
 
-                };
-                panelHand.Controls.Add(cardButton);
-                xAxis += 75;
-                // after each card is being played, refresh the panel to display the new cards
-                displayPlayedCards();
+                    };
+                    panelHand.Controls.Add(cardButton);
+                    xAxis += 75;
+                    // after each card is being played, refresh the panel to display the new cards
+                    displayPlayedCards();
 
+                }
                 // add winners
                 if (game.players[game.turnIndex].Hand.Count() == 0)
                 {
-                    textBoxWinners.Text += " " + game.players[game.turnIndex].Name;
+                    textBoxWinners.Text = " " + game.players[game.turnIndex].Name;
                 }
 
 
@@ -332,6 +338,17 @@ namespace DurakCardGame
             displayCurrentPlayerHand();
         }
 
+        // switch your card if you have 6 of trump with the last trump card in the dexk
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (game.TakeTumpCardFromDeck(game.turnIndex))
+            {
+                displayCurrentPlayerHand();
+            }
+        }
+
+        
+
 
         //                                    ##############################################
         //                                                       DEBUG CODE 
@@ -383,6 +400,8 @@ namespace DurakCardGame
         }
 
         
+
+
         //                                    ##############################################
         //                                                       DEBUG CODE 
         //                                    ##############################################

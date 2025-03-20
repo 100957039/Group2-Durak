@@ -42,6 +42,7 @@
             textBoxDeckNumber = new TextBox();
             textBoxWinners = new TextBox();
             buttonPass = new Button();
+            button2 = new Button();
             SuspendLayout();
             // 
             // button1
@@ -66,7 +67,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(458, 40);
+            button3.Location = new Point(432, 40);
             button3.Name = "button3";
             button3.Size = new Size(97, 23);
             button3.TabIndex = 2;
@@ -92,7 +93,7 @@
             // 
             panelHand.Location = new Point(66, 454);
             panelHand.Name = "panelHand";
-            panelHand.Size = new Size(913, 126);
+            panelHand.Size = new Size(899, 126);
             panelHand.TabIndex = 5;
             // 
             // textBoxDefenderIndex
@@ -157,11 +158,22 @@
             buttonPass.UseVisualStyleBackColor = true;
             buttonPass.Click += buttonPass_Click;
             // 
+            // button2
+            // 
+            button2.Location = new Point(977, 544);
+            button2.Name = "button2";
+            button2.Size = new Size(95, 23);
+            button2.TabIndex = 14;
+            button2.Text = "switch trump";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
             // SimpleForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1084, 631);
+            Controls.Add(button2);
             Controls.Add(buttonPass);
             Controls.Add(textBoxWinners);
             Controls.Add(textBoxDeckNumber);
@@ -198,5 +210,6 @@
         private TextBox textBoxDeckNumber;
         private TextBox textBoxWinners;
         private Button buttonPass;
+        private Button button2;
     }
 }

@@ -352,7 +352,22 @@ namespace DurakCardGame
                     nextAttackerIndex =  players.Count() - Math.Abs(nextAttackerIndex);
                 }
                 //Console.WriteLine("GameLogic.cs| nextAttackerIndex: " + nextAttackerIndex);
+                //return nextAttackerIndex;
+                // new code starts here ############################### TEST ################################
+                // if Hand.Count() == 0 => means player won
+                if (players[nextAttackerIndex].Hand.Count() == 0)
+                {
+                    for (int nextAvailablePlayerIndex=0 ; nextAvailablePlayerIndex < players.Count(); nextAvailablePlayerIndex++) 
+                    {
+                        if (players[nextAvailablePlayerIndex].Hand.Count() > 0)
+                        {
+                            return nextAvailablePlayerIndex;
+                        }
+                    }
+                }
                 return nextAttackerIndex;
+                // new code ends here ############################### TEST ################################
+
             }
             else
             {
@@ -364,9 +379,23 @@ namespace DurakCardGame
                     nextDefenderIndex -= players.Count();
                 }
                 //Console.WriteLine("GameLogic.cs| nextDefenderIndex: " + nextDefenderIndex);
+                //return nextDefenderIndex;
+                // new code starts here ############################### TEST ################################
+                // if Hand.Count() == 0 => means player won
+                if (players[nextDefenderIndex].Hand.Count() == 0)
+                {
+                    for (int nextAvailablePlayerIndex = 0; nextAvailablePlayerIndex < players.Count(); nextAvailablePlayerIndex++)
+                    {
+                        if (players[nextAvailablePlayerIndex].Hand.Count() > 0)
+                        {
+                            return nextAvailablePlayerIndex;
+                        }
+                    }
+                }
                 return nextDefenderIndex;
+                // new code ends here ############################### TEST ################################
             }
-            
+
         }
 
         public void Pass(int currentIndex) {
@@ -482,6 +511,23 @@ namespace DurakCardGame
         // if there is time left implement later
 
         //1- take trump card from the deck if you have (6 of trump)
+        public bool TakeTumpCardFromDeck(int currentPlayerIndex)
+        {
+            Card lastTrumpCardDeck = deck.cards[deck.cards.Count() - 1];
+            Card tempCard;
+            int index = players[currentPlayerIndex].Hand.FindIndex(card => card.Rank == 6 & card.Suit == trump);
+            if (index != -1)
+            {
+                tempCard = players[currentPlayerIndex].Hand[index];
+                players[currentPlayerIndex].Hand[index] = lastTrumpCardDeck;
+                deck.cards[deck.cards.Count() - 1] = tempCard;
+                Console.WriteLine("changed");
+                Console.WriteLine("last card in deck=  " + deck.cards[deck.cards.Count() - 1].Rank + " suit: " + deck.cards[deck.cards.Count() - 1].Suit);
+                Console.WriteLine("players new card=  " + players[currentPlayerIndex].Hand[index].Rank + " suit: " + players[currentPlayerIndex].Hand[index].Suit);
+                return true;
+            }
+            return false;
+        }
 
         //2- reverse attack
         // ####################################################################
