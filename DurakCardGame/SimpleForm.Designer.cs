@@ -34,8 +34,8 @@
             panelDefend = new Panel();
             panelAttack = new Panel();
             panelHand = new Panel();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
+            textBoxDefenderIndex = new TextBox();
+            textBoxttackerIndex = new TextBox();
             textBoxTurn = new TextBox();
             textBoxTrump = new TextBox();
             buttonPlayedCards = new Button();
@@ -92,19 +92,19 @@
             panelHand.Size = new Size(913, 126);
             panelHand.TabIndex = 5;
             // 
-            // textBox1
+            // textBoxDefenderIndex
             // 
-            textBox1.Location = new Point(919, 274);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 6;
+            textBoxDefenderIndex.Location = new Point(919, 274);
+            textBoxDefenderIndex.Name = "textBoxDefenderIndex";
+            textBoxDefenderIndex.Size = new Size(100, 23);
+            textBoxDefenderIndex.TabIndex = 6;
             // 
-            // textBox2
+            // textBoxttackerIndex
             // 
-            textBox2.Location = new Point(919, 203);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(100, 23);
-            textBox2.TabIndex = 7;
+            textBoxttackerIndex.Location = new Point(919, 203);
+            textBoxttackerIndex.Name = "textBoxttackerIndex";
+            textBoxttackerIndex.Size = new Size(100, 23);
+            textBoxttackerIndex.TabIndex = 7;
             // 
             // textBoxTurn
             // 
@@ -138,8 +138,8 @@
             Controls.Add(buttonPlayedCards);
             Controls.Add(textBoxTrump);
             Controls.Add(textBoxTurn);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(textBoxttackerIndex);
+            Controls.Add(textBoxDefenderIndex);
             Controls.Add(panelHand);
             Controls.Add(panelAttack);
             Controls.Add(panelDefend);
@@ -160,8 +160,8 @@
         private Panel panelDefend;
         private Panel panelAttack;
         private Panel panelHand;
-        private TextBox textBox1;
-        private TextBox textBox2;
+        private TextBox textBoxDefenderIndex;
+        private TextBox textBoxttackerIndex;
         private TextBox textBoxTurn;
         private TextBox textBoxTrump;
         private Button buttonPlayedCards;

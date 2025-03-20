@@ -66,17 +66,26 @@ namespace DurakCardGame
             // clear the table to display the new cards
             refreshTopBottomPanels();
             // add to the bottom panel the attacking cards
+            int xAxis = 0;
             foreach (Card card in game.cardsAttack)
             {
+                card.X = xAxis;
                 Button cardButton = card.CreateCardButton();
+                cardButton.Enabled = false;
                 panelAttack.Controls.Add(cardButton);
+                xAxis += 75;
             }
 
+            //reset xAxis 
+            xAxis = 0;
             // add to the top panel the defending cards
             foreach (Card card in game.cardsDefend)
             {
+                card.X = xAxis;
                 Button cardButton = card.CreateCardButton();
+                cardButton.Enabled = false;
                 panelDefend.Controls.Add(cardButton);
+                xAxis += 75;
             }
         }
 
@@ -87,6 +96,9 @@ namespace DurakCardGame
         {
             panelHand.Controls.Clear();
             panelHand.Refresh(); // I dont know what refresh does, I do not think it's needed
+            Console.WriteLine("    ");
+            Console.WriteLine("game.turnIndex: "+ game.turnIndex);
+            Console.WriteLine("    ");
             Player currentPlayer = game.players[game.turnIndex];
             int xAxis = 0;
             foreach (Card card in currentPlayer.Hand)
@@ -95,7 +107,9 @@ namespace DurakCardGame
 
                 Button cardButton = card.CreateCardButton();
                 // ******************************************
-                //Duplicated code, needs not work on it later
+                //Duplicated code, needs not work on it later 
+                // cardButton.Click += (sender, e) => should be inside this if statement 
+                // it will no effect anything, but it's good practice 
                 bool defenderIndex = game.defenderIndex == game.turnIndex;
                 if (defenderIndex)
                 {
@@ -113,7 +127,6 @@ namespace DurakCardGame
                         cardButton.Enabled = false;
                     }
                 }
-
                 //Duplicated code, needs not work on it later
                 // ******************************************
 
@@ -138,7 +151,9 @@ namespace DurakCardGame
                                 // remove all the played cards
                                 game.cardsDefend.Clear();
                                 game.cardsAttack.Clear();
-                                Console.WriteLine("attacker cant attack again, next attacker index: ", game.turnIndex + game.distanceIndexDiffernceBetweenAttackerDefender);
+                                //Console.WriteLine("attacker cant attack again, next attacker index: ");
+                                Console.WriteLine("SimpleForm.cs => attcker cann't attack again, run fill hand run");
+                                game.fillHand();
                                 // I think game.turnIndx should be + 1 not game.distance....
                                 game.turnIndex = game.defenderIndex;
                                 // ***************************** DO NOT FORGET to CHANGE the DEFENDER INDEX 
@@ -193,6 +208,9 @@ namespace DurakCardGame
                                         defender.DrawCard(card);
                                     }
                                     game.cardsAttack.Clear();
+
+                                    Console.WriteLine("SimpleForm.cs => defender cann't defend again, run fill hand run");
+                                    game.fillHand();
 
                                     //the defender lost, he no longer is able to be the next attacker
                                     //the next attacker will be the player after the current defender
