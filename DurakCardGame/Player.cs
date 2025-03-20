@@ -30,6 +30,14 @@ namespace DurakCardGame
             return card;
         }
 
+        public Card PlayCard2(Card card)
+        {
+            //Card card = Hand[cardIndex];
+            //Hand.RemoveAt(cardIndex);
+            Hand.Remove(card);
+            return card;
+        }
+
         public void DrawCard(Card card)
         {
             Hand.Add(card);

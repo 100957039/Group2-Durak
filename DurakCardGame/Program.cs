@@ -12,7 +12,8 @@ namespace DurakCardGame
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             //Application.Run(new Form1());
-            Application.Run(new DurakGUI());
+            //Application.Run(new DurakGUI());
+            Application.Run(new SimpleForm());
 
         }
     }

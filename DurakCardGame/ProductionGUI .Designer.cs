@@ -53,20 +53,20 @@
             btnBackPS = new Button();
             btnConfirmPS = new Button();
             pnlGame = new Panel();
+            buttonConsole = new Button();
+            textBoxPlayerTurnName = new TextBox();
+            textBox1 = new TextBox();
             pbCardTestBack = new PictureBox();
             pbCardTestTrump = new PictureBox();
             lblDeck = new Label();
             lblDeckCount = new Label();
             btnMenu = new Button();
             btnRules = new Button();
-            pnlTableTop = new Panel();
-            btnTableTopBg = new Button();
-            pnlTableBottom = new Panel();
-            button1 = new Button();
+            panelTableTop = new Panel();
+            panelTableBottom = new Panel();
             pnlPlayer1 = new Panel();
             logBox = new TextBox();
-            pnlHand = new Panel();
-            pbCardTest = new PictureBox();
+            panelHand = new Panel();
             btnHandBg = new Button();
             pbPlayer1Role = new PictureBox();
             btnPlayer1RoleBg = new Button();
@@ -154,10 +154,7 @@
             pnlGame.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbCardTestBack).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbCardTestTrump).BeginInit();
-            pnlTableTop.SuspendLayout();
-            pnlTableBottom.SuspendLayout();
             pnlPlayer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pbCardTest).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPlayer1Role).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPlayer1IconG).BeginInit();
             pnlPlayer2.SuspendLayout();
@@ -203,18 +200,19 @@
             pnlMainMenu.Controls.Add(btnOptions);
             pnlMainMenu.Controls.Add(btnQuit);
             pnlMainMenu.Location = new Point(0, 0);
+            pnlMainMenu.Margin = new Padding(3, 2, 3, 2);
             pnlMainMenu.Name = "pnlMainMenu";
-            pnlMainMenu.Size = new Size(1082, 753);
+            pnlMainMenu.Size = new Size(947, 565);
             pnlMainMenu.TabIndex = 0;
             // 
             // lblTitle
             // 
             lblTitle.BackColor = Color.Black;
-            lblTitle.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblTitle.Font = new Font("Microsoft Sans Serif", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblTitle.ForeColor = Color.White;
-            lblTitle.Location = new Point(262, 133);
+            lblTitle.Location = new Point(229, 100);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(560, 128);
+            lblTitle.Size = new Size(490, 96);
             lblTitle.TabIndex = 12;
             lblTitle.Text = "DURAK";
             // 
@@ -224,11 +222,12 @@
             btnTitle.Enabled = false;
             btnTitle.FlatAppearance.BorderSize = 10;
             btnTitle.FlatStyle = FlatStyle.Flat;
-            btnTitle.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnTitle.Font = new Font("Microsoft Sans Serif", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnTitle.ForeColor = Color.White;
-            btnTitle.Location = new Point(248, 119);
+            btnTitle.Location = new Point(217, 89);
+            btnTitle.Margin = new Padding(3, 2, 3, 2);
             btnTitle.Name = "btnTitle";
-            btnTitle.Size = new Size(587, 157);
+            btnTitle.Size = new Size(514, 118);
             btnTitle.TabIndex = 11;
             btnTitle.UseVisualStyleBackColor = false;
             // 
@@ -237,11 +236,12 @@
             btnStart.BackColor = Color.Black;
             btnStart.FlatAppearance.BorderSize = 5;
             btnStart.FlatStyle = FlatStyle.Flat;
-            btnStart.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnStart.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnStart.ForeColor = Color.White;
-            btnStart.Location = new Point(461, 334);
+            btnStart.Location = new Point(403, 250);
+            btnStart.Margin = new Padding(3, 2, 3, 2);
             btnStart.Name = "btnStart";
-            btnStart.Size = new Size(162, 60);
+            btnStart.Size = new Size(142, 45);
             btnStart.TabIndex = 7;
             btnStart.Text = "Start";
             btnStart.UseVisualStyleBackColor = false;
@@ -252,11 +252,12 @@
             btnHTP.BackColor = Color.Black;
             btnHTP.FlatAppearance.BorderSize = 5;
             btnHTP.FlatStyle = FlatStyle.Flat;
-            btnHTP.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnHTP.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnHTP.ForeColor = Color.White;
-            btnHTP.Location = new Point(401, 414);
+            btnHTP.Location = new Point(351, 310);
+            btnHTP.Margin = new Padding(3, 2, 3, 2);
             btnHTP.Name = "btnHTP";
-            btnHTP.Size = new Size(281, 60);
+            btnHTP.Size = new Size(246, 45);
             btnHTP.TabIndex = 9;
             btnHTP.Text = "How to Play";
             btnHTP.UseVisualStyleBackColor = false;
@@ -267,11 +268,12 @@
             btnOptions.BackColor = Color.Black;
             btnOptions.FlatAppearance.BorderSize = 5;
             btnOptions.FlatStyle = FlatStyle.Flat;
-            btnOptions.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnOptions.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnOptions.ForeColor = Color.White;
-            btnOptions.Location = new Point(446, 494);
+            btnOptions.Location = new Point(390, 370);
+            btnOptions.Margin = new Padding(3, 2, 3, 2);
             btnOptions.Name = "btnOptions";
-            btnOptions.Size = new Size(191, 60);
+            btnOptions.Size = new Size(167, 45);
             btnOptions.TabIndex = 8;
             btnOptions.Text = "Options";
             btnOptions.UseVisualStyleBackColor = false;
@@ -282,11 +284,12 @@
             btnQuit.BackColor = Color.Black;
             btnQuit.FlatAppearance.BorderSize = 5;
             btnQuit.FlatStyle = FlatStyle.Flat;
-            btnQuit.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnQuit.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnQuit.ForeColor = Color.White;
-            btnQuit.Location = new Point(461, 574);
+            btnQuit.Location = new Point(403, 430);
+            btnQuit.Margin = new Padding(3, 2, 3, 2);
             btnQuit.Name = "btnQuit";
-            btnQuit.Size = new Size(162, 60);
+            btnQuit.Size = new Size(142, 45);
             btnQuit.TabIndex = 10;
             btnQuit.Text = "Quit";
             btnQuit.UseVisualStyleBackColor = false;
@@ -302,19 +305,20 @@
             pnlPlayerSelect.Controls.Add(btnBackPS);
             pnlPlayerSelect.Controls.Add(btnConfirmPS);
             pnlPlayerSelect.Location = new Point(0, 0);
+            pnlPlayerSelect.Margin = new Padding(3, 2, 3, 2);
             pnlPlayerSelect.Name = "pnlPlayerSelect";
-            pnlPlayerSelect.Size = new Size(1082, 760);
+            pnlPlayerSelect.Size = new Size(947, 570);
             pnlPlayerSelect.TabIndex = 13;
             pnlPlayerSelect.Visible = false;
             // 
             // lblPlayerSelect
             // 
             lblPlayerSelect.BackColor = Color.Black;
-            lblPlayerSelect.Font = new Font("Castellar", 48F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPlayerSelect.Font = new Font("Microsoft Sans Serif", 48F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblPlayerSelect.ForeColor = Color.White;
-            lblPlayerSelect.Location = new Point(187, 74);
+            lblPlayerSelect.Location = new Point(164, 56);
             lblPlayerSelect.Name = "lblPlayerSelect";
-            lblPlayerSelect.Size = new Size(708, 101);
+            lblPlayerSelect.Size = new Size(620, 76);
             lblPlayerSelect.TabIndex = 13;
             lblPlayerSelect.Text = "PLAYER SELECT";
             // 
@@ -324,11 +328,12 @@
             btnPlayerSelectBg.Enabled = false;
             btnPlayerSelectBg.FlatAppearance.BorderSize = 10;
             btnPlayerSelectBg.FlatStyle = FlatStyle.Flat;
-            btnPlayerSelectBg.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPlayerSelectBg.Font = new Font("Microsoft Sans Serif", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnPlayerSelectBg.ForeColor = Color.White;
-            btnPlayerSelectBg.Location = new Point(174, 53);
+            btnPlayerSelectBg.Location = new Point(152, 40);
+            btnPlayerSelectBg.Margin = new Padding(3, 2, 3, 2);
             btnPlayerSelectBg.Name = "btnPlayerSelectBg";
-            btnPlayerSelectBg.Size = new Size(734, 134);
+            btnPlayerSelectBg.Size = new Size(642, 100);
             btnPlayerSelectBg.TabIndex = 14;
             btnPlayerSelectBg.UseVisualStyleBackColor = false;
             // 
@@ -341,11 +346,13 @@
             gbNumAI.Controls.Add(rb3AI);
             gbNumAI.Controls.Add(lblHide2AI);
             gbNumAI.Controls.Add(lblHide3AI);
-            gbNumAI.Font = new Font("Castellar", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            gbNumAI.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             gbNumAI.ForeColor = Color.White;
-            gbNumAI.Location = new Point(625, 239);
+            gbNumAI.Location = new Point(547, 179);
+            gbNumAI.Margin = new Padding(3, 2, 3, 2);
             gbNumAI.Name = "gbNumAI";
-            gbNumAI.Size = new Size(282, 376);
+            gbNumAI.Padding = new Padding(3, 2, 3, 2);
+            gbNumAI.Size = new Size(247, 282);
             gbNumAI.TabIndex = 31;
             gbNumAI.TabStop = false;
             gbNumAI.Text = "# of AI";
@@ -354,11 +361,12 @@
             // 
             rb0AI.AutoSize = true;
             rb0AI.BackColor = Color.Black;
-            rb0AI.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rb0AI.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             rb0AI.ForeColor = Color.White;
-            rb0AI.Location = new Point(38, 64);
+            rb0AI.Location = new Point(33, 48);
+            rb0AI.Margin = new Padding(3, 2, 3, 2);
             rb0AI.Name = "rb0AI";
-            rb0AI.Size = new Size(106, 41);
+            rb0AI.Size = new Size(80, 35);
             rb0AI.TabIndex = 22;
             rb0AI.Text = "0 AI";
             rb0AI.UseVisualStyleBackColor = false;
@@ -369,11 +377,12 @@
             rb1AI.AutoSize = true;
             rb1AI.BackColor = Color.Black;
             rb1AI.Checked = true;
-            rb1AI.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rb1AI.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             rb1AI.ForeColor = Color.White;
-            rb1AI.Location = new Point(38, 144);
+            rb1AI.Location = new Point(33, 108);
+            rb1AI.Margin = new Padding(3, 2, 3, 2);
             rb1AI.Name = "rb1AI";
-            rb1AI.Size = new Size(106, 41);
+            rb1AI.Size = new Size(80, 35);
             rb1AI.TabIndex = 24;
             rb1AI.TabStop = true;
             rb1AI.Text = "1 AI";
@@ -386,11 +395,12 @@
             rb2AI.BackColor = Color.Transparent;
             rb2AI.Enabled = false;
             rb2AI.FlatAppearance.BorderSize = 5;
-            rb2AI.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rb2AI.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             rb2AI.ForeColor = Color.White;
-            rb2AI.Location = new Point(38, 224);
+            rb2AI.Location = new Point(33, 168);
+            rb2AI.Margin = new Padding(3, 2, 3, 2);
             rb2AI.Name = "rb2AI";
-            rb2AI.Size = new Size(106, 41);
+            rb2AI.Size = new Size(80, 35);
             rb2AI.TabIndex = 26;
             rb2AI.Text = "2 AI";
             rb2AI.UseVisualStyleBackColor = false;
@@ -401,11 +411,12 @@
             rb3AI.AutoSize = true;
             rb3AI.BackColor = Color.Transparent;
             rb3AI.Enabled = false;
-            rb3AI.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rb3AI.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             rb3AI.ForeColor = Color.White;
-            rb3AI.Location = new Point(38, 304);
+            rb3AI.Location = new Point(33, 228);
+            rb3AI.Margin = new Padding(3, 2, 3, 2);
             rb3AI.Name = "rb3AI";
-            rb3AI.Size = new Size(106, 41);
+            rb3AI.Size = new Size(80, 35);
             rb3AI.TabIndex = 28;
             rb3AI.Text = "3 AI";
             rb3AI.UseVisualStyleBackColor = false;
@@ -414,17 +425,17 @@
             // lblHide2AI
             // 
             lblHide2AI.BackColor = Color.Black;
-            lblHide2AI.Location = new Point(33, 232);
+            lblHide2AI.Location = new Point(29, 174);
             lblHide2AI.Name = "lblHide2AI";
-            lblHide2AI.Size = new Size(25, 25);
+            lblHide2AI.Size = new Size(22, 19);
             lblHide2AI.TabIndex = 32;
             // 
             // lblHide3AI
             // 
             lblHide3AI.BackColor = Color.Black;
-            lblHide3AI.Location = new Point(33, 312);
+            lblHide3AI.Location = new Point(29, 234);
             lblHide3AI.Name = "lblHide3AI";
-            lblHide3AI.Size = new Size(25, 25);
+            lblHide3AI.Size = new Size(22, 19);
             lblHide3AI.TabIndex = 33;
             // 
             // gbNumPlayers
@@ -433,11 +444,13 @@
             gbNumPlayers.Controls.Add(rb2Players);
             gbNumPlayers.Controls.Add(rb3Players);
             gbNumPlayers.Controls.Add(rb4Players);
-            gbNumPlayers.Font = new Font("Castellar", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            gbNumPlayers.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             gbNumPlayers.ForeColor = Color.White;
-            gbNumPlayers.Location = new Point(173, 239);
+            gbNumPlayers.Location = new Point(151, 179);
+            gbNumPlayers.Margin = new Padding(3, 2, 3, 2);
             gbNumPlayers.Name = "gbNumPlayers";
-            gbNumPlayers.Size = new Size(282, 376);
+            gbNumPlayers.Padding = new Padding(3, 2, 3, 2);
+            gbNumPlayers.Size = new Size(247, 282);
             gbNumPlayers.TabIndex = 30;
             gbNumPlayers.TabStop = false;
             gbNumPlayers.Text = "# of Players";
@@ -447,11 +460,12 @@
             rb2Players.AutoSize = true;
             rb2Players.BackColor = Color.Transparent;
             rb2Players.Checked = true;
-            rb2Players.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rb2Players.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             rb2Players.ForeColor = Color.White;
-            rb2Players.Location = new Point(26, 64);
+            rb2Players.Location = new Point(23, 48);
+            rb2Players.Margin = new Padding(3, 2, 3, 2);
             rb2Players.Name = "rb2Players";
-            rb2Players.Size = new Size(217, 41);
+            rb2Players.Size = new Size(145, 35);
             rb2Players.TabIndex = 16;
             rb2Players.TabStop = true;
             rb2Players.Tag = "";
@@ -463,11 +477,12 @@
             // 
             rb3Players.AutoSize = true;
             rb3Players.BackColor = Color.Transparent;
-            rb3Players.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rb3Players.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             rb3Players.ForeColor = Color.White;
-            rb3Players.Location = new Point(26, 144);
+            rb3Players.Location = new Point(23, 108);
+            rb3Players.Margin = new Padding(3, 2, 3, 2);
             rb3Players.Name = "rb3Players";
-            rb3Players.Size = new Size(217, 41);
+            rb3Players.Size = new Size(145, 35);
             rb3Players.TabIndex = 18;
             rb3Players.Text = "3 Players";
             rb3Players.UseVisualStyleBackColor = false;
@@ -477,11 +492,12 @@
             // 
             rb4Players.AutoSize = true;
             rb4Players.BackColor = Color.Transparent;
-            rb4Players.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rb4Players.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             rb4Players.ForeColor = Color.White;
-            rb4Players.Location = new Point(26, 224);
+            rb4Players.Location = new Point(23, 168);
+            rb4Players.Margin = new Padding(3, 2, 3, 2);
             rb4Players.Name = "rb4Players";
-            rb4Players.Size = new Size(217, 41);
+            rb4Players.Size = new Size(145, 35);
             rb4Players.TabIndex = 20;
             rb4Players.Text = "4 Players";
             rb4Players.UseVisualStyleBackColor = false;
@@ -492,11 +508,12 @@
             btnBackPS.BackColor = Color.Black;
             btnBackPS.FlatAppearance.BorderSize = 5;
             btnBackPS.FlatStyle = FlatStyle.Flat;
-            btnBackPS.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnBackPS.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnBackPS.ForeColor = Color.White;
-            btnBackPS.Location = new Point(60, 635);
+            btnBackPS.Location = new Point(52, 476);
+            btnBackPS.Margin = new Padding(3, 2, 3, 2);
             btnBackPS.Name = "btnBackPS";
-            btnBackPS.Size = new Size(128, 60);
+            btnBackPS.Size = new Size(112, 45);
             btnBackPS.TabIndex = 8;
             btnBackPS.Text = "Back";
             btnBackPS.UseVisualStyleBackColor = false;
@@ -507,11 +524,12 @@
             btnConfirmPS.BackColor = Color.Black;
             btnConfirmPS.FlatAppearance.BorderSize = 5;
             btnConfirmPS.FlatStyle = FlatStyle.Flat;
-            btnConfirmPS.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnConfirmPS.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnConfirmPS.ForeColor = Color.White;
-            btnConfirmPS.Location = new Point(830, 635);
+            btnConfirmPS.Location = new Point(726, 476);
+            btnConfirmPS.Margin = new Padding(3, 2, 3, 2);
             btnConfirmPS.Name = "btnConfirmPS";
-            btnConfirmPS.Size = new Size(192, 60);
+            btnConfirmPS.Size = new Size(168, 45);
             btnConfirmPS.TabIndex = 15;
             btnConfirmPS.Text = "Confirm";
             btnConfirmPS.UseVisualStyleBackColor = false;
@@ -520,30 +538,59 @@
             // pnlGame
             // 
             pnlGame.BackgroundImage = (Image)resources.GetObject("pnlGame.BackgroundImage");
+            pnlGame.Controls.Add(buttonConsole);
+            pnlGame.Controls.Add(textBoxPlayerTurnName);
+            pnlGame.Controls.Add(textBox1);
             pnlGame.Controls.Add(pbCardTestBack);
             pnlGame.Controls.Add(pbCardTestTrump);
             pnlGame.Controls.Add(lblDeck);
             pnlGame.Controls.Add(lblDeckCount);
             pnlGame.Controls.Add(btnMenu);
             pnlGame.Controls.Add(btnRules);
-            pnlGame.Controls.Add(pnlTableTop);
-            pnlGame.Controls.Add(pnlTableBottom);
+            pnlGame.Controls.Add(panelTableTop);
+            pnlGame.Controls.Add(panelTableBottom);
             pnlGame.Controls.Add(pnlPlayer1);
             pnlGame.Controls.Add(pnlPlayer2);
             pnlGame.Controls.Add(pnlPlayer3);
             pnlGame.Controls.Add(pnlPlayer4);
             pnlGame.Location = new Point(0, 0);
+            pnlGame.Margin = new Padding(3, 2, 3, 2);
             pnlGame.Name = "pnlGame";
-            pnlGame.Size = new Size(1082, 760);
+            pnlGame.Size = new Size(1108, 570);
             pnlGame.TabIndex = 32;
             pnlGame.Visible = false;
+            // 
+            // buttonConsole
+            // 
+            buttonConsole.Location = new Point(964, 129);
+            buttonConsole.Name = "buttonConsole";
+            buttonConsole.Size = new Size(100, 23);
+            buttonConsole.TabIndex = 86;
+            buttonConsole.Text = "console.log";
+            buttonConsole.UseVisualStyleBackColor = true;
+            buttonConsole.Click += buttonConsole_Click;
+            // 
+            // textBoxPlayerTurnName
+            // 
+            textBoxPlayerTurnName.Location = new Point(964, 74);
+            textBoxPlayerTurnName.Name = "textBoxPlayerTurnName";
+            textBoxPlayerTurnName.Size = new Size(100, 23);
+            textBoxPlayerTurnName.TabIndex = 85;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(1336, 157);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(100, 23);
+            textBox1.TabIndex = 84;
             // 
             // pbCardTestBack
             // 
             pbCardTestBack.Image = (Image)resources.GetObject("pbCardTestBack.Image");
-            pbCardTestBack.Location = new Point(39, 27);
+            pbCardTestBack.Location = new Point(34, 20);
+            pbCardTestBack.Margin = new Padding(3, 2, 3, 2);
             pbCardTestBack.Name = "pbCardTestBack";
-            pbCardTestBack.Size = new Size(80, 122);
+            pbCardTestBack.Size = new Size(70, 92);
             pbCardTestBack.SizeMode = PictureBoxSizeMode.StretchImage;
             pbCardTestBack.TabIndex = 48;
             pbCardTestBack.TabStop = false;
@@ -551,9 +598,10 @@
             // pbCardTestTrump
             // 
             pbCardTestTrump.Image = (Image)resources.GetObject("pbCardTestTrump.Image");
-            pbCardTestTrump.Location = new Point(78, 27);
+            pbCardTestTrump.Location = new Point(68, 20);
+            pbCardTestTrump.Margin = new Padding(3, 2, 3, 2);
             pbCardTestTrump.Name = "pbCardTestTrump";
-            pbCardTestTrump.Size = new Size(80, 122);
+            pbCardTestTrump.Size = new Size(70, 92);
             pbCardTestTrump.SizeMode = PictureBoxSizeMode.StretchImage;
             pbCardTestTrump.TabIndex = 72;
             pbCardTestTrump.TabStop = false;
@@ -561,11 +609,11 @@
             // lblDeck
             // 
             lblDeck.BackColor = Color.Transparent;
-            lblDeck.Font = new Font("Castellar", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblDeck.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblDeck.ForeColor = Color.White;
-            lblDeck.Location = new Point(29, 156);
+            lblDeck.Location = new Point(25, 117);
             lblDeck.Name = "lblDeck";
-            lblDeck.Size = new Size(136, 36);
+            lblDeck.Size = new Size(119, 27);
             lblDeck.TabIndex = 56;
             lblDeck.Text = "Deck Remaining";
             lblDeck.TextAlign = ContentAlignment.TopCenter;
@@ -574,11 +622,11 @@
             // 
             lblDeckCount.AutoSize = true;
             lblDeckCount.BackColor = Color.Transparent;
-            lblDeckCount.Font = new Font("Castellar", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblDeckCount.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblDeckCount.ForeColor = Color.White;
-            lblDeckCount.Location = new Point(159, 156);
+            lblDeckCount.Location = new Point(139, 117);
             lblDeckCount.Name = "lblDeckCount";
-            lblDeckCount.Size = new Size(50, 36);
+            lblDeckCount.Size = new Size(41, 29);
             lblDeckCount.TabIndex = 55;
             lblDeckCount.Text = "36";
             // 
@@ -587,11 +635,12 @@
             btnMenu.BackColor = Color.Black;
             btnMenu.FlatAppearance.BorderSize = 3;
             btnMenu.FlatStyle = FlatStyle.Flat;
-            btnMenu.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnMenu.Font = new Font("Microsoft Sans Serif", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnMenu.ForeColor = Color.White;
-            btnMenu.Location = new Point(977, 12);
+            btnMenu.Location = new Point(855, 9);
+            btnMenu.Margin = new Padding(3, 2, 3, 2);
             btnMenu.Name = "btnMenu";
-            btnMenu.Size = new Size(93, 42);
+            btnMenu.Size = new Size(81, 32);
             btnMenu.TabIndex = 73;
             btnMenu.Text = "Menu";
             btnMenu.UseVisualStyleBackColor = false;
@@ -602,68 +651,40 @@
             btnRules.BackColor = Color.Black;
             btnRules.FlatAppearance.BorderSize = 3;
             btnRules.FlatStyle = FlatStyle.Flat;
-            btnRules.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnRules.Font = new Font("Microsoft Sans Serif", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnRules.ForeColor = Color.White;
-            btnRules.Location = new Point(967, 59);
+            btnRules.Location = new Point(846, 44);
+            btnRules.Margin = new Padding(3, 2, 3, 2);
             btnRules.Name = "btnRules";
-            btnRules.Size = new Size(103, 42);
+            btnRules.Size = new Size(90, 32);
             btnRules.TabIndex = 82;
             btnRules.Text = "Rules";
             btnRules.UseVisualStyleBackColor = false;
             btnRules.Click += ShowRules;
             // 
-            // pnlTableTop
+            // panelTableTop
             // 
-            pnlTableTop.BackColor = Color.Transparent;
-            pnlTableTop.Controls.Add(btnTableTopBg);
-            pnlTableTop.Location = new Point(254, 195);
-            pnlTableTop.Name = "pnlTableTop";
-            pnlTableTop.Size = new Size(574, 152);
-            pnlTableTop.TabIndex = 83;
+            panelTableTop.BackColor = Color.Transparent;
+            panelTableTop.Location = new Point(222, 146);
+            panelTableTop.Margin = new Padding(3, 2, 3, 2);
+            panelTableTop.Name = "panelTableTop";
+            panelTableTop.Size = new Size(502, 114);
+            panelTableTop.TabIndex = 83;
             // 
-            // btnTableTopBg
+            // panelTableBottom
             // 
-            btnTableTopBg.BackColor = Color.Black;
-            btnTableTopBg.Enabled = false;
-            btnTableTopBg.FlatAppearance.BorderSize = 4;
-            btnTableTopBg.FlatStyle = FlatStyle.Flat;
-            btnTableTopBg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnTableTopBg.ForeColor = Color.White;
-            btnTableTopBg.Location = new Point(0, 0);
-            btnTableTopBg.Name = "btnTableTopBg";
-            btnTableTopBg.Size = new Size(574, 158);
-            btnTableTopBg.TabIndex = 86;
-            btnTableTopBg.UseVisualStyleBackColor = false;
-            // 
-            // pnlTableBottom
-            // 
-            pnlTableBottom.BackColor = Color.Transparent;
-            pnlTableBottom.Controls.Add(pbCardTest);
-            pnlTableBottom.Controls.Add(button1);
-            pnlTableBottom.Location = new Point(254, 347);
-            pnlTableBottom.Name = "pnlTableBottom";
-            pnlTableBottom.Size = new Size(574, 152);
-            pnlTableBottom.TabIndex = 81;
-            // 
-            // button1
-            // 
-            button1.BackColor = Color.Black;
-            button1.Enabled = false;
-            button1.FlatAppearance.BorderSize = 4;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(0, -6);
-            button1.Name = "button1";
-            button1.Size = new Size(574, 158);
-            button1.TabIndex = 87;
-            button1.UseVisualStyleBackColor = false;
+            panelTableBottom.BackColor = Color.Transparent;
+            panelTableBottom.Location = new Point(222, 260);
+            panelTableBottom.Margin = new Padding(3, 2, 3, 2);
+            panelTableBottom.Name = "panelTableBottom";
+            panelTableBottom.Size = new Size(502, 114);
+            panelTableBottom.TabIndex = 81;
             // 
             // pnlPlayer1
             // 
             pnlPlayer1.BackColor = Color.Transparent;
             pnlPlayer1.Controls.Add(logBox);
-            pnlPlayer1.Controls.Add(pnlHand);
+            pnlPlayer1.Controls.Add(panelHand);
             pnlPlayer1.Controls.Add(btnHandBg);
             pnlPlayer1.Controls.Add(pbPlayer1Role);
             pnlPlayer1.Controls.Add(btnPlayer1RoleBg);
@@ -674,39 +695,32 @@
             pnlPlayer1.Controls.Add(btnEndTurn);
             pnlPlayer1.Controls.Add(btnPlayer1Bg);
             pnlPlayer1.ForeColor = Color.WhiteSmoke;
-            pnlPlayer1.Location = new Point(12, 507);
+            pnlPlayer1.Location = new Point(10, 380);
+            pnlPlayer1.Margin = new Padding(3, 2, 3, 2);
             pnlPlayer1.Name = "pnlPlayer1";
-            pnlPlayer1.Size = new Size(1058, 238);
+            pnlPlayer1.Size = new Size(926, 178);
             pnlPlayer1.TabIndex = 80;
             // 
             // logBox
             // 
             logBox.BackColor = Color.White;
-            logBox.Location = new Point(12, 15);
+            logBox.Location = new Point(10, 11);
+            logBox.Margin = new Padding(3, 2, 3, 2);
             logBox.Multiline = true;
             logBox.Name = "logBox";
             logBox.ScrollBars = ScrollBars.Both;
-            logBox.Size = new Size(188, 212);
+            logBox.Size = new Size(165, 160);
             logBox.TabIndex = 71;
             logBox.Text = "Hello";
             // 
-            // pnlHand
+            // panelHand
             // 
-            pnlHand.BackColor = Color.Black;
-            pnlHand.Location = new Point(246, 46);
-            pnlHand.Name = "pnlHand";
-            pnlHand.Size = new Size(566, 146);
-            pnlHand.TabIndex = 0;
-            // 
-            // pbCardTest
-            // 
-            pbCardTest.Image = (Image)resources.GetObject("pbCardTest.Image");
-            pbCardTest.Location = new Point(26, 13);
-            pbCardTest.Name = "pbCardTest";
-            pbCardTest.Size = new Size(80, 122);
-            pbCardTest.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbCardTest.TabIndex = 1;
-            pbCardTest.TabStop = false;
+            panelHand.BackColor = Color.Black;
+            panelHand.Location = new Point(24, 11);
+            panelHand.Margin = new Padding(3, 2, 3, 2);
+            panelHand.Name = "panelHand";
+            panelHand.Size = new Size(1000, 110);
+            panelHand.TabIndex = 0;
             // 
             // btnHandBg
             // 
@@ -714,11 +728,12 @@
             btnHandBg.Enabled = false;
             btnHandBg.FlatAppearance.BorderSize = 4;
             btnHandBg.FlatStyle = FlatStyle.Flat;
-            btnHandBg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnHandBg.Font = new Font("Microsoft Sans Serif", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnHandBg.ForeColor = Color.White;
-            btnHandBg.Location = new Point(242, 42);
+            btnHandBg.Location = new Point(212, 32);
+            btnHandBg.Margin = new Padding(3, 2, 3, 2);
             btnHandBg.Name = "btnHandBg";
-            btnHandBg.Size = new Size(574, 154);
+            btnHandBg.Size = new Size(502, 116);
             btnHandBg.TabIndex = 76;
             btnHandBg.UseVisualStyleBackColor = false;
             // 
@@ -726,9 +741,10 @@
             // 
             pbPlayer1Role.BackColor = Color.Black;
             pbPlayer1Role.Image = (Image)resources.GetObject("pbPlayer1Role.Image");
-            pbPlayer1Role.Location = new Point(830, 19);
+            pbPlayer1Role.Location = new Point(726, 14);
+            pbPlayer1Role.Margin = new Padding(3, 2, 3, 2);
             pbPlayer1Role.Name = "pbPlayer1Role";
-            pbPlayer1Role.Size = new Size(92, 92);
+            pbPlayer1Role.Size = new Size(80, 69);
             pbPlayer1Role.SizeMode = PictureBoxSizeMode.StretchImage;
             pbPlayer1Role.TabIndex = 51;
             pbPlayer1Role.TabStop = false;
@@ -739,22 +755,23 @@
             btnPlayer1RoleBg.Enabled = false;
             btnPlayer1RoleBg.FlatAppearance.BorderSize = 4;
             btnPlayer1RoleBg.FlatStyle = FlatStyle.Flat;
-            btnPlayer1RoleBg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPlayer1RoleBg.Font = new Font("Microsoft Sans Serif", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnPlayer1RoleBg.ForeColor = Color.White;
-            btnPlayer1RoleBg.Location = new Point(826, 15);
+            btnPlayer1RoleBg.Location = new Point(723, 11);
+            btnPlayer1RoleBg.Margin = new Padding(3, 2, 3, 2);
             btnPlayer1RoleBg.Name = "btnPlayer1RoleBg";
-            btnPlayer1RoleBg.Size = new Size(100, 100);
+            btnPlayer1RoleBg.Size = new Size(88, 75);
             btnPlayer1RoleBg.TabIndex = 75;
             btnPlayer1RoleBg.UseVisualStyleBackColor = false;
             // 
             // lblPlayer1Cards
             // 
             lblPlayer1Cards.BackColor = Color.Black;
-            lblPlayer1Cards.Font = new Font("Castellar", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPlayer1Cards.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPlayer1Cards.ForeColor = Color.White;
-            lblPlayer1Cards.Location = new Point(847, 116);
+            lblPlayer1Cards.Location = new Point(741, 87);
             lblPlayer1Cards.Name = "lblPlayer1Cards";
-            lblPlayer1Cards.Size = new Size(60, 34);
+            lblPlayer1Cards.Size = new Size(52, 26);
             lblPlayer1Cards.TabIndex = 67;
             lblPlayer1Cards.Text = "6";
             lblPlayer1Cards.TextAlign = ContentAlignment.MiddleCenter;
@@ -762,9 +779,10 @@
             // pbPlayer1IconG
             // 
             pbPlayer1IconG.Image = (Image)resources.GetObject("pbPlayer1IconG.Image");
-            pbPlayer1IconG.Location = new Point(945, 19);
+            pbPlayer1IconG.Location = new Point(827, 14);
+            pbPlayer1IconG.Margin = new Padding(3, 2, 3, 2);
             pbPlayer1IconG.Name = "pbPlayer1IconG";
-            pbPlayer1IconG.Size = new Size(92, 92);
+            pbPlayer1IconG.Size = new Size(80, 69);
             pbPlayer1IconG.SizeMode = PictureBoxSizeMode.StretchImage;
             pbPlayer1IconG.TabIndex = 69;
             pbPlayer1IconG.TabStop = false;
@@ -775,23 +793,24 @@
             btnPlayer1IconGBg.Enabled = false;
             btnPlayer1IconGBg.FlatAppearance.BorderSize = 4;
             btnPlayer1IconGBg.FlatStyle = FlatStyle.Flat;
-            btnPlayer1IconGBg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPlayer1IconGBg.Font = new Font("Microsoft Sans Serif", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnPlayer1IconGBg.ForeColor = Color.White;
-            btnPlayer1IconGBg.Location = new Point(941, 15);
+            btnPlayer1IconGBg.Location = new Point(823, 11);
+            btnPlayer1IconGBg.Margin = new Padding(3, 2, 3, 2);
             btnPlayer1IconGBg.Name = "btnPlayer1IconGBg";
-            btnPlayer1IconGBg.Size = new Size(100, 100);
+            btnPlayer1IconGBg.Size = new Size(88, 75);
             btnPlayer1IconGBg.TabIndex = 85;
             btnPlayer1IconGBg.UseVisualStyleBackColor = false;
             // 
             // lblPlayer1NameG
             // 
             lblPlayer1NameG.BackColor = Color.Black;
-            lblPlayer1NameG.Font = new Font("Castellar", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPlayer1NameG.Font = new Font("Microsoft Sans Serif", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPlayer1NameG.ForeColor = Color.White;
             lblPlayer1NameG.ImageAlign = ContentAlignment.BottomCenter;
-            lblPlayer1NameG.Location = new Point(930, 118);
+            lblPlayer1NameG.Location = new Point(814, 88);
             lblPlayer1NameG.Name = "lblPlayer1NameG";
-            lblPlayer1NameG.Size = new Size(122, 32);
+            lblPlayer1NameG.Size = new Size(107, 24);
             lblPlayer1NameG.TabIndex = 68;
             lblPlayer1NameG.Text = "Player 1";
             lblPlayer1NameG.TextAlign = ContentAlignment.TopCenter;
@@ -801,11 +820,12 @@
             btnEndTurn.BackColor = Color.Black;
             btnEndTurn.FlatAppearance.BorderSize = 3;
             btnEndTurn.FlatStyle = FlatStyle.Flat;
-            btnEndTurn.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnEndTurn.Font = new Font("Microsoft Sans Serif", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnEndTurn.ForeColor = Color.White;
-            btnEndTurn.Location = new Point(857, 175);
+            btnEndTurn.Location = new Point(750, 131);
+            btnEndTurn.Margin = new Padding(3, 2, 3, 2);
             btnEndTurn.Name = "btnEndTurn";
-            btnEndTurn.Size = new Size(152, 41);
+            btnEndTurn.Size = new Size(133, 31);
             btnEndTurn.TabIndex = 74;
             btnEndTurn.Text = "End Turn";
             btnEndTurn.UseVisualStyleBackColor = false;
@@ -816,11 +836,12 @@
             btnPlayer1Bg.Enabled = false;
             btnPlayer1Bg.FlatAppearance.BorderSize = 4;
             btnPlayer1Bg.FlatStyle = FlatStyle.Flat;
-            btnPlayer1Bg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPlayer1Bg.Font = new Font("Microsoft Sans Serif", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnPlayer1Bg.ForeColor = Color.White;
-            btnPlayer1Bg.Location = new Point(0, 0);
+            btnPlayer1Bg.Location = new Point(7, -10);
+            btnPlayer1Bg.Margin = new Padding(3, 2, 3, 2);
             btnPlayer1Bg.Name = "btnPlayer1Bg";
-            btnPlayer1Bg.Size = new Size(1058, 238);
+            btnPlayer1Bg.Size = new Size(926, 178);
             btnPlayer1Bg.TabIndex = 86;
             btnPlayer1Bg.UseVisualStyleBackColor = false;
             // 
@@ -834,17 +855,19 @@
             pnlPlayer2.Controls.Add(btnPlayer2RoleBg);
             pnlPlayer2.Controls.Add(lblPlayer2Cards);
             pnlPlayer2.Controls.Add(btnPlayer2Bg);
-            pnlPlayer2.Location = new Point(371, 8);
+            pnlPlayer2.Location = new Point(325, 6);
+            pnlPlayer2.Margin = new Padding(3, 2, 3, 2);
             pnlPlayer2.Name = "pnlPlayer2";
-            pnlPlayer2.Size = new Size(325, 185);
+            pnlPlayer2.Size = new Size(284, 139);
             pnlPlayer2.TabIndex = 80;
             // 
             // pbPlayer2IconG
             // 
             pbPlayer2IconG.Image = (Image)resources.GetObject("pbPlayer2IconG.Image");
-            pbPlayer2IconG.Location = new Point(41, 35);
+            pbPlayer2IconG.Location = new Point(36, 26);
+            pbPlayer2IconG.Margin = new Padding(3, 2, 3, 2);
             pbPlayer2IconG.Name = "pbPlayer2IconG";
-            pbPlayer2IconG.Size = new Size(92, 92);
+            pbPlayer2IconG.Size = new Size(80, 69);
             pbPlayer2IconG.SizeMode = PictureBoxSizeMode.StretchImage;
             pbPlayer2IconG.TabIndex = 58;
             pbPlayer2IconG.TabStop = false;
@@ -855,22 +878,23 @@
             btnPlayer2IconGBg.Enabled = false;
             btnPlayer2IconGBg.FlatAppearance.BorderSize = 4;
             btnPlayer2IconGBg.FlatStyle = FlatStyle.Flat;
-            btnPlayer2IconGBg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPlayer2IconGBg.Font = new Font("Microsoft Sans Serif", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnPlayer2IconGBg.ForeColor = Color.White;
-            btnPlayer2IconGBg.Location = new Point(37, 31);
+            btnPlayer2IconGBg.Location = new Point(32, 23);
+            btnPlayer2IconGBg.Margin = new Padding(3, 2, 3, 2);
             btnPlayer2IconGBg.Name = "btnPlayer2IconGBg";
-            btnPlayer2IconGBg.Size = new Size(100, 100);
+            btnPlayer2IconGBg.Size = new Size(88, 75);
             btnPlayer2IconGBg.TabIndex = 84;
             btnPlayer2IconGBg.UseVisualStyleBackColor = false;
             // 
             // lblPlayer2NameG
             // 
             lblPlayer2NameG.BackColor = Color.Black;
-            lblPlayer2NameG.Font = new Font("Castellar", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPlayer2NameG.Font = new Font("Microsoft Sans Serif", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPlayer2NameG.ForeColor = Color.White;
-            lblPlayer2NameG.Location = new Point(29, 135);
+            lblPlayer2NameG.Location = new Point(25, 101);
             lblPlayer2NameG.Name = "lblPlayer2NameG";
-            lblPlayer2NameG.Size = new Size(122, 32);
+            lblPlayer2NameG.Size = new Size(107, 24);
             lblPlayer2NameG.TabIndex = 57;
             lblPlayer2NameG.Text = "Player 2";
             lblPlayer2NameG.TextAlign = ContentAlignment.TopCenter;
@@ -879,9 +903,10 @@
             // 
             pbPlayer2Role.BackColor = Color.Black;
             pbPlayer2Role.Image = (Image)resources.GetObject("pbPlayer2Role.Image");
-            pbPlayer2Role.Location = new Point(191, 35);
+            pbPlayer2Role.Location = new Point(167, 26);
+            pbPlayer2Role.Margin = new Padding(3, 2, 3, 2);
             pbPlayer2Role.Name = "pbPlayer2Role";
-            pbPlayer2Role.Size = new Size(92, 92);
+            pbPlayer2Role.Size = new Size(80, 69);
             pbPlayer2Role.SizeMode = PictureBoxSizeMode.StretchImage;
             pbPlayer2Role.TabIndex = 53;
             pbPlayer2Role.TabStop = false;
@@ -892,22 +917,23 @@
             btnPlayer2RoleBg.Enabled = false;
             btnPlayer2RoleBg.FlatAppearance.BorderSize = 4;
             btnPlayer2RoleBg.FlatStyle = FlatStyle.Flat;
-            btnPlayer2RoleBg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPlayer2RoleBg.Font = new Font("Microsoft Sans Serif", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnPlayer2RoleBg.ForeColor = Color.White;
-            btnPlayer2RoleBg.Location = new Point(187, 31);
+            btnPlayer2RoleBg.Location = new Point(164, 23);
+            btnPlayer2RoleBg.Margin = new Padding(3, 2, 3, 2);
             btnPlayer2RoleBg.Name = "btnPlayer2RoleBg";
-            btnPlayer2RoleBg.Size = new Size(100, 100);
+            btnPlayer2RoleBg.Size = new Size(88, 75);
             btnPlayer2RoleBg.TabIndex = 77;
             btnPlayer2RoleBg.UseVisualStyleBackColor = false;
             // 
             // lblPlayer2Cards
             // 
             lblPlayer2Cards.BackColor = Color.Black;
-            lblPlayer2Cards.Font = new Font("Castellar", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPlayer2Cards.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPlayer2Cards.ForeColor = Color.White;
-            lblPlayer2Cards.Location = new Point(208, 132);
+            lblPlayer2Cards.Location = new Point(182, 99);
             lblPlayer2Cards.Name = "lblPlayer2Cards";
-            lblPlayer2Cards.Size = new Size(60, 34);
+            lblPlayer2Cards.Size = new Size(52, 26);
             lblPlayer2Cards.TabIndex = 59;
             lblPlayer2Cards.Text = "6";
             lblPlayer2Cards.TextAlign = ContentAlignment.MiddleCenter;
@@ -918,11 +944,12 @@
             btnPlayer2Bg.Enabled = false;
             btnPlayer2Bg.FlatAppearance.BorderSize = 4;
             btnPlayer2Bg.FlatStyle = FlatStyle.Flat;
-            btnPlayer2Bg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPlayer2Bg.Font = new Font("Microsoft Sans Serif", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnPlayer2Bg.ForeColor = Color.White;
             btnPlayer2Bg.Location = new Point(0, 0);
+            btnPlayer2Bg.Margin = new Padding(3, 2, 3, 2);
             btnPlayer2Bg.Name = "btnPlayer2Bg";
-            btnPlayer2Bg.Size = new Size(325, 179);
+            btnPlayer2Bg.Size = new Size(284, 134);
             btnPlayer2Bg.TabIndex = 84;
             btnPlayer2Bg.UseVisualStyleBackColor = false;
             // 
@@ -936,17 +963,19 @@
             pnlPlayer3.Controls.Add(btnPlayer3RoleBg);
             pnlPlayer3.Controls.Add(lblPlayer3Cards);
             pnlPlayer3.Controls.Add(btnPlayer3Bg);
-            pnlPlayer3.Location = new Point(12, 195);
+            pnlPlayer3.Location = new Point(10, 146);
+            pnlPlayer3.Margin = new Padding(3, 2, 3, 2);
             pnlPlayer3.Name = "pnlPlayer3";
-            pnlPlayer3.Size = new Size(200, 304);
+            pnlPlayer3.Size = new Size(175, 228);
             pnlPlayer3.TabIndex = 80;
             // 
             // pbPlayer3IconG
             // 
             pbPlayer3IconG.Image = (Image)resources.GetObject("pbPlayer3IconG.Image");
-            pbPlayer3IconG.Location = new Point(53, 19);
+            pbPlayer3IconG.Location = new Point(46, 14);
+            pbPlayer3IconG.Margin = new Padding(3, 2, 3, 2);
             pbPlayer3IconG.Name = "pbPlayer3IconG";
-            pbPlayer3IconG.Size = new Size(92, 92);
+            pbPlayer3IconG.Size = new Size(80, 69);
             pbPlayer3IconG.SizeMode = PictureBoxSizeMode.StretchImage;
             pbPlayer3IconG.TabIndex = 60;
             pbPlayer3IconG.TabStop = false;
@@ -957,22 +986,23 @@
             btnPlayer3IconGBg.Enabled = false;
             btnPlayer3IconGBg.FlatAppearance.BorderSize = 4;
             btnPlayer3IconGBg.FlatStyle = FlatStyle.Flat;
-            btnPlayer3IconGBg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPlayer3IconGBg.Font = new Font("Microsoft Sans Serif", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnPlayer3IconGBg.ForeColor = Color.White;
-            btnPlayer3IconGBg.Location = new Point(49, 15);
+            btnPlayer3IconGBg.Location = new Point(43, 11);
+            btnPlayer3IconGBg.Margin = new Padding(3, 2, 3, 2);
             btnPlayer3IconGBg.Name = "btnPlayer3IconGBg";
-            btnPlayer3IconGBg.Size = new Size(100, 100);
+            btnPlayer3IconGBg.Size = new Size(88, 75);
             btnPlayer3IconGBg.TabIndex = 79;
             btnPlayer3IconGBg.UseVisualStyleBackColor = false;
             // 
             // lblPlayer3NameG
             // 
             lblPlayer3NameG.BackColor = Color.Black;
-            lblPlayer3NameG.Font = new Font("Castellar", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPlayer3NameG.Font = new Font("Microsoft Sans Serif", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPlayer3NameG.ForeColor = Color.White;
-            lblPlayer3NameG.Location = new Point(38, 119);
+            lblPlayer3NameG.Location = new Point(33, 89);
             lblPlayer3NameG.Name = "lblPlayer3NameG";
-            lblPlayer3NameG.Size = new Size(122, 32);
+            lblPlayer3NameG.Size = new Size(107, 24);
             lblPlayer3NameG.TabIndex = 61;
             lblPlayer3NameG.Text = "Player 3";
             lblPlayer3NameG.TextAlign = ContentAlignment.TopCenter;
@@ -981,9 +1011,10 @@
             // 
             pbPlayer3Role.BackColor = Color.Black;
             pbPlayer3Role.Image = (Image)resources.GetObject("pbPlayer3Role.Image");
-            pbPlayer3Role.Location = new Point(53, 165);
+            pbPlayer3Role.Location = new Point(46, 124);
+            pbPlayer3Role.Margin = new Padding(3, 2, 3, 2);
             pbPlayer3Role.Name = "pbPlayer3Role";
-            pbPlayer3Role.Size = new Size(92, 92);
+            pbPlayer3Role.Size = new Size(80, 69);
             pbPlayer3Role.SizeMode = PictureBoxSizeMode.StretchImage;
             pbPlayer3Role.TabIndex = 54;
             pbPlayer3Role.TabStop = false;
@@ -994,22 +1025,23 @@
             btnPlayer3RoleBg.Enabled = false;
             btnPlayer3RoleBg.FlatAppearance.BorderSize = 4;
             btnPlayer3RoleBg.FlatStyle = FlatStyle.Flat;
-            btnPlayer3RoleBg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPlayer3RoleBg.Font = new Font("Microsoft Sans Serif", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnPlayer3RoleBg.ForeColor = Color.White;
-            btnPlayer3RoleBg.Location = new Point(49, 161);
+            btnPlayer3RoleBg.Location = new Point(43, 121);
+            btnPlayer3RoleBg.Margin = new Padding(3, 2, 3, 2);
             btnPlayer3RoleBg.Name = "btnPlayer3RoleBg";
-            btnPlayer3RoleBg.Size = new Size(100, 100);
+            btnPlayer3RoleBg.Size = new Size(88, 75);
             btnPlayer3RoleBg.TabIndex = 78;
             btnPlayer3RoleBg.UseVisualStyleBackColor = false;
             // 
             // lblPlayer3Cards
             // 
             lblPlayer3Cards.BackColor = Color.Black;
-            lblPlayer3Cards.Font = new Font("Castellar", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPlayer3Cards.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPlayer3Cards.ForeColor = Color.White;
-            lblPlayer3Cards.Location = new Point(70, 262);
+            lblPlayer3Cards.Location = new Point(61, 196);
             lblPlayer3Cards.Name = "lblPlayer3Cards";
-            lblPlayer3Cards.Size = new Size(60, 34);
+            lblPlayer3Cards.Size = new Size(52, 26);
             lblPlayer3Cards.TabIndex = 62;
             lblPlayer3Cards.Text = "36";
             lblPlayer3Cards.TextAlign = ContentAlignment.MiddleCenter;
@@ -1020,11 +1052,12 @@
             btnPlayer3Bg.Enabled = false;
             btnPlayer3Bg.FlatAppearance.BorderSize = 4;
             btnPlayer3Bg.FlatStyle = FlatStyle.Flat;
-            btnPlayer3Bg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPlayer3Bg.Font = new Font("Microsoft Sans Serif", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnPlayer3Bg.ForeColor = Color.White;
             btnPlayer3Bg.Location = new Point(0, 0);
+            btnPlayer3Bg.Margin = new Padding(3, 2, 3, 2);
             btnPlayer3Bg.Name = "btnPlayer3Bg";
-            btnPlayer3Bg.Size = new Size(200, 304);
+            btnPlayer3Bg.Size = new Size(175, 228);
             btnPlayer3Bg.TabIndex = 85;
             btnPlayer3Bg.UseVisualStyleBackColor = false;
             // 
@@ -1038,17 +1071,19 @@
             pnlPlayer4.Controls.Add(btnPlayer4RoleBg);
             pnlPlayer4.Controls.Add(lblPlayer4Cards);
             pnlPlayer4.Controls.Add(btnPlayer4Bg);
-            pnlPlayer4.Location = new Point(870, 195);
+            pnlPlayer4.Location = new Point(761, 146);
+            pnlPlayer4.Margin = new Padding(3, 2, 3, 2);
             pnlPlayer4.Name = "pnlPlayer4";
-            pnlPlayer4.Size = new Size(200, 304);
+            pnlPlayer4.Size = new Size(175, 228);
             pnlPlayer4.TabIndex = 79;
             // 
             // pbPlayer4IconG
             // 
             pbPlayer4IconG.Image = (Image)resources.GetObject("pbPlayer4IconG.Image");
-            pbPlayer4IconG.Location = new Point(53, 19);
+            pbPlayer4IconG.Location = new Point(46, 14);
+            pbPlayer4IconG.Margin = new Padding(3, 2, 3, 2);
             pbPlayer4IconG.Name = "pbPlayer4IconG";
-            pbPlayer4IconG.Size = new Size(92, 92);
+            pbPlayer4IconG.Size = new Size(80, 69);
             pbPlayer4IconG.SizeMode = PictureBoxSizeMode.StretchImage;
             pbPlayer4IconG.TabIndex = 65;
             pbPlayer4IconG.TabStop = false;
@@ -1059,22 +1094,23 @@
             btnPlayer4IconGBg.Enabled = false;
             btnPlayer4IconGBg.FlatAppearance.BorderSize = 4;
             btnPlayer4IconGBg.FlatStyle = FlatStyle.Flat;
-            btnPlayer4IconGBg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPlayer4IconGBg.Font = new Font("Microsoft Sans Serif", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnPlayer4IconGBg.ForeColor = Color.White;
-            btnPlayer4IconGBg.Location = new Point(49, 15);
+            btnPlayer4IconGBg.Location = new Point(43, 11);
+            btnPlayer4IconGBg.Margin = new Padding(3, 2, 3, 2);
             btnPlayer4IconGBg.Name = "btnPlayer4IconGBg";
-            btnPlayer4IconGBg.Size = new Size(100, 100);
+            btnPlayer4IconGBg.Size = new Size(88, 75);
             btnPlayer4IconGBg.TabIndex = 80;
             btnPlayer4IconGBg.UseVisualStyleBackColor = false;
             // 
             // lblPlayer4NameG
             // 
             lblPlayer4NameG.BackColor = Color.Black;
-            lblPlayer4NameG.Font = new Font("Castellar", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPlayer4NameG.Font = new Font("Microsoft Sans Serif", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPlayer4NameG.ForeColor = Color.White;
-            lblPlayer4NameG.Location = new Point(38, 119);
+            lblPlayer4NameG.Location = new Point(33, 89);
             lblPlayer4NameG.Name = "lblPlayer4NameG";
-            lblPlayer4NameG.Size = new Size(122, 32);
+            lblPlayer4NameG.Size = new Size(107, 24);
             lblPlayer4NameG.TabIndex = 64;
             lblPlayer4NameG.Text = "Player 4";
             lblPlayer4NameG.TextAlign = ContentAlignment.TopCenter;
@@ -1083,9 +1119,10 @@
             // 
             pbPlayer4Role.BackColor = Color.Black;
             pbPlayer4Role.Image = (Image)resources.GetObject("pbPlayer4Role.Image");
-            pbPlayer4Role.Location = new Point(53, 165);
+            pbPlayer4Role.Location = new Point(46, 124);
+            pbPlayer4Role.Margin = new Padding(3, 2, 3, 2);
             pbPlayer4Role.Name = "pbPlayer4Role";
-            pbPlayer4Role.Size = new Size(92, 92);
+            pbPlayer4Role.Size = new Size(80, 69);
             pbPlayer4Role.SizeMode = PictureBoxSizeMode.StretchImage;
             pbPlayer4Role.TabIndex = 50;
             pbPlayer4Role.TabStop = false;
@@ -1096,22 +1133,23 @@
             btnPlayer4RoleBg.Enabled = false;
             btnPlayer4RoleBg.FlatAppearance.BorderSize = 4;
             btnPlayer4RoleBg.FlatStyle = FlatStyle.Flat;
-            btnPlayer4RoleBg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPlayer4RoleBg.Font = new Font("Microsoft Sans Serif", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnPlayer4RoleBg.ForeColor = Color.White;
-            btnPlayer4RoleBg.Location = new Point(49, 161);
+            btnPlayer4RoleBg.Location = new Point(43, 121);
+            btnPlayer4RoleBg.Margin = new Padding(3, 2, 3, 2);
             btnPlayer4RoleBg.Name = "btnPlayer4RoleBg";
-            btnPlayer4RoleBg.Size = new Size(100, 100);
+            btnPlayer4RoleBg.Size = new Size(88, 75);
             btnPlayer4RoleBg.TabIndex = 76;
             btnPlayer4RoleBg.UseVisualStyleBackColor = false;
             // 
             // lblPlayer4Cards
             // 
             lblPlayer4Cards.BackColor = Color.Black;
-            lblPlayer4Cards.Font = new Font("Castellar", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPlayer4Cards.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPlayer4Cards.ForeColor = Color.White;
-            lblPlayer4Cards.Location = new Point(70, 262);
+            lblPlayer4Cards.Location = new Point(61, 196);
             lblPlayer4Cards.Name = "lblPlayer4Cards";
-            lblPlayer4Cards.Size = new Size(60, 34);
+            lblPlayer4Cards.Size = new Size(52, 26);
             lblPlayer4Cards.TabIndex = 63;
             lblPlayer4Cards.Text = "6";
             lblPlayer4Cards.TextAlign = ContentAlignment.MiddleCenter;
@@ -1122,11 +1160,12 @@
             btnPlayer4Bg.Enabled = false;
             btnPlayer4Bg.FlatAppearance.BorderSize = 4;
             btnPlayer4Bg.FlatStyle = FlatStyle.Flat;
-            btnPlayer4Bg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPlayer4Bg.Font = new Font("Microsoft Sans Serif", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnPlayer4Bg.ForeColor = Color.White;
             btnPlayer4Bg.Location = new Point(0, 0);
+            btnPlayer4Bg.Margin = new Padding(3, 2, 3, 2);
             btnPlayer4Bg.Name = "btnPlayer4Bg";
-            btnPlayer4Bg.Size = new Size(200, 304);
+            btnPlayer4Bg.Size = new Size(175, 228);
             btnPlayer4Bg.TabIndex = 86;
             btnPlayer4Bg.UseVisualStyleBackColor = false;
             // 
@@ -1144,19 +1183,20 @@
             pnlCustomize.Controls.Add(btnBackN);
             pnlCustomize.Controls.Add(btnConfirmN);
             pnlCustomize.Location = new Point(0, 0);
+            pnlCustomize.Margin = new Padding(3, 2, 3, 2);
             pnlCustomize.Name = "pnlCustomize";
-            pnlCustomize.Size = new Size(1082, 753);
+            pnlCustomize.Size = new Size(947, 565);
             pnlCustomize.TabIndex = 33;
             pnlCustomize.Visible = false;
             // 
             // lblCustomize
             // 
             lblCustomize.BackColor = Color.Black;
-            lblCustomize.Font = new Font("Castellar", 36F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblCustomize.Font = new Font("Microsoft Sans Serif", 36F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblCustomize.ForeColor = Color.White;
-            lblCustomize.Location = new Point(233, 44);
+            lblCustomize.Location = new Point(204, 33);
             lblCustomize.Name = "lblCustomize";
-            lblCustomize.Size = new Size(615, 148);
+            lblCustomize.Size = new Size(538, 111);
             lblCustomize.TabIndex = 32;
             lblCustomize.Text = "PLAYER CUSTOMIZATION";
             lblCustomize.TextAlign = ContentAlignment.TopCenter;
@@ -1167,11 +1207,12 @@
             btnCustomizeBg.Enabled = false;
             btnCustomizeBg.FlatAppearance.BorderSize = 10;
             btnCustomizeBg.FlatStyle = FlatStyle.Flat;
-            btnCustomizeBg.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnCustomizeBg.Font = new Font("Microsoft Sans Serif", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnCustomizeBg.ForeColor = Color.White;
-            btnCustomizeBg.Location = new Point(218, 34);
+            btnCustomizeBg.Location = new Point(191, 26);
+            btnCustomizeBg.Margin = new Padding(3, 2, 3, 2);
             btnCustomizeBg.Name = "btnCustomizeBg";
-            btnCustomizeBg.Size = new Size(646, 169);
+            btnCustomizeBg.Size = new Size(565, 127);
             btnCustomizeBg.TabIndex = 33;
             btnCustomizeBg.UseVisualStyleBackColor = false;
             // 
@@ -1183,40 +1224,43 @@
             gbPlayer1Customize.Controls.Add(lblPlayer1Icon);
             gbPlayer1Customize.Controls.Add(pbPlayer1SelectedIcon);
             gbPlayer1Customize.Controls.Add(pnlPlayer1IconSelect);
-            gbPlayer1Customize.Font = new Font("Castellar", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            gbPlayer1Customize.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             gbPlayer1Customize.ForeColor = Color.White;
-            gbPlayer1Customize.Location = new Point(13, 220);
+            gbPlayer1Customize.Location = new Point(11, 165);
+            gbPlayer1Customize.Margin = new Padding(3, 2, 3, 2);
             gbPlayer1Customize.Name = "gbPlayer1Customize";
-            gbPlayer1Customize.Size = new Size(256, 378);
+            gbPlayer1Customize.Padding = new Padding(3, 2, 3, 2);
+            gbPlayer1Customize.Size = new Size(224, 284);
             gbPlayer1Customize.TabIndex = 34;
             gbPlayer1Customize.TabStop = false;
             gbPlayer1Customize.Text = "Player 1";
             // 
             // lblPlayer1NameC
             // 
-            lblPlayer1NameC.Font = new Font("Copperplate Gothic Light", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblPlayer1NameC.Location = new Point(11, 41);
+            lblPlayer1NameC.Font = new Font("Microsoft Sans Serif", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPlayer1NameC.Location = new Point(10, 31);
             lblPlayer1NameC.Name = "lblPlayer1NameC";
-            lblPlayer1NameC.Size = new Size(95, 30);
+            lblPlayer1NameC.Size = new Size(83, 22);
             lblPlayer1NameC.TabIndex = 22;
             lblPlayer1NameC.Text = "Name";
             // 
             // tbPlayer1Name
             // 
-            tbPlayer1Name.Font = new Font("Copperplate Gothic Light", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            tbPlayer1Name.Location = new Point(13, 74);
+            tbPlayer1Name.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tbPlayer1Name.Location = new Point(11, 56);
+            tbPlayer1Name.Margin = new Padding(3, 2, 3, 2);
             tbPlayer1Name.MaxLength = 10;
             tbPlayer1Name.Name = "tbPlayer1Name";
-            tbPlayer1Name.Size = new Size(230, 40);
+            tbPlayer1Name.Size = new Size(202, 35);
             tbPlayer1Name.TabIndex = 21;
             tbPlayer1Name.Text = "Player 1";
             // 
             // lblPlayer1Icon
             // 
-            lblPlayer1Icon.Font = new Font("Copperplate Gothic Light", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblPlayer1Icon.Location = new Point(11, 129);
+            lblPlayer1Icon.Font = new Font("Microsoft Sans Serif", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPlayer1Icon.Location = new Point(10, 97);
             lblPlayer1Icon.Name = "lblPlayer1Icon";
-            lblPlayer1Icon.Size = new Size(95, 30);
+            lblPlayer1Icon.Size = new Size(83, 22);
             lblPlayer1Icon.TabIndex = 23;
             lblPlayer1Icon.Text = "Icon";
             // 
@@ -1224,9 +1268,10 @@
             // 
             pbPlayer1SelectedIcon.BackColor = Color.White;
             pbPlayer1SelectedIcon.ImageLocation = "../../../GUI_Images/Icons/Surprise.jpg";
-            pbPlayer1SelectedIcon.Location = new Point(158, 129);
+            pbPlayer1SelectedIcon.Location = new Point(138, 97);
+            pbPlayer1SelectedIcon.Margin = new Padding(3, 2, 3, 2);
             pbPlayer1SelectedIcon.Name = "pbPlayer1SelectedIcon";
-            pbPlayer1SelectedIcon.Size = new Size(80, 80);
+            pbPlayer1SelectedIcon.Size = new Size(70, 60);
             pbPlayer1SelectedIcon.SizeMode = PictureBoxSizeMode.StretchImage;
             pbPlayer1SelectedIcon.TabIndex = 39;
             pbPlayer1SelectedIcon.TabStop = false;
@@ -1236,9 +1281,10 @@
             pnlPlayer1IconSelect.BackColor = Color.White;
             pnlPlayer1IconSelect.Controls.Add(btnPlayer1ArrowL);
             pnlPlayer1IconSelect.Controls.Add(btnPlayer1ArrowR);
-            pnlPlayer1IconSelect.Location = new Point(13, 224);
+            pnlPlayer1IconSelect.Location = new Point(11, 168);
+            pnlPlayer1IconSelect.Margin = new Padding(3, 2, 3, 2);
             pnlPlayer1IconSelect.Name = "pnlPlayer1IconSelect";
-            pnlPlayer1IconSelect.Size = new Size(230, 132);
+            pnlPlayer1IconSelect.Size = new Size(201, 99);
             pnlPlayer1IconSelect.TabIndex = 37;
             // 
             // btnPlayer1ArrowL
@@ -1246,11 +1292,12 @@
             btnPlayer1ArrowL.BackColor = Color.Black;
             btnPlayer1ArrowL.FlatAppearance.BorderSize = 0;
             btnPlayer1ArrowL.FlatStyle = FlatStyle.Flat;
-            btnPlayer1ArrowL.Font = new Font("Castellar", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPlayer1ArrowL.Font = new Font("Microsoft Sans Serif", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnPlayer1ArrowL.ForeColor = Color.White;
-            btnPlayer1ArrowL.Location = new Point(7, 47);
+            btnPlayer1ArrowL.Location = new Point(6, 35);
+            btnPlayer1ArrowL.Margin = new Padding(3, 2, 3, 2);
             btnPlayer1ArrowL.Name = "btnPlayer1ArrowL";
-            btnPlayer1ArrowL.Size = new Size(20, 38);
+            btnPlayer1ArrowL.Size = new Size(18, 28);
             btnPlayer1ArrowL.TabIndex = 35;
             btnPlayer1ArrowL.Text = "<";
             btnPlayer1ArrowL.TextAlign = ContentAlignment.TopCenter;
@@ -1261,11 +1308,12 @@
             btnPlayer1ArrowR.BackColor = Color.Black;
             btnPlayer1ArrowR.FlatAppearance.BorderSize = 0;
             btnPlayer1ArrowR.FlatStyle = FlatStyle.Flat;
-            btnPlayer1ArrowR.Font = new Font("Castellar", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPlayer1ArrowR.Font = new Font("Microsoft Sans Serif", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnPlayer1ArrowR.ForeColor = Color.White;
-            btnPlayer1ArrowR.Location = new Point(203, 47);
+            btnPlayer1ArrowR.Location = new Point(178, 35);
+            btnPlayer1ArrowR.Margin = new Padding(3, 2, 3, 2);
             btnPlayer1ArrowR.Name = "btnPlayer1ArrowR";
-            btnPlayer1ArrowR.Size = new Size(20, 38);
+            btnPlayer1ArrowR.Size = new Size(18, 28);
             btnPlayer1ArrowR.TabIndex = 37;
             btnPlayer1ArrowR.Text = ">";
             btnPlayer1ArrowR.TextAlign = ContentAlignment.TopCenter;
@@ -1279,40 +1327,43 @@
             gbPlayer2Customize.Controls.Add(lblPlayer2Icon);
             gbPlayer2Customize.Controls.Add(pbPlayer2SelectedIcon);
             gbPlayer2Customize.Controls.Add(pnlPlayer2IconSelect);
-            gbPlayer2Customize.Font = new Font("Castellar", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            gbPlayer2Customize.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             gbPlayer2Customize.ForeColor = Color.White;
-            gbPlayer2Customize.Location = new Point(280, 220);
+            gbPlayer2Customize.Location = new Point(245, 165);
+            gbPlayer2Customize.Margin = new Padding(3, 2, 3, 2);
             gbPlayer2Customize.Name = "gbPlayer2Customize";
-            gbPlayer2Customize.Size = new Size(256, 378);
+            gbPlayer2Customize.Padding = new Padding(3, 2, 3, 2);
+            gbPlayer2Customize.Size = new Size(224, 284);
             gbPlayer2Customize.TabIndex = 41;
             gbPlayer2Customize.TabStop = false;
             gbPlayer2Customize.Text = "Player 2";
             // 
             // lblPlayer2NameC
             // 
-            lblPlayer2NameC.Font = new Font("Copperplate Gothic Light", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblPlayer2NameC.Location = new Point(11, 41);
+            lblPlayer2NameC.Font = new Font("Microsoft Sans Serif", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPlayer2NameC.Location = new Point(10, 31);
             lblPlayer2NameC.Name = "lblPlayer2NameC";
-            lblPlayer2NameC.Size = new Size(95, 30);
+            lblPlayer2NameC.Size = new Size(83, 22);
             lblPlayer2NameC.TabIndex = 22;
             lblPlayer2NameC.Text = "Name";
             // 
             // tbPlayer2Name
             // 
-            tbPlayer2Name.Font = new Font("Copperplate Gothic Light", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            tbPlayer2Name.Location = new Point(13, 74);
+            tbPlayer2Name.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tbPlayer2Name.Location = new Point(11, 56);
+            tbPlayer2Name.Margin = new Padding(3, 2, 3, 2);
             tbPlayer2Name.MaxLength = 10;
             tbPlayer2Name.Name = "tbPlayer2Name";
-            tbPlayer2Name.Size = new Size(230, 40);
+            tbPlayer2Name.Size = new Size(202, 35);
             tbPlayer2Name.TabIndex = 21;
             tbPlayer2Name.Text = "Player 2";
             // 
             // lblPlayer2Icon
             // 
-            lblPlayer2Icon.Font = new Font("Copperplate Gothic Light", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblPlayer2Icon.Location = new Point(11, 129);
+            lblPlayer2Icon.Font = new Font("Microsoft Sans Serif", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPlayer2Icon.Location = new Point(10, 97);
             lblPlayer2Icon.Name = "lblPlayer2Icon";
-            lblPlayer2Icon.Size = new Size(95, 30);
+            lblPlayer2Icon.Size = new Size(83, 22);
             lblPlayer2Icon.TabIndex = 23;
             lblPlayer2Icon.Text = "Icon";
             // 
@@ -1320,9 +1371,10 @@
             // 
             pbPlayer2SelectedIcon.BackColor = Color.White;
             pbPlayer2SelectedIcon.ImageLocation = "../../../GUI_Images/Icons/Surprise.jpg";
-            pbPlayer2SelectedIcon.Location = new Point(158, 129);
+            pbPlayer2SelectedIcon.Location = new Point(138, 97);
+            pbPlayer2SelectedIcon.Margin = new Padding(3, 2, 3, 2);
             pbPlayer2SelectedIcon.Name = "pbPlayer2SelectedIcon";
-            pbPlayer2SelectedIcon.Size = new Size(80, 80);
+            pbPlayer2SelectedIcon.Size = new Size(70, 60);
             pbPlayer2SelectedIcon.SizeMode = PictureBoxSizeMode.StretchImage;
             pbPlayer2SelectedIcon.TabIndex = 39;
             pbPlayer2SelectedIcon.TabStop = false;
@@ -1332,9 +1384,10 @@
             pnlPlayer2IconSelect.BackColor = Color.White;
             pnlPlayer2IconSelect.Controls.Add(btnPlayer2ArrowL);
             pnlPlayer2IconSelect.Controls.Add(btnPlayer2ArrowR);
-            pnlPlayer2IconSelect.Location = new Point(13, 224);
+            pnlPlayer2IconSelect.Location = new Point(11, 168);
+            pnlPlayer2IconSelect.Margin = new Padding(3, 2, 3, 2);
             pnlPlayer2IconSelect.Name = "pnlPlayer2IconSelect";
-            pnlPlayer2IconSelect.Size = new Size(230, 132);
+            pnlPlayer2IconSelect.Size = new Size(201, 99);
             pnlPlayer2IconSelect.TabIndex = 37;
             // 
             // btnPlayer2ArrowL
@@ -1342,11 +1395,12 @@
             btnPlayer2ArrowL.BackColor = Color.Black;
             btnPlayer2ArrowL.FlatAppearance.BorderSize = 0;
             btnPlayer2ArrowL.FlatStyle = FlatStyle.Flat;
-            btnPlayer2ArrowL.Font = new Font("Castellar", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPlayer2ArrowL.Font = new Font("Microsoft Sans Serif", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnPlayer2ArrowL.ForeColor = Color.White;
-            btnPlayer2ArrowL.Location = new Point(7, 47);
+            btnPlayer2ArrowL.Location = new Point(6, 35);
+            btnPlayer2ArrowL.Margin = new Padding(3, 2, 3, 2);
             btnPlayer2ArrowL.Name = "btnPlayer2ArrowL";
-            btnPlayer2ArrowL.Size = new Size(20, 38);
+            btnPlayer2ArrowL.Size = new Size(18, 28);
             btnPlayer2ArrowL.TabIndex = 35;
             btnPlayer2ArrowL.Text = "<";
             btnPlayer2ArrowL.TextAlign = ContentAlignment.TopCenter;
@@ -1357,11 +1411,12 @@
             btnPlayer2ArrowR.BackColor = Color.Black;
             btnPlayer2ArrowR.FlatAppearance.BorderSize = 0;
             btnPlayer2ArrowR.FlatStyle = FlatStyle.Flat;
-            btnPlayer2ArrowR.Font = new Font("Castellar", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPlayer2ArrowR.Font = new Font("Microsoft Sans Serif", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnPlayer2ArrowR.ForeColor = Color.White;
-            btnPlayer2ArrowR.Location = new Point(203, 47);
+            btnPlayer2ArrowR.Location = new Point(178, 35);
+            btnPlayer2ArrowR.Margin = new Padding(3, 2, 3, 2);
             btnPlayer2ArrowR.Name = "btnPlayer2ArrowR";
-            btnPlayer2ArrowR.Size = new Size(20, 38);
+            btnPlayer2ArrowR.Size = new Size(18, 28);
             btnPlayer2ArrowR.TabIndex = 37;
             btnPlayer2ArrowR.Text = ">";
             btnPlayer2ArrowR.TextAlign = ContentAlignment.TopCenter;
@@ -1375,40 +1430,43 @@
             gbPlayer3Customize.Controls.Add(lblPlayer3Icon);
             gbPlayer3Customize.Controls.Add(pbPlayer3SelectedIcon);
             gbPlayer3Customize.Controls.Add(pnlPlayer3IconSelect);
-            gbPlayer3Customize.Font = new Font("Castellar", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            gbPlayer3Customize.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             gbPlayer3Customize.ForeColor = Color.White;
-            gbPlayer3Customize.Location = new Point(547, 220);
+            gbPlayer3Customize.Location = new Point(479, 165);
+            gbPlayer3Customize.Margin = new Padding(3, 2, 3, 2);
             gbPlayer3Customize.Name = "gbPlayer3Customize";
-            gbPlayer3Customize.Size = new Size(256, 378);
+            gbPlayer3Customize.Padding = new Padding(3, 2, 3, 2);
+            gbPlayer3Customize.Size = new Size(224, 284);
             gbPlayer3Customize.TabIndex = 40;
             gbPlayer3Customize.TabStop = false;
             gbPlayer3Customize.Text = "Player 3";
             // 
             // lblPlayer3NameC
             // 
-            lblPlayer3NameC.Font = new Font("Copperplate Gothic Light", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblPlayer3NameC.Location = new Point(11, 41);
+            lblPlayer3NameC.Font = new Font("Microsoft Sans Serif", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPlayer3NameC.Location = new Point(10, 31);
             lblPlayer3NameC.Name = "lblPlayer3NameC";
-            lblPlayer3NameC.Size = new Size(95, 30);
+            lblPlayer3NameC.Size = new Size(83, 22);
             lblPlayer3NameC.TabIndex = 22;
             lblPlayer3NameC.Text = "Name";
             // 
             // tbPlayer3Name
             // 
-            tbPlayer3Name.Font = new Font("Copperplate Gothic Light", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            tbPlayer3Name.Location = new Point(13, 74);
+            tbPlayer3Name.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tbPlayer3Name.Location = new Point(11, 56);
+            tbPlayer3Name.Margin = new Padding(3, 2, 3, 2);
             tbPlayer3Name.MaxLength = 10;
             tbPlayer3Name.Name = "tbPlayer3Name";
-            tbPlayer3Name.Size = new Size(230, 40);
+            tbPlayer3Name.Size = new Size(202, 35);
             tbPlayer3Name.TabIndex = 21;
             tbPlayer3Name.Text = "Player 3";
             // 
             // lblPlayer3Icon
             // 
-            lblPlayer3Icon.Font = new Font("Copperplate Gothic Light", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblPlayer3Icon.Location = new Point(11, 129);
+            lblPlayer3Icon.Font = new Font("Microsoft Sans Serif", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPlayer3Icon.Location = new Point(10, 97);
             lblPlayer3Icon.Name = "lblPlayer3Icon";
-            lblPlayer3Icon.Size = new Size(95, 30);
+            lblPlayer3Icon.Size = new Size(83, 22);
             lblPlayer3Icon.TabIndex = 23;
             lblPlayer3Icon.Text = "Icon";
             // 
@@ -1416,9 +1474,10 @@
             // 
             pbPlayer3SelectedIcon.BackColor = Color.White;
             pbPlayer3SelectedIcon.ImageLocation = "../../../GUI_Images/Icons/Surprise.jpg";
-            pbPlayer3SelectedIcon.Location = new Point(158, 129);
+            pbPlayer3SelectedIcon.Location = new Point(138, 97);
+            pbPlayer3SelectedIcon.Margin = new Padding(3, 2, 3, 2);
             pbPlayer3SelectedIcon.Name = "pbPlayer3SelectedIcon";
-            pbPlayer3SelectedIcon.Size = new Size(80, 80);
+            pbPlayer3SelectedIcon.Size = new Size(70, 60);
             pbPlayer3SelectedIcon.SizeMode = PictureBoxSizeMode.StretchImage;
             pbPlayer3SelectedIcon.TabIndex = 39;
             pbPlayer3SelectedIcon.TabStop = false;
@@ -1428,9 +1487,10 @@
             pnlPlayer3IconSelect.BackColor = Color.White;
             pnlPlayer3IconSelect.Controls.Add(btnPlayer3ArrowL);
             pnlPlayer3IconSelect.Controls.Add(btnPlayer3ArrowR);
-            pnlPlayer3IconSelect.Location = new Point(13, 224);
+            pnlPlayer3IconSelect.Location = new Point(11, 168);
+            pnlPlayer3IconSelect.Margin = new Padding(3, 2, 3, 2);
             pnlPlayer3IconSelect.Name = "pnlPlayer3IconSelect";
-            pnlPlayer3IconSelect.Size = new Size(230, 132);
+            pnlPlayer3IconSelect.Size = new Size(201, 99);
             pnlPlayer3IconSelect.TabIndex = 37;
             // 
             // btnPlayer3ArrowL
@@ -1438,11 +1498,12 @@
             btnPlayer3ArrowL.BackColor = Color.Black;
             btnPlayer3ArrowL.FlatAppearance.BorderSize = 0;
             btnPlayer3ArrowL.FlatStyle = FlatStyle.Flat;
-            btnPlayer3ArrowL.Font = new Font("Castellar", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPlayer3ArrowL.Font = new Font("Microsoft Sans Serif", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnPlayer3ArrowL.ForeColor = Color.White;
-            btnPlayer3ArrowL.Location = new Point(7, 47);
+            btnPlayer3ArrowL.Location = new Point(6, 35);
+            btnPlayer3ArrowL.Margin = new Padding(3, 2, 3, 2);
             btnPlayer3ArrowL.Name = "btnPlayer3ArrowL";
-            btnPlayer3ArrowL.Size = new Size(20, 38);
+            btnPlayer3ArrowL.Size = new Size(18, 28);
             btnPlayer3ArrowL.TabIndex = 35;
             btnPlayer3ArrowL.Text = "<";
             btnPlayer3ArrowL.TextAlign = ContentAlignment.TopCenter;
@@ -1453,11 +1514,12 @@
             btnPlayer3ArrowR.BackColor = Color.Black;
             btnPlayer3ArrowR.FlatAppearance.BorderSize = 0;
             btnPlayer3ArrowR.FlatStyle = FlatStyle.Flat;
-            btnPlayer3ArrowR.Font = new Font("Castellar", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPlayer3ArrowR.Font = new Font("Microsoft Sans Serif", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnPlayer3ArrowR.ForeColor = Color.White;
-            btnPlayer3ArrowR.Location = new Point(203, 47);
+            btnPlayer3ArrowR.Location = new Point(178, 35);
+            btnPlayer3ArrowR.Margin = new Padding(3, 2, 3, 2);
             btnPlayer3ArrowR.Name = "btnPlayer3ArrowR";
-            btnPlayer3ArrowR.Size = new Size(20, 38);
+            btnPlayer3ArrowR.Size = new Size(18, 28);
             btnPlayer3ArrowR.TabIndex = 37;
             btnPlayer3ArrowR.Text = ">";
             btnPlayer3ArrowR.TextAlign = ContentAlignment.TopCenter;
@@ -1471,40 +1533,43 @@
             gbPlayer4Customize.Controls.Add(lblPlayer4Icon);
             gbPlayer4Customize.Controls.Add(pbPlayer4SelectedIcon);
             gbPlayer4Customize.Controls.Add(pnlPlayer4IconSelect);
-            gbPlayer4Customize.Font = new Font("Castellar", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            gbPlayer4Customize.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             gbPlayer4Customize.ForeColor = Color.White;
-            gbPlayer4Customize.Location = new Point(814, 220);
+            gbPlayer4Customize.Location = new Point(712, 165);
+            gbPlayer4Customize.Margin = new Padding(3, 2, 3, 2);
             gbPlayer4Customize.Name = "gbPlayer4Customize";
-            gbPlayer4Customize.Size = new Size(256, 378);
+            gbPlayer4Customize.Padding = new Padding(3, 2, 3, 2);
+            gbPlayer4Customize.Size = new Size(224, 284);
             gbPlayer4Customize.TabIndex = 40;
             gbPlayer4Customize.TabStop = false;
             gbPlayer4Customize.Text = "Player 4";
             // 
             // lblPlayer4NameC
             // 
-            lblPlayer4NameC.Font = new Font("Copperplate Gothic Light", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblPlayer4NameC.Location = new Point(11, 41);
+            lblPlayer4NameC.Font = new Font("Microsoft Sans Serif", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPlayer4NameC.Location = new Point(10, 31);
             lblPlayer4NameC.Name = "lblPlayer4NameC";
-            lblPlayer4NameC.Size = new Size(95, 30);
+            lblPlayer4NameC.Size = new Size(83, 22);
             lblPlayer4NameC.TabIndex = 22;
             lblPlayer4NameC.Text = "Name";
             // 
             // tbPlayer4Name
             // 
-            tbPlayer4Name.Font = new Font("Copperplate Gothic Light", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            tbPlayer4Name.Location = new Point(13, 74);
+            tbPlayer4Name.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tbPlayer4Name.Location = new Point(11, 56);
+            tbPlayer4Name.Margin = new Padding(3, 2, 3, 2);
             tbPlayer4Name.MaxLength = 10;
             tbPlayer4Name.Name = "tbPlayer4Name";
-            tbPlayer4Name.Size = new Size(230, 40);
+            tbPlayer4Name.Size = new Size(202, 35);
             tbPlayer4Name.TabIndex = 21;
             tbPlayer4Name.Text = "Player 4";
             // 
             // lblPlayer4Icon
             // 
-            lblPlayer4Icon.Font = new Font("Copperplate Gothic Light", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblPlayer4Icon.Location = new Point(11, 129);
+            lblPlayer4Icon.Font = new Font("Microsoft Sans Serif", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPlayer4Icon.Location = new Point(10, 97);
             lblPlayer4Icon.Name = "lblPlayer4Icon";
-            lblPlayer4Icon.Size = new Size(95, 30);
+            lblPlayer4Icon.Size = new Size(83, 22);
             lblPlayer4Icon.TabIndex = 23;
             lblPlayer4Icon.Text = "Icon";
             // 
@@ -1512,9 +1577,10 @@
             // 
             pbPlayer4SelectedIcon.BackColor = Color.White;
             pbPlayer4SelectedIcon.ImageLocation = "../../../GUI_Images/Icons/Surprise.jpg";
-            pbPlayer4SelectedIcon.Location = new Point(158, 129);
+            pbPlayer4SelectedIcon.Location = new Point(138, 97);
+            pbPlayer4SelectedIcon.Margin = new Padding(3, 2, 3, 2);
             pbPlayer4SelectedIcon.Name = "pbPlayer4SelectedIcon";
-            pbPlayer4SelectedIcon.Size = new Size(80, 80);
+            pbPlayer4SelectedIcon.Size = new Size(70, 60);
             pbPlayer4SelectedIcon.SizeMode = PictureBoxSizeMode.StretchImage;
             pbPlayer4SelectedIcon.TabIndex = 39;
             pbPlayer4SelectedIcon.TabStop = false;
@@ -1530,56 +1596,63 @@
             pnlPlayer4IconSelect.Controls.Add(pictureBox42);
             pnlPlayer4IconSelect.Controls.Add(btnPlayer4ArrowL);
             pnlPlayer4IconSelect.Controls.Add(btnPlayer4ArrowR);
-            pnlPlayer4IconSelect.Location = new Point(13, 224);
+            pnlPlayer4IconSelect.Location = new Point(11, 168);
+            pnlPlayer4IconSelect.Margin = new Padding(3, 2, 3, 2);
             pnlPlayer4IconSelect.Name = "pnlPlayer4IconSelect";
-            pnlPlayer4IconSelect.Size = new Size(230, 132);
+            pnlPlayer4IconSelect.Size = new Size(201, 99);
             pnlPlayer4IconSelect.TabIndex = 37;
             // 
             // pictureBox16
             // 
-            pictureBox16.Location = new Point(34, 13);
+            pictureBox16.Location = new Point(30, 10);
+            pictureBox16.Margin = new Padding(3, 2, 3, 2);
             pictureBox16.Name = "pictureBox16";
-            pictureBox16.Size = new Size(50, 50);
+            pictureBox16.Size = new Size(44, 38);
             pictureBox16.TabIndex = 35;
             pictureBox16.TabStop = false;
             // 
             // pictureBox17
             // 
-            pictureBox17.Location = new Point(90, 13);
+            pictureBox17.Location = new Point(79, 10);
+            pictureBox17.Margin = new Padding(3, 2, 3, 2);
             pictureBox17.Name = "pictureBox17";
-            pictureBox17.Size = new Size(50, 50);
+            pictureBox17.Size = new Size(44, 38);
             pictureBox17.TabIndex = 36;
             pictureBox17.TabStop = false;
             // 
             // pictureBox18
             // 
-            pictureBox18.Location = new Point(146, 13);
+            pictureBox18.Location = new Point(128, 10);
+            pictureBox18.Margin = new Padding(3, 2, 3, 2);
             pictureBox18.Name = "pictureBox18";
-            pictureBox18.Size = new Size(50, 50);
+            pictureBox18.Size = new Size(44, 38);
             pictureBox18.TabIndex = 37;
             pictureBox18.TabStop = false;
             // 
             // pictureBox40
             // 
-            pictureBox40.Location = new Point(34, 69);
+            pictureBox40.Location = new Point(30, 52);
+            pictureBox40.Margin = new Padding(3, 2, 3, 2);
             pictureBox40.Name = "pictureBox40";
-            pictureBox40.Size = new Size(50, 50);
+            pictureBox40.Size = new Size(44, 38);
             pictureBox40.TabIndex = 38;
             pictureBox40.TabStop = false;
             // 
             // pictureBox41
             // 
-            pictureBox41.Location = new Point(90, 69);
+            pictureBox41.Location = new Point(79, 52);
+            pictureBox41.Margin = new Padding(3, 2, 3, 2);
             pictureBox41.Name = "pictureBox41";
-            pictureBox41.Size = new Size(50, 50);
+            pictureBox41.Size = new Size(44, 38);
             pictureBox41.TabIndex = 39;
             pictureBox41.TabStop = false;
             // 
             // pictureBox42
             // 
-            pictureBox42.Location = new Point(146, 69);
+            pictureBox42.Location = new Point(128, 52);
+            pictureBox42.Margin = new Padding(3, 2, 3, 2);
             pictureBox42.Name = "pictureBox42";
-            pictureBox42.Size = new Size(50, 50);
+            pictureBox42.Size = new Size(44, 38);
             pictureBox42.TabIndex = 40;
             pictureBox42.TabStop = false;
             // 
@@ -1588,11 +1661,12 @@
             btnPlayer4ArrowL.BackColor = Color.Black;
             btnPlayer4ArrowL.FlatAppearance.BorderSize = 0;
             btnPlayer4ArrowL.FlatStyle = FlatStyle.Flat;
-            btnPlayer4ArrowL.Font = new Font("Castellar", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPlayer4ArrowL.Font = new Font("Microsoft Sans Serif", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnPlayer4ArrowL.ForeColor = Color.White;
-            btnPlayer4ArrowL.Location = new Point(7, 47);
+            btnPlayer4ArrowL.Location = new Point(6, 35);
+            btnPlayer4ArrowL.Margin = new Padding(3, 2, 3, 2);
             btnPlayer4ArrowL.Name = "btnPlayer4ArrowL";
-            btnPlayer4ArrowL.Size = new Size(20, 38);
+            btnPlayer4ArrowL.Size = new Size(18, 28);
             btnPlayer4ArrowL.TabIndex = 35;
             btnPlayer4ArrowL.Text = "<";
             btnPlayer4ArrowL.TextAlign = ContentAlignment.TopCenter;
@@ -1603,11 +1677,12 @@
             btnPlayer4ArrowR.BackColor = Color.Black;
             btnPlayer4ArrowR.FlatAppearance.BorderSize = 0;
             btnPlayer4ArrowR.FlatStyle = FlatStyle.Flat;
-            btnPlayer4ArrowR.Font = new Font("Castellar", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPlayer4ArrowR.Font = new Font("Microsoft Sans Serif", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnPlayer4ArrowR.ForeColor = Color.White;
-            btnPlayer4ArrowR.Location = new Point(203, 47);
+            btnPlayer4ArrowR.Location = new Point(178, 35);
+            btnPlayer4ArrowR.Margin = new Padding(3, 2, 3, 2);
             btnPlayer4ArrowR.Name = "btnPlayer4ArrowR";
-            btnPlayer4ArrowR.Size = new Size(20, 38);
+            btnPlayer4ArrowR.Size = new Size(18, 28);
             btnPlayer4ArrowR.TabIndex = 37;
             btnPlayer4ArrowR.Text = ">";
             btnPlayer4ArrowR.TextAlign = ContentAlignment.TopCenter;
@@ -1618,11 +1693,12 @@
             btnBackN.BackColor = Color.Black;
             btnBackN.FlatAppearance.BorderSize = 5;
             btnBackN.FlatStyle = FlatStyle.Flat;
-            btnBackN.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnBackN.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnBackN.ForeColor = Color.White;
-            btnBackN.Location = new Point(50, 643);
+            btnBackN.Location = new Point(44, 482);
+            btnBackN.Margin = new Padding(3, 2, 3, 2);
             btnBackN.Name = "btnBackN";
-            btnBackN.Size = new Size(128, 60);
+            btnBackN.Size = new Size(112, 45);
             btnBackN.TabIndex = 9;
             btnBackN.Text = "Back";
             btnBackN.UseVisualStyleBackColor = false;
@@ -1633,11 +1709,12 @@
             btnConfirmN.BackColor = Color.Black;
             btnConfirmN.FlatAppearance.BorderSize = 5;
             btnConfirmN.FlatStyle = FlatStyle.Flat;
-            btnConfirmN.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnConfirmN.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnConfirmN.ForeColor = Color.White;
-            btnConfirmN.Location = new Point(852, 643);
+            btnConfirmN.Location = new Point(746, 482);
+            btnConfirmN.Margin = new Padding(3, 2, 3, 2);
             btnConfirmN.Name = "btnConfirmN";
-            btnConfirmN.Size = new Size(192, 60);
+            btnConfirmN.Size = new Size(168, 45);
             btnConfirmN.TabIndex = 16;
             btnConfirmN.Text = "Confirm";
             btnConfirmN.UseVisualStyleBackColor = false;
@@ -1652,19 +1729,20 @@
             pnlOptions.Controls.Add(btnBack);
             pnlOptions.Controls.Add(btnOptionsBg);
             pnlOptions.Location = new Point(0, 0);
+            pnlOptions.Margin = new Padding(3, 2, 3, 2);
             pnlOptions.Name = "pnlOptions";
-            pnlOptions.Size = new Size(1082, 753);
+            pnlOptions.Size = new Size(947, 565);
             pnlOptions.TabIndex = 13;
             pnlOptions.Visible = false;
             // 
             // lblOptions
             // 
             lblOptions.BackColor = Color.Black;
-            lblOptions.Font = new Font("Castellar", 48F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblOptions.Font = new Font("Microsoft Sans Serif", 48F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblOptions.ForeColor = Color.White;
-            lblOptions.Location = new Point(325, 118);
+            lblOptions.Location = new Point(284, 88);
             lblOptions.Name = "lblOptions";
-            lblOptions.Size = new Size(427, 85);
+            lblOptions.Size = new Size(374, 64);
             lblOptions.TabIndex = 12;
             lblOptions.Text = "Options";
             // 
@@ -1673,11 +1751,12 @@
             btnBack.BackColor = Color.Black;
             btnBack.FlatAppearance.BorderSize = 5;
             btnBack.FlatStyle = FlatStyle.Flat;
-            btnBack.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnBack.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnBack.ForeColor = Color.White;
-            btnBack.Location = new Point(476, 601);
+            btnBack.Location = new Point(416, 451);
+            btnBack.Margin = new Padding(3, 2, 3, 2);
             btnBack.Name = "btnBack";
-            btnBack.Size = new Size(129, 60);
+            btnBack.Size = new Size(113, 45);
             btnBack.TabIndex = 10;
             btnBack.Text = "Back";
             btnBack.UseVisualStyleBackColor = false;
@@ -1689,25 +1768,27 @@
             btnOptionsBg.Enabled = false;
             btnOptionsBg.FlatAppearance.BorderSize = 10;
             btnOptionsBg.FlatStyle = FlatStyle.Flat;
-            btnOptionsBg.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnOptionsBg.Font = new Font("Microsoft Sans Serif", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnOptionsBg.ForeColor = Color.White;
-            btnOptionsBg.Location = new Point(314, 108);
+            btnOptionsBg.Location = new Point(275, 81);
+            btnOptionsBg.Margin = new Padding(3, 2, 3, 2);
             btnOptionsBg.Name = "btnOptionsBg";
-            btnOptionsBg.Size = new Size(455, 107);
+            btnOptionsBg.Size = new Size(398, 80);
             btnOptionsBg.TabIndex = 13;
             btnOptionsBg.UseVisualStyleBackColor = false;
             // 
             // ProductionGUI
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(1082, 753);
+            ClientSize = new Size(1090, 565);
             Controls.Add(pnlGame);
             Controls.Add(pnlMainMenu);
             Controls.Add(pnlCustomize);
             Controls.Add(pnlOptions);
             Controls.Add(pnlPlayerSelect);
+            Margin = new Padding(3, 2, 3, 2);
             MaximizeBox = false;
             Name = "ProductionGUI";
             StartPosition = FormStartPosition.CenterScreen;
@@ -1722,11 +1803,8 @@
             pnlGame.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbCardTestBack).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbCardTestTrump).EndInit();
-            pnlTableTop.ResumeLayout(false);
-            pnlTableBottom.ResumeLayout(false);
             pnlPlayer1.ResumeLayout(false);
             pnlPlayer1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pbCardTest).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbPlayer1Role).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbPlayer1IconG).EndInit();
             pnlPlayer2.ResumeLayout(false);
@@ -1792,8 +1870,7 @@
         private Button btnBackPS;
         private Button btnConfirmPS;
         private Panel pnlGame;
-        private PictureBox pbCardTest;
-        private Panel pnlHand;
+        private Panel panelHand;
         private Button btnMenu;
         private PictureBox pbCardTestBack;
         private PictureBox pbCardTestTrump;
@@ -1826,9 +1903,9 @@
         private Button btnPlayer3RoleBg;
         private Button btnPlayer2RoleBg;
         private Button btnPlayer4RoleBg;
-        private Panel pnlTableBottom;
+        private Panel panelTableBottom;
         private Button btnRules;
-        private Panel pnlTableTop;
+        private Panel panelTableTop;
         private Button btnPlayer3IconGBg;
         private Button btnPlayer2IconGBg;
         private Button btnHandBg;
@@ -1837,8 +1914,6 @@
         private Button btnPlayer3Bg;
         private Button btnPlayer4Bg;
         private Button btnPlayer1Bg;
-        private Button btnTableTopBg;
-        private Button button1;
         private Panel pnlCustomize;
         private Label lblCustomize;
         private Button btnCustomizeBg;
@@ -1898,5 +1973,8 @@
         private GroupBox groupBox1;
         private GroupBox groupBox2;
         private GroupBox groupBox3;
+        private Button buttonConsole;
+        private TextBox textBoxPlayerTurnName;
+        private TextBox textBox1;
     }
 }
