@@ -39,8 +39,10 @@ namespace DurakCardGame
         {
             string playerOne = "1";
             string playerTwo = "2";
-            game.addPlayer(playerOne);
-            game.addPlayer(playerTwo);
+            List<String> playersList = new List<String>{"1", "2", "3", "4"};
+            foreach (String player in playersList) {
+                game.addPlayer(player);
+            }
         }
 
         //STEP #2

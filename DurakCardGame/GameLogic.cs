@@ -342,8 +342,8 @@ namespace DurakCardGame
         // example [current_player_defender, player_2, player_3, player_4] => attacker_index (0 - 3) out of range
         public int CalculateNextPlayerIndex(int currentIndex, int differenceDistanceBetweenNextPlayer, bool currentPlayerDefender)
         {
-            Console.WriteLine(" ");
-            Console.WriteLine("currentIndex: " + currentIndex + " distance: " + differenceDistanceBetweenNextPlayer + "  players.Count() " + players.Count() + " isCurrentPlayerDefender: " + currentPlayerDefender);
+            //Console.WriteLine(" ");
+            //Console.WriteLine("currentIndex: " + currentIndex + " distance: " + differenceDistanceBetweenNextPlayer + "  players.Count() " + players.Count() + " isCurrentPlayerDefender: " + currentPlayerDefender);
             if (currentPlayerDefender)
             {
                 int nextAttackerIndex = currentIndex - differenceDistanceBetweenNextPlayer;
@@ -351,19 +351,19 @@ namespace DurakCardGame
                 {
                     nextAttackerIndex =  players.Count() - Math.Abs(nextAttackerIndex);
                 }
-                Console.WriteLine("GameLogic.cs| nextAttackerIndex: " + nextAttackerIndex);
+                //Console.WriteLine("GameLogic.cs| nextAttackerIndex: " + nextAttackerIndex);
                 return nextAttackerIndex;
             }
             else
             {
                 int nextDefenderIndex = currentIndex + differenceDistanceBetweenNextPlayer;
                 // error here
-                Console.WriteLine("nextDefenderIndex: "+ nextDefenderIndex + " | currentIndex: "+ currentIndex + " | differenceDistanceBetweenNextPlayer: " + differenceDistanceBetweenNextPlayer);
+                //Console.WriteLine("nextDefenderIndex: "+ nextDefenderIndex + " | currentIndex: "+ currentIndex + " | differenceDistanceBetweenNextPlayer: " + differenceDistanceBetweenNextPlayer);
                 if (nextDefenderIndex >= players.Count())
                 {
                     nextDefenderIndex -= players.Count();
                 }
-                Console.WriteLine("GameLogic.cs| nextDefenderIndex: " + nextDefenderIndex);
+                //Console.WriteLine("GameLogic.cs| nextDefenderIndex: " + nextDefenderIndex);
                 return nextDefenderIndex;
             }
             
