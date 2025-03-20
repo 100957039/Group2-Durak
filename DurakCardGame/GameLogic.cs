@@ -369,6 +369,39 @@ namespace DurakCardGame
             
         }
 
+        public void Pass(int currentIndex) { 
+            //if (currentPlayerDefender)
+            //{
+
+            //}
+            //// if attacker refuses to attack again during the same turn
+            //else
+            //{
+                // attcker calculation starts here
+                int calculateTurnIndex = currentIndex + 1;
+                if (calculateTurnIndex >= players.Count()){
+                    turnIndex = 0;
+                }
+                else
+                {
+                    turnIndex = calculateTurnIndex;
+                }
+                // attcker calculation starts here
+
+                // defender calculation starts here
+                int calculateDefenderIndex = currentIndex + 2;
+                if (calculateDefenderIndex >= players.Count()) {
+                    int difference = calculateDefenderIndex - players.Count();
+                    defenderIndex = difference;
+                }
+                else
+                {
+                    turnIndex = calculateTurnIndex;
+                }
+                // defender calculation ends here
+            //}
+        }
+
 
         //can attck with this card
         public bool CanAttackWithThisCard(Card attackCard)

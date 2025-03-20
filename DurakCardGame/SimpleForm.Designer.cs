@@ -41,6 +41,7 @@
             buttonPlayedCards = new Button();
             textBoxDeckNumber = new TextBox();
             textBoxWinners = new TextBox();
+            buttonPass = new Button();
             SuspendLayout();
             // 
             // button1
@@ -146,11 +147,22 @@
             textBoxWinners.Size = new Size(267, 23);
             textBoxWinners.TabIndex = 12;
             // 
+            // buttonPass
+            // 
+            buttonPass.Location = new Point(997, 504);
+            buttonPass.Name = "buttonPass";
+            buttonPass.Size = new Size(75, 23);
+            buttonPass.TabIndex = 13;
+            buttonPass.Text = "Pass";
+            buttonPass.UseVisualStyleBackColor = true;
+            buttonPass.Click += buttonPass_Click;
+            // 
             // SimpleForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1084, 631);
+            Controls.Add(buttonPass);
             Controls.Add(textBoxWinners);
             Controls.Add(textBoxDeckNumber);
             Controls.Add(buttonPlayedCards);
@@ -185,5 +197,6 @@
         private Button buttonPlayedCards;
         private TextBox textBoxDeckNumber;
         private TextBox textBoxWinners;
+        private Button buttonPass;
     }
 }

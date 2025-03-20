@@ -18,7 +18,7 @@ namespace DurakCardGame
             InitializeComponent();
         }
 
-       
+
 
         // #########################################################################################################
         //                                              GAME LOGIC STARTS HERE  March 19th
@@ -32,7 +32,7 @@ namespace DurakCardGame
         string textAttackerIndex = "Attacker Index: ";
         string textDefenderIndex = "Defender Index: ";
 
-        
+
 
         //STEP #1
         public void addPlayers()
@@ -68,12 +68,13 @@ namespace DurakCardGame
         {
             //******************************************************************
             //after each time full hand fuction run, update cards left in deck
-            textBoxDeckNumber.Text =  textCardsLeftDeck + game.deck.Count();
+            textBoxDeckNumber.Text = textCardsLeftDeck + game.deck.Count();
             textBoxTurn.Text = textPlayerIndexField + game.turnIndex.ToString();
             textBoxDefenderIndex.Text = textDefenderIndex + game.defenderIndex;
 
             string winners = "Winners: ";
-            foreach (Player player in game.players) {
+            foreach (Player player in game.players)
+            {
                 if (player.Hand.Count() == 0)
                 {
                     winners += player.Name + " ";
@@ -117,7 +118,7 @@ namespace DurakCardGame
             panelHand.Controls.Clear();
             panelHand.Refresh(); // I dont know what refresh does, I do not think it's needed
             Console.WriteLine("    ");
-            Console.WriteLine("game.turnIndex: "+ game.turnIndex);
+            Console.WriteLine("game.turnIndex: " + game.turnIndex);
             Console.WriteLine("    ");
             Player currentPlayer = game.players[game.turnIndex];
             int xAxis = 0;
@@ -207,53 +208,53 @@ namespace DurakCardGame
                         // else attacker
                         else
                         {
-                            
-                                currentPlayer.PlayCard2(card);
-                                game.cardsAttack.Add(card);
-                                // check if the defender can defend this card
-                                Player defender = game.players[game.defenderIndex];
-                                bool canDefend = game.canStillDefend(defender.Hand, card);
 
-                                
-                                //if defender no longer able to defend, take all the played cards
-                                if (!canDefend)
+                            currentPlayer.PlayCard2(card);
+                            game.cardsAttack.Add(card);
+                            // check if the defender can defend this card
+                            Player defender = game.players[game.defenderIndex];
+                            bool canDefend = game.canStillDefend(defender.Hand, card);
+
+
+                            //if defender no longer able to defend, take all the played cards
+                            if (!canDefend)
+                            {
+                                foreach (Card card in game.cardsDefend)
                                 {
-                                    foreach (Card card in game.cardsDefend)
-                                    {
-                                        defender.DrawCard(card);
-                                    }
-                                    game.cardsDefend.Clear();
-
-                                    foreach (Card card in game.cardsAttack)
-                                    {
-                                        defender.DrawCard(card);
-                                    }
-                                    game.cardsAttack.Clear();
-
-                                    Console.WriteLine("SimpleForm.cs => defender cann't defend again, run fill hand run");
-                                    game.fillHand();
-
-                                    Console.WriteLine("4 calculate");
-                                    //the defender lost, he no longer is able to be the next attacker
-                                    //the next attacker will be the player after the current defender
-                                    // change distance to 2
-                                    game.distanceIndexDiffernceBetweenAttackerDefender = 2;
-                                    game.turnIndex =  game.CalculateNextPlayerIndex(game.turnIndex, game.distanceIndexDiffernceBetweenAttackerDefender, defenderIndex);
-                                    // change distance back to 1
-                                    game.distanceIndexDiffernceBetweenAttackerDefender = 1;
-
+                                    defender.DrawCard(card);
                                 }
-                                else
+                                game.cardsDefend.Clear();
+
+                                foreach (Card card in game.cardsAttack)
                                 {
-                                    Console.WriteLine("3 calculate");
-                                    //change turn to the defender after playing a card
-                                    game.turnIndex = game.CalculateNextPlayerIndex(game.turnIndex, game.distanceIndexDiffernceBetweenAttackerDefender, defenderIndex);
-
-                                    PrintPlayersHand();
-                                    displayPlayedCards();
+                                    defender.DrawCard(card);
                                 }
-                            
-                            
+                                game.cardsAttack.Clear();
+
+                                Console.WriteLine("SimpleForm.cs => defender cann't defend again, run fill hand run");
+                                game.fillHand();
+
+                                Console.WriteLine("4 calculate");
+                                //the defender lost, he no longer is able to be the next attacker
+                                //the next attacker will be the player after the current defender
+                                // change distance to 2
+                                game.distanceIndexDiffernceBetweenAttackerDefender = 2;
+                                game.turnIndex = game.CalculateNextPlayerIndex(game.turnIndex, game.distanceIndexDiffernceBetweenAttackerDefender, defenderIndex);
+                                // change distance back to 1
+                                game.distanceIndexDiffernceBetweenAttackerDefender = 1;
+
+                            }
+                            else
+                            {
+                                Console.WriteLine("3 calculate");
+                                //change turn to the defender after playing a card
+                                game.turnIndex = game.CalculateNextPlayerIndex(game.turnIndex, game.distanceIndexDiffernceBetweenAttackerDefender, defenderIndex);
+
+                                PrintPlayersHand();
+                                displayPlayedCards();
+                            }
+
+
                         }
                         displayCurrentPlayerHand();
                     }
@@ -285,6 +286,30 @@ namespace DurakCardGame
             //current player
             //displayCurrentPlayerHand();
             PrintPlayersHand();
+
+        }
+
+        // pass attack or defence
+        private void buttonPass_Click(object sender, EventArgs e)
+        {
+            bool isDefender = game.turnIndex == game.defenderIndex;
+            if (isDefender)
+            {
+                foreach (Card card in game.cardsAttack)
+                {
+                    game.players[game.turnIndex].Hand.Add(card);
+                }
+                foreach (Card card in game.cardsDefend)
+                {
+                    game.players[game.turnIndex].Hand.Add(card);
+                }
+            }
+            game.cardsDefend.Clear();
+            game.cardsAttack.Clear();
+            refreshTopBottomPanels();
+            displayCurrentPlayerHand();
+            game.fillHand();
+            game.Pass(game.turnIndex);
 
         }
 
@@ -321,7 +346,7 @@ namespace DurakCardGame
             Console.WriteLine("       ");
             // I stole this (string result = String.Join(" ", player.Hand.Select(obj => obj.Rank));) from chatGPT
             string result = String.Join(" ", game.cardsAttack.Select(obj => obj.Value + obj.Suit));
-            Console.WriteLine("cardsAttack: "  + result);
+            Console.WriteLine("cardsAttack: " + result);
             // I stole this (string result = String.Join(" ", player.Hand.Select(obj => obj.Rank));) from chatGPT
             string result2 = String.Join(" ", game.cardsDefend.Select(obj => obj.Value + obj.Suit));
             Console.WriteLine("cardsDefend: " + result2);
@@ -343,6 +368,8 @@ namespace DurakCardGame
         {
             PrintDefenderCurrentPlayerIndex();
         }
+
+        
         //                                    ##############################################
         //                                                       DEBUG CODE 
         //                                    ##############################################
