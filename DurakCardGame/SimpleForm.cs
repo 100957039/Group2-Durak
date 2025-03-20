@@ -265,6 +265,12 @@ namespace DurakCardGame
                 // after each card is being played, refresh the panel to display the new cards
                 displayPlayedCards();
 
+                // add winners
+                if (game.players[game.turnIndex].Hand.Count() == 0)
+                {
+                    textBoxWinners.Text += " " + game.players[game.turnIndex].Name;
+                }
+
 
                 //panelTableBottom.Controls.Add(cardButton);
             }
@@ -292,24 +298,29 @@ namespace DurakCardGame
         // pass attack or defence
         private void buttonPass_Click(object sender, EventArgs e)
         {
-            bool isDefender = game.turnIndex == game.defenderIndex;
-            if (isDefender)
+            // only works if there is at least one card played in attack list
+            if (game.cardsAttack.Count() != 0)
             {
-                foreach (Card card in game.cardsAttack)
+                bool isDefender = game.turnIndex == game.defenderIndex;
+                if (isDefender)
                 {
-                    game.players[game.turnIndex].Hand.Add(card);
+                    foreach (Card card in game.cardsAttack)
+                    {
+                        game.players[game.turnIndex].Hand.Add(card);
+                    }
+                    foreach (Card card in game.cardsDefend)
+                    {
+                        game.players[game.turnIndex].Hand.Add(card);
+                    }
                 }
-                foreach (Card card in game.cardsDefend)
-                {
-                    game.players[game.turnIndex].Hand.Add(card);
-                }
+                game.cardsDefend.Clear();
+                game.cardsAttack.Clear();
+
+                game.fillHand();
+                game.Pass(game.turnIndex);
+                refreshTopBottomPanels();
+                displayCurrentPlayerHand();
             }
-            game.cardsDefend.Clear();
-            game.cardsAttack.Clear();
-            refreshTopBottomPanels();
-            displayCurrentPlayerHand();
-            game.fillHand();
-            game.Pass(game.turnIndex);
 
         }
 

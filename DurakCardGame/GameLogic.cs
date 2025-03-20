@@ -369,7 +369,7 @@ namespace DurakCardGame
             
         }
 
-        public void Pass(int currentIndex) { 
+        public void Pass(int currentIndex) {
             //if (currentPlayerDefender)
             //{
 
@@ -377,28 +377,40 @@ namespace DurakCardGame
             //// if attacker refuses to attack again during the same turn
             //else
             //{
-                // attcker calculation starts here
+            //Console.WriteLine("  ");
+            //Console.WriteLine("currentIndex: " + currentIndex);
+            // attcker calculation starts here
+            // only works after attack starts
+            //if (cardsAttack.Count != 0)
+            //{
                 int calculateTurnIndex = currentIndex + 1;
-                if (calculateTurnIndex >= players.Count()){
+                Console.WriteLine("calculateTurnIndex: " + calculateTurnIndex);
+                if (calculateTurnIndex >= players.Count())
+                {
                     turnIndex = 0;
                 }
                 else
                 {
                     turnIndex = calculateTurnIndex;
                 }
+                Console.WriteLine("gameLogic: turn index: " + turnIndex);
                 // attcker calculation starts here
 
                 // defender calculation starts here
                 int calculateDefenderIndex = currentIndex + 2;
-                if (calculateDefenderIndex >= players.Count()) {
+                Console.WriteLine("calculateDefenderIndex: " + calculateDefenderIndex);
+                if (calculateDefenderIndex >= players.Count())
+                {
                     int difference = calculateDefenderIndex - players.Count();
                     defenderIndex = difference;
                 }
                 else
                 {
-                    turnIndex = calculateTurnIndex;
+                    defenderIndex = calculateDefenderIndex;
                 }
-                // defender calculation ends here
+            //}
+            //Console.WriteLine("gameLogic: defender index: " + defenderIndex);
+            // defender calculation ends here
             //}
         }
 
