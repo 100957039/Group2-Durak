@@ -28,6 +28,9 @@ namespace DurakCardGame
         GameLogic game = new GameLogic();
         string textTrumpField = "Trump Suit: ";
         string textPlayerIndexField = "Player Trun by Index: ";
+        string textCardsLeftDeck = "Deck: ";
+        string textAttackerIndex = "Attacker Index: ";
+        string textDefenderIndex = "Defender Index: ";
 
         
 
@@ -63,6 +66,23 @@ namespace DurakCardGame
         // run after each time a card is played
         public void displayPlayedCards()
         {
+            //******************************************************************
+            //after each time full hand fuction run, update cards left in deck
+            textBoxDeckNumber.Text =  textCardsLeftDeck + game.deck.Count();
+            textBoxTurn.Text = textPlayerIndexField + game.turnIndex.ToString();
+            textBoxDefenderIndex.Text = textDefenderIndex + game.defenderIndex;
+
+            string winners = "Winners: ";
+            foreach (Player player in game.players) {
+                if (player.Hand.Count() == 0)
+                {
+                    winners += player.Name + " ";
+                }
+            }
+            textBoxWinners.Text = winners;
+            //******************************************************************
+
+            //textBox
             // clear the table to display the new cards
             refreshTopBottomPanels();
             // add to the bottom panel the attacking cards
@@ -113,10 +133,14 @@ namespace DurakCardGame
                 bool defenderIndex = game.defenderIndex == game.turnIndex;
                 if (defenderIndex)
                 {
-                    Card lastAttackedCard = game.cardsAttack[game.cardsAttack.Count()-1];
-                    if (!game.CanDefendWithThisCard(card, lastAttackedCard))
+                    int lastCardIndex = game.cardsAttack.Count() - 1;
+                    if (lastCardIndex >= 0)
                     {
-                        cardButton.Enabled = false;
+                        Card lastAttackedCard = game.cardsAttack[game.cardsAttack.Count() - 1];
+                        if (!game.CanDefendWithThisCard(card, lastAttackedCard))
+                        {
+                            cardButton.Enabled = false;
+                        }
                     }
                 }
                 else
@@ -143,6 +167,7 @@ namespace DurakCardGame
                             currentPlayer.PlayCard2(card);
                             game.cardsDefend.Add(card);
                             // attacker index 
+                            Console.WriteLine("1 calculate");
                             int attackerIndex = game.CalculateNextPlayerIndex(game.turnIndex, game.distanceIndexDiffernceBetweenAttackerDefender, defenderIndex);
                             //check if the player can attack the defender again
                             bool canAttackAgain = game.canStillAttack(game.players[attackerIndex].Hand);
@@ -157,13 +182,11 @@ namespace DurakCardGame
                                 // I think game.turnIndx should be + 1 not game.distance....
                                 game.turnIndex = game.defenderIndex;
                                 // ***************************** DO NOT FORGET to CHANGE the DEFENDER INDEX 
+                                Console.WriteLine("2 calculate");
                                 game.defenderIndex = game.CalculateNextPlayerIndex(game.turnIndex, game.distanceIndexDiffernceBetweenAttackerDefender, false);
                                 // I think the code above will do    
                                 /// CHNAGE INDEX HERE FOR THE DEFENDER
                                 // ***************************** DO NOT FORGET to CHANGE the DEFENDER INDEX 
-
-                                // *********** fill hand after each attack *********
-                                //game.fillHand();
 
                             }
                             // other players might be able to attack ########### leave for later ############# 
@@ -191,9 +214,7 @@ namespace DurakCardGame
                                 Player defender = game.players[game.defenderIndex];
                                 bool canDefend = game.canStillDefend(defender.Hand, card);
 
-                                //change turn to the defender after playing a card
-                                game.turnIndex = game.CalculateNextPlayerIndex(game.turnIndex, game.distanceIndexDiffernceBetweenAttackerDefender, defenderIndex);
-
+                                
                                 //if defender no longer able to defend, take all the played cards
                                 if (!canDefend)
                                 {
@@ -212,17 +233,22 @@ namespace DurakCardGame
                                     Console.WriteLine("SimpleForm.cs => defender cann't defend again, run fill hand run");
                                     game.fillHand();
 
+                                    Console.WriteLine("4 calculate");
                                     //the defender lost, he no longer is able to be the next attacker
                                     //the next attacker will be the player after the current defender
                                     // change distance to 2
                                     game.distanceIndexDiffernceBetweenAttackerDefender = 2;
-                                    game.turnIndex = 1 + game.CalculateNextPlayerIndex(game.turnIndex, game.distanceIndexDiffernceBetweenAttackerDefender, defenderIndex);
+                                    game.turnIndex =  game.CalculateNextPlayerIndex(game.turnIndex, game.distanceIndexDiffernceBetweenAttackerDefender, defenderIndex);
                                     // change distance back to 1
                                     game.distanceIndexDiffernceBetweenAttackerDefender = 1;
 
                                 }
                                 else
                                 {
+                                    Console.WriteLine("3 calculate");
+                                    //change turn to the defender after playing a card
+                                    game.turnIndex = game.CalculateNextPlayerIndex(game.turnIndex, game.distanceIndexDiffernceBetweenAttackerDefender, defenderIndex);
+
                                     PrintPlayersHand();
                                     displayPlayedCards();
                                 }

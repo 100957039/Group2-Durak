@@ -357,6 +357,8 @@ namespace DurakCardGame
             else
             {
                 int nextDefenderIndex = currentIndex + differenceDistanceBetweenNextPlayer;
+                // error here
+                Console.WriteLine("nextDefenderIndex: "+ nextDefenderIndex + " | currentIndex: "+ currentIndex + " | differenceDistanceBetweenNextPlayer: " + differenceDistanceBetweenNextPlayer);
                 if (nextDefenderIndex >= players.Count())
                 {
                     nextDefenderIndex -= players.Count();

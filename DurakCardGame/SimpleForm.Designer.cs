@@ -39,6 +39,8 @@
             textBoxTurn = new TextBox();
             textBoxTrump = new TextBox();
             buttonPlayedCards = new Button();
+            textBoxDeckNumber = new TextBox();
+            textBoxWinners = new TextBox();
             SuspendLayout();
             // 
             // button1
@@ -94,16 +96,16 @@
             // 
             // textBoxDefenderIndex
             // 
-            textBoxDefenderIndex.Location = new Point(919, 274);
+            textBoxDefenderIndex.Location = new Point(864, 274);
             textBoxDefenderIndex.Name = "textBoxDefenderIndex";
-            textBoxDefenderIndex.Size = new Size(100, 23);
+            textBoxDefenderIndex.Size = new Size(155, 23);
             textBoxDefenderIndex.TabIndex = 6;
             // 
             // textBoxttackerIndex
             // 
-            textBoxttackerIndex.Location = new Point(919, 203);
+            textBoxttackerIndex.Location = new Point(864, 203);
             textBoxttackerIndex.Name = "textBoxttackerIndex";
-            textBoxttackerIndex.Size = new Size(100, 23);
+            textBoxttackerIndex.Size = new Size(155, 23);
             textBoxttackerIndex.TabIndex = 7;
             // 
             // textBoxTurn
@@ -130,11 +132,27 @@
             buttonPlayedCards.UseVisualStyleBackColor = true;
             buttonPlayedCards.Click += buttonPlayedCards_Click;
             // 
+            // textBoxDeckNumber
+            // 
+            textBoxDeckNumber.Location = new Point(934, 347);
+            textBoxDeckNumber.Name = "textBoxDeckNumber";
+            textBoxDeckNumber.Size = new Size(100, 23);
+            textBoxDeckNumber.TabIndex = 11;
+            // 
+            // textBoxWinners
+            // 
+            textBoxWinners.Location = new Point(778, 409);
+            textBoxWinners.Name = "textBoxWinners";
+            textBoxWinners.Size = new Size(267, 23);
+            textBoxWinners.TabIndex = 12;
+            // 
             // SimpleForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1084, 631);
+            Controls.Add(textBoxWinners);
+            Controls.Add(textBoxDeckNumber);
             Controls.Add(buttonPlayedCards);
             Controls.Add(textBoxTrump);
             Controls.Add(textBoxTurn);
@@ -165,5 +183,7 @@
         private TextBox textBoxTurn;
         private TextBox textBoxTrump;
         private Button buttonPlayedCards;
+        private TextBox textBoxDeckNumber;
+        private TextBox textBoxWinners;
     }
 }
