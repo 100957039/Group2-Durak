@@ -1,6 +1,6 @@
 ﻿namespace DurakCardGame
 {
-    partial class DurakGUI
+    partial class ProductionGUI
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DurakGUI));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductionGUI));
             pnlMainMenu = new Panel();
             lblTitle = new Label();
             btnTitle = new Button();
@@ -1697,7 +1697,7 @@
             btnOptionsBg.TabIndex = 13;
             btnOptionsBg.UseVisualStyleBackColor = false;
             // 
-            // DurakGUI
+            // ProductionGUI
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -1709,9 +1709,9 @@
             Controls.Add(pnlOptions);
             Controls.Add(pnlPlayerSelect);
             MaximizeBox = false;
-            Name = "DurakGUI";
+            Name = "ProductionGUI";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "DurakGUI";
+            Text = "ProductionGUI";
             pnlMainMenu.ResumeLayout(false);
             pnlPlayerSelect.ResumeLayout(false);
             gbNumAI.ResumeLayout(false);

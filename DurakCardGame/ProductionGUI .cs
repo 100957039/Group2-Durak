@@ -15,13 +15,13 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
  * The different screens are made of seperate panels, the easiest
  *  way to work with them is by using the Document Outline.
  *  
- * On the DurakGUI Form go View -> Other Windows -> Document Outline
+ * On the ProductionGUI Form go View -> Other Windows -> Document Outline
  *  or hit CTRL + ALT + T.
  */
 
 namespace DurakCardGame
 {
-    public partial class DurakGUI : Form
+    public partial class ProductionGUI : Form
     {
         // Constants
         const int IconsPerPage = 6;
@@ -31,7 +31,7 @@ namespace DurakCardGame
         int numAI = 1;
         int iconPage = 0;
 
-        public DurakGUI()
+        public ProductionGUI()
         {
             InitializeComponent();
         }
@@ -352,7 +352,6 @@ namespace DurakCardGame
 
 
             // Calculate how much space should be between cards
-            // Not working as intended, I'll need to rework the calculation
             cardXModifier = (int)(CardXModifier - ((handCount - BaseHandCount) * SpacePerCard));
 
             foreach (Card card in hand)
