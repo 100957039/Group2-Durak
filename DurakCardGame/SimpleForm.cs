@@ -117,7 +117,7 @@ namespace DurakCardGame
 
 
 
-        public void displayCurrentPlayerHand()
+        public void displayCurrentPlayerHand3()
         {
             panelHand.Controls.Clear();
             panelHand.Refresh(); // I dont know what refresh does, I do not think it's needed
@@ -137,7 +137,7 @@ namespace DurakCardGame
                     // ******************************************
                     //Duplicated code, needs not work on it later 
                     // cardButton.Click += (sender, e) => should be inside this if statement 
-                    // it will no effect anything, but it's good practice 
+                    // it will not effect anything, but it's not good practice 
                     bool defenderIndex = game.defenderIndex == game.turnIndex;
                     if (defenderIndex)
                     {
@@ -281,6 +281,83 @@ namespace DurakCardGame
 
 
                 //panelTableBottom.Controls.Add(cardButton);
+            }
+        }
+
+        public void displayCurrentPlayerHand()
+        {
+            panelHand.Controls.Clear();
+            panelHand.Refresh(); // I dont know what refresh does, I do not think it's needed
+            Console.WriteLine("    ");
+            Console.WriteLine("game.turnIndex: " + game.turnIndex);
+            Console.WriteLine("    ");
+            Player currentPlayer = game.players[game.turnIndex];
+            int xAxis = 0;
+            //String winners = "";
+            foreach (Card card in currentPlayer.Hand)
+            {
+                if (currentPlayer.Hand.Count() > 0)
+                {
+                    card.X = xAxis;
+
+                    Button cardButton = card.CreateCardButton();
+                    // ******************************************
+                    //Duplicated code, needs not work on it later 
+                    // cardButton.Click += (sender, e) => should be inside this if statement 
+                    // it will not effect anything, but it's not good practice 
+                    bool defenderIndex = game.defenderIndex == game.turnIndex;
+                    if (defenderIndex)
+                    {
+                        int lastCardIndex = game.cardsAttack.Count() - 1;
+                        if (lastCardIndex >= 0)
+                        {
+                            Card lastAttackedCard = game.cardsAttack[game.cardsAttack.Count() - 1];
+                            if (!game.CanDefendWithThisCard(card, lastAttackedCard))
+                            {
+                                cardButton.Enabled = false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        //check if the attacker can use this card to attack
+                        if (game.cardsAttack.Count() != 0 & (!game.CanAttackWithThisCard(card)))
+                        {
+                            cardButton.Enabled = false;
+                        }
+                    }
+                    //Duplicated code, needs not work on it later
+                    // ******************************************
+
+                    cardButton.Click += (sender, e) =>
+                    {
+                        // ckeck if the game ended
+                        bool endGame = game.GameEnded();
+                        if (!endGame)
+                        {
+                            currentPlayer.PlayCard2(card);
+                            game.PlayCardToAttckOrDefendList(card);
+                            game.DetermineDefenderAndAttackerIndex();
+                            displayPlayedCards();
+                            displayCurrentPlayerHand();
+                        };
+                        panelHand.Controls.Add(cardButton);
+                        xAxis += 75;
+                        // after each card is being played, refresh the panel to display the new cards
+                        displayPlayedCards();
+
+                    };
+                    panelHand.Controls.Add(cardButton);
+                }
+                xAxis += 75;
+                // add winners
+                if (game.players[game.turnIndex].Hand.Count() == 0)
+                {
+                    textBoxWinners.Text = " " + game.players[game.turnIndex].Name;
+                }
+
+
+                
             }
         }
 

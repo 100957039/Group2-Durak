@@ -31,6 +31,8 @@ namespace DurakCardGame
         // store cards used in signle attack
         public List<Card> cardsDefend = new List<Card>();
 
+        // new test
+        public int attackerIndex { get; set; } = 0;
         // this will always be the attacker 
         public int defenderIndex { get; set; } = 0;
         // determine the index of the current player (might be attacker or defender)
@@ -192,6 +194,7 @@ namespace DurakCardGame
                 playerIndex = 0;
             }
             turnIndex = playerIndex;
+            attackerIndex = playerIndex;
             //determin the defender (((((((attacker will not work))))))))))
             int calculateDefenderIndex = playerIndex + 1;
             // if attacker is the last player in the list
@@ -400,55 +403,126 @@ namespace DurakCardGame
 
         //  ############################### TEST starts here ################################
         // new function to keep track of attacker and defender
-        public void DetermineDefenderAndAttackerIndex(bool won)
+        public void DetermineDefenderAndAttackerIndex()
         {
+            // just to debug starts here
+            int caseNumber = -1;
+            string caseInfo;
+            // just to debug ends here
+
             int nextDefenderIndex;
             int nextAttackerIndex; // ====== turnIndex
+            int nextTrurnIndex;
             // if defender 
             if (defenderIndex == turnIndex)
             {
-                // if defender won the attack
-                // attacker = 0 | defender = 1 | => nextAttacker = 1 | next defender = 2
-                // defender 1 + X = 2 => x = 1
-                if (won)
+                // check if the current attcker can attack again
+                bool canStillAttackAgainBlah = canStillAttack(players[attackerIndex].Hand);
+                if (canStillAttackAgainBlah)
                 {
-                    // implement code to allow other players to attack if the attacker no longer has the right cards
+                    caseNumber = 1;
+                    caseInfo = "defender won, attacker can attack again";
+                    nextDefenderIndex = defenderIndex;
+                    nextAttackerIndex = attackerIndex;
+                    nextTrurnIndex = attackerIndex;
 
-
-                    // implement code to allow other players to attack if the attacker no longer has the right cards
-                    nextDefenderIndex = turnIndex + 1; //x
                 }
-                
+                // else the defender won the attack
+                else
+                {
+                    caseNumber = 2;
+                    caseInfo = "defender won, attcker can not attack again";
+                    // implement code to allow other players to attack if the attacker no longer has the right cards
+
+                    //            ######################## DO NOT FORGET ########################
+
+                    // implement code to allow other players to attack if the attacker no longer has the right cards
+
+                    // attacker = 0 | defender = 1 | => nextAttacker = 1 | next defender = 2
+                    // defender 1 + X = 2 => x = 1
+                    nextDefenderIndex = turnIndex + 1; //x
+                    nextAttackerIndex = defenderIndex;
+                    nextTrurnIndex = defenderIndex;
+                    cardsAttack.Clear();
+                    cardsDefend.Clear();
+                    fillHand();
+                        
+                }
+                //}
                 // if defender lost the attack
                 // attacker = 0 | defender = 1 | => nextAttacker = 2 | next defender = 3
                 // defender 1 + X = 3 => x = 2
-                else
-                {
-                    nextDefenderIndex = turnIndex + 2; //x
-                }
+                //else
+                //{
+                //    nextDefenderIndex = turnIndex + 2; //x
+                //}
             }
             // if attacker
             else
             {
-                // if attacker won 
-                // attacker = 0 | defender = 1 | => nextAttacker = 2 | next defender = 3
-                // attacker 0 + X = 3 => x = 3
-                if (won)
+
+                Card cardAttackedBy = cardsAttack[cardsAttack.Count - 1];
+                Console.WriteLine(" : "+ cardAttackedBy);
+                bool canStillDefendAgainBlah = canStillDefend(players[defenderIndex].Hand, cardAttackedBy);
+                Console.WriteLine("can defend: " +canStillDefendAgainBlah);
+                if (!canStillDefendAgainBlah)
                 {
+                    caseNumber = 3;
+                    caseInfo = "attcker won, defender can not beat the card";
+                    // if attacker won 
+                    // attacker = 0 | defender = 1 | => nextAttacker = 2 | next defender = 3
+                    // attacker 0 + X = 3 => x = 3
                     nextDefenderIndex = turnIndex + 3; //x
+                    nextAttackerIndex = turnIndex + 2;
+                    //nextTrurnIndex = turnIndex + 2;
+                    nextTrurnIndex = -1; //it will be same as nextAttackerIndex 
+                    foreach (Card card in cardsAttack)
+                    {
+                        players[defenderIndex].Hand.Add(card);
+                    }
+                    foreach (Card card in cardsDefend)
+                    {
+                        players[defenderIndex].Hand.Add(card);
+                    }
+
+                    //clear played cards defence and attack
+                    cardsDefend.Clear();
+                    cardsAttack.Clear();
+                    fillHand();
                 }
                 // if aatcker loses
                 // attacker = 0 | defender = 1 | => nextAttacker = 1 | next defender = 2
                 // attacker 0 + X = 2 => x = 2 
                 else
                 {
+                    caseNumber = 4;
+                    caseInfo = "attcker played card, defender can defend";
                     // implement code to allow other players to attack if the attacker no longer has the right cards
 
 
                     // implement code to allow other players to attack if the attacker no longer has the right cards
-                    nextDefenderIndex = turnIndex + 2; //x;
+                    //nextDefenderIndex = turnIndex + 2; //x;
+                    nextDefenderIndex = defenderIndex;
+                    nextAttackerIndex = attackerIndex;
+                    nextTrurnIndex = defenderIndex;
+
                 }
             }
+
+
+            // #################### NOT SURE OF THIS ########################
+            //if (nextTrurnIndex >= players.Count())
+            //{
+            //    nextTrurnIndex = (nextTrurnIndex % players.Count()); //x;
+            //}
+            // check attacker first because the defender is next tot he attacker
+            // the attacker has to be available first then determine the defender after
+            //nextAttackerIndex = nextDefenderIndex - 1;
+            //if (nextAttackerIndex < 0)
+            //{
+            //    nextAttackerIndex = players.Count() - 1;
+            //}
+            // #################### NOT SURE OF THIS ########################
 
             // get valid index not out of range
             // players [000, 111, 222, 333]
@@ -456,7 +530,8 @@ namespace DurakCardGame
             // nextDefenderIndex 5 % len(players) 4 = 1 => 1 == 111
             // 1 - x = 0 | => x = 1 
             if (nextDefenderIndex >= players.Count()) {
-                nextDefenderIndex = (nextDefenderIndex % players.Count()) - 1; //x;
+                //nextDefenderIndex = (nextDefenderIndex % players.Count()) - 1; //x;
+                nextDefenderIndex = (nextDefenderIndex % players.Count()); //x;
             }
             // check attacker first because the defender is next tot he attacker
             // the attacker has to be available first then determine the defender after
@@ -487,6 +562,11 @@ namespace DurakCardGame
                         fromStartIndex++;
                     }
                 }
+            }
+
+            if (nextTrurnIndex == -1)
+            {
+                nextTrurnIndex = nextAttackerIndex;
             }
 
             // find the next defender
@@ -531,14 +611,35 @@ namespace DurakCardGame
                     }
                 }
             }
-
-            turnIndex = nextAttackerIndex;
+            Console.WriteLine(" ");
+            Console.WriteLine(caseInfo);
+            Console.WriteLine("GameLogic=> previous turnIndex: " + turnIndex + " | defenderIndex: " + defenderIndex);
+            Console.WriteLine("GameLogic=> caseNumber: " + caseNumber + " | nextAttackerIndex: " + nextAttackerIndex + " | nextDefenderIndex: " + nextDefenderIndex);
+            turnIndex = nextTrurnIndex;
+            attackerIndex = nextAttackerIndex;
             defenderIndex = nextDefenderIndex;
         }
 
 
 
         // ############################### TEST ends here ################################
+
+        // ########## add card to cardsAttack or cardsDefend based on turnIndex ##########
+        //                   this will help make the GUI code shorter I guess
+        public void PlayCardToAttckOrDefendList(Card card)
+        {
+            bool isDefender = turnIndex == defenderIndex;
+            if (isDefender)
+            {
+                cardsDefend.Add(card);
+            }
+            else
+            {
+                cardsAttack.Add(card);
+            }
+        }
+        // ########## add card to cardsAttack or cardsDefend based on turnIndex ##########
+        
 
         public void Pass(int currentIndex) {
             //if (currentPlayerDefender)
