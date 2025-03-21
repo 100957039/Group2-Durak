@@ -398,6 +398,148 @@ namespace DurakCardGame
 
         }
 
+        //  ############################### TEST starts here ################################
+        // new function to keep track of attacker and defender
+        public void DetermineDefenderAndAttackerIndex(bool won)
+        {
+            int nextDefenderIndex;
+            int nextAttackerIndex; // ====== turnIndex
+            // if defender 
+            if (defenderIndex == turnIndex)
+            {
+                // if defender won the attack
+                // attacker = 0 | defender = 1 | => nextAttacker = 1 | next defender = 2
+                // defender 1 + X = 2 => x = 1
+                if (won)
+                {
+                    // implement code to allow other players to attack if the attacker no longer has the right cards
+
+
+                    // implement code to allow other players to attack if the attacker no longer has the right cards
+                    nextDefenderIndex = turnIndex + 1; //x
+                }
+                
+                // if defender lost the attack
+                // attacker = 0 | defender = 1 | => nextAttacker = 2 | next defender = 3
+                // defender 1 + X = 3 => x = 2
+                else
+                {
+                    nextDefenderIndex = turnIndex + 2; //x
+                }
+            }
+            // if attacker
+            else
+            {
+                // if attacker won 
+                // attacker = 0 | defender = 1 | => nextAttacker = 2 | next defender = 3
+                // attacker 0 + X = 3 => x = 3
+                if (won)
+                {
+                    nextDefenderIndex = turnIndex + 3; //x
+                }
+                // if aatcker loses
+                // attacker = 0 | defender = 1 | => nextAttacker = 1 | next defender = 2
+                // attacker 0 + X = 2 => x = 2 
+                else
+                {
+                    // implement code to allow other players to attack if the attacker no longer has the right cards
+
+
+                    // implement code to allow other players to attack if the attacker no longer has the right cards
+                    nextDefenderIndex = turnIndex + 2; //x;
+                }
+            }
+
+            // get valid index not out of range
+            // players [000, 111, 222, 333]
+            // nextDefenderIndex 5  === 000
+            // nextDefenderIndex 5 % len(players) 4 = 1 => 1 == 111
+            // 1 - x = 0 | => x = 1 
+            if (nextDefenderIndex >= players.Count()) {
+                nextDefenderIndex = (nextDefenderIndex % players.Count()) - 1; //x;
+            }
+            // check attacker first because the defender is next tot he attacker
+            // the attacker has to be available first then determine the defender after
+            nextAttackerIndex = nextDefenderIndex - 1;
+            if (nextAttackerIndex < 0) {
+                nextAttackerIndex = players.Count() - 1;
+            }
+
+            // lastly check if the next attacker's hand is not empty ####### choose the next available one
+            if (players[nextAttackerIndex].Hand.Count() == 0)
+            {
+                int fromStartIndex = 0;
+                for (int i = 0; i < players.Count(); i++)
+                {
+                    if (i + nextAttackerIndex < players.Count())
+                    {
+                        if (players[i + nextAttackerIndex].Hand.Count() != 0)
+                        {
+                            nextAttackerIndex = i + nextAttackerIndex; break;
+                        }
+                    }
+                    else
+                    {
+                        if (players[fromStartIndex].Hand.Count() != 0)
+                        {
+                            nextAttackerIndex = fromStartIndex; break;
+                        }
+                        fromStartIndex++;
+                    }
+                }
+            }
+
+            // find the next defender
+            nextDefenderIndex = nextAttackerIndex + 1;
+            if (nextDefenderIndex >= players.Count())
+            {
+                nextDefenderIndex = 0;
+            }
+            // check if this player has cards
+            if (players[nextDefenderIndex].Hand.Count() == 0)
+            {
+                int fromStartIndex = 0;
+                for (int i = 0; i < players.Count(); i++)
+                {
+                    if (i + nextDefenderIndex < players.Count())
+                    {
+                        // i dont think this (& (i + nextDefenderIndex != nextAttackerIndex) is nedded here
+                        if (players[i + nextDefenderIndex].Hand.Count() != 0 & (i + nextDefenderIndex != nextAttackerIndex))
+                        {
+                            nextDefenderIndex = i + nextDefenderIndex; break;
+                        }
+                        else
+                        {
+                            // just to let me know no other player is left to defend and the game has reached an end
+                            // I dont think it should ever reach this condition, because it should check this first
+                            nextDefenderIndex = -1;
+                        }
+                    }
+                    else
+                    {
+                        if ((players[fromStartIndex].Hand.Count() != 0) & (i + nextDefenderIndex != nextAttackerIndex))
+                        {
+                            nextDefenderIndex = fromStartIndex; break;
+                        }
+                        else
+                        {
+                            // just to let me know no other player is left to defend and the game has reached an end
+                            // I dont think it should ever reach this condition, because it should check this first
+                            nextDefenderIndex = -1;
+                        }
+                        fromStartIndex++;
+                    }
+                }
+            }
+
+            turnIndex = nextAttackerIndex;
+            defenderIndex = nextDefenderIndex;
+        }
+
+
+
+        // ############################### TEST ends here ################################
+
         public void Pass(int currentIndex) {
             //if (currentPlayerDefender)
             //{
