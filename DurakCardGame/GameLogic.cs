@@ -31,6 +31,12 @@ namespace DurakCardGame
         // store cards used in signle attack
         public List<Card> cardsDefend = new List<Card>();
 
+        // based on this value, it will determine if (REVERSE ATTACKE) is active
+        public bool reverseAttackActive { get; set; } = false;
+
+        // 
+        bool gameEnd { get; set; } = false;
+
         // new test
         public int attackerIndex { get; set; } = 0;
         // this will always be the attacker 
@@ -635,8 +641,162 @@ namespace DurakCardGame
         }
 
 
-
         // ############################### TEST ends here ################################
+
+
+        // ############################ TEST FOR RESERVE ATTACK IMPLEMENTATION starts here ############
+        public void ReserveAttack()
+        {
+            // start second or third reverse
+            if (cardsAttack.Count() >= 3 & cardsDefend.Count() != cardsAttack.Count())
+            {
+                // check if cards rank is equal, mean it's reverse mode
+                bool stillReverse = true;
+                for (int cardIndex = 0; cardIndex < cardsAttack.Count() - 1; cardIndex++)
+                {
+                    if (cardsAttack[cardIndex].Rank != cardsAttack[cardIndex + 1].Rank)
+                    {
+                        stillReverse = false;
+                    }
+                }
+                if (stillReverse)
+                {
+                    for (int i =0; i <cardsDefend.Count(); i++)
+                    {
+                        if (cardsDefend[i].Rank < cardsAttack[i].Rank)
+                        {
+                            
+                        }
+                    }
+                    turnIndex = defenderIndex;
+                }
+
+            }
+            // first reverse from defender to attacker 
+            else if (cardsAttack.Count() == 1 & cardsDefend.Count() == 1)
+            {
+                Card firstAttackCard = cardsAttack[0];
+                Card firstDefendCard = cardsDefend[0];
+                if (firstAttackCard.Rank == firstDefendCard.Rank)
+                {
+                    // check if defender hand is empty | no point of reverse if it will be after playing this card
+                    // stop the attck and change the attacker and defender
+                    if (players[defenderIndex].Hand.Count() == 0 || players[attackerIndex].Hand.Count() == 0)
+                    {
+                        int nextAttackerIndex = FindNextAvailablePlayer(defenderIndex);
+                        if (nextAttackerIndex == -1)
+                        {
+                            gameEnd = true;
+                        }
+                        else
+                        {
+                            attackerIndex = nextAttackerIndex;
+                            turnIndex = nextAttackerIndex;
+                            defenderIndex = FindNextAvailablePlayer(nextAttackerIndex);
+                            // move cards from defend to attack
+                            cardsAttack.Add(firstDefendCard);
+                            cardsDefend.Clear();
+                        }
+                    }
+                    // if attacker and defender still have cards to play
+                    else
+                    {
+                        attackerIndex = defenderIndex;
+                        defenderIndex = turnIndex;
+
+                    }
+                }
+            }
+            // second reverse
+            else if (cardsAttack.Count() == 2 & cardsDefend.Count() == 1)
+            {
+                Card firstDefendCard = cardsDefend[0];
+                bool isReverse = true;
+                foreach (Card card in cardsAttack)
+                {
+                    if (card.Rank != firstDefendCard.Rank)
+                    {
+                        isReverse = false;
+                    }
+                }
+                if (isReverse) {
+                    // check if defender's hand is empty | no point of reverse if it will be after playing this card
+                    // stop the attck and change the attacker and defender
+                    if (players[defenderIndex].Hand.Count() == 0 || players[attackerIndex].Hand.Count() == 0)
+                    {
+                        int nextAttackerIndex = FindNextAvailablePlayer(defenderIndex);
+                        if (nextAttackerIndex == -1)
+                        {
+                            gameEnd = true;
+                        }
+                        else
+                        {
+                            attackerIndex = nextAttackerIndex;
+                            turnIndex = nextAttackerIndex;
+                            defenderIndex = FindNextAvailablePlayer(nextAttackerIndex);
+                            // move cards from defend to attack
+                            cardsAttack.Add(firstDefendCard);
+                            cardsDefend.Clear();
+                        }
+                    }
+                    // if attacker and defender still have cards to play
+                    else
+                    {
+                        defenderIndex = attackerIndex;
+                        attackerIndex = turnIndex;
+                        turnIndex = defenderIndex;
+
+                    }
+                }
+            }
+                
+              
+                
+
+
+            
+        }
+        // ############################ TEST FOR RESERVE ATTACK IMPLEMENTATION ends here ############
+
+        // ############################### helper function to determine the next available player ##########
+        // -1 => means no other player is available
+        public int FindNextAvailablePlayer(int afterThisIndex)
+        {
+            int nextAvailablePlayerIndex = afterThisIndex + 1;
+            if (nextAvailablePlayerIndex >= players.Count())
+            {
+                nextAvailablePlayerIndex = 0;
+            }
+            if (players[nextAvailablePlayerIndex].Hand.Count() == 0)
+            {
+                int fromStartIndex = 0;
+                for (int i = 0; i < players.Count(); i++)
+                {
+                    if (i + nextAvailablePlayerIndex < players.Count())
+                    {
+                        if (players[i + nextAvailablePlayerIndex].Hand.Count() != 0)
+                        {
+                            nextAvailablePlayerIndex = i + nextAvailablePlayerIndex; break;
+                        }
+                    }
+                    else
+                    {
+                        if (players[fromStartIndex].Hand.Count() != 0)
+                        {
+                            nextAvailablePlayerIndex = fromStartIndex; break;
+                        }
+                        fromStartIndex++;
+                    }
+                }
+                if (nextAvailablePlayerIndex == afterThisIndex)
+                {
+                    nextAvailablePlayerIndex = -1;
+                }
+
+            }
+            return nextAvailablePlayerIndex;
+        }
+        // ############################## helper function to determine the next available player ends here #####
 
         // ########## add card to cardsAttack or cardsDefend based on turnIndex ##########
         //                   this will help make the GUI code shorter I guess
