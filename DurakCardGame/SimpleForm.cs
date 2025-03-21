@@ -344,7 +344,7 @@ namespace DurakCardGame
                         panelHand.Controls.Add(cardButton);
                         xAxis += 75;
                         // after each card is being played, refresh the panel to display the new cards
-                        displayPlayedCards();
+                        //displayPlayedCards();
 
                     };
                     panelHand.Controls.Add(cardButton);

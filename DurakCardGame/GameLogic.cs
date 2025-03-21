@@ -611,10 +611,24 @@ namespace DurakCardGame
                     }
                 }
             }
-            Console.WriteLine(" ");
+            Console.WriteLine("      before      ");
+            foreach (Player player in players)
+            {
+                // I stole this (string result = String.Join(" ", player.Hand.Select(obj => obj.Rank));) from chatGPT
+                string result = String.Join(" ", player.Hand.Select(obj => obj.Value + obj.Suit));
+                Console.WriteLine("player: " + player.Name + " | " + result);
+            }
+            Console.WriteLine("  ");
             Console.WriteLine(caseInfo);
             Console.WriteLine("GameLogic=> previous turnIndex: " + turnIndex + " | defenderIndex: " + defenderIndex);
             Console.WriteLine("GameLogic=> caseNumber: " + caseNumber + " | nextAttackerIndex: " + nextAttackerIndex + " | nextDefenderIndex: " + nextDefenderIndex);
+            Console.WriteLine("      after       ");
+            foreach (Player player in players)
+            {
+                // I stole this (string result = String.Join(" ", player.Hand.Select(obj => obj.Rank));) from chatGPT
+                string result = String.Join(" ", player.Hand.Select(obj => obj.Value + obj.Suit));
+                Console.WriteLine("player: " + player.Name + " | " + result);
+            }
             turnIndex = nextTrurnIndex;
             attackerIndex = nextAttackerIndex;
             defenderIndex = nextDefenderIndex;
