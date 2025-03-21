@@ -669,31 +669,78 @@ namespace DurakCardGame
             // only works after attack starts
             //if (cardsAttack.Count != 0)
             //{
-                int calculateTurnIndex = currentIndex + 1;
-                Console.WriteLine("calculateTurnIndex: " + calculateTurnIndex);
-                if (calculateTurnIndex >= players.Count())
-                {
-                    turnIndex = 0;
-                }
-                else
-                {
-                    turnIndex = calculateTurnIndex;
-                }
-                Console.WriteLine("gameLogic: turn index: " + turnIndex);
-                // attcker calculation starts here
+            int calculateTurnIndex = currentIndex + 1;
+            Console.WriteLine("calculateTurnIndex: " + calculateTurnIndex);
+            if (calculateTurnIndex >= players.Count())
+            {
+                calculateTurnIndex = 0;
+            }
 
-                // defender calculation starts here
-                int calculateDefenderIndex = currentIndex + 2;
-                Console.WriteLine("calculateDefenderIndex: " + calculateDefenderIndex);
-                if (calculateDefenderIndex >= players.Count())
+            if (players[calculateTurnIndex].Hand.Count == 0) {
+                int fromStart = 0;
+                for (int i = 0; i < players.Count(); i++)
                 {
-                    int difference = calculateDefenderIndex - players.Count();
-                    defenderIndex = difference;
+                    if (calculateTurnIndex + 1 < players.Count())
+                    {
+                        if (players[i + calculateTurnIndex].Hand.Count() != 0)
+                        {
+                            calculateTurnIndex += i; break;
+                        }
+                    }
+                    else
+                    {
+                        if (players[fromStart].Hand.Count() != 0)
+                        {
+                            calculateTurnIndex = i; break;
+                        }
+                        fromStart += 1;
+                    }
                 }
-                else
+            }
+
+            turnIndex = calculateTurnIndex;
+            attackerIndex = calculateTurnIndex;
+            Console.WriteLine("gameLogic: turn index: " + turnIndex);
+            // attcker calculation starts here
+
+            // defender calculation starts here
+            int calculateDefenderIndex = currentIndex + 2;
+            Console.WriteLine("calculateDefenderIndex: " + calculateDefenderIndex);
+            if (calculateDefenderIndex >= players.Count())
+            {
+                calculateDefenderIndex = calculateDefenderIndex - players.Count();
+            }
+            // check if it is out of range
+            if (calculateDefenderIndex >= players.Count())
+            {
+                calculateDefenderIndex = calculateDefenderIndex - players.Count();
+            }
+
+            if (players[calculateDefenderIndex].Hand.Count == 0)
+            {
+                int fromStart = 0;
+                for (int i = 0; i < players.Count(); i++)
                 {
-                    defenderIndex = calculateDefenderIndex;
+                    if (calculateDefenderIndex + 1 < players.Count())
+                    {
+                        if (players[i + calculateDefenderIndex].Hand.Count() != 0)
+                        {
+                            calculateDefenderIndex += i; break;
+                        }
+                    }
+                    else
+                    {
+                        if (players[fromStart].Hand.Count() != 0)
+                        {
+                            calculateDefenderIndex = i; break;
+                        }
+                        fromStart += 1;
+                    }
                 }
+            }
+
+
+            defenderIndex = calculateDefenderIndex;
             //}
             //Console.WriteLine("gameLogic: defender index: " + defenderIndex);
             // defender calculation ends here
