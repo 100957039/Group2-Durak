@@ -438,20 +438,59 @@ namespace DurakCardGame
                 {
                     caseNumber = 2;
                     caseInfo = "defender won, attcker can not attack again";
-                    // implement code to allow other players to attack if the attacker no longer has the right cards
+                    // implement code to allow other players to attack if the attacker no longer has the right cards starts here
 
                     //            ######################## DO NOT FORGET ########################
+                    // -2 => exclude defender and attacker from total players
+                    int possibleNumberOfAttackers = players.Count() - 2;
+                    Console.WriteLine(possibleNumberOfAttackers);
+                    //int possibleNextAttackerIndex = FindNextAvailablePlayer(turnIndex);
+                    //Console.WriteLine(possibleNextAttackerIndex);
+                    //int distanceBetweenSubAttckerAndDefender = Math.Abs(possibleNextAttackerIndex - defenderIndex);
+                    //Console.WriteLine(distanceBetweenSubAttckerAndDefender);
+                    //bool possibleNextAttackerCanAttack = canStillAttack(players[possibleNextAttackerIndex].Hand);
+                    //Console.WriteLine("next can attack: " + possibleNextAttackerCanAttack);
 
-                    // implement code to allow other players to attack if the attacker no longer has the right cards
+                    // test starts here
+                    int possibleNextAttackerIndex = 100;             //100 could be any value
+                    int distanceBetweenSubAttckerAndDefender = 100;  // any value less than total number of players
+                    bool possibleNextAttackerCanAttack = false;
+                    for (int i = 0; i < possibleNumberOfAttackers; i++)
+                    {
+                        possibleNextAttackerIndex = FindNextAvailablePlayer(turnIndex+i);
+                        distanceBetweenSubAttckerAndDefender = Math.Abs(possibleNextAttackerIndex - defenderIndex);
+                        possibleNextAttackerCanAttack = canStillAttack(players[possibleNextAttackerIndex].Hand);
+                        if (possibleNextAttackerCanAttack)
+                        {
+                            Console.WriteLine(possibleNextAttackerIndex);
+                            Console.WriteLine(distanceBetweenSubAttckerAndDefender);
+                            break;
+                        }
+                    }
+                    // test ends here
+                    if (possibleNumberOfAttackers != 0 & possibleNumberOfAttackers >= distanceBetweenSubAttckerAndDefender & possibleNextAttackerCanAttack)
+                    {
+                        Console.WriteLine("############################case test sub attack ################################");
+                        nextDefenderIndex = defenderIndex; 
+                        nextAttackerIndex = possibleNextAttackerIndex;
+                        nextTrurnIndex = possibleNextAttackerIndex;
+                    }
+                    else
+                    {
+                    // implement code to allow other players to attack if the attacker no longer has the right cards ends here
 
-                    // attacker = 0 | defender = 1 | => nextAttacker = 1 | next defender = 2
-                    // defender 1 + X = 2 => x = 1
-                    nextDefenderIndex = turnIndex + 1; //x
-                    nextAttackerIndex = defenderIndex;
-                    nextTrurnIndex = defenderIndex;
-                    cardsAttack.Clear();
-                    cardsDefend.Clear();
-                    fillHand();
+                        // attacker = 0 | defender = 1 | => nextAttacker = 1 | next defender = 2
+                        // defender 1 + X = 2 => x = 1
+                        nextDefenderIndex = turnIndex + 1; //x
+                        nextAttackerIndex = defenderIndex;
+                        nextTrurnIndex = defenderIndex;
+                        cardsAttack.Clear();
+                        cardsDefend.Clear();
+                        fillHand();
+                    }
+                    
+
+                    
                         
                 }
                 //}
@@ -474,12 +513,12 @@ namespace DurakCardGame
                 if (!canStillDefendAgainBlah)
                 {
                     caseNumber = 3;
-                    caseInfo = "attcker won, defender can not beat the card";
+                    caseInfo = "attcker won, defender can not beat the card" + cardAttackedBy.Suit + cardAttackedBy.Rank;
                     // if attacker won 
                     // attacker = 0 | defender = 1 | => nextAttacker = 2 | next defender = 3
                     // attacker 0 + X = 3 => x = 3
-                    nextDefenderIndex = turnIndex + 3; //x
-                    nextAttackerIndex = turnIndex + 2;
+                    nextDefenderIndex = defenderIndex + 2; //x
+                    nextAttackerIndex = defenderIndex + 1;
                     //nextTrurnIndex = turnIndex + 2;
                     nextTrurnIndex = -1; //it will be same as nextAttackerIndex 
                     foreach (Card card in cardsAttack)
@@ -829,7 +868,42 @@ namespace DurakCardGame
             // only works after attack starts
             //if (cardsAttack.Count != 0)
             //{
-            int calculateTurnIndex = currentIndex + 1;
+            int calculateTurnIndex;
+            //lis = [1, 2, 3, 4]
+            //newlis = lis[3:] + lis[:3] => [3,4,1,2]
+            List<Player> playersListAttackerFirstIndex = new List<Player>();
+            int fromStartBlah = 0;
+            for (int i = 0; i < players.Count(); i++)
+            {
+                bool exceedRange = i + attackerIndex >= players.Count();
+                if (exceedRange)
+                {
+                    playersListAttackerFirstIndex.Add(players[fromStartBlah]);
+                    fromStartBlah++;
+                }
+                else
+                {
+                    playersListAttackerFirstIndex.Add(players[i + attackerIndex]);
+                }
+            }
+            Console.WriteLine(" ");
+            Console.WriteLine("first attcker: " + playersListAttackerFirstIndex[0].Name);
+            Console.WriteLine("second attcker: " + playersListAttackerFirstIndex[1].Name);
+            Console.WriteLine("first attcker: " + players[defenderIndex].Name);
+            Console.WriteLine(" ");
+
+            //multiple attack ##################(for this to work, each player needs to have uniuqe name or ID) ######################
+            //if the second index does not equal the defender name, (it is multiple attack)
+            if (playersListAttackerFirstIndex[1].Name != players[defenderIndex].Name) {
+                calculateTurnIndex = defenderIndex;
+                Console.WriteLine("multiple attack");
+            }
+            //single attack
+            else {
+                Console.WriteLine("Single attack");
+                calculateTurnIndex = currentIndex + 1;
+            }
+
             Console.WriteLine("calculateTurnIndex: " + calculateTurnIndex);
             if (calculateTurnIndex >= players.Count())
             {
