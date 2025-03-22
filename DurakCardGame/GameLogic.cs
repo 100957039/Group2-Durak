@@ -515,7 +515,9 @@ namespace DurakCardGame
             {
 
                 Card cardAttackedBy = cardsAttack[cardsAttack.Count - 1];
-                Console.WriteLine(" : "+ cardAttackedBy);
+                Console.WriteLine(" ");
+                Console.WriteLine("defender can't beat this card : "+ cardAttackedBy.Rank + cardAttackedBy.Suit);
+                Console.WriteLine("defender Hand: " + string.Join(", ", players[defenderIndex].Hand.Select(card => card.Rank.ToString() + card.Suit.ToString())));
                 bool canStillDefendAgainBlah = canStillDefend(players[defenderIndex].Hand, cardAttackedBy);
                 Console.WriteLine("can defend: " +canStillDefendAgainBlah);
                 if (!canStillDefendAgainBlah)
@@ -714,11 +716,13 @@ namespace DurakCardGame
                 bool canStillAttackAgainBlah = canStillAttack(players[attackerIndex].Hand);
                 if (canStillAttackAgainBlah)
                 {
+                    Console.WriteLine("attacker hand: " + string.Join(", ", players[attackerIndex].Hand.Select(card => card.Rank.ToString() + card.Suit)));
                     caseNumber = 1;
                     caseInfo = "defender won, attacker can attack again";
                     nextDefenderIndex = defenderIndex;
                     nextAttackerIndex = attackerIndex;
                     nextTrurnIndex = attackerIndex;
+                    
 
                 }
                 // else the defender won the attack
@@ -752,14 +756,14 @@ namespace DurakCardGame
                         if (possibleNextAttackerCanAttack)
                         {
                             Console.WriteLine("should attack the same defender next: " + possibleNextAttackerIndex);
-                            Console.WriteLine("distance between them" +distanceBetweenSubAttckerAndDefender);
+                            Console.WriteLine("distance between them: " +distanceBetweenSubAttckerAndDefender);
                             break;
                         }
                     }
                     Console.WriteLine(" ");
                     Console.WriteLine("cards Attack: " + string.Join(", ", cardsAttack.Select(p => p.Rank)));
                     Console.WriteLine("cards defend: " + string.Join(", ", cardsDefend.Select(p => p.Rank)));
-                    Console.WriteLine("attacker's hand: " + string.Join(", ", players[possibleNextAttackerIndex].Hand.Select(card => card.Rank)));
+                    Console.WriteLine("sub-attack| attacker's hand: " + string.Join(" , ", players[possibleNextAttackerIndex].Hand.Select(card => card.Rank)));
                     Console.WriteLine(" ");
                     // test ends here
                     if (possibleNumberOfAttackers != 0 & possibleNumberOfAttackers >= distanceBetweenSubAttckerAndDefender & possibleNextAttackerCanAttack)
@@ -778,6 +782,7 @@ namespace DurakCardGame
                         // attacker = 0 | defender = 1 | => nextAttacker = 1 | next defender = 2
                         // defender 1 + X = 2 => x = 1
                         // check if defender who is going to be attacker, still have cards
+                        Console.WriteLine("attacker no longer have valid cards to play: " + string.Join(" , ", players[attackerIndex].Hand.Select(card => card.Rank.ToString() + card.Suit)));
                         if (players[defenderIndex].Hand.Count() != 0)
                         {
                             nextDefenderIndex = FindNextAvailablePlayer(defenderIndex); //x
@@ -810,13 +815,14 @@ namespace DurakCardGame
             {
 
                 Card cardAttackedBy = cardsAttack[cardsAttack.Count - 1];
-                Console.WriteLine(" : " + cardAttackedBy);
+                Console.WriteLine(" : " + cardAttackedBy.Rank.ToString() + cardAttackedBy.Suit);
                 bool canStillDefendAgainBlah = canStillDefend(players[defenderIndex].Hand, cardAttackedBy);
                 Console.WriteLine("can defend: " + canStillDefendAgainBlah);
                 if (!canStillDefendAgainBlah)
                 {
                     caseNumber = 3;
-                    caseInfo = "attcker won, defender can not beat the card" + cardAttackedBy.Suit + cardAttackedBy.Rank;
+                    caseInfo = "attcker won, defender can not beat this card: " + cardAttackedBy.Suit + cardAttackedBy.Rank;
+                    Console.WriteLine("defender hand: " + string.Join(" , ",players[defenderIndex].Hand.Select(card => card.Rank.ToString() + card.Suit)));
                     //nextTrurnIndex = turnIndex + 2;
                     nextTrurnIndex = -1; //it will be same as nextAttackerIndex 
                     foreach (Card card in cardsAttack)
@@ -842,6 +848,7 @@ namespace DurakCardGame
                 // attacker 0 + X = 2 => x = 2 
                 else
                 {
+                    Console.WriteLine("defender hand: " + string.Join(" , ", players[defenderIndex].Hand.Select(card => card.Rank.ToString() + card.Suit)));
                     caseNumber = 4;
                     caseInfo = "attcker played card, defender can defend";
                     // implement code to allow other players to attack if the attacker no longer has the right cards
@@ -856,9 +863,58 @@ namespace DurakCardGame
                 }
             }
 
+            // test stop attack if 6 cards has been played starts here
+            int numberAttackCardPlayed = cardsAttack.Count();
+            int numberDefendCardPlayed = cardsDefend.Count();
+            bool defenderHasNoCardsForLastAttack = players[defenderIndex].Hand.Count() == 0;
+            //bool canDefendLastAttack = canStillDefend(players[defenderIndex].Hand, cardsAttack[cardsAttack.Count() - 1]);
+
+            // defender does not have cards
+            // I do not think it will ever reach this condition
+            if (defenderHasNoCardsForLastAttack)
+            {
+                Console.WriteLine("GameLogic.cs| special case 2... defender won and has no cards left");
+                nextAttackerIndex = FindNextAvailablePlayer(defenderIndex);
+                nextTrurnIndex = nextAttackerIndex;
+                nextDefenderIndex = FindNextAvailablePlayer(nextAttackerIndex);
+
+            }
+            // defender does have cards
+            // only usefull if there is 6 cards in cardsAttack
+            else if (numberAttackCardPlayed == 6 & numberDefendCardPlayed == 6)
+            {
+                Console.WriteLine("GameLogic.cs| special case 2");
+                //if ()
+                //{
+                nextAttackerIndex = defenderIndex;
+                nextTrurnIndex = defenderIndex;
+                nextDefenderIndex = FindNextAvailablePlayer(defenderIndex);
+                cardsAttack.Clear();
+                cardsDefend.Clear();
+                fillHand();
+
+                //}
+                // not sure about this and I dont think it will ever reach this point
+                //else if (numberDefendCardPlayed == 5 & canDefendLastAttack)
+                //{
+                //    nextDefenderIndex = defenderIndex;
+                //    nextAttackerIndex = attackerIndex;
+                //    next
+                //}
+            }
+
+            //if attack cards = 6 and defender can defend
+            //if (canDefendLastAttack) { }
+            //if attack cards = 6 and defender can not defend
+            //else if (!canDefendLastAttack) { }
+            
+            // test stop attack if 6 cards has been played ends here
+
             turnIndex = nextTrurnIndex;
             attackerIndex = nextAttackerIndex;
             defenderIndex = nextDefenderIndex;
+            Console.WriteLine("case number: " + caseNumber);
+            Console.WriteLine("case info: " + caseInfo);
         }
 
             // new function to determine next player and support multiple attack and maybe pass as well ENDS HERE
