@@ -409,7 +409,7 @@ namespace DurakCardGame
 
         //  ############################### TEST starts here ################################
         // new function to keep track of attacker and defender
-        public void DetermineDefenderAndAttackerIndex()
+        public void DetermineDefenderAndAttackerIndex2()
         {
             // just to debug starts here
             int caseNumber = -1;
@@ -436,8 +436,15 @@ namespace DurakCardGame
                 // else the defender won the attack
                 else
                 {
+
                     caseNumber = 2;
                     caseInfo = "defender won, attcker can not attack again";
+
+                    Console.WriteLine(" ");
+                    Console.WriteLine("cards Attack: " + string.Join(", ", cardsAttack.Select(p => p.Rank)));
+                    Console.WriteLine("cards defend: " + string.Join(", ", cardsDefend.Select(p => p.Rank)));
+                    Console.WriteLine("attacker's hand: " + string.Join(", ", players[attackerIndex].Hand.Select(card => card.Rank)));
+                    Console.WriteLine(" ");
                     // implement code to allow other players to attack if the attacker no longer has the right cards starts here
 
                     //            ######################## DO NOT FORGET ########################
@@ -471,6 +478,7 @@ namespace DurakCardGame
                     if (possibleNumberOfAttackers != 0 & possibleNumberOfAttackers >= distanceBetweenSubAttckerAndDefender & possibleNextAttackerCanAttack)
                     {
                         Console.WriteLine("############################case test sub attack ################################");
+                        Console.WriteLine("previous defender: " + defenderIndex);
                         nextDefenderIndex = defenderIndex; 
                         nextAttackerIndex = possibleNextAttackerIndex;
                         nextTrurnIndex = possibleNextAttackerIndex;
@@ -574,117 +582,290 @@ namespace DurakCardGame
             // nextDefenderIndex 5  === 000
             // nextDefenderIndex 5 % len(players) 4 = 1 => 1 == 111
             // 1 - x = 0 | => x = 1 
-            if (nextDefenderIndex >= players.Count()) {
-                //nextDefenderIndex = (nextDefenderIndex % players.Count()) - 1; //x;
-                nextDefenderIndex = (nextDefenderIndex % players.Count()); //x;
-            }
-            // check attacker first because the defender is next tot he attacker
-            // the attacker has to be available first then determine the defender after
-            nextAttackerIndex = nextDefenderIndex - 1;
-            if (nextAttackerIndex < 0) {
-                nextAttackerIndex = players.Count() - 1;
-            }
 
-            // lastly check if the next attacker's hand is not empty ####### choose the next available one
-            if (players[nextAttackerIndex].Hand.Count() == 0)
-            {
-                int fromStartIndex = 0;
-                for (int i = 0; i < players.Count(); i++)
-                {
-                    if (i + nextAttackerIndex < players.Count())
-                    {
-                        if (players[i + nextAttackerIndex].Hand.Count() != 0)
-                        {
-                            nextAttackerIndex = i + nextAttackerIndex; break;
-                        }
-                    }
-                    else
-                    {
-                        if (players[fromStartIndex].Hand.Count() != 0)
-                        {
-                            nextAttackerIndex = fromStartIndex; break;
-                        }
-                        fromStartIndex++;
-                    }
-                }
-            }
+            //turnIndex = nextTrurnIndex;
+            //attackerIndex = nextAttackerIndex;
+            //defenderIndex = nextDefenderIndex;
+            ///  ################################ if it breaks, un commment the code in between ####################
 
-            if (nextTrurnIndex == -1)
-            {
-                nextTrurnIndex = nextAttackerIndex;
-            }
+            //if (nextDefenderIndex >= players.Count()) {
+            //    nextDefenderIndex = (nextDefenderIndex % players.Count()); //x;
+            //}
+            //// check attacker first because the defender is next tot he attacker
+            //// the attacker has to be available first then determine the defender after
+            //nextAttackerIndex = nextDefenderIndex - 1;
+            //if (nextAttackerIndex < 0) {
+            //    nextAttackerIndex = players.Count() - 1;
+            //}
 
-            // find the next defender
-            nextDefenderIndex = nextAttackerIndex + 1;
-            if (nextDefenderIndex >= players.Count())
-            {
-                nextDefenderIndex = 0;
-            }
-            // check if this player has cards
-            if (players[nextDefenderIndex].Hand.Count() == 0)
-            {
-                int fromStartIndex = 0;
-                for (int i = 0; i < players.Count(); i++)
-                {
-                    if (i + nextDefenderIndex < players.Count())
-                    {
-                        // i dont think this (& (i + nextDefenderIndex != nextAttackerIndex) is nedded here
-                        if (players[i + nextDefenderIndex].Hand.Count() != 0 & (i + nextDefenderIndex != nextAttackerIndex))
-                        {
-                            nextDefenderIndex = i + nextDefenderIndex; break;
-                        }
-                        else
-                        {
-                            // just to let me know no other player is left to defend and the game has reached an end
-                            // I dont think it should ever reach this condition, because it should check this first
-                            nextDefenderIndex = -1;
-                        }
-                    }
-                    else
-                    {
-                        if ((players[fromStartIndex].Hand.Count() != 0) & (i + nextDefenderIndex != nextAttackerIndex))
-                        {
-                            nextDefenderIndex = fromStartIndex; break;
-                        }
-                        else
-                        {
-                            // just to let me know no other player is left to defend and the game has reached an end
-                            // I dont think it should ever reach this condition, because it should check this first
-                            nextDefenderIndex = -1;
-                        }
-                        fromStartIndex++;
-                    }
-                }
-            }
-            Console.WriteLine("      before      ");
-            foreach (Player player in players)
-            {
-                // I stole this (string result = String.Join(" ", player.Hand.Select(obj => obj.Rank));) from chatGPT
-                string result = String.Join(" ", player.Hand.Select(obj => obj.Value + obj.Suit));
-                Console.WriteLine("player: " + player.Name + " | " + result);
-            }
-            Console.WriteLine("  ");
-            Console.WriteLine(caseInfo);
-            Console.WriteLine("GameLogic=> previous turnIndex: " + turnIndex + " | defenderIndex: " + defenderIndex);
-            Console.WriteLine("GameLogic=> caseNumber: " + caseNumber + " | nextAttackerIndex: " + nextAttackerIndex + " | nextDefenderIndex: " + nextDefenderIndex);
-            Console.WriteLine("      after       ");
-            foreach (Player player in players)
-            {
-                // I stole this (string result = String.Join(" ", player.Hand.Select(obj => obj.Rank));) from chatGPT
-                string result = String.Join(" ", player.Hand.Select(obj => obj.Value + obj.Suit));
-                Console.WriteLine("player: " + player.Name + " | " + result);
-            }
-            turnIndex = nextTrurnIndex;
-            attackerIndex = nextAttackerIndex;
-            defenderIndex = nextDefenderIndex;
+            //// lastly check if the next attacker's hand is not empty ####### choose the next available one
+            //if (players[nextAttackerIndex].Hand.Count() == 0)
+            //{
+            //    int fromStartIndex = 0;
+            //    for (int i = 0; i < players.Count(); i++)
+            //    {
+            //        if (i + nextAttackerIndex < players.Count())
+            //        {
+            //            if (players[i + nextAttackerIndex].Hand.Count() != 0)
+            //            {
+            //                nextAttackerIndex = i + nextAttackerIndex; break;
+            //            }
+            //        }
+            //        else
+            //        {
+            //            if (players[fromStartIndex].Hand.Count() != 0)
+            //            {
+            //                nextAttackerIndex = fromStartIndex; break;
+            //            }
+            //            fromStartIndex++;
+            //        }
+            //    }
+            //}
+
+            //if (nextTrurnIndex == -1)
+            //{
+            //    nextTrurnIndex = nextAttackerIndex;
+            //}
+
+            //// find the next defender
+            //nextDefenderIndex = nextAttackerIndex + 1;
+            //if (nextDefenderIndex >= players.Count())
+            //{
+            //    nextDefenderIndex = 0;
+            //}
+            //// check if this player has cards
+            //if (players[nextDefenderIndex].Hand.Count() == 0)
+            //{
+            //    int fromStartIndex = 0;
+            //    for (int i = 0; i < players.Count(); i++)
+            //    {
+            //        if (i + nextDefenderIndex < players.Count())
+            //        {
+            //            // i dont think this (& (i + nextDefenderIndex != nextAttackerIndex) is nedded here
+            //            if (players[i + nextDefenderIndex].Hand.Count() != 0 & (i + nextDefenderIndex != nextAttackerIndex))
+            //            {
+            //                nextDefenderIndex = i + nextDefenderIndex; break;
+            //            }
+            //            else
+            //            {
+            //                // just to let me know no other player is left to defend and the game has reached an end
+            //                // I dont think it should ever reach this condition, because it should check this first
+            //                nextDefenderIndex = -1;
+            //            }
+            //        }
+            //        else
+            //        {
+            //            if ((players[fromStartIndex].Hand.Count() != 0) & (i + nextDefenderIndex != nextAttackerIndex))
+            //            {
+            //                nextDefenderIndex = fromStartIndex; break;
+            //            }
+            //            else
+            //            {
+            //                // just to let me know no other player is left to defend and the game has reached an end
+            //                // I dont think it should ever reach this condition, because it should check this first
+            //                nextDefenderIndex = -1;
+            //            }
+            //            fromStartIndex++;
+            //        }
+            //    }
+            //}
+            //Console.WriteLine("      before      ");
+            //foreach (Player player in players)
+            //{
+            //    // I stole this (string result = String.Join(" ", player.Hand.Select(obj => obj.Rank));) from chatGPT
+            //    string result = String.Join(" ", player.Hand.Select(obj => obj.Value + obj.Suit));
+            //    Console.WriteLine("player: " + player.Name + " | " + result);
+            //}
+            //Console.WriteLine("  ");
+            //Console.WriteLine(caseInfo);
+            //Console.WriteLine("GameLogic=> previous turnIndex: " + turnIndex + " | defenderIndex: " + defenderIndex);
+            //Console.WriteLine("GameLogic=> caseNumber: " + caseNumber + " | nextAttackerIndex: " + nextAttackerIndex + " | nextDefenderIndex: " + nextDefenderIndex);
+            //Console.WriteLine("      after       ");
+            //foreach (Player player in players)
+            //{
+            //    // I stole this (string result = String.Join(" ", player.Hand.Select(obj => obj.Rank));) from chatGPT
+            //    string result = String.Join(" ", player.Hand.Select(obj => obj.Value + obj.Suit));
+            //    Console.WriteLine("player: " + player.Name + " | " + result);
+            //}
+            //turnIndex = nextTrurnIndex;
+            //attackerIndex = nextAttackerIndex;
+            //defenderIndex = nextDefenderIndex;
+            ///  ################################ if it breaks, un commment the code in between ####################
         }
 
 
         // ############################### TEST ends here ################################
 
+        // new function to detemine next player and support multiple attack and maybe pass as well STARTS HERE
+        public void DetermineDefenderAndAttackerIndex()
+        {
+            // just to debug starts here
+            int caseNumber = -1;
+            string caseInfo;
+            // just to debug ends here
 
-        // ############################ TEST FOR RESERVE ATTACK IMPLEMENTATION starts here ############
-        public void ReserveAttack()
+            int nextDefenderIndex;
+            int nextAttackerIndex; // ====== turnIndex
+            int nextTrurnIndex;
+            // if defender 
+            if (defenderIndex == turnIndex)
+            {
+                // check if the current attcker can attack again
+                bool canStillAttackAgainBlah = canStillAttack(players[attackerIndex].Hand);
+                if (canStillAttackAgainBlah)
+                {
+                    caseNumber = 1;
+                    caseInfo = "defender won, attacker can attack again";
+                    nextDefenderIndex = defenderIndex;
+                    nextAttackerIndex = attackerIndex;
+                    nextTrurnIndex = attackerIndex;
+
+                }
+                // else the defender won the attack
+                else
+                {
+
+                    caseNumber = 2;
+                    caseInfo = "defender won, attcker can not attack again";
+                    // implement code to allow other players to attack if the attacker no longer has the right cards starts here
+
+                    //            ######################## DO NOT FORGET ########################
+                    // -2 => exclude defender and attacker from total players
+                    int possibleNumberOfAttackers = players.Count() - 2;
+                    Console.WriteLine(possibleNumberOfAttackers);
+                    //int possibleNextAttackerIndex = FindNextAvailablePlayer(turnIndex);
+                    //Console.WriteLine(possibleNextAttackerIndex);
+                    //int distanceBetweenSubAttckerAndDefender = Math.Abs(possibleNextAttackerIndex - defenderIndex);
+                    //Console.WriteLine(distanceBetweenSubAttckerAndDefender);
+                    //bool possibleNextAttackerCanAttack = canStillAttack(players[possibleNextAttackerIndex].Hand);
+                    //Console.WriteLine("next can attack: " + possibleNextAttackerCanAttack);
+
+                    // test starts here
+                    int possibleNextAttackerIndex = 100;             //100 could be any value
+                    int distanceBetweenSubAttckerAndDefender = 100;  // any value less than total number of players
+                    bool possibleNextAttackerCanAttack = false;
+                    for (int i = 0; i < possibleNumberOfAttackers; i++)
+                    {
+                        possibleNextAttackerIndex = FindNextAvailablePlayer(turnIndex + i);
+                        distanceBetweenSubAttckerAndDefender = Math.Abs(possibleNextAttackerIndex - defenderIndex);
+                        possibleNextAttackerCanAttack = canStillAttack(players[possibleNextAttackerIndex].Hand);
+                        if (possibleNextAttackerCanAttack)
+                        {
+                            Console.WriteLine("should attack the same defender next: " + possibleNextAttackerIndex);
+                            Console.WriteLine("distance between them" +distanceBetweenSubAttckerAndDefender);
+                            break;
+                        }
+                    }
+                    Console.WriteLine(" ");
+                    Console.WriteLine("cards Attack: " + string.Join(", ", cardsAttack.Select(p => p.Rank)));
+                    Console.WriteLine("cards defend: " + string.Join(", ", cardsDefend.Select(p => p.Rank)));
+                    Console.WriteLine("attacker's hand: " + string.Join(", ", players[possibleNextAttackerIndex].Hand.Select(card => card.Rank)));
+                    Console.WriteLine(" ");
+                    // test ends here
+                    if (possibleNumberOfAttackers != 0 & possibleNumberOfAttackers >= distanceBetweenSubAttckerAndDefender & possibleNextAttackerCanAttack)
+                    {
+                        Console.WriteLine("############################case test sub attack ################################");
+                        Console.WriteLine("previous defender: " + defenderIndex);
+                        nextDefenderIndex = defenderIndex;
+                        nextAttackerIndex = possibleNextAttackerIndex;
+                        nextTrurnIndex = possibleNextAttackerIndex;
+                    }
+                    // defender won and no other attack from any player is made
+                    else
+                    {
+                        // implement code to allow other players to attack if the attacker no longer has the right cards ends here
+
+                        // attacker = 0 | defender = 1 | => nextAttacker = 1 | next defender = 2
+                        // defender 1 + X = 2 => x = 1
+                        // check if defender who is going to be attacker, still have cards
+                        if (players[defenderIndex].Hand.Count() != 0)
+                        {
+                            nextDefenderIndex = FindNextAvailablePlayer(defenderIndex); //x
+                            nextAttackerIndex = defenderIndex;
+                            nextTrurnIndex = defenderIndex;
+                        }
+                        else
+                        {
+                            nextAttackerIndex = FindNextAvailablePlayer(defenderIndex);
+                            nextDefenderIndex = FindNextAvailablePlayer(nextAttackerIndex);
+                            nextTrurnIndex = nextAttackerIndex;
+                        }
+                        
+                        cardsAttack.Clear();
+                        cardsDefend.Clear();
+                        fillHand();
+                    }
+                }
+                //}
+                // if defender lost the attack
+                // attacker = 0 | defender = 1 | => nextAttacker = 2 | next defender = 3
+                // defender 1 + X = 3 => x = 2
+                //else
+                //{
+                //    nextDefenderIndex = turnIndex + 2; //x
+                //}
+            }
+            // if attacker
+            else
+            {
+
+                Card cardAttackedBy = cardsAttack[cardsAttack.Count - 1];
+                Console.WriteLine(" : " + cardAttackedBy);
+                bool canStillDefendAgainBlah = canStillDefend(players[defenderIndex].Hand, cardAttackedBy);
+                Console.WriteLine("can defend: " + canStillDefendAgainBlah);
+                if (!canStillDefendAgainBlah)
+                {
+                    caseNumber = 3;
+                    caseInfo = "attcker won, defender can not beat the card" + cardAttackedBy.Suit + cardAttackedBy.Rank;
+                    //nextTrurnIndex = turnIndex + 2;
+                    nextTrurnIndex = -1; //it will be same as nextAttackerIndex 
+                    foreach (Card card in cardsAttack)
+                    {
+                        players[defenderIndex].Hand.Add(card);
+                    }
+                    foreach (Card card in cardsDefend)
+                    {
+                        players[defenderIndex].Hand.Add(card);
+                    }
+
+                    // if attacker won 
+                    nextAttackerIndex = FindNextAvailablePlayer(defenderIndex);
+                    nextDefenderIndex = FindNextAvailablePlayer(nextAttackerIndex);
+                    nextTrurnIndex = nextAttackerIndex;
+                    //clear played cards defence and attack
+                    cardsDefend.Clear();
+                    cardsAttack.Clear();
+                    fillHand();
+                }
+                // if attacker loses
+                // attacker = 0 | defender = 1 | => nextAttacker = 1 | next defender = 2
+                // attacker 0 + X = 2 => x = 2 
+                else
+                {
+                    caseNumber = 4;
+                    caseInfo = "attcker played card, defender can defend";
+                    // implement code to allow other players to attack if the attacker no longer has the right cards
+
+
+                    // implement code to allow other players to attack if the attacker no longer has the right cards
+                    //nextDefenderIndex = turnIndex + 2; //x;
+                    nextDefenderIndex = defenderIndex;
+                    nextAttackerIndex = attackerIndex;
+                    nextTrurnIndex = defenderIndex;
+
+                }
+            }
+
+            turnIndex = nextTrurnIndex;
+            attackerIndex = nextAttackerIndex;
+            defenderIndex = nextDefenderIndex;
+        }
+
+            // new function to determine next player and support multiple attack and maybe pass as well ENDS HERE
+
+
+            // ############################ TEST FOR RESERVE ATTACK IMPLEMENTATION starts here ############
+            public void ReserveAttack()
         {
             // start second or third reverse
             if (cardsAttack.Count() >= 3 & cardsDefend.Count() != cardsAttack.Count())
@@ -887,9 +1068,10 @@ namespace DurakCardGame
                 }
             }
             Console.WriteLine(" ");
+            Console.WriteLine("attacker index from plyaers list: " + players[attackerIndex].Name);
             Console.WriteLine("first attcker: " + playersListAttackerFirstIndex[0].Name);
             Console.WriteLine("second attcker: " + playersListAttackerFirstIndex[1].Name);
-            Console.WriteLine("first attcker: " + players[defenderIndex].Name);
+            Console.WriteLine("defender from players list: " + players[defenderIndex].Name);
             Console.WriteLine(" ");
 
             //multiple attack ##################(for this to work, each player needs to have uniuqe name or ID) ######################

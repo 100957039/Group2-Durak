@@ -468,8 +468,9 @@ namespace DurakCardGame
         private void PrintDefenderCurrentPlayerIndex()
         {
             Console.WriteLine("   ");
-            Console.WriteLine("Defender PLayer Index: " + game.defenderIndex);
             Console.WriteLine("Curent Player Index: " + game.turnIndex);
+            Console.WriteLine("Attacker Player Index: " + game.attackerIndex);
+            Console.WriteLine("Defender PLayer Index: " + game.defenderIndex);
         }
         private void button1_Click(object sender, EventArgs e)
         {
