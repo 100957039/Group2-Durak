@@ -516,8 +516,6 @@ namespace DurakCardGame
 
                 Card cardAttackedBy = cardsAttack[cardsAttack.Count - 1];
                 Console.WriteLine(" ");
-                Console.WriteLine("defender can't beat this card : "+ cardAttackedBy.Rank + cardAttackedBy.Suit);
-                Console.WriteLine("defender Hand: " + string.Join(", ", players[defenderIndex].Hand.Select(card => card.Rank.ToString() + card.Suit.ToString())));
                 bool canStillDefendAgainBlah = canStillDefend(players[defenderIndex].Hand, cardAttackedBy);
                 Console.WriteLine("can defend: " +canStillDefendAgainBlah);
                 if (!canStillDefendAgainBlah)
@@ -551,7 +549,9 @@ namespace DurakCardGame
                 else
                 {
                     caseNumber = 4;
-                    caseInfo = "attcker played card, defender can defend";
+                    caseInfo = "attcker played card, defender can defend: " + cardAttackedBy.Rank + cardAttackedBy.Suit;
+                    //Console.WriteLine("defender can't beat this card : " + cardAttackedBy.Rank + cardAttackedBy.Suit);
+                    Console.WriteLine("defender Hand: " + string.Join(", ", players[defenderIndex].Hand.Select(card => card.Rank.ToString() + card.Suit.ToString())));
                     // implement code to allow other players to attack if the attacker no longer has the right cards
 
 
@@ -730,6 +730,7 @@ namespace DurakCardGame
                 {
 
                     caseNumber = 2;
+                    //Console.WriteLine("attacker's hand: " + players[attackerIndex].Hand.Select(card=> card.Rank.ToString()+ card.Suit));
                     caseInfo = "defender won, attcker can not attack again";
                     // implement code to allow other players to attack if the attacker no longer has the right cards starts here
 
@@ -1089,7 +1090,400 @@ namespace DurakCardGame
             }
         }
         // ########## add card to cardsAttack or cardsDefend based on turnIndex ##########
-        
+
+        // make it work for multiple attacks
+        public void PassNot(int currentIndex)
+        {
+            int nextPossibleAttacker;
+            int nextPossibleTurn;
+            int nextPossibleDefender;
+            //lis = [1, 2, 3, 4]
+            //newlis = lis[3:] + lis[:3] => [3,4,1,2]
+            List<Player> playersListAttackerFirstIndex = new List<Player>();
+            int fromStartBlah = 0;
+            for (int i = 0; i < players.Count(); i++)
+            {
+                bool exceedRange = i + attackerIndex >= players.Count();
+                if (exceedRange)
+                {
+                    playersListAttackerFirstIndex.Add(players[fromStartBlah]);
+                    fromStartBlah++;
+                }
+                else
+                {
+                    playersListAttackerFirstIndex.Add(players[i + attackerIndex]);
+                }
+            }
+            // last one is the first attacker, not needed
+            playersListAttackerFirstIndex = playersListAttackerFirstIndex.GetRange(0, playersListAttackerFirstIndex.Count() - 1);
+
+            //multiple attack ##################(for this to work, each player needs to have uniuqe name or ID) ######################
+            //if the second index does not equal the defender name, (it is multiple attack)
+            if (playersListAttackerFirstIndex[1].Name != players[defenderIndex].Name)
+            {
+                //calculateTurnIndex = defenderIndex;
+                Console.WriteLine("multiple attack");
+            }
+            //single attack
+            else
+            {
+                Console.WriteLine("Single attack");
+                //calculateTurnIndex = currentIndex + 1;
+            }
+
+
+            //turnIndex = calculateTurnIndex;
+            //attackerIndex = calculateTurnIndex;
+            //defenderIndex = calculateDefenderIndex;
+            //}
+            //Console.WriteLine("gameLogic: defender index: " + defenderIndex);
+            // defender calculation ends here
+            //}
+        }
+        public void PassZ(int currentIndex)
+        {
+            Console.WriteLine("runing pass function");
+
+            int nextPossibleAttacker;
+            int nextPossibleDefender;
+            int nextPossibleTurn;
+
+            // check if it is multiple attack
+            //lis = [1, 2, 3, 4]
+            //newlis = lis[3:] + lis[:3] => [3,4,1,2]
+            List<Player> playersListAttackerFirstIndex = new List<Player>();
+            int fromStartBlah = 0;
+            for (int i = 0; i < players.Count(); i++)
+            {
+                bool exceedRange = i + attackerIndex >= players.Count();
+                if (exceedRange)
+                {
+                    playersListAttackerFirstIndex.Add(players[fromStartBlah]);
+                    fromStartBlah++;
+                }
+                else
+                {
+                    playersListAttackerFirstIndex.Add(players[i + attackerIndex]);
+                }
+            }
+            bool isDefenderTurn = defenderIndex == turnIndex;
+
+            // for this to work, NAME MUST be unique or add ID to player class
+            // 0 = attacker and 1 = defender => means it's single attack, because they are in the right order
+            // single attack
+            if (playersListAttackerFirstIndex[1].Name == players[defenderIndex].Name)
+            {
+                if (isDefenderTurn)
+                {
+                    Console.WriteLine("here");
+                    nextPossibleAttacker = FindNextAvailablePlayer(defenderIndex);
+                    nextPossibleTurn = nextPossibleAttacker;
+                    nextPossibleDefender = FindNextAvailablePlayer(nextPossibleAttacker);
+                    // take all the cards on the board
+                    foreach (Card card in cardsAttack)
+                    {
+                        players[defenderIndex].Hand.Add(card);
+                    }
+                    foreach (Card card in cardsDefend)
+                    {
+                        players[defenderIndex].Hand.Add(card);
+                    }
+                }
+                else
+                {
+                    nextPossibleAttacker = defenderIndex;
+                    nextPossibleTurn = defenderIndex;
+                    nextPossibleDefender = FindNextAvailablePlayer(defenderIndex);
+                }
+            }
+            // multiple attack
+            else
+            {
+                if (isDefenderTurn)
+                {
+                    nextPossibleAttacker = FindNextAvailablePlayer(defenderIndex);
+                    nextPossibleDefender = FindNextAvailablePlayer(nextPossibleAttacker);
+                    nextPossibleTurn = nextPossibleAttacker;
+                }
+                // attacker
+                else
+                {
+                    List<Player> defenderFirst = new List<Player>();
+                    int fromStartBlah2 = 0;
+                    // -1 | because it's multiple attack and the first one is excluded, only two left max.
+                    for (int i = 0; i < players.Count(); i++)
+                    {
+                        bool exceedRange = i + defenderIndex >= players.Count();
+                        if (exceedRange)
+                        {
+                            if (players[fromStartBlah2].Hand.Count() !=0)
+                            {
+                                defenderFirst.Add(players[fromStartBlah2]);
+                                fromStartBlah2++;
+                            }
+                        }
+                        else 
+                        {
+                            if (players[i + defenderIndex].Hand.Count() != 0)
+                            {
+                                defenderFirst.Add(players[i + defenderIndex]);
+                            }
+                                
+                        }
+                    }
+
+                    // there is at least one attcker (first & second)
+                    if (defenderFirst.Count() > 1)
+                    {
+                        Console.WriteLine("first: " + defenderFirst.Count());
+                        if (defenderFirst.Count() >= 3)
+                        {
+                            Console.WriteLine("second: " + defenderFirst.Count());
+                            if (defenderFirst[1].Name == players[turnIndex].Name)
+                            {
+                                Console.WriteLine("third: " + defenderFirst[1].Name + " | next" + defenderFirst[2].Name) ;
+                                nextPossibleAttacker = players.FindIndex(player=> player.Name == defenderFirst[2].Name);
+                                nextPossibleTurn = nextPossibleAttacker;
+                                nextPossibleDefender = defenderIndex;
+                            }
+                            else
+                            {
+                                if (players[defenderIndex].Hand.Count() != 0)
+                                {
+                                    nextPossibleAttacker = defenderIndex;
+                                    nextPossibleTurn = defenderIndex;
+                                    nextPossibleDefender = FindNextAvailablePlayer(defenderIndex);
+                                }
+                                else
+                                {
+                                    nextPossibleAttacker = FindNextAvailablePlayer(defenderIndex);
+                                    nextPossibleTurn = nextPossibleAttacker;
+                                    nextPossibleDefender = FindNextAvailablePlayer(nextPossibleAttacker);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (players[defenderIndex].Hand.Count() != 0)
+                            {
+                                nextPossibleAttacker = defenderIndex;
+                                nextPossibleTurn = defenderIndex;
+                                nextPossibleDefender = FindNextAvailablePlayer(defenderIndex);
+                            }
+                            else
+                            {
+                                nextPossibleAttacker = FindNextAvailablePlayer(defenderIndex);
+                                nextPossibleTurn = nextPossibleAttacker;
+                                nextPossibleDefender = FindNextAvailablePlayer(nextPossibleAttacker);
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        nextPossibleTurn = defenderIndex;
+                        nextPossibleAttacker = defenderIndex;
+                        nextPossibleDefender = FindNextAvailablePlayer(defenderIndex);
+                    }
+                }
+
+            }
+            turnIndex = nextPossibleTurn;
+            attackerIndex = nextPossibleAttacker;
+            defenderIndex = nextPossibleDefender;
+        }
+        public void PassTestLikeAbove (int currentIndex)
+        {
+            Console.WriteLine("runing pass function");
+
+            int nextPossibleAttacker;
+            int nextPossibleDefender;
+            int nextPossibleTurn;
+
+            // check if it is multiple attack
+            //lis = [1, 2, 3, 4]
+            //newlis = lis[3:] + lis[:3] => [3,4,1,2]
+            List<Player> playersListAttackerFirstIndex = new List<Player>();
+            int fromStartBlah = 0;
+            for (int i = 0; i < players.Count(); i++)
+            {
+                bool exceedRange = i + attackerIndex >= players.Count();
+                if (exceedRange)
+                {
+                    playersListAttackerFirstIndex.Add(players[fromStartBlah]);
+                    fromStartBlah++;
+                }
+                else
+                {
+                    playersListAttackerFirstIndex.Add(players[i + attackerIndex]);
+                }
+            }
+            bool isDefenderTurn = defenderIndex == turnIndex;
+
+            // for this to work, NAME MUST be unique or add ID to player class
+            // 0 = attacker and 1 = defender => means it's single attack, because they are in the right order
+            // single attack
+            if (playersListAttackerFirstIndex[1].Name == players[defenderIndex].Name)
+            {
+                if (isDefenderTurn)
+                {
+                    Console.WriteLine("here");
+                    nextPossibleAttacker = FindNextAvailablePlayer(defenderIndex);
+                    nextPossibleTurn = nextPossibleAttacker;
+                    nextPossibleDefender = FindNextAvailablePlayer(nextPossibleAttacker);
+                    // take all the cards on the board
+                    foreach (Card card in cardsAttack)
+                    {
+                        players[defenderIndex].Hand.Add(card);
+                    }
+                    foreach (Card card in cardsDefend)
+                    {
+                        players[defenderIndex].Hand.Add(card);
+                    }
+                }
+                else
+                {
+                    nextPossibleAttacker = defenderIndex;
+                    nextPossibleTurn = defenderIndex;
+                    nextPossibleDefender = FindNextAvailablePlayer(defenderIndex);
+                }
+            }
+            // multiple attack
+            else
+            {
+                if (isDefenderTurn)
+                {
+                    nextPossibleAttacker = FindNextAvailablePlayer(defenderIndex);
+                    nextPossibleDefender = FindNextAvailablePlayer(nextPossibleAttacker);
+                    nextPossibleTurn = nextPossibleAttacker;
+                }
+                // attacker
+                else
+                {
+                    int numberOfPlayers = players.Count();
+                    // make defender first
+                    List<Player> playersListDefenderFirstIndex = new List<Player>();
+                    int fromStartBlah2 = 0;
+                    for (int i = 0; i < players.Count(); i++)
+                    {
+                        bool exceedRange = i + attackerIndex >= players.Count();
+                        if (exceedRange)
+                        {
+                            playersListDefenderFirstIndex.Add(players[fromStartBlah2]);
+                            fromStartBlah++;
+                        }
+                        else
+                        {
+                            playersListDefenderFirstIndex.Add(players[i + attackerIndex]);
+                        }
+                    }
+
+                    // check deference between defender and the rest of the attackers. max should be 2
+                    List<int> availableAttackers = new List<int>();
+                    for (int i = 0; i < numberOfPlayers; i++)
+                    {
+                        if (availableAttackers.Count() + 2 <= numberOfPlayers)
+                        {
+                            if (playersListDefenderFirstIndex[i + 1].Hand.Count() != 0)
+                            {
+                                availableAttackers.Add(i + 1);
+                            }
+                        }
+                    }
+                    int maxAvailablePllayers = players.Count() - 2;
+                    for (int i = 0; i < maxAvailablePllayers; i++)
+                    {
+
+                        if (playersListDefenderFirstIndex[i].Name == players[turnIndex].Name)
+                        {
+                            // if the differnce is 1
+                            if (i == 0)
+                            {
+                                nextPossibleDefender = defenderIndex;
+                                nextPossibleAttacker = players.FindIndex(player => player.Name == playersListDefenderFirstIndex[i].Name);
+                                nextPossibleTurn = nextPossibleAttacker;
+                            }
+                            // if difference is 2
+                            else
+                            {
+                                nextPossibleAttacker = defenderIndex;
+                                nextPossibleTurn = defenderIndex;
+                                nextPossibleDefender = FindNextAvailablePlayer(defenderIndex);
+                            }
+                        }
+
+
+                    }
+
+
+                }
+                
+            }
+            //turnIndex = nextPossibleTurn;
+            //attackerIndex = nextPossibleAttacker;
+            //defenderIndex = nextPossibleDefender;
+        }
+
+
+        // works fine but if it is in multiple attack if the second attacker pass, it wont transfer the attack to the third player
+        public void Pass2(int currentIndex)
+        {
+            Console.WriteLine("runing pass function");
+            int nextPossibleAttacker;
+            int nextPossibleDefender;
+            int nextPossibleTurn;
+
+
+            // all the code above and comment, might not be needed   ###########################
+            // you can use pass button only if there is at least one card played
+            //if (cardsAttack.Count() != 0)
+            //{
+
+                bool isDefenderTurn = defenderIndex == turnIndex;
+                if (isDefenderTurn)
+                {
+                Console.WriteLine("here");
+                    nextPossibleAttacker = FindNextAvailablePlayer(defenderIndex);
+                    nextPossibleTurn = nextPossibleAttacker;
+                    nextPossibleDefender = FindNextAvailablePlayer(nextPossibleAttacker);
+                    // take all the cards on the board
+                    foreach( Card card in cardsAttack)
+                    {
+                        players[defenderIndex].Hand.Add(card);
+                    }
+                    foreach(Card card in cardsDefend)
+                    {
+                        players[defenderIndex].Hand.Add(card);
+                    }
+                }
+                else
+                {
+                nextPossibleAttacker = defenderIndex;
+                    nextPossibleTurn = defenderIndex;
+                    nextPossibleDefender = FindNextAvailablePlayer(defenderIndex);
+                }
+
+
+                Console.WriteLine(" ");
+                if (isDefenderTurn)
+                {
+                    Console.WriteLine("defender refuse to defend");
+                }
+                else
+                {
+                    Console.WriteLine("attacker refuse to attack");
+                }
+                Console.WriteLine("current attacker index: " + attackerIndex + " | current defender: " + defenderIndex);
+                turnIndex = nextPossibleTurn;
+                attackerIndex = nextPossibleAttacker;
+                defenderIndex = nextPossibleDefender;
+                Console.WriteLine("next attacker index: " + attackerIndex + " | next defender: " + defenderIndex);
+                // clear board 
+                cardsDefend.Clear();
+                cardsAttack.Clear();
+            //}
+            // all the code below and comment, might not be needed   #############################
+        }
 
         public void Pass(int currentIndex) {
             //if (currentPlayerDefender)
@@ -1128,6 +1522,8 @@ namespace DurakCardGame
             Console.WriteLine("first attcker: " + playersListAttackerFirstIndex[0].Name);
             Console.WriteLine("second attcker: " + playersListAttackerFirstIndex[1].Name);
             Console.WriteLine("defender from players list: " + players[defenderIndex].Name);
+            Console.WriteLine("before arrange: " + string.Join(" , ", players.Select(player=> player.Name)));
+            Console.WriteLine("after arrange: " + string.Join(" , ", playersListAttackerFirstIndex.Select(player => player.Name)));
             Console.WriteLine(" ");
 
             //multiple attack ##################(for this to work, each player needs to have uniuqe name or ID) ######################
