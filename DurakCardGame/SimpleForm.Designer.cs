@@ -59,9 +59,9 @@
             // 
             buttonStartGame.Location = new Point(660, 55);
             buttonStartGame.Name = "buttonStartGame";
-            buttonStartGame.Size = new Size(75, 23);
+            buttonStartGame.Size = new Size(124, 23);
             buttonStartGame.TabIndex = 1;
-            buttonStartGame.Text = "start";
+            buttonStartGame.Text = "start/restart";
             buttonStartGame.UseVisualStyleBackColor = true;
             buttonStartGame.Click += buttonStartGame_Click;
             // 
@@ -71,7 +71,7 @@
             button3.Name = "button3";
             button3.Size = new Size(97, 23);
             button3.TabIndex = 2;
-            button3.Text = "console.log";
+            button3.Text = "All Hands";
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 

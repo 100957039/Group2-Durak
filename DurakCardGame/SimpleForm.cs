@@ -386,23 +386,24 @@ namespace DurakCardGame
             // only works if there is at least one card played in attack list
             if (game.cardsAttack.Count() != 0)
             {
-                bool isDefender = game.turnIndex == game.defenderIndex;
-                if (isDefender)
-                {
-                    foreach (Card card in game.cardsAttack)
-                    {
-                        game.players[game.turnIndex].Hand.Add(card);
-                    }
-                    foreach (Card card in game.cardsDefend)
-                    {
-                        game.players[game.turnIndex].Hand.Add(card);
-                    }
-                }
-                game.cardsDefend.Clear();
-                game.cardsAttack.Clear();
+                //bool isDefender = game.turnIndex == game.defenderIndex;
+                //if (isDefender)
+                //{
+                //    foreach (Card card in game.cardsAttack)
+                //    {
+                //        game.players[game.turnIndex].Hand.Add(card);
+                //    }
+                //    foreach (Card card in game.cardsDefend)
+                //    {
+                //        game.players[game.turnIndex].Hand.Add(card);
+                //    }
+                //}
+                //game.cardsDefend.Clear();
+                //game.cardsAttack.Clear();
 
-                game.fillHand();
-                game.Pass(game.turnIndex);
+                //game.fillHand();
+                game.Pass();
+                //game.Pass(game.turnIndex);
                 refreshTopBottomPanels();
                 displayCurrentPlayerHand();
             }
@@ -433,11 +434,11 @@ namespace DurakCardGame
         public void PrintPlayersHand()
         {
             Console.WriteLine("       ");
-            foreach (Player player in game.players)
+            for (int i =0; i < game.players.Count(); i++)
             {
                 // I stole this (string result = String.Join(" ", player.Hand.Select(obj => obj.Rank));) from chatGPT
-                string result = String.Join(" ", player.Hand.Select(obj => obj.Value + obj.Suit));
-                Console.WriteLine("player: " + player.Name + " | " + result);
+                string result = String.Join(" ", game.players[i].Hand.Select(obj => obj.Value + obj.Suit));
+                Console.WriteLine("player index: " + i + " | " + result);
             }
             Console.WriteLine("       ");
 
