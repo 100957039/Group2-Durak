@@ -405,6 +405,7 @@ namespace DurakCardGame
                 game.Pass();
                 //game.Pass(game.turnIndex);
                 refreshTopBottomPanels();
+                displayPlayedCards();
                 displayCurrentPlayerHand();
             }
 

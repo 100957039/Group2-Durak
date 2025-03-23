@@ -1172,11 +1172,39 @@ namespace DurakCardGame
                 {
                     // available next sub attack
                     nextPossibleAttacker = FindNextAvailablePlayer(defenderIndex);
-                    if (players[nextPossibleAttacker].Name != playersListAttackerFirstIndex[0].Name)
+                    
+                    if (players[nextPossibleAttacker].Name != playersListAttackerFirstIndex[0].Name )
                     {
-                        nextPossibleDefender = defenderIndex;
-                        nextPossibleTurn = nextPossibleAttacker;
+                        bool nextAttackerCanPlay = canStillAttack(players[nextPossibleAttacker].Hand);
                         subAttackNumber++;
+                        if (nextAttackerCanPlay)
+                        {
+                            nextPossibleDefender = defenderIndex;
+                            nextPossibleTurn = nextPossibleAttacker;
+                        }
+                        else
+                        {
+                            subAttackNumber++;
+                            nextPossibleAttacker = FindNextAvailablePlayer(subAttackNumber);
+                            nextAttackerCanPlay = canStillAttack(players[nextPossibleAttacker].Hand);
+                            int maxDistance = players.Select(player => player.Hand.Count() != 0).Count() - 2;
+                            if (maxDistance != subAttackNumber & nextAttackerCanPlay)
+                            {
+                                nextPossibleDefender = defenderIndex;
+                                nextPossibleTurn = nextPossibleAttacker;
+                            }
+                            else
+                            {
+                                nextPossibleAttacker = defenderIndex;
+                                nextPossibleDefender = FindNextAvailablePlayer(nextPossibleAttacker);
+                                nextPossibleTurn = defenderIndex;
+                                cardsAttack.Clear();
+                                cardsDefend.Clear();
+                                fillHand();
+                                subAttackNumber = 0;
+                            }
+                        }
+                        
                     }
                     // no attacker left, means defender will be the next attacker
                     else
