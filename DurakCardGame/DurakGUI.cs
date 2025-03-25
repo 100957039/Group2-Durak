@@ -343,17 +343,24 @@ namespace DurakCardGame
             const int CardHeight = 122;
             const int CardY = 12;
             const int CardHover = 10;
-            const double SpacePerCard = 2.65;
-            const double CardXModifier = 93;
-            const double BaseHandCount = 6;
+            double spacePerCard = 0;
             double handCount = hand.Count;
-            int cardXModifier;
+            const int defaultHandCount = 6;
+            int cardXModifier = 92;
             int cardX = 12;
 
 
             // Calculate how much space should be between cards
             // Not working as intended, I'll need to rework the calculation
-            cardXModifier = (int)(CardXModifier - ((handCount - BaseHandCount) * SpacePerCard));
+            //if(handCount > defaultHandCount)
+            //{
+            //    spacePerCard = CardWidth / handCount;
+            //    cardXModifier = (int)(defaultHandCount * spacePerCard);
+            //}
+
+            spacePerCard = CardWidth / handCount;
+            cardXModifier = (int)(defaultHandCount * spacePerCard);
+
 
             foreach (Card card in hand)
             {
