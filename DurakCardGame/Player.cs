@@ -17,6 +17,8 @@ namespace DurakCardGame
 
         public bool DisableHand { get; set; } = true;
 
+        public String IconPath { get; set; }
+
         public Player(string name, List<Card> hand) 
         {
             Name = name;

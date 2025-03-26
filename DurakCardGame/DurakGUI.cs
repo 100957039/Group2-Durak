@@ -23,17 +23,18 @@ namespace DurakCardGame
 {
     public partial class DurakGUI : Form
     {
-        // Constants
-        const int IconsPerPage = 6;
-
         // Variables
         int numPlayers = 2;
         int numAI = 1;
-        int iconPage = 0;
+        int[] iconPage = { 0, 0, 0, 0 };
+
+        // Game variable
+        GameLogic game = new GameLogic();
 
         public DurakGUI()
         {
             InitializeComponent();
+            BtnConfirmNClick(null, null);
         }
 
         //*******************************************************************************************************************************************************
@@ -130,10 +131,10 @@ namespace DurakCardGame
         /// <param name="e"></param>
         private void BtnConfirmPSClick(object sender, EventArgs e)
         {
+            SetupCustomization();
             pnlPlayerSelect.Visible = false;
             pnlCustomize.Visible = true;
             pnlCustomize.BringToFront();
-            //ShowIcons();
         }
 
         /// <summary>
@@ -235,6 +236,38 @@ namespace DurakCardGame
         //*******************************************************************************************************************************************************
 
         /// <summary>
+        /// 
+        /// </summary>
+        private void SetupCustomization()
+        {
+            if (numPlayers == 2 && numAI == 1 || numPlayers == 3 && numAI == 2 || numPlayers == 4 && numAI == 3)
+            {
+                gbPlayer2Customize.Visible = false;
+                gbPlayer3Customize.Visible = false;
+                gbPlayer4Customize.Visible = false;
+            }
+            else if (numPlayers == 2 && numAI == 0 || numPlayers == 3 && numAI == 1 || numPlayers == 4 && numAI == 2)
+            {
+                gbPlayer2Customize.Visible = true;
+                gbPlayer3Customize.Visible = false;
+                gbPlayer4Customize.Visible = false;
+            }
+            else if (numPlayers == 3 && numAI == 0 || numPlayers == 4 && numAI == 1)
+            {
+                gbPlayer2Customize.Visible = true;
+                gbPlayer3Customize.Visible = true;
+                gbPlayer4Customize.Visible = false;
+            }
+            else
+            {
+                gbPlayer2Customize.Visible = true;
+                gbPlayer3Customize.Visible = true;
+                gbPlayer4Customize.Visible = true;
+            }
+            //ShowIcons();
+        }
+
+        /// <summary>
         /// Moves to Player Select from Customize Screen
         /// </summary>
         /// <param name="sender"></param>
@@ -244,7 +277,7 @@ namespace DurakCardGame
             pnlCustomize.Visible = false;
             pnlPlayerSelect.Visible = true;
             pnlPlayerSelect.BringToFront();
-            iconPage = 0;
+            iconPage[0] = 0;
         }
 
         /// <summary>
@@ -257,7 +290,7 @@ namespace DurakCardGame
             pnlCustomize.Visible = false;
             pnlGame.Visible = true;
             pnlGame.BringToFront();
-            iconPage = 0;
+            iconPage[0] = 0;
             GameSetup();
         }
 
@@ -267,35 +300,60 @@ namespace DurakCardGame
         /// </summary>
         private void ShowIcons()
         {
+            const int IconsPerPage = 6;
             const int iconSize = 50;
             int[] iconLocationX = { 34, 90, 146 };
-            int[] iconLocationY = { 13, 69, 0 };
+            int[] iconLocationY = { 13, 69 };
+            List<Player> playerList = new List<Player>();
             List<PictureBox> iconList = new List<PictureBox>();
-            List<PictureBox> panelList = new List<PictureBox>() { pbPlayer1SelectedIcon, pbPlayer2SelectedIcon, pbPlayer3SelectedIcon, pbPlayer4SelectedIcon };
+            List<PictureBox> pbList = new List<PictureBox>() { pbPlayer1SelectedIcon, pbPlayer2SelectedIcon, pbPlayer3SelectedIcon, pbPlayer4SelectedIcon };
+            List<Panel> panelList = new List<Panel>() { pnlPlayer1IconSelect, pnlPlayer2IconSelect, pnlPlayer3IconSelect, pnlPlayer4IconSelect };
             const String iconLocation = "../../../GUI_Images/Icons/";
             String[] icons = ["Acorn_Boy.jpg", "Beard_Man.jpg", "Inventor.jpg", "Queen.jpg", "Skull_Man.jpg", "Surprise.jpg", "Robot_Knight.jpg"];
 
-            int index = (IconsPerPage * iconPage);
-
-            for (int i = 0; i < IconsPerPage; i++)
+            // Clear all the icon panels
+            for (int f = 0; f < pbList.Count; f++)
             {
-                for (int j = 0; j < iconLocationX.Length; j++)
-                {
-                    iconList[i + j] = new PictureBox
-                    {
-                        Size = new Size(iconSize, iconSize),
-                        Location = new Point(iconLocationX[j], iconLocationY[i]),
-                        ImageLocation = iconLocation + icons[index + i],
-                        BackgroundImageLayout = ImageLayout.Stretch
-                    };
-
-                    //iconList[i + j].Click += (sender, e) =>
-                    //{
-
-                    //};
-                }
-
+                panelList[f].Controls.Clear();
             }
+
+            // Set the players in the list
+            for (int g = 0; g < numPlayers - 1; g++)
+            {
+                playerList.Add(game.players[g]);
+            }
+
+            int index = (IconsPerPage * iconPage[0]);
+
+            for (int h = 0; h < numPlayers; h++)
+            {
+                for (int i = 0; i < IconsPerPage; i++)
+                {
+                    for (int j = 0; j < iconLocationX.Length; j++)
+                    {
+                        iconList[i + j] = new PictureBox
+                        {
+                            Size = new Size(iconSize, iconSize),
+                            Location = new Point(iconLocationX[j], iconLocationY[i]),
+                            ImageLocation = iconLocation + icons[index + i],
+                            BackgroundImageLayout = ImageLayout.Stretch
+                        };
+
+                        iconList[i + j].Click += (sender, e) =>
+                        {
+                            playerList[h].IconPath = iconList[i + j].ImageLocation;
+                            pbList[h].ImageLocation = iconLocation;
+                        };
+
+                        panelList[h].Controls.Add(iconList[i +j]);
+                    }
+                }  
+            }
+        }
+
+        private void nameValidation()
+        {
+
         }
 
 
@@ -303,6 +361,18 @@ namespace DurakCardGame
         // Game
         //*******************************************************************************************************************************************************
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private void SetupPlayers()
+        {
+
+            List<String> playersList = new List<String> { "1", "2", "3", "4" };
+            foreach (String player in playersList)
+            {
+                game.addPlayer(player);
+            }
+        }
         /// <summary>
         /// Brings up an alert and lets player return to Main Menu
         /// </summary>
@@ -323,45 +393,39 @@ namespace DurakCardGame
 
         private void GameSetup()
         {
-            Deck deck = new Deck();
-            List<Card> hand = new List<Card>();
-            for (int i = 0; i < 13; i++)
-            {
-                hand.Add(deck.Draw());
-            }
-
-            DisplayHand(hand);
+            
         }
 
         /// <summary>
         /// Gets a players hand and displays it
         /// </summary>
         /// <param name="hand"></param>
-        private void DisplayHand(List<Card> hand)
+        private void DisplayHand()
         {
             const int CardWidth = 80;
-            const int CardHeight = 122;
             const int CardY = 12;
             const int CardHover = 10;
+            const int defaultHandCount = 6;
+
+            Player currentPlayer = game.players[game.turnIndex];
+            List<Card> hand = currentPlayer.Hand;
+
             double spacePerCard = 0;
             double handCount = hand.Count;
-            const int defaultHandCount = 6;
             int cardXModifier = 92;
             int cardX = 12;
 
+            // Clear the panel
+            pnlHand.Controls.Clear();
 
             // Calculate how much space should be between cards
-            // Not working as intended, I'll need to rework the calculation
-            //if(handCount > defaultHandCount)
-            //{
-            //    spacePerCard = CardWidth / handCount;
-            //    cardXModifier = (int)(defaultHandCount * spacePerCard);
-            //}
+            if (handCount > defaultHandCount)
+            {
+                spacePerCard = CardWidth / handCount;
+                cardXModifier = (int)(defaultHandCount * spacePerCard);
+            }
 
-            spacePerCard = CardWidth / handCount;
-            cardXModifier = (int)(defaultHandCount * spacePerCard);
-
-
+            // Create a picturebox for each card in the list
             foreach (Card card in hand)
             {
                 card.X = cardX;
@@ -369,7 +433,7 @@ namespace DurakCardGame
                 PictureBox cardPb = new PictureBox
                 {
                     // Remove card width and height from card class
-                    Size = new Size(CardWidth, CardHeight),
+                    Size = new Size(card.Width, card.Height),
                     Location = new Point(cardX, CardY),
                     ImageLocation = card.ImageLocation,
                     SizeMode = PictureBoxSizeMode.StretchImage
@@ -378,14 +442,18 @@ namespace DurakCardGame
                 // Add card click event
                 cardPb.Click += (sender, e) =>
                 {
-
-                    Console.WriteLine(cardPb.Location);
                     // Add Functions from the Game class
+                    // ckeck if the game ended
+                    bool endGame = game.GameEnded();
+                    if (!endGame)
+                    {
+                        currentPlayer.PlayCard2(card);
+                        game.PlayCardToAttckOrDefendList(card);
+                        game.DetermineDefenderAndAttackerIndex();
+                        DisplayTableTop();
+                        DisplayTableBottom();
+                    };
 
-
-                    // If card can be played, Play card
-
-                    
                 };
 
                 // Add mouse hover events
@@ -403,6 +471,80 @@ namespace DurakCardGame
                 };
 
                 pnlHand.Controls.Add(cardPb);
+                cardPb.BringToFront();
+
+                // Add to card x
+                cardX += cardXModifier;
+            }
+        }
+
+        /// <summary>
+        /// Gets the attacking cards and displays them in the top table panel
+        /// </summary>
+        /// <param name="hand"></param>
+        private void DisplayTableTop()
+        {
+            const int CardY = 12;
+            List<Card> hand = game.cardsAttack;
+            double handCount = hand.Count;
+            int cardXModifier = 92;
+            int cardX = 12;
+
+            // Clear the panel
+            pnlTableTop.Controls.Clear();
+
+            // Create a picturebox for each card in the list
+            foreach (Card card in hand)
+            {
+                card.X = cardX;
+                card.Y = CardY;
+                PictureBox cardPb = new PictureBox
+                {
+                    // Remove card width and height from card class
+                    Size = new Size(card.Width, card.Height),
+                    Location = new Point(cardX, CardY),
+                    ImageLocation = card.ImageLocation,
+                    SizeMode = PictureBoxSizeMode.StretchImage
+                };
+
+                pnlTableTop.Controls.Add(cardPb);
+                cardPb.BringToFront();
+
+                // Add to card x
+                cardX += cardXModifier;
+            }
+        }
+
+        /// <summary>
+        /// Gets the attacking cards and displays them in the top table panel
+        /// </summary>
+        /// <param name="hand"></param>
+        private void DisplayTableBottom()
+        {
+            const int CardY = 12;
+            List<Card> hand = game.cardsDefend;
+            double handCount = hand.Count;
+            int cardXModifier = 92;
+            int cardX = 12;
+
+            // Clear the panel
+            pnlTableTop.Controls.Clear();
+
+            // Create a picturebox for each card in the list
+            foreach (Card card in hand)
+            {
+                card.X = cardX;
+                card.Y = CardY;
+                PictureBox cardPb = new PictureBox
+                {
+                    // Remove card width and height from card class
+                    Size = new Size(card.Width, card.Height),
+                    Location = new Point(cardX, CardY),
+                    ImageLocation = card.ImageLocation,
+                    SizeMode = PictureBoxSizeMode.StretchImage
+                };
+
+                pnlTableBottom.Controls.Add(cardPb);
                 cardPb.BringToFront();
 
                 // Add to card x

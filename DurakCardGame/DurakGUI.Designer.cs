@@ -53,6 +53,7 @@
             btnBackPS = new Button();
             btnConfirmPS = new Button();
             pnlGame = new Panel();
+            lblTableDivider = new Label();
             pbCardTestBack = new PictureBox();
             pbCardTestTrump = new PictureBox();
             lblDeck = new Label();
@@ -60,13 +61,11 @@
             btnMenu = new Button();
             btnRules = new Button();
             pnlTableTop = new Panel();
-            btnTableTopBg = new Button();
             pnlTableBottom = new Panel();
-            button1 = new Button();
             pnlPlayer1 = new Panel();
+            button2 = new Button();
             logBox = new TextBox();
             pnlHand = new Panel();
-            pbCardTest = new PictureBox();
             btnHandBg = new Button();
             pbPlayer1Role = new PictureBox();
             btnPlayer1RoleBg = new Button();
@@ -100,6 +99,8 @@
             btnPlayer4RoleBg = new Button();
             lblPlayer4Cards = new Label();
             btnPlayer4Bg = new Button();
+            btnTableBottomBg = new Button();
+            btnTableTopBg = new Button();
             pnlCustomize = new Panel();
             lblCustomize = new Label();
             btnCustomizeBg = new Button();
@@ -147,6 +148,10 @@
             lblOptions = new Label();
             btnBack = new Button();
             btnOptionsBg = new Button();
+            gbPlayer1CustomizeBg = new GroupBox();
+            gbPlayer2CustomizeBg = new GroupBox();
+            gbPlayer3CustomizeBg = new GroupBox();
+            gbPlayer4CustomizeBg = new GroupBox();
             pnlMainMenu.SuspendLayout();
             pnlPlayerSelect.SuspendLayout();
             gbNumAI.SuspendLayout();
@@ -154,10 +159,7 @@
             pnlGame.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbCardTestBack).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbCardTestTrump).BeginInit();
-            pnlTableTop.SuspendLayout();
-            pnlTableBottom.SuspendLayout();
             pnlPlayer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pbCardTest).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPlayer1Role).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPlayer1IconG).BeginInit();
             pnlPlayer2.SuspendLayout();
@@ -520,6 +522,7 @@
             // pnlGame
             // 
             pnlGame.BackgroundImage = (Image)resources.GetObject("pnlGame.BackgroundImage");
+            pnlGame.Controls.Add(lblTableDivider);
             pnlGame.Controls.Add(pbCardTestBack);
             pnlGame.Controls.Add(pbCardTestTrump);
             pnlGame.Controls.Add(lblDeck);
@@ -532,11 +535,22 @@
             pnlGame.Controls.Add(pnlPlayer2);
             pnlGame.Controls.Add(pnlPlayer3);
             pnlGame.Controls.Add(pnlPlayer4);
+            pnlGame.Controls.Add(btnTableBottomBg);
+            pnlGame.Controls.Add(btnTableTopBg);
             pnlGame.Location = new Point(0, 0);
             pnlGame.Name = "pnlGame";
             pnlGame.Size = new Size(1082, 760);
             pnlGame.TabIndex = 32;
             pnlGame.Visible = false;
+            // 
+            // lblTableDivider
+            // 
+            lblTableDivider.BackColor = Color.Black;
+            lblTableDivider.Location = new Point(258, 344);
+            lblTableDivider.Name = "lblTableDivider";
+            lblTableDivider.Size = new Size(566, 10);
+            lblTableDivider.TabIndex = 86;
+            lblTableDivider.Text = "label1";
             // 
             // pbCardTestBack
             // 
@@ -614,54 +628,24 @@
             // 
             // pnlTableTop
             // 
-            pnlTableTop.BackColor = Color.Transparent;
-            pnlTableTop.Controls.Add(btnTableTopBg);
-            pnlTableTop.Location = new Point(254, 195);
+            pnlTableTop.BackColor = Color.Black;
+            pnlTableTop.Location = new Point(258, 199);
             pnlTableTop.Name = "pnlTableTop";
-            pnlTableTop.Size = new Size(574, 152);
+            pnlTableTop.Size = new Size(566, 146);
             pnlTableTop.TabIndex = 83;
-            // 
-            // btnTableTopBg
-            // 
-            btnTableTopBg.BackColor = Color.Black;
-            btnTableTopBg.Enabled = false;
-            btnTableTopBg.FlatAppearance.BorderSize = 4;
-            btnTableTopBg.FlatStyle = FlatStyle.Flat;
-            btnTableTopBg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnTableTopBg.ForeColor = Color.White;
-            btnTableTopBg.Location = new Point(0, 0);
-            btnTableTopBg.Name = "btnTableTopBg";
-            btnTableTopBg.Size = new Size(574, 158);
-            btnTableTopBg.TabIndex = 86;
-            btnTableTopBg.UseVisualStyleBackColor = false;
             // 
             // pnlTableBottom
             // 
-            pnlTableBottom.BackColor = Color.Transparent;
-            pnlTableBottom.Controls.Add(pbCardTest);
-            pnlTableBottom.Controls.Add(button1);
-            pnlTableBottom.Location = new Point(254, 347);
+            pnlTableBottom.BackColor = Color.Black;
+            pnlTableBottom.Location = new Point(258, 351);
             pnlTableBottom.Name = "pnlTableBottom";
-            pnlTableBottom.Size = new Size(574, 152);
+            pnlTableBottom.Size = new Size(566, 146);
             pnlTableBottom.TabIndex = 81;
-            // 
-            // button1
-            // 
-            button1.BackColor = Color.Black;
-            button1.Enabled = false;
-            button1.FlatAppearance.BorderSize = 4;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(0, -6);
-            button1.Name = "button1";
-            button1.Size = new Size(574, 158);
-            button1.TabIndex = 87;
-            button1.UseVisualStyleBackColor = false;
             // 
             // pnlPlayer1
             // 
             pnlPlayer1.BackColor = Color.Transparent;
+            pnlPlayer1.Controls.Add(button2);
             pnlPlayer1.Controls.Add(logBox);
             pnlPlayer1.Controls.Add(pnlHand);
             pnlPlayer1.Controls.Add(btnHandBg);
@@ -678,6 +662,20 @@
             pnlPlayer1.Name = "pnlPlayer1";
             pnlPlayer1.Size = new Size(1058, 238);
             pnlPlayer1.TabIndex = 80;
+            // 
+            // button2
+            // 
+            button2.BackColor = Color.Black;
+            button2.Enabled = false;
+            button2.FlatAppearance.BorderSize = 4;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button2.ForeColor = Color.White;
+            button2.Location = new Point(254, 347);
+            button2.Name = "button2";
+            button2.Size = new Size(574, 154);
+            button2.TabIndex = 87;
+            button2.UseVisualStyleBackColor = false;
             // 
             // logBox
             // 
@@ -697,16 +695,6 @@
             pnlHand.Name = "pnlHand";
             pnlHand.Size = new Size(566, 146);
             pnlHand.TabIndex = 0;
-            // 
-            // pbCardTest
-            // 
-            pbCardTest.Image = (Image)resources.GetObject("pbCardTest.Image");
-            pbCardTest.Location = new Point(26, 13);
-            pbCardTest.Name = "pbCardTest";
-            pbCardTest.Size = new Size(80, 122);
-            pbCardTest.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbCardTest.TabIndex = 1;
-            pbCardTest.TabStop = false;
             // 
             // btnHandBg
             // 
@@ -1130,6 +1118,34 @@
             btnPlayer4Bg.TabIndex = 86;
             btnPlayer4Bg.UseVisualStyleBackColor = false;
             // 
+            // btnTableBottomBg
+            // 
+            btnTableBottomBg.BackColor = Color.Black;
+            btnTableBottomBg.Enabled = false;
+            btnTableBottomBg.FlatAppearance.BorderSize = 4;
+            btnTableBottomBg.FlatStyle = FlatStyle.Flat;
+            btnTableBottomBg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnTableBottomBg.ForeColor = Color.White;
+            btnTableBottomBg.Location = new Point(254, 347);
+            btnTableBottomBg.Name = "btnTableBottomBg";
+            btnTableBottomBg.Size = new Size(574, 154);
+            btnTableBottomBg.TabIndex = 84;
+            btnTableBottomBg.UseVisualStyleBackColor = false;
+            // 
+            // btnTableTopBg
+            // 
+            btnTableTopBg.BackColor = Color.Black;
+            btnTableTopBg.Enabled = false;
+            btnTableTopBg.FlatAppearance.BorderSize = 4;
+            btnTableTopBg.FlatStyle = FlatStyle.Flat;
+            btnTableTopBg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnTableTopBg.ForeColor = Color.White;
+            btnTableTopBg.Location = new Point(254, 195);
+            btnTableTopBg.Name = "btnTableTopBg";
+            btnTableTopBg.Size = new Size(574, 154);
+            btnTableTopBg.TabIndex = 85;
+            btnTableTopBg.UseVisualStyleBackColor = false;
+            // 
             // pnlCustomize
             // 
             pnlCustomize.AutoScroll = true;
@@ -1138,9 +1154,13 @@
             pnlCustomize.Controls.Add(lblCustomize);
             pnlCustomize.Controls.Add(btnCustomizeBg);
             pnlCustomize.Controls.Add(gbPlayer1Customize);
+            pnlCustomize.Controls.Add(gbPlayer1CustomizeBg);
             pnlCustomize.Controls.Add(gbPlayer2Customize);
+            pnlCustomize.Controls.Add(gbPlayer2CustomizeBg);
             pnlCustomize.Controls.Add(gbPlayer3Customize);
+            pnlCustomize.Controls.Add(gbPlayer3CustomizeBg);
             pnlCustomize.Controls.Add(gbPlayer4Customize);
+            pnlCustomize.Controls.Add(gbPlayer4CustomizeBg);
             pnlCustomize.Controls.Add(btnBackN);
             pnlCustomize.Controls.Add(btnConfirmN);
             pnlCustomize.Location = new Point(0, 0);
@@ -1697,15 +1717,59 @@
             btnOptionsBg.TabIndex = 13;
             btnOptionsBg.UseVisualStyleBackColor = false;
             // 
+            // gbPlayer1CustomizeBg
+            // 
+            gbPlayer1CustomizeBg.BackColor = Color.Black;
+            gbPlayer1CustomizeBg.Font = new Font("Castellar", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            gbPlayer1CustomizeBg.ForeColor = Color.White;
+            gbPlayer1CustomizeBg.Location = new Point(13, 220);
+            gbPlayer1CustomizeBg.Name = "gbPlayer1CustomizeBg";
+            gbPlayer1CustomizeBg.Size = new Size(256, 378);
+            gbPlayer1CustomizeBg.TabIndex = 42;
+            gbPlayer1CustomizeBg.TabStop = false;
+            // 
+            // gbPlayer2CustomizeBg
+            // 
+            gbPlayer2CustomizeBg.BackColor = Color.Black;
+            gbPlayer2CustomizeBg.Font = new Font("Castellar", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            gbPlayer2CustomizeBg.ForeColor = Color.White;
+            gbPlayer2CustomizeBg.Location = new Point(280, 220);
+            gbPlayer2CustomizeBg.Name = "gbPlayer2CustomizeBg";
+            gbPlayer2CustomizeBg.Size = new Size(256, 378);
+            gbPlayer2CustomizeBg.TabIndex = 43;
+            gbPlayer2CustomizeBg.TabStop = false;
+            // 
+            // gbPlayer3CustomizeBg
+            // 
+            gbPlayer3CustomizeBg.BackColor = Color.Black;
+            gbPlayer3CustomizeBg.Font = new Font("Castellar", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            gbPlayer3CustomizeBg.ForeColor = Color.White;
+            gbPlayer3CustomizeBg.Location = new Point(547, 220);
+            gbPlayer3CustomizeBg.Name = "gbPlayer3CustomizeBg";
+            gbPlayer3CustomizeBg.Size = new Size(258, 378);
+            gbPlayer3CustomizeBg.TabIndex = 43;
+            gbPlayer3CustomizeBg.TabStop = false;
+            // 
+            // gbPlayer4CustomizeBg
+            // 
+            gbPlayer4CustomizeBg.BackColor = Color.Black;
+            gbPlayer4CustomizeBg.Font = new Font("Castellar", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            gbPlayer4CustomizeBg.ForeColor = Color.White;
+            gbPlayer4CustomizeBg.Location = new Point(814, 220);
+            gbPlayer4CustomizeBg.Name = "gbPlayer4CustomizeBg";
+            gbPlayer4CustomizeBg.Size = new Size(256, 378);
+            gbPlayer4CustomizeBg.TabIndex = 43;
+            gbPlayer4CustomizeBg.TabStop = false;
+            // 
             // DurakGUI
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(1082, 753);
+            Controls.Add(pnlCustomize);
             Controls.Add(pnlGame);
             Controls.Add(pnlMainMenu);
-            Controls.Add(pnlCustomize);
             Controls.Add(pnlOptions);
             Controls.Add(pnlPlayerSelect);
             MaximizeBox = false;
@@ -1722,11 +1786,8 @@
             pnlGame.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbCardTestBack).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbCardTestTrump).EndInit();
-            pnlTableTop.ResumeLayout(false);
-            pnlTableBottom.ResumeLayout(false);
             pnlPlayer1.ResumeLayout(false);
             pnlPlayer1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pbCardTest).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbPlayer1Role).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbPlayer1IconG).EndInit();
             pnlPlayer2.ResumeLayout(false);
@@ -1792,7 +1853,6 @@
         private Button btnBackPS;
         private Button btnConfirmPS;
         private Panel pnlGame;
-        private PictureBox pbCardTest;
         private Panel pnlHand;
         private Button btnMenu;
         private PictureBox pbCardTestBack;
@@ -1837,8 +1897,6 @@
         private Button btnPlayer3Bg;
         private Button btnPlayer4Bg;
         private Button btnPlayer1Bg;
-        private Button btnTableTopBg;
-        private Button button1;
         private Panel pnlCustomize;
         private Label lblCustomize;
         private Button btnCustomizeBg;
@@ -1857,7 +1915,7 @@
         private Label lblPlayer1IconPC;
         private Button btnPlayer1ArrowL;
         private Button btnPlayer1ArrowR;
-        private Label label1;
+        private Label lblTableDivider;
         private PictureBox pbPlayer1SelectedIcon;
         private Label lblPlayer1NameC;
         private Label lblPlayer1Icon;
@@ -1898,5 +1956,12 @@
         private GroupBox groupBox1;
         private GroupBox groupBox2;
         private GroupBox groupBox3;
+        private Button button2;
+        private Button btnTableBottomBg;
+        private Button btnTableTopBg;
+        private GroupBox gbPlayer2CustomizeBg;
+        private GroupBox gbPlayer3CustomizeBg;
+        private GroupBox gbPlayer4CustomizeBg;
+        private GroupBox gbPlayer1CustomizeBg;
     }
 }

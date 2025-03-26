@@ -14,8 +14,8 @@ namespace DurakCardGame
         //public string Image { get; set; }
         public string ImageLocation { get; set; }
         public bool Flip { get; set; } = false;
-        public int Width { get; set; } = 50;
-        public int Height { get; set; } = 100;
+        public int Width { get; set; } = 80;
+        public int Height { get; set; } = 122;
         public int X { get; set; }
         public int Y { get; set; }
         //public int AddX { get; set; } = 0;
