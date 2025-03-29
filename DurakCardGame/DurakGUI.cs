@@ -35,6 +35,7 @@ namespace DurakCardGame
         public DurakGUI()
         {
             InitializeComponent();
+            BtnConfirmNClick(null, null);
         }
 
         //*******************************************************************************************************************************************************
@@ -297,7 +298,7 @@ namespace DurakCardGame
             }
             else
             {
-                DialogResult dialogResult = MessageBox.Show("Player name cannot be blank.", "Name Error", MessageBoxButtons.OK);
+                DialogResult dialogResult = MessageBox.Show("Player name cannot be blank.", "Error", MessageBoxButtons.OK);
             }
         }
 
@@ -378,24 +379,6 @@ namespace DurakCardGame
         //*******************************************************************************************************************************************************
         // Game
         //*******************************************************************************************************************************************************
-
-        /// <summary>
-        /// Add the players into the game with their chosen names and icons
-        /// Also adds the computer players with their selected difficulty
-        /// </summary>
-        private void SetupPlayers()
-        {
-            List<String> playerNames = new List<String> { tbPlayer1Name.Text, tbPlayer2Name.Text, tbPlayer3Name.Text, tbPlayer4Name.Text };
-            List<String> playerIcons = new List<String> { pbPlayer1SelectedIcon.ImageLocation, pbPlayer2SelectedIcon.ImageLocation, pbPlayer3SelectedIcon.ImageLocation, pbPlayer4SelectedIcon.ImageLocation };
-            for (int i = 0; i < numPlayers; i++)
-            {
-                game.addPlayer(playerNames[i], playerIcons[i]);
-            }
-            for (int i = 0; i < numAI; i++)
-            {
-                game.addComputer(difficulty);
-            }
-        }
         /// <summary>
         /// Brings up an alert and lets player return to Main Menu
         /// </summary>
@@ -416,7 +399,34 @@ namespace DurakCardGame
 
         private void GameSetup()
         {
+            game = new GameLogic();
             SetupPlayers();
+            SetupTrump();
+            game.sortAllHands();
+        }
+
+        /// <summary>
+        /// Add the players into the game with their chosen names and icons
+        /// Also adds the computer players with their selected difficulty
+        /// </summary>
+        private void SetupPlayers()
+        {
+            List<String> playerNames = new List<String> { tbPlayer1Name.Text, tbPlayer2Name.Text, tbPlayer3Name.Text, tbPlayer4Name.Text };
+            List<String> playerIcons = new List<String> { pbPlayer1SelectedIcon.ImageLocation, pbPlayer2SelectedIcon.ImageLocation, pbPlayer3SelectedIcon.ImageLocation, pbPlayer4SelectedIcon.ImageLocation };
+            for (int i = 0; i < numPlayers; i++)
+            {
+                game.addPlayer(playerNames[i], playerIcons[i]);
+            }
+            for (int i = 0; i < numAI; i++)
+            {
+                game.addComputer(difficulty);
+            }
+        }
+
+        private void SetupTrump()
+        {
+            game.determineTrumpCard();
+
         }
 
         /// <summary>

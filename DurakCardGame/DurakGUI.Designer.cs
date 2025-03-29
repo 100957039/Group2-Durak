@@ -55,7 +55,7 @@
             pnlGame = new Panel();
             lblTableDivider = new Label();
             pbCardTestBack = new PictureBox();
-            pbCardTestTrump = new PictureBox();
+            pbCardTrump = new PictureBox();
             lblDeck = new Label();
             lblDeckCount = new Label();
             btnMenu = new Button();
@@ -112,6 +112,7 @@
             pnlPlayer1IconSelect = new Panel();
             btnPlayer1ArrowL = new Button();
             btnPlayer1ArrowR = new Button();
+            gbPlayer1CustomizeBg = new GroupBox();
             gbPlayer2Customize = new GroupBox();
             lblPlayer2NameC = new Label();
             tbPlayer2Name = new TextBox();
@@ -120,6 +121,7 @@
             pnlPlayer2IconSelect = new Panel();
             btnPlayer2ArrowL = new Button();
             btnPlayer2ArrowR = new Button();
+            gbPlayer2CustomizeBg = new GroupBox();
             gbPlayer3Customize = new GroupBox();
             lblPlayer3NameC = new Label();
             tbPlayer3Name = new TextBox();
@@ -128,6 +130,7 @@
             pnlPlayer3IconSelect = new Panel();
             btnPlayer3ArrowL = new Button();
             btnPlayer3ArrowR = new Button();
+            gbPlayer3CustomizeBg = new GroupBox();
             gbPlayer4Customize = new GroupBox();
             lblPlayer4NameC = new Label();
             tbPlayer4Name = new TextBox();
@@ -142,23 +145,20 @@
             pictureBox42 = new PictureBox();
             btnPlayer4ArrowL = new Button();
             btnPlayer4ArrowR = new Button();
+            gbPlayer4CustomizeBg = new GroupBox();
             btnBackN = new Button();
             btnConfirmN = new Button();
             pnlOptions = new Panel();
             lblOptions = new Label();
             btnBack = new Button();
             btnOptionsBg = new Button();
-            gbPlayer1CustomizeBg = new GroupBox();
-            gbPlayer2CustomizeBg = new GroupBox();
-            gbPlayer3CustomizeBg = new GroupBox();
-            gbPlayer4CustomizeBg = new GroupBox();
             pnlMainMenu.SuspendLayout();
             pnlPlayerSelect.SuspendLayout();
             gbNumAI.SuspendLayout();
             gbNumPlayers.SuspendLayout();
             pnlGame.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbCardTestBack).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbCardTestTrump).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbCardTrump).BeginInit();
             pnlPlayer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbPlayer1Role).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPlayer1IconG).BeginInit();
@@ -524,7 +524,7 @@
             pnlGame.BackgroundImage = (Image)resources.GetObject("pnlGame.BackgroundImage");
             pnlGame.Controls.Add(lblTableDivider);
             pnlGame.Controls.Add(pbCardTestBack);
-            pnlGame.Controls.Add(pbCardTestTrump);
+            pnlGame.Controls.Add(pbCardTrump);
             pnlGame.Controls.Add(lblDeck);
             pnlGame.Controls.Add(lblDeckCount);
             pnlGame.Controls.Add(btnMenu);
@@ -562,15 +562,15 @@
             pbCardTestBack.TabIndex = 48;
             pbCardTestBack.TabStop = false;
             // 
-            // pbCardTestTrump
+            // pbCardTrump
             // 
-            pbCardTestTrump.Image = (Image)resources.GetObject("pbCardTestTrump.Image");
-            pbCardTestTrump.Location = new Point(78, 27);
-            pbCardTestTrump.Name = "pbCardTestTrump";
-            pbCardTestTrump.Size = new Size(80, 122);
-            pbCardTestTrump.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbCardTestTrump.TabIndex = 72;
-            pbCardTestTrump.TabStop = false;
+            pbCardTrump.Image = (Image)resources.GetObject("pbCardTrump.Image");
+            pbCardTrump.Location = new Point(78, 27);
+            pbCardTrump.Name = "pbCardTrump";
+            pbCardTrump.Size = new Size(80, 122);
+            pbCardTrump.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbCardTrump.TabIndex = 72;
+            pbCardTrump.TabStop = false;
             // 
             // lblDeck
             // 
@@ -1291,6 +1291,17 @@
             btnPlayer1ArrowR.TextAlign = ContentAlignment.TopCenter;
             btnPlayer1ArrowR.UseVisualStyleBackColor = false;
             // 
+            // gbPlayer1CustomizeBg
+            // 
+            gbPlayer1CustomizeBg.BackColor = Color.Black;
+            gbPlayer1CustomizeBg.Font = new Font("Castellar", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            gbPlayer1CustomizeBg.ForeColor = Color.White;
+            gbPlayer1CustomizeBg.Location = new Point(13, 220);
+            gbPlayer1CustomizeBg.Name = "gbPlayer1CustomizeBg";
+            gbPlayer1CustomizeBg.Size = new Size(256, 378);
+            gbPlayer1CustomizeBg.TabIndex = 42;
+            gbPlayer1CustomizeBg.TabStop = false;
+            // 
             // gbPlayer2Customize
             // 
             gbPlayer2Customize.BackColor = Color.Black;
@@ -1387,6 +1398,17 @@
             btnPlayer2ArrowR.TextAlign = ContentAlignment.TopCenter;
             btnPlayer2ArrowR.UseVisualStyleBackColor = false;
             // 
+            // gbPlayer2CustomizeBg
+            // 
+            gbPlayer2CustomizeBg.BackColor = Color.Black;
+            gbPlayer2CustomizeBg.Font = new Font("Castellar", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            gbPlayer2CustomizeBg.ForeColor = Color.White;
+            gbPlayer2CustomizeBg.Location = new Point(280, 220);
+            gbPlayer2CustomizeBg.Name = "gbPlayer2CustomizeBg";
+            gbPlayer2CustomizeBg.Size = new Size(256, 378);
+            gbPlayer2CustomizeBg.TabIndex = 43;
+            gbPlayer2CustomizeBg.TabStop = false;
+            // 
             // gbPlayer3Customize
             // 
             gbPlayer3Customize.BackColor = Color.Black;
@@ -1482,6 +1504,17 @@
             btnPlayer3ArrowR.Text = ">";
             btnPlayer3ArrowR.TextAlign = ContentAlignment.TopCenter;
             btnPlayer3ArrowR.UseVisualStyleBackColor = false;
+            // 
+            // gbPlayer3CustomizeBg
+            // 
+            gbPlayer3CustomizeBg.BackColor = Color.Black;
+            gbPlayer3CustomizeBg.Font = new Font("Castellar", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            gbPlayer3CustomizeBg.ForeColor = Color.White;
+            gbPlayer3CustomizeBg.Location = new Point(547, 220);
+            gbPlayer3CustomizeBg.Name = "gbPlayer3CustomizeBg";
+            gbPlayer3CustomizeBg.Size = new Size(258, 378);
+            gbPlayer3CustomizeBg.TabIndex = 43;
+            gbPlayer3CustomizeBg.TabStop = false;
             // 
             // gbPlayer4Customize
             // 
@@ -1633,6 +1666,17 @@
             btnPlayer4ArrowR.TextAlign = ContentAlignment.TopCenter;
             btnPlayer4ArrowR.UseVisualStyleBackColor = false;
             // 
+            // gbPlayer4CustomizeBg
+            // 
+            gbPlayer4CustomizeBg.BackColor = Color.Black;
+            gbPlayer4CustomizeBg.Font = new Font("Castellar", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            gbPlayer4CustomizeBg.ForeColor = Color.White;
+            gbPlayer4CustomizeBg.Location = new Point(814, 220);
+            gbPlayer4CustomizeBg.Name = "gbPlayer4CustomizeBg";
+            gbPlayer4CustomizeBg.Size = new Size(256, 378);
+            gbPlayer4CustomizeBg.TabIndex = 43;
+            gbPlayer4CustomizeBg.TabStop = false;
+            // 
             // btnBackN
             // 
             btnBackN.BackColor = Color.Black;
@@ -1717,58 +1761,14 @@
             btnOptionsBg.TabIndex = 13;
             btnOptionsBg.UseVisualStyleBackColor = false;
             // 
-            // gbPlayer1CustomizeBg
-            // 
-            gbPlayer1CustomizeBg.BackColor = Color.Black;
-            gbPlayer1CustomizeBg.Font = new Font("Castellar", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            gbPlayer1CustomizeBg.ForeColor = Color.White;
-            gbPlayer1CustomizeBg.Location = new Point(13, 220);
-            gbPlayer1CustomizeBg.Name = "gbPlayer1CustomizeBg";
-            gbPlayer1CustomizeBg.Size = new Size(256, 378);
-            gbPlayer1CustomizeBg.TabIndex = 42;
-            gbPlayer1CustomizeBg.TabStop = false;
-            // 
-            // gbPlayer2CustomizeBg
-            // 
-            gbPlayer2CustomizeBg.BackColor = Color.Black;
-            gbPlayer2CustomizeBg.Font = new Font("Castellar", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            gbPlayer2CustomizeBg.ForeColor = Color.White;
-            gbPlayer2CustomizeBg.Location = new Point(280, 220);
-            gbPlayer2CustomizeBg.Name = "gbPlayer2CustomizeBg";
-            gbPlayer2CustomizeBg.Size = new Size(256, 378);
-            gbPlayer2CustomizeBg.TabIndex = 43;
-            gbPlayer2CustomizeBg.TabStop = false;
-            // 
-            // gbPlayer3CustomizeBg
-            // 
-            gbPlayer3CustomizeBg.BackColor = Color.Black;
-            gbPlayer3CustomizeBg.Font = new Font("Castellar", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            gbPlayer3CustomizeBg.ForeColor = Color.White;
-            gbPlayer3CustomizeBg.Location = new Point(547, 220);
-            gbPlayer3CustomizeBg.Name = "gbPlayer3CustomizeBg";
-            gbPlayer3CustomizeBg.Size = new Size(258, 378);
-            gbPlayer3CustomizeBg.TabIndex = 43;
-            gbPlayer3CustomizeBg.TabStop = false;
-            // 
-            // gbPlayer4CustomizeBg
-            // 
-            gbPlayer4CustomizeBg.BackColor = Color.Black;
-            gbPlayer4CustomizeBg.Font = new Font("Castellar", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            gbPlayer4CustomizeBg.ForeColor = Color.White;
-            gbPlayer4CustomizeBg.Location = new Point(814, 220);
-            gbPlayer4CustomizeBg.Name = "gbPlayer4CustomizeBg";
-            gbPlayer4CustomizeBg.Size = new Size(256, 378);
-            gbPlayer4CustomizeBg.TabIndex = 43;
-            gbPlayer4CustomizeBg.TabStop = false;
-            // 
             // DurakGUI
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(1082, 753);
-            Controls.Add(pnlCustomize);
             Controls.Add(pnlGame);
+            Controls.Add(pnlCustomize);
             Controls.Add(pnlMainMenu);
             Controls.Add(pnlOptions);
             Controls.Add(pnlPlayerSelect);
@@ -1785,7 +1785,7 @@
             pnlGame.ResumeLayout(false);
             pnlGame.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbCardTestBack).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbCardTestTrump).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbCardTrump).EndInit();
             pnlPlayer1.ResumeLayout(false);
             pnlPlayer1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbPlayer1Role).EndInit();
@@ -1856,7 +1856,7 @@
         private Panel pnlHand;
         private Button btnMenu;
         private PictureBox pbCardTestBack;
-        private PictureBox pbCardTestTrump;
+        private PictureBox pbCardTrump;
         private TextBox logBox;
         private PictureBox pbPlayer1IconG;
         private Label lblPlayer1NameG;
