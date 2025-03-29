@@ -249,7 +249,7 @@ namespace DurakCardGame
 
 
         // add a player to the game ########### DONE #############
-        public void addPlayer(string name)
+        public void addPlayer(string name, string icon)
         {
             // draw 6 cards from the deck and add them to the player's hand
             List<Card> hand = new List<Card>();
@@ -257,7 +257,7 @@ namespace DurakCardGame
             {
                 hand.Add(deck.Draw());
             }
-            players.Add(new Human(name, hand));
+            players.Add(new Human(name, icon, hand));
         }
 
         // add a computer to the game ########### DONE #############
@@ -269,7 +269,7 @@ namespace DurakCardGame
             {
                 hand.Add(deck.Draw());
             }
-            players.Add(new Computer(name, hand, difficulty));
+            players.Add(new Computer(hand, difficulty));
         }
 
         // Might be deleted ******************

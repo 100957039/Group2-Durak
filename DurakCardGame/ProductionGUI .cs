@@ -409,15 +409,15 @@ namespace DurakCardGame
         {
             string playerOne = "1";
             string playerTwo = "2";
-            game.addPlayer(playerOne);
-            game.addPlayer(playerTwo);
+            //game.addPlayer(playerOne);
+            //game.addPlayer(playerTwo);
         }
 
         //STEP #2
         public void startGame()
         {
             addPlayers();
-            game.determinTrumpCard();
+            game.determineTrumpCard();
             string attacker = game.chooseFirstAttacker();
         }
 

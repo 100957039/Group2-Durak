@@ -12,19 +12,30 @@ namespace DurakCardGame
     internal abstract class  Player
     {
         public string Name { get; set; }
+
+        public string IconLocation { get; set; }
+
         public List<Card> Hand { get; set; } = new List<Card>();
         public bool CanAttack { get; set; } = false;
 
         public bool DisableHand { get; set; } = true;
 
-        public String IconPath { get; set; }
-
-        public Player(string name, List<Card> hand) 
+        public Player(string name, string icon, List<Card> hand) 
         {
             Name = name;
+            IconLocation = icon;
             Hand = hand;
             //SortHand();
         }
+
+        public Player(List<Card> hand)
+        {
+            Name = "";
+            IconLocation = "";
+            Hand = hand;
+            //SortHand();
+        }
+
         public Card PlayCard(int cardIndex)
         {
             Card card = Hand[cardIndex];

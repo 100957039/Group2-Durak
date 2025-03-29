@@ -27,6 +27,7 @@ namespace DurakCardGame
         int numPlayers = 2;
         int numAI = 1;
         int[] iconPage = { 0, 0, 0, 0 };
+        string difficulty = "easy";
 
         // Game variable
         GameLogic game = new GameLogic();
@@ -34,7 +35,6 @@ namespace DurakCardGame
         public DurakGUI()
         {
             InitializeComponent();
-            BtnConfirmNClick(null, null);
         }
 
         //*******************************************************************************************************************************************************
@@ -287,11 +287,18 @@ namespace DurakCardGame
         /// <param name="e"></param>
         private void BtnConfirmNClick(object sender, EventArgs e)
         {
-            pnlCustomize.Visible = false;
-            pnlGame.Visible = true;
-            pnlGame.BringToFront();
-            iconPage[0] = 0;
-            GameSetup();
+            if (NameValidation())
+            {
+                pnlCustomize.Visible = false;
+                pnlGame.Visible = true;
+                pnlGame.BringToFront();
+                iconPage[0] = 0;
+                GameSetup();
+            }
+            else
+            {
+                DialogResult dialogResult = MessageBox.Show("Player name cannot be blank.", "Name Error", MessageBoxButtons.OK);
+            }
         }
 
         /// <summary>
@@ -341,7 +348,7 @@ namespace DurakCardGame
 
                         iconList[i + j].Click += (sender, e) =>
                         {
-                            playerList[h].IconPath = iconList[i + j].ImageLocation;
+                            playerList[h].IconLocation = iconList[i + j].ImageLocation;
                             pbList[h].ImageLocation = iconLocation;
                         };
 
@@ -351,9 +358,20 @@ namespace DurakCardGame
             }
         }
 
-        private void nameValidation()
+        private bool NameValidation()
         {
+            bool valid = true;
+            List<String> playerName = new List<String> { tbPlayer1Name.Text, tbPlayer2Name.Text, tbPlayer3Name.Text, tbPlayer4Name.Text };
+            for (int i = 0; i <= numPlayers; i++)
+            {
+                if (string.IsNullOrWhiteSpace(playerName[i]))
+                {
+                    valid = false;
+                    return valid;
+                }
+            }
 
+            return valid;
         }
 
 
@@ -362,15 +380,20 @@ namespace DurakCardGame
         //*******************************************************************************************************************************************************
 
         /// <summary>
-        /// 
+        /// Add the players into the game with their chosen names and icons
+        /// Also adds the computer players with their selected difficulty
         /// </summary>
         private void SetupPlayers()
         {
-
-            List<String> playersList = new List<String> { "1", "2", "3", "4" };
-            foreach (String player in playersList)
+            List<String> playerNames = new List<String> { tbPlayer1Name.Text, tbPlayer2Name.Text, tbPlayer3Name.Text, tbPlayer4Name.Text };
+            List<String> playerIcons = new List<String> { pbPlayer1SelectedIcon.ImageLocation, pbPlayer2SelectedIcon.ImageLocation, pbPlayer3SelectedIcon.ImageLocation, pbPlayer4SelectedIcon.ImageLocation };
+            for (int i = 0; i < numPlayers; i++)
             {
-                game.addPlayer(player);
+                game.addPlayer(playerNames[i], playerIcons[i]);
+            }
+            for (int i = 0; i < numAI; i++)
+            {
+                game.addComputer(difficulty);
             }
         }
         /// <summary>
@@ -393,7 +416,7 @@ namespace DurakCardGame
 
         private void GameSetup()
         {
-            
+            SetupPlayers();
         }
 
         /// <summary>
@@ -551,5 +574,6 @@ namespace DurakCardGame
                 cardX += cardXModifier;
             }
         }
-    }
+
+    }   
 }

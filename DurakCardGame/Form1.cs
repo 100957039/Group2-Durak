@@ -81,7 +81,7 @@ namespace DurakCardGame
             {
                 int playerIndex = i;
                 String playerName = pls[i];
-                game.addPlayer(playerName);
+                //game.addPlayer(playerName);
                 game.startGame();
                 int x = 0;
                 //////here

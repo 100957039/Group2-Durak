@@ -40,9 +40,10 @@ namespace DurakCardGame
             string playerOne = "1";
             string playerTwo = "2";
             List<String> playersList = new List<String> { "1", "2", "3", "4" };
-            foreach (String player in playersList)
+            List<String> iconList = new List<String> { "1", "2", "3", "4" };
+            for (int i = 0; i < playersList.Count; i++)
             {
-                game.addPlayer(player);
+                game.addPlayer(playersList[i], iconList[i]);
             }
         }
 
@@ -51,7 +52,8 @@ namespace DurakCardGame
         {
             game = new GameLogic();
             addPlayers();
-            game.determinTrumpCard();
+            game.determineTrumpCard();
+            game.sortAllHands();
             string attacker = game.chooseFirstAttacker();
             textBoxTrump.Text = textTrumpField + game.trump;
             textBoxTurn.Text = textPlayerIndexField + game.turnIndex.ToString();
@@ -420,7 +422,7 @@ namespace DurakCardGame
         // switch your card if you have 6 of trump with the last trump card in the dexk
         private void button2_Click(object sender, EventArgs e)
         {
-            if (game.TakeTumpCardFromDeck(game.turnIndex))
+            if (game.TakeTrumpCardFromDeck(game.turnIndex))
             {
                 displayCurrentPlayerHand();
             }

@@ -14,10 +14,18 @@ namespace DurakCardGame
     internal class Computer : Player
     {
         public string Difficulty { get; set; }
-        public List<IndexCards> IndexCardPlayers {get; set; } 
+        public List<IndexCards> IndexCardPlayers {get; set; }
 
         // Constructor for Computer that uses the base class constructor
-        public Computer(string name, List<Card> hand, string difficulty) : base(name, hand)
+        // For setting name and icon manually
+        public Computer(string name, string icon, List<Card> hand, string difficulty) : base(name, icon, hand)
+        {
+            Difficulty = difficulty;
+        }
+
+        // A constructor for Computer that doesn't require name and icon
+        // AiCustomization will need to be called from the game class to set those values
+        public Computer(List<Card> hand, string difficulty) : base(hand)
         {
             Difficulty = difficulty;
         }
@@ -76,6 +84,28 @@ namespace DurakCardGame
             return card;
         }
 
-        
+        /// <summary>
+        /// Choose a random name and icon for a Computer player
+        /// </summary>
+        public int AiCustomization(int[] usedIndex)
+        {
+            Random random = new Random();
+            string[] names = ["Acorn", "Beardo", "Tinker", "Regina", "Skully", "Shock", "Knight Bot"];
+            const string iconLocation = "../../../GUI_Images/Icons/";
+            string[] icons = ["Acorn_Boy.jpg", "Beard_Man.jpg", "Inventor.jpg", "Queen.jpg", "Skull_Man.jpg", "Surprise.jpg", "Robot_Knight.jpg"];
+            int listLength = names.Length;
+
+            int index = random.Next(listLength);
+
+            while (usedIndex.Contains(index))
+            {
+                index = random.Next(listLength);
+            }
+            Name = names[index];
+            IconLocation = iconLocation + icons[index];
+
+            // Returns the index to ensure the same Ai won't be used again in a single game
+            return index;
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,6 +25,8 @@ namespace DurakCardGame
         public List<Player> players = new List<Player>();
         // all the played cards will be stored here for AI 
         // if defender loses, transfer cards to the loser, then clear after each trun (do not forget to transfer to AI)
+        // A list for ensuring that each Ai name and icon is different
+        public List<int> usedAiCustomization = new List<int>();
         public List<Card> cardPlayedDuringGame = new List<Card>();
         //temprary store cards to campare the atack and defence
         // store the cards used in single attack
@@ -57,6 +60,9 @@ namespace DurakCardGame
         public String trump;
 
         private String Separator = "|";
+
+        // For checking if a player is human or Ai
+        public Type typeHuman = typeof(Human);
 
 
         //######################### GUI variable #############################
@@ -266,6 +272,12 @@ namespace DurakCardGame
                             break;
                         }
                         player.Hand.Add(deck.Draw());
+
+                        // Checks if a player is human and sorts their hand
+                        if (player.GetType().Equals(typeHuman))
+                        {
+                            ((Human)player).SortHand(trump);
+                        }
                     }
                     // check how many cards are left in the deck to break the outter loop
                     if (deck.Count() < 1)
@@ -278,7 +290,7 @@ namespace DurakCardGame
 
 
         // add a player to the game ########### DONE #############
-        public void addPlayer(string name)
+        public void addPlayer(string name, string icon)
         {
             // draw 6 cards from the deck and add them to the player's hand
             List<Card> hand = new List<Card>();
@@ -286,7 +298,8 @@ namespace DurakCardGame
             {
                 hand.Add(deck.Draw());
             }
-            players.Add(new Human(name, hand));
+            players.Add(new Human(name, icon, hand));
+
             // important value for sub-attack
             // it's two, because winning_defender + first_lossing_attacker = 2
             // can not attack again at the same turn
@@ -294,7 +307,7 @@ namespace DurakCardGame
         }
 
         // add a computer to the game ########### DONE #############
-        public void addComputer(string name, String difficulty)
+        public void addComputer(String difficulty)
         {
             // draw 6 cards from the deck and add them to the player's hand
             List<Card> hand = new List<Card>();
@@ -302,7 +315,7 @@ namespace DurakCardGame
             {
                 hand.Add(deck.Draw());
             }
-            players.Add(new Computer(name, hand, difficulty));
+            players.Add(new Computer(hand, difficulty));
             // important value for sub-attack
             // it's two, because winning_defender + first_lossing_attacker = 2
             // can not attack again at the same turn
@@ -312,7 +325,7 @@ namespace DurakCardGame
 
         // run this after adding players and computers 
         // ############## DONE ##############
-        public void determinTrumpCard()
+        public void determineTrumpCard()
         {
             // after giving each player 6 cards, draw card to set as trump suit
             Card trumpCard = deck.Draw();
@@ -1484,7 +1497,8 @@ namespace DurakCardGame
                     }
                 }
             }
-
+            // Sort Cards
+            sortAllHands();
 
             turnIndex = nextPossibleTurn;
             attackerIndex = nextPossibleAttacker;
@@ -2029,11 +2043,23 @@ namespace DurakCardGame
             }
         }
 
+        public void sortAllHands()
+        {
+            foreach (Player player in players)
+            {
+                // Checks if a player is human and sorts their hand
+                if (player.GetType().Equals(typeHuman))
+                {
+                    ((Human)player).SortHand(trump);
+                }
+            }
+        }
+
         // ####################################################################
         // if there is time left implement later
 
         //1- take trump card from the deck if you have (6 of trump)
-        public bool TakeTumpCardFromDeck(int currentPlayerIndex)
+        public bool TakeTrumpCardFromDeck(int currentPlayerIndex)
         {
             Card lastTrumpCardDeck = deck.cards[deck.cards.Count() - 1];
             Card tempCard;
@@ -2054,7 +2080,7 @@ namespace DurakCardGame
         //2- reverse attack
         // ####################################################################
 
-
+        
 
 
 
