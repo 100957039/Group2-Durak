@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.DataFormats;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 /* 
@@ -25,7 +26,7 @@ namespace DurakCardGame
     {
         // Variables
         int numPlayers = 2;
-        int numAI = 1;
+        int numAi = 1;
         int[] iconPage = { 0, 0, 0, 0 };
         string difficulty = "easy";
 
@@ -35,7 +36,7 @@ namespace DurakCardGame
         public DurakGUI()
         {
             InitializeComponent();
-            BtnConfirmNClick(null, null);
+            //BtnConfirmNClick(null, null);
         }
 
         //*******************************************************************************************************************************************************
@@ -154,7 +155,7 @@ namespace DurakCardGame
             if (rb2AI.Checked == true || rb3AI.Checked == true)
             {
                 rb1AI.Checked = true;
-                numAI = 1;
+                numAi = 1;
             }
         }
 
@@ -174,7 +175,7 @@ namespace DurakCardGame
             if (rb3AI.Checked == true)
             {
                 rb2AI.Checked = true;
-                numAI = 2;
+                numAi = 2;
             }
         }
 
@@ -199,7 +200,7 @@ namespace DurakCardGame
         /// <param name="e"></param>
         private void Rb0AIClick(object sender, EventArgs e)
         {
-            numAI = 0;
+            numAi = 0;
         }
 
         /// <summary>
@@ -209,7 +210,7 @@ namespace DurakCardGame
         /// <param name="e"></param>
         private void Rb1AIClick(object sender, EventArgs e)
         {
-            numAI = 1;
+            numAi = 1;
         }
 
         /// <summary>
@@ -219,7 +220,7 @@ namespace DurakCardGame
         /// <param name="e"></param>
         private void Rb2AIClick(object sender, EventArgs e)
         {
-            numAI = 2;
+            numAi = 2;
         }
 
         /// <summary>
@@ -229,7 +230,7 @@ namespace DurakCardGame
         /// <param name="e"></param>
         private void Rb3AIClick(object sender, EventArgs e)
         {
-            numAI = 3;
+            numAi = 3;
         }
 
         //*******************************************************************************************************************************************************
@@ -241,19 +242,19 @@ namespace DurakCardGame
         /// </summary>
         private void SetupCustomization()
         {
-            if (numPlayers == 2 && numAI == 1 || numPlayers == 3 && numAI == 2 || numPlayers == 4 && numAI == 3)
+            if (numPlayers == 2 && numAi == 1 || numPlayers == 3 && numAi == 2 || numPlayers == 4 && numAi == 3)
             {
                 gbPlayer2Customize.Visible = false;
                 gbPlayer3Customize.Visible = false;
                 gbPlayer4Customize.Visible = false;
             }
-            else if (numPlayers == 2 && numAI == 0 || numPlayers == 3 && numAI == 1 || numPlayers == 4 && numAI == 2)
+            else if (numPlayers == 2 && numAi == 0 || numPlayers == 3 && numAi == 1 || numPlayers == 4 && numAi == 2)
             {
                 gbPlayer2Customize.Visible = true;
                 gbPlayer3Customize.Visible = false;
                 gbPlayer4Customize.Visible = false;
             }
-            else if (numPlayers == 3 && numAI == 0 || numPlayers == 4 && numAI == 1)
+            else if (numPlayers == 3 && numAi == 0 || numPlayers == 4 && numAi == 1)
             {
                 gbPlayer2Customize.Visible = true;
                 gbPlayer3Customize.Visible = true;
@@ -353,17 +354,21 @@ namespace DurakCardGame
                             pbList[h].ImageLocation = iconLocation;
                         };
 
-                        panelList[h].Controls.Add(iconList[i +j]);
+                        panelList[h].Controls.Add(iconList[i + j]);
                     }
-                }  
+                }
             }
         }
 
+        /// <summary>
+        /// Ensures that all players have a proper name
+        /// </summary>
+        /// <returns></returns>
         private bool NameValidation()
         {
             bool valid = true;
             List<String> playerName = new List<String> { tbPlayer1Name.Text, tbPlayer2Name.Text, tbPlayer3Name.Text, tbPlayer4Name.Text };
-            for (int i = 0; i <= numPlayers; i++)
+            for (int i = 0; i < numPlayers; i++)
             {
                 if (string.IsNullOrWhiteSpace(playerName[i]))
                 {
@@ -400,9 +405,16 @@ namespace DurakCardGame
         private void GameSetup()
         {
             game = new GameLogic();
+            ResetGameBoard();
             SetupPlayers();
+            game.determineTrumpCard();
             SetupTrump();
-            game.sortAllHands();
+            game.SortAllHands();
+            game.chooseFirstAttacker();
+            UpdatePlayerLocations();
+            DisplayHand();
+            UpdateHandCounts();
+            UpdateDeckCount();
         }
 
         /// <summary>
@@ -411,22 +423,77 @@ namespace DurakCardGame
         /// </summary>
         private void SetupPlayers()
         {
-            List<String> playerNames = new List<String> { tbPlayer1Name.Text, tbPlayer2Name.Text, tbPlayer3Name.Text, tbPlayer4Name.Text };
             List<String> playerIcons = new List<String> { pbPlayer1SelectedIcon.ImageLocation, pbPlayer2SelectedIcon.ImageLocation, pbPlayer3SelectedIcon.ImageLocation, pbPlayer4SelectedIcon.ImageLocation };
-            for (int i = 0; i < numPlayers; i++)
+            List<Panel> playerPanels = new List<Panel> { pnlPlayer1, pnlPlayer2, pnlPlayer3, pnlPlayer4 };
+            List<String> playerNames = new List<String> { tbPlayer1Name.Text, tbPlayer2Name.Text, tbPlayer3Name.Text, tbPlayer4Name.Text };
+
+            // Add all needed human and computer players
+            for (int i = 0; i < numPlayers - numAi; i++)
             {
                 game.addPlayer(playerNames[i], playerIcons[i]);
             }
-            for (int i = 0; i < numAI; i++)
+            for (int i = 0; i < numAi; i++)
             {
                 game.addComputer(difficulty);
             }
+
+            // Hide all player panels
+            for (int i = 0; i < playerPanels.Count; i++)
+            {
+                playerPanels[i].Visible = false;
+            }
+
+            // Show all needed player panels
+            for (int i = 0; i < numPlayers; i++)
+            {
+                playerPanels[i].Visible = true;
+                playerNames[i] = game.players[i].Name;
+                playerIcons[i] = game.players[i].IconLocation;
+            }
         }
 
+        /// <summary>
+        /// Changes the trump card by the deck to match the last card in the deck
+        /// </summary>
         private void SetupTrump()
         {
-            game.determineTrumpCard();
+            const string cardBackLocation = "../../../GUI_Images/Card_Back.png";
+            const int trumpX = 72;
+            const int trumpY = 15;
 
+            // Resets the deck images and locations
+            pbDeck.ImageLocation = cardBackLocation;
+            pbDeck.Visible = true;
+            pbTrumpCard.Location = new Point(trumpX, trumpY);
+            pbTrumpCard.Visible = true;
+
+            // Gets the trump card and turns it into a picturebox
+            int deckLength = game.deck.cards.Count();
+            Card trumpCard = game.deck.cards[deckLength - 1];
+
+            // Set the trump card image
+            pbTrumpCard.ImageLocation = trumpCard.ImageLocation;
+        }
+
+        /// <summary>
+        /// Lets the player take the deck trump card if they have the 6 of trump
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PbTrumpCardClick(object sender, EventArgs e)
+        {
+            bool exchangeTrump = game.TakeTrumpCardFromDeck();
+            if (exchangeTrump)
+            {
+                SetupTrump();
+                DisplayHand();
+            };
+
+            int index = game.deck.cards.FindIndex(card => card.Rank == 6 && card.Suit == game.trump);
+            Console.WriteLine();
+            Console.WriteLine("Test: " + index);
+            Console.WriteLine("Durak GUI Test  " + game.deck.cards[game.deck.cards.Count() - 1].Rank + " suit: " + game.deck.cards[game.deck.cards.Count() - 1].Suit);
+            Console.WriteLine();
         }
 
         /// <summary>
@@ -450,65 +517,88 @@ namespace DurakCardGame
 
             // Clear the panel
             pnlHand.Controls.Clear();
+            btnEndTurn.Enabled = false;
+            pbTrumpCard.Enabled = false;
 
-            // Calculate how much space should be between cards
-            if (handCount > defaultHandCount)
+            if (currentPlayer.GetType() == game.typeHuman)
             {
-                spacePerCard = CardWidth / handCount;
-                cardXModifier = (int)(defaultHandCount * spacePerCard);
-            }
+                btnEndTurn.Enabled = true;
+                pbTrumpCard.Enabled = true;
 
-            // Create a picturebox for each card in the list
-            foreach (Card card in hand)
-            {
-                card.X = cardX;
-                card.Y = CardY;
-                PictureBox cardPb = new PictureBox
+                // Calculate how much space should be between cards
+                if (handCount > defaultHandCount)
                 {
-                    // Remove card width and height from card class
-                    Size = new Size(card.Width, card.Height),
-                    Location = new Point(cardX, CardY),
-                    ImageLocation = card.ImageLocation,
-                    SizeMode = PictureBoxSizeMode.StretchImage
-                };
+                    spacePerCard = CardWidth / handCount;
+                    cardXModifier = (int)(defaultHandCount * spacePerCard);
+                }
 
-                // Add card click event
-                cardPb.Click += (sender, e) =>
+                // Create a picturebox for each card in the list
+                foreach (Card card in hand)
                 {
-                    // Add Functions from the Game class
-                    // ckeck if the game ended
-                    bool endGame = game.GameEnded();
-                    if (!endGame)
+                    card.X = cardX;
+                    card.Y = CardY;
+                    PictureBox cardPb = new PictureBox
                     {
-                        currentPlayer.PlayCard2(card);
-                        game.PlayCardToAttckOrDefendList(card);
-                        game.DetermineDefenderAndAttackerIndex();
-                        DisplayTableTop();
-                        DisplayTableBottom();
+                        // Remove card width and height from card class
+                        Size = new Size(card.Width, card.Height),
+                        Location = new Point(cardX, CardY),
+                        ImageLocation = card.ImageLocation,
+                        SizeMode = PictureBoxSizeMode.StretchImage
                     };
 
-                };
+                    // Adds click functions if a card can be played
+                    // Disables it if it can't
+                    if (CanPlayCard(card))
+                    {
+                        cardPb.Enabled = true;
 
-                // Add mouse hover events
-                cardPb.MouseEnter += (sender, e) =>
-                {
-                    // Moves card slightly up
-                    cardPb.Location = new Point(card.X, card.Y - CardHover);
-                };
+                        // Add card click event
+                        cardPb.Click += (sender, e) =>
+                        {
+                            // Add Functions from the Game class
+                            // ckeck if the game ended
+                            bool endGame = game.GameEnded();
+                            if (!endGame)
+                            {
+                                currentPlayer.PlayCard2(card);
+                                game.PlayCardToAttckOrDefendList(card);
+                                game.DetermineDefenderAndAttackerIndex();
+                                UpdatePlayerLocations();
+                                DisplayHand();
+                                DisplayTableTop();
+                                DisplayTableBottom();
+                                UpdateHandCounts();
+                                UpdateDeckCount();
+                            };
 
-                // Mouse Leave Event (Return to original position and restore order if necessary)
-                cardPb.MouseLeave += (sender, e) =>
-                {
-                    // Resets card to default position
-                    cardPb.Location = new Point(card.X, card.Y);
-                };
+                        };
 
-                pnlHand.Controls.Add(cardPb);
-                cardPb.BringToFront();
+                        // Add mouse hover events
+                        cardPb.MouseEnter += (sender, e) =>
+                        {
+                            // Moves card slightly up
+                            cardPb.Location = new Point(card.X, card.Y - CardHover);
+                        };
 
-                // Add to card x
-                cardX += cardXModifier;
-            }
+                        // Mouse Leave Event (Return to original position and restore order if necessary)
+                        cardPb.MouseLeave += (sender, e) =>
+                        {
+                            // Resets card to default position
+                            cardPb.Location = new Point(card.X, card.Y);
+                        };
+                    }
+                    else
+                    {
+                        cardPb.Enabled = false;
+                    }
+
+                    pnlHand.Controls.Add(cardPb);
+                    cardPb.BringToFront();
+
+                    // Add to card x
+                    cardX += cardXModifier;
+                }
+            }  
         }
 
         /// <summary>
@@ -561,7 +651,7 @@ namespace DurakCardGame
             int cardX = 12;
 
             // Clear the panel
-            pnlTableTop.Controls.Clear();
+            pnlTableBottom.Controls.Clear();
 
             // Create a picturebox for each card in the list
             foreach (Card card in hand)
@@ -585,5 +675,174 @@ namespace DurakCardGame
             }
         }
 
-    }   
+        /// <summary>
+        /// Updates the player names and icons on the game screen
+        /// </summary>
+        private void UpdatePlayerLocations()
+        {
+            List<Label> playerGameNames = new List<Label>();
+            List<PictureBox> playerGameIcons = new List<PictureBox>();
+            List<PictureBox> playerRoleIcons = new List<PictureBox>();
+            const string roleLocation = "../../../GUI_Images/";
+            List<String> roleIcons = new List<String>() { "DefenderIcon.png", "1stAttackerIcon.png", "2ndAttackerIcon.png", "3rdAttackerIcon.png", "BrokenDefenderIcon.png" };
+
+            // Ensures that, depending on player number, names and icons are placed right
+            if (numPlayers == 2)
+            {
+                playerGameNames.AddRange([lblPlayer1NameG, lblPlayer2NameG]);
+                playerGameIcons.AddRange([pbPlayer1IconG, pbPlayer2IconG]);
+                playerRoleIcons.AddRange([pbPlayer1Role, pbPlayer2Role]);
+            }
+            else 
+            {
+                playerGameNames.AddRange([lblPlayer1NameG, lblPlayer3NameG, lblPlayer2NameG, lblPlayer4NameG]);
+                playerGameIcons.AddRange([pbPlayer1IconG, pbPlayer3IconG, pbPlayer2IconG, pbPlayer4IconG]);
+                playerRoleIcons.AddRange([pbPlayer1Role, pbPlayer3Role, pbPlayer2Role, pbPlayer4Role]);
+            }
+
+            // Places players on the screen starting based on the current players turn
+            int turnIndex = game.turnIndex;
+
+            for (int i = 0; i < numPlayers; i++)
+            {
+                if ((turnIndex) > numPlayers - 1)
+                {
+                    turnIndex -= numPlayers;
+                }
+                Console.WriteLine(game.defenderIndex);
+                Console.WriteLine(game.attackerIndex);
+                playerGameNames[i].Text = game.players[turnIndex].Name;
+                playerGameIcons[i].ImageLocation = game.players[turnIndex].IconLocation;
+
+                // Figures out the players role and sets their icon
+                if (turnIndex == game.defenderIndex)
+                {
+                    playerRoleIcons[i].ImageLocation = roleLocation + roleIcons[0];
+                }
+                else if (turnIndex == game.attackerIndex)
+                {
+                    playerRoleIcons[i].ImageLocation = roleLocation + roleIcons[1];
+                }
+                else if (numPlayers > 2 && turnIndex == game.defenderIndex + 1 || turnIndex == ((game.defenderIndex + 1) - numPlayers))
+                {
+                    playerRoleIcons[i].ImageLocation = roleLocation + roleIcons[2];
+                }
+                else if (numPlayers > 3 && turnIndex == game.defenderIndex + 2 || turnIndex == ((game.defenderIndex + 2) - numPlayers))
+                {
+                    playerRoleIcons[i].ImageLocation = roleLocation + roleIcons[3];
+                }
+                
+
+                //if (!game.players[i].CanAttack)
+                //{
+                //    playerRoleIcons[i].ImageLocation = roleLocation + roleIcons[4];
+                //}
+
+                turnIndex += 1;
+            }
+        }
+
+        /// <summary>
+        /// Disables the cards in the players hand depending on if they can be played
+        /// </summary>
+        /// <param name="card"></param>
+        /// <returns></returns>
+        private bool CanPlayCard(Card card)
+        {
+            bool canPlay = true;
+            bool defenderIndex = game.defenderIndex == game.turnIndex;
+
+            // Checks if the player is defender or not
+            if (defenderIndex)
+            {
+                int lastCardIndex = game.cardsAttack.Count() - 1;
+
+                // Ensures there has been a card played as an attack
+                if (lastCardIndex >= 0)
+                {
+                    // Gets the last card attacked with and checks if the current
+                    //  card can defend against it
+                    Card lastAttackedCard = game.cardsAttack[lastCardIndex];
+                    if (!game.CanDefendWithThisCard(card, lastAttackedCard))
+                    {
+                        canPlay = false;
+                    }
+                }
+            }
+            else
+            {
+                // Checks if an attack has been made and if the current card
+                //  can be used to attack again
+                if (game.cardsAttack.Count() != 0 & (!game.CanAttackWithThisCard(card)))
+                {
+                    canPlay = false;
+                }
+            }
+            return canPlay;
+        }
+
+        /// <summary>
+        /// Updates player hand counts
+        /// </summary>
+        private void UpdateHandCounts()
+        {
+            List<Label> playerHandCounts = new List<Label>() { lblPlayer1Cards, lblPlayer2Cards, lblPlayer3Cards, lblPlayer4Cards };
+            for (int i = 0; i < game.players.Count(); i++)
+            {
+                playerHandCounts[i].Text = (game.players[i].Hand.Count()).ToString();
+            }
+        }
+
+        /// <summary>
+        /// Updates the deck count and deck cards depending on card count
+        /// </summary>
+        private void UpdateDeckCount()
+        {
+            const string trumpSuitLocation = "../../../GUI_Images/Trump";
+            const string pngString = ".png";
+            int deckCount = game.deck.cards.Count();
+            lblDeckCount.Text = deckCount.ToString();
+
+            // Updates deck look when there's 0 or 1 cards remaining
+            if (deckCount == 1)
+            {
+                pbDeck.Visible = false;
+                pbTrumpCard.Location = pbDeck.Location;
+            }
+            else if (deckCount == 0)
+            {
+                pbDeck.Visible = true;
+                pbTrumpCard.Visible = false;
+                pbDeck.ImageLocation = trumpSuitLocation + game.trump + pngString;
+            }
+        }
+
+        /// <summary>
+        /// Passes the current turn as long as an attack has been made
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnEndTurnClick(object sender, EventArgs e)
+        {
+            // Checks if at least 1 card has been played before allowing the pass
+            if (game.cardsAttack.Count() != 0)
+            {
+                game.Pass();
+                DisplayTableTop();
+                DisplayTableBottom();
+            }
+        }
+
+        /// <summary>
+        /// Resets the game board panels
+        /// </summary>
+        private void ResetGameBoard()
+        {
+            pnlHand.Controls.Clear();
+            pnlTableTop.Controls.Clear();
+            pnlTableBottom.Controls.Clear();
+        }
+
+        
+    }
 }

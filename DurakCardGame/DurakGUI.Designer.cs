@@ -53,17 +53,21 @@
             btnBackPS = new Button();
             btnConfirmPS = new Button();
             pnlGame = new Panel();
-            lblTableDivider = new Label();
-            pbCardTestBack = new PictureBox();
-            pbCardTrump = new PictureBox();
-            lblDeck = new Label();
+            pnlDeck = new Panel();
+            pbDeck = new PictureBox();
+            pbTrumpCard = new PictureBox();
             lblDeckCount = new Label();
+            lblDeck = new Label();
             btnMenu = new Button();
             btnRules = new Button();
+            pbAttacker = new PictureBox();
+            btnAttackerBg = new Button();
+            pbDefender = new PictureBox();
+            btnDefenderBg = new Button();
+            lblTableDivider = new Label();
             pnlTableTop = new Panel();
             pnlTableBottom = new Panel();
             pnlPlayer1 = new Panel();
-            button2 = new Button();
             logBox = new TextBox();
             pnlHand = new Panel();
             btnHandBg = new Button();
@@ -157,8 +161,11 @@
             gbNumAI.SuspendLayout();
             gbNumPlayers.SuspendLayout();
             pnlGame.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pbCardTestBack).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbCardTrump).BeginInit();
+            pnlDeck.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbDeck).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbTrumpCard).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbAttacker).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbDefender).BeginInit();
             pnlPlayer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbPlayer1Role).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPlayer1IconG).BeginInit();
@@ -522,13 +529,14 @@
             // pnlGame
             // 
             pnlGame.BackgroundImage = (Image)resources.GetObject("pnlGame.BackgroundImage");
-            pnlGame.Controls.Add(lblTableDivider);
-            pnlGame.Controls.Add(pbCardTestBack);
-            pnlGame.Controls.Add(pbCardTrump);
-            pnlGame.Controls.Add(lblDeck);
-            pnlGame.Controls.Add(lblDeckCount);
+            pnlGame.Controls.Add(pnlDeck);
             pnlGame.Controls.Add(btnMenu);
             pnlGame.Controls.Add(btnRules);
+            pnlGame.Controls.Add(pbAttacker);
+            pnlGame.Controls.Add(btnAttackerBg);
+            pnlGame.Controls.Add(pbDefender);
+            pnlGame.Controls.Add(btnDefenderBg);
+            pnlGame.Controls.Add(lblTableDivider);
             pnlGame.Controls.Add(pnlTableTop);
             pnlGame.Controls.Add(pnlTableBottom);
             pnlGame.Controls.Add(pnlPlayer1);
@@ -543,46 +551,37 @@
             pnlGame.TabIndex = 32;
             pnlGame.Visible = false;
             // 
-            // lblTableDivider
+            // pnlDeck
             // 
-            lblTableDivider.BackColor = Color.Black;
-            lblTableDivider.Location = new Point(258, 344);
-            lblTableDivider.Name = "lblTableDivider";
-            lblTableDivider.Size = new Size(566, 10);
-            lblTableDivider.TabIndex = 86;
-            lblTableDivider.Text = "label1";
+            pnlDeck.BackColor = Color.Transparent;
+            pnlDeck.Controls.Add(pbDeck);
+            pnlDeck.Controls.Add(pbTrumpCard);
+            pnlDeck.Controls.Add(lblDeckCount);
+            pnlDeck.Controls.Add(lblDeck);
+            pnlDeck.Location = new Point(12, 8);
+            pnlDeck.Name = "pnlDeck";
+            pnlDeck.Size = new Size(200, 179);
+            pnlDeck.TabIndex = 87;
             // 
-            // pbCardTestBack
+            // pbDeck
             // 
-            pbCardTestBack.Image = (Image)resources.GetObject("pbCardTestBack.Image");
-            pbCardTestBack.Location = new Point(39, 27);
-            pbCardTestBack.Name = "pbCardTestBack";
-            pbCardTestBack.Size = new Size(80, 122);
-            pbCardTestBack.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbCardTestBack.TabIndex = 48;
-            pbCardTestBack.TabStop = false;
+            pbDeck.ImageLocation = "../../../GUI_Images/Card_Back.png";
+            pbDeck.Location = new Point(40, 15);
+            pbDeck.Name = "pbDeck";
+            pbDeck.Size = new Size(80, 122);
+            pbDeck.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbDeck.TabIndex = 89;
+            pbDeck.TabStop = false;
             // 
-            // pbCardTrump
+            // pbTrumpCard
             // 
-            pbCardTrump.Image = (Image)resources.GetObject("pbCardTrump.Image");
-            pbCardTrump.Location = new Point(78, 27);
-            pbCardTrump.Name = "pbCardTrump";
-            pbCardTrump.Size = new Size(80, 122);
-            pbCardTrump.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbCardTrump.TabIndex = 72;
-            pbCardTrump.TabStop = false;
-            // 
-            // lblDeck
-            // 
-            lblDeck.BackColor = Color.Transparent;
-            lblDeck.Font = new Font("Castellar", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblDeck.ForeColor = Color.White;
-            lblDeck.Location = new Point(29, 156);
-            lblDeck.Name = "lblDeck";
-            lblDeck.Size = new Size(136, 36);
-            lblDeck.TabIndex = 56;
-            lblDeck.Text = "Deck Remaining";
-            lblDeck.TextAlign = ContentAlignment.TopCenter;
+            pbTrumpCard.Location = new Point(72, 15);
+            pbTrumpCard.Name = "pbTrumpCard";
+            pbTrumpCard.Size = new Size(80, 122);
+            pbTrumpCard.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbTrumpCard.TabIndex = 88;
+            pbTrumpCard.TabStop = false;
+            pbTrumpCard.Click += PbTrumpCardClick;
             // 
             // lblDeckCount
             // 
@@ -590,11 +589,23 @@
             lblDeckCount.BackColor = Color.Transparent;
             lblDeckCount.Font = new Font("Castellar", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblDeckCount.ForeColor = Color.White;
-            lblDeckCount.Location = new Point(159, 156);
+            lblDeckCount.Location = new Point(146, 140);
             lblDeckCount.Name = "lblDeckCount";
             lblDeckCount.Size = new Size(50, 36);
             lblDeckCount.TabIndex = 55;
             lblDeckCount.Text = "36";
+            // 
+            // lblDeck
+            // 
+            lblDeck.BackColor = Color.Transparent;
+            lblDeck.Font = new Font("Castellar", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblDeck.ForeColor = Color.White;
+            lblDeck.Location = new Point(22, 140);
+            lblDeck.Name = "lblDeck";
+            lblDeck.Size = new Size(120, 36);
+            lblDeck.TabIndex = 56;
+            lblDeck.Text = "Deck Remaining";
+            lblDeck.TextAlign = ContentAlignment.TopCenter;
             // 
             // btnMenu
             // 
@@ -626,6 +637,65 @@
             btnRules.UseVisualStyleBackColor = false;
             btnRules.Click += ShowRules;
             // 
+            // pbAttacker
+            // 
+            pbAttacker.BackColor = Color.Black;
+            pbAttacker.Image = (Image)resources.GetObject("pbAttacker.Image");
+            pbAttacker.Location = new Point(224, 197);
+            pbAttacker.Name = "pbAttacker";
+            pbAttacker.Size = new Size(30, 30);
+            pbAttacker.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbAttacker.TabIndex = 88;
+            pbAttacker.TabStop = false;
+            // 
+            // btnAttackerBg
+            // 
+            btnAttackerBg.BackColor = Color.Transparent;
+            btnAttackerBg.Enabled = false;
+            btnAttackerBg.FlatAppearance.BorderSize = 2;
+            btnAttackerBg.FlatStyle = FlatStyle.Flat;
+            btnAttackerBg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnAttackerBg.ForeColor = Color.White;
+            btnAttackerBg.Location = new Point(222, 195);
+            btnAttackerBg.Name = "btnAttackerBg";
+            btnAttackerBg.Size = new Size(34, 34);
+            btnAttackerBg.TabIndex = 91;
+            btnAttackerBg.UseVisualStyleBackColor = false;
+            // 
+            // pbDefender
+            // 
+            pbDefender.BackColor = Color.Black;
+            pbDefender.Image = (Image)resources.GetObject("pbDefender.Image");
+            pbDefender.Location = new Point(828, 469);
+            pbDefender.Name = "pbDefender";
+            pbDefender.Size = new Size(30, 30);
+            pbDefender.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbDefender.TabIndex = 89;
+            pbDefender.TabStop = false;
+            // 
+            // btnDefenderBg
+            // 
+            btnDefenderBg.BackColor = Color.Transparent;
+            btnDefenderBg.Enabled = false;
+            btnDefenderBg.FlatAppearance.BorderSize = 2;
+            btnDefenderBg.FlatStyle = FlatStyle.Flat;
+            btnDefenderBg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnDefenderBg.ForeColor = Color.White;
+            btnDefenderBg.Location = new Point(826, 467);
+            btnDefenderBg.Name = "btnDefenderBg";
+            btnDefenderBg.Size = new Size(34, 34);
+            btnDefenderBg.TabIndex = 90;
+            btnDefenderBg.UseVisualStyleBackColor = false;
+            // 
+            // lblTableDivider
+            // 
+            lblTableDivider.BackColor = Color.Black;
+            lblTableDivider.Location = new Point(258, 344);
+            lblTableDivider.Name = "lblTableDivider";
+            lblTableDivider.Size = new Size(566, 10);
+            lblTableDivider.TabIndex = 86;
+            lblTableDivider.Text = "label1";
+            // 
             // pnlTableTop
             // 
             pnlTableTop.BackColor = Color.Black;
@@ -645,7 +715,6 @@
             // pnlPlayer1
             // 
             pnlPlayer1.BackColor = Color.Transparent;
-            pnlPlayer1.Controls.Add(button2);
             pnlPlayer1.Controls.Add(logBox);
             pnlPlayer1.Controls.Add(pnlHand);
             pnlPlayer1.Controls.Add(btnHandBg);
@@ -663,26 +732,13 @@
             pnlPlayer1.Size = new Size(1058, 238);
             pnlPlayer1.TabIndex = 80;
             // 
-            // button2
-            // 
-            button2.BackColor = Color.Black;
-            button2.Enabled = false;
-            button2.FlatAppearance.BorderSize = 4;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button2.ForeColor = Color.White;
-            button2.Location = new Point(254, 347);
-            button2.Name = "button2";
-            button2.Size = new Size(574, 154);
-            button2.TabIndex = 87;
-            button2.UseVisualStyleBackColor = false;
-            // 
             // logBox
             // 
             logBox.BackColor = Color.White;
             logBox.Location = new Point(12, 15);
             logBox.Multiline = true;
             logBox.Name = "logBox";
+            logBox.ReadOnly = true;
             logBox.ScrollBars = ScrollBars.Both;
             logBox.Size = new Size(188, 212);
             logBox.TabIndex = 71;
@@ -797,6 +853,7 @@
             btnEndTurn.TabIndex = 74;
             btnEndTurn.Text = "End Turn";
             btnEndTurn.UseVisualStyleBackColor = false;
+            btnEndTurn.Click += BtnEndTurnClick;
             // 
             // btnPlayer1Bg
             // 
@@ -1783,9 +1840,12 @@
             gbNumPlayers.ResumeLayout(false);
             gbNumPlayers.PerformLayout();
             pnlGame.ResumeLayout(false);
-            pnlGame.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pbCardTestBack).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbCardTrump).EndInit();
+            pnlDeck.ResumeLayout(false);
+            pnlDeck.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbDeck).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbTrumpCard).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbAttacker).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbDefender).EndInit();
             pnlPlayer1.ResumeLayout(false);
             pnlPlayer1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbPlayer1Role).EndInit();
@@ -1855,8 +1915,6 @@
         private Panel pnlGame;
         private Panel pnlHand;
         private Button btnMenu;
-        private PictureBox pbCardTestBack;
-        private PictureBox pbCardTrump;
         private TextBox logBox;
         private PictureBox pbPlayer1IconG;
         private Label lblPlayer1NameG;
@@ -1956,12 +2014,18 @@
         private GroupBox groupBox1;
         private GroupBox groupBox2;
         private GroupBox groupBox3;
-        private Button button2;
         private Button btnTableBottomBg;
         private Button btnTableTopBg;
         private GroupBox gbPlayer2CustomizeBg;
         private GroupBox gbPlayer3CustomizeBg;
         private GroupBox gbPlayer4CustomizeBg;
         private GroupBox gbPlayer1CustomizeBg;
+        private Panel pnlDeck;
+        private PictureBox pbDeck;
+        private PictureBox pbTrumpCard;
+        private PictureBox pbDefender;
+        private PictureBox pbAttacker;
+        private Button btnDefenderBg;
+        private Button btnAttackerBg;
     }
 }

@@ -53,7 +53,7 @@ namespace DurakCardGame
             game = new GameLogic();
             addPlayers();
             game.determineTrumpCard();
-            game.sortAllHands();
+            game.SortAllHands();
             string attacker = game.chooseFirstAttacker();
             textBoxTrump.Text = textTrumpField + game.trump;
             textBoxTurn.Text = textPlayerIndexField + game.turnIndex.ToString();
@@ -422,7 +422,7 @@ namespace DurakCardGame
         // switch your card if you have 6 of trump with the last trump card in the dexk
         private void button2_Click(object sender, EventArgs e)
         {
-            if (game.TakeTrumpCardFromDeck(game.turnIndex))
+            if (game.TakeTrumpCardFromDeck())
             {
                 displayCurrentPlayerHand();
             }
