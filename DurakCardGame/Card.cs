@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace DurakCardGame
 {
@@ -79,6 +80,71 @@ namespace DurakCardGame
             };
 
             return imgButton;
+        }
+
+        /// <summary>
+        /// Returns a string of the card suit and value
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            const string Jack = "J";
+            const string Queen = "Q";
+            const string King = "K";
+            const string Ace = "A";
+            const string JackWord = "Jack";
+            const string QueenWord = "Queen";
+            const string KingWord = "King";
+            const string AceWord = "Ace";
+            const string Heart = "H";
+            const string Diamond = "D";
+            const string Club = "C";
+            const string Spade = "S";
+            const string HeartWord = "Hearts";
+            const string DiamondWord = "Diamonds";
+            const string ClubWord = "Clubs";
+            const string SpadeWord = "Spades";
+
+            string cardString = Value;
+
+
+            // Checks for the card suit and add the full word
+            switch (Value)
+            {
+                case Jack:
+                    cardString = JackWord;
+                    break;
+                case Queen:
+                    cardString = QueenWord;
+                    break;
+                case King:
+                    cardString = KingWord;
+                    break;
+                case Ace:
+                    cardString = AceWord;
+                    break;
+            }
+
+            cardString += " of ";
+
+            // Checks for the card suit and add the full word
+            switch (Suit)
+            {
+                case Heart:
+                    cardString += HeartWord;
+                    break;
+                case Diamond:
+                    cardString += DiamondWord;
+                    break;
+                case Club:
+                    cardString += ClubWord;
+                    break;
+                case Spade:
+                    cardString += SpadeWord;
+                    break;
+            }
+
+            return cardString;
         }
 
         //public void ChangePosition(x)

@@ -238,7 +238,7 @@ namespace DurakCardGame
         //*******************************************************************************************************************************************************
 
         /// <summary>
-        /// 
+        /// Makes visible only the chosen number of human players customization
         /// </summary>
         private void SetupCustomization()
         {
@@ -266,7 +266,8 @@ namespace DurakCardGame
                 gbPlayer3Customize.Visible = true;
                 gbPlayer4Customize.Visible = true;
             }
-            //ShowIcons();
+            
+            SetupIcons();
         }
 
         /// <summary>
@@ -279,7 +280,7 @@ namespace DurakCardGame
             pnlCustomize.Visible = false;
             pnlPlayerSelect.Visible = true;
             pnlPlayerSelect.BringToFront();
-            iconPage[0] = 0;
+            ResetIconPages();
         }
 
         /// <summary>
@@ -294,7 +295,7 @@ namespace DurakCardGame
                 pnlCustomize.Visible = false;
                 pnlGame.Visible = true;
                 pnlGame.BringToFront();
-                iconPage[0] = 0;
+                ResetIconPages();
                 GameSetup();
             }
             else
@@ -304,60 +305,124 @@ namespace DurakCardGame
         }
 
         /// <summary>
+        /// Displays the icon selections for all human players
+        /// </summary>
+        private void SetupIcons()
+        {
+            List<Panel> panelList = new List<Panel>() { pnlPlayer1IconSelect, pnlPlayer2IconSelect, pnlPlayer3IconSelect, pnlPlayer4IconSelect };
+            List<PictureBox> selectedIconList = new List<PictureBox>() { pbPlayer1SelectedIcon, pbPlayer2SelectedIcon, pbPlayer3SelectedIcon, pbPlayer4SelectedIcon };
+            
+            for (int i = 0; i < numPlayers - numAi; i++)
+            {
+                ShowIcons(panelList[i], selectedIconList[i], i);
+            }
+        }
+
+        /// <summary>
         /// Displays the icons players can choose on the customization page
         /// (Not priority so will continue later)
         /// </summary>
-        private void ShowIcons()
+        private void ShowIcons(Panel iconPanel, PictureBox selectedIcon, int playerIndex)
         {
             const int IconsPerPage = 6;
-            const int iconSize = 50;
-            int[] iconLocationX = { 34, 90, 146 };
-            int[] iconLocationY = { 13, 69 };
-            List<Player> playerList = new List<Player>();
+            const int IconSize = 50;
+            int[] IconLocationX = { 34, 90, 146, 34, 90, 146 };
+            int[] IconLocationY = { 13, 69, 13, 69, 13, 69 };
             List<PictureBox> iconList = new List<PictureBox>();
-            List<PictureBox> pbList = new List<PictureBox>() { pbPlayer1SelectedIcon, pbPlayer2SelectedIcon, pbPlayer3SelectedIcon, pbPlayer4SelectedIcon };
-            List<Panel> panelList = new List<Panel>() { pnlPlayer1IconSelect, pnlPlayer2IconSelect, pnlPlayer3IconSelect, pnlPlayer4IconSelect };
-            const String iconLocation = "../../../GUI_Images/Icons/";
-            String[] icons = ["Acorn_Boy.jpg", "Beard_Man.jpg", "Inventor.jpg", "Queen.jpg", "Skull_Man.jpg", "Surprise.jpg", "Robot_Knight.jpg"];
+            const string IconLocation = "../../../GUI_Images/Icons/";
+            string[] icons = ["Acorn_Boy.jpg", "Beard_Man.jpg", "Inventor.jpg", "Queen.jpg", "Skull_Man.jpg", "Surprise.jpg", "Robot_Knight.jpg"];
 
-            // Clear all the icon panels
-            for (int f = 0; f < pbList.Count; f++)
+            const int ArrowWidth = 20;
+            const int ArrowHeight = 38;
+            Point ArrowLocationL = new Point(7, 47);
+            Point ArrowLocationR = new Point(203, 47);
+            const string ArrowTextL = "<";
+            const string ArrowTextR = ">";
+           
+
+            // Clear the icon panel
+            iconPanel.Controls.Clear();
+
+            // Calculate where in the icon array to start
+            int index = (IconsPerPage * iconPage[playerIndex]);
+
+            // Adds all icon pictureboxs to selection panel
+            for (int i = 0; i < IconLocationY.Length; i++)
             {
-                panelList[f].Controls.Clear();
-            }
-
-            // Set the players in the list
-            for (int g = 0; g < numPlayers - 1; g++)
-            {
-                playerList.Add(game.players[g]);
-            }
-
-            int index = (IconsPerPage * iconPage[0]);
-
-            for (int h = 0; h < numPlayers; h++)
-            {
-                for (int i = 0; i < IconsPerPage; i++)
+                iconList.Add(new PictureBox
                 {
-                    for (int j = 0; j < iconLocationX.Length; j++)
+                    Size = new Size(IconSize, IconSize),
+                    Location = new Point(IconLocationX[i], IconLocationY[i]),
+                    SizeMode = PictureBoxSizeMode.StretchImage
+                });
+
+                if ((index + i) < icons.Length)
+                {
+                    iconList[i].ImageLocation = IconLocation + icons[index + i];
+                    
+                    iconList[i].Click += (sender, e) =>
                     {
-                        iconList[i + j] = new PictureBox
-                        {
-                            Size = new Size(iconSize, iconSize),
-                            Location = new Point(iconLocationX[j], iconLocationY[i]),
-                            ImageLocation = iconLocation + icons[index + i],
-                            BackgroundImageLayout = ImageLayout.Stretch
-                        };
-
-                        iconList[i + j].Click += (sender, e) =>
-                        {
-                            playerList[h].IconLocation = iconList[i + j].ImageLocation;
-                            pbList[h].ImageLocation = iconLocation;
-                        };
-
-                        panelList[h].Controls.Add(iconList[i + j]);
-                    }
+                        PictureBox icon = sender as PictureBox;
+                        selectedIcon.ImageLocation = icon.ImageLocation;
+                        Console.WriteLine(icon.ImageLocation);
+                        Console.WriteLine(selectedIcon.ImageLocation);
+                    };
                 }
+                else
+                {
+                    iconList[i].BackColor = Color.Black;
+                }
+
+                iconPanel.Controls.Add(iconList[i]);
             }
+
+            // Creates and adds the left arrow
+            Button arrowL = new Button
+            {
+                Size = new Size(ArrowWidth, ArrowHeight),
+                Location = ArrowLocationL,
+                Text = ArrowTextL,
+                BackColor = Color.Black,
+                ForeColor = Color.White,
+                Font = new Font("Casteller", 14),
+                TextAlign = ContentAlignment.TopCenter
+            };
+            arrowL.Click += (sender, e) =>
+            {
+                iconPage[playerIndex]--;
+                ShowIcons(iconPanel, selectedIcon, playerIndex);
+            };
+
+            // Creates and adds the right arrow
+            Button arrowR = new Button
+            {
+                Size = new Size(ArrowWidth, ArrowHeight),
+                Location = ArrowLocationR,
+                Text = ArrowTextR,
+                BackColor = Color.Black,
+                ForeColor = Color.White,
+                Font = new Font("Casteller", 14),
+                TextAlign = ContentAlignment.TopCenter
+            };
+            arrowR.Click += (sender, e) =>
+            {
+                iconPage[playerIndex]++;
+                ShowIcons(iconPanel, selectedIcon, playerIndex);
+            };
+
+            // Disables the arrow if at the first or last page
+            if (iconPage[playerIndex] == 0) 
+            { 
+                arrowL.Enabled = false;
+            }
+            if (index + IconsPerPage >= icons.Length)
+            {
+                arrowR.Enabled = false;
+            }
+
+            // Add the arrows to the panel
+            iconPanel.Controls.Add(arrowL);
+            iconPanel.Controls.Add(arrowR);
         }
 
         /// <summary>
@@ -380,6 +445,17 @@ namespace DurakCardGame
             return valid;
         }
 
+        /// <summary>
+        /// Sets all players icon pages to 0
+        /// </summary>
+        private void ResetIconPages()
+        {
+            for (int i = 0; i < iconPage.Length - 1; i++) 
+            {
+                iconPage[i] = 0;
+            }
+
+        }
 
         //*******************************************************************************************************************************************************
         // Game
@@ -406,11 +482,13 @@ namespace DurakCardGame
         {
             game = new GameLogic();
             ResetGameBoard();
+            UpdateActionLog();
             SetupPlayers();
             game.determineTrumpCard();
             SetupTrump();
             game.SortAllHands();
             game.chooseFirstAttacker();
+            UpdateActionLog();
             UpdatePlayerLocations();
             DisplayHand();
             UpdateHandCounts();
@@ -457,14 +535,14 @@ namespace DurakCardGame
         /// </summary>
         private void SetupTrump()
         {
-            const string cardBackLocation = "../../../GUI_Images/Card_Back.png";
-            const int trumpX = 72;
-            const int trumpY = 15;
+            const string CardBackLocation = "../../../GUI_Images/Card_Back.png";
+            const int TrumpX = 72;
+            const int TrumpY = 15;
 
             // Resets the deck images and locations
-            pbDeck.ImageLocation = cardBackLocation;
+            pbDeck.ImageLocation = CardBackLocation;
             pbDeck.Visible = true;
-            pbTrumpCard.Location = new Point(trumpX, trumpY);
+            pbTrumpCard.Location = new Point(TrumpX, TrumpY);
             pbTrumpCard.Visible = true;
 
             // Gets the trump card and turns it into a picturebox
@@ -487,13 +565,8 @@ namespace DurakCardGame
             {
                 SetupTrump();
                 DisplayHand();
+                UpdateActionLog();
             };
-
-            int index = game.deck.cards.FindIndex(card => card.Rank == 6 && card.Suit == game.trump);
-            Console.WriteLine();
-            Console.WriteLine("Test: " + index);
-            Console.WriteLine("Durak GUI Test  " + game.deck.cards[game.deck.cards.Count() - 1].Rank + " suit: " + game.deck.cards[game.deck.cards.Count() - 1].Suit);
-            Console.WriteLine();
         }
 
         /// <summary>
@@ -505,7 +578,7 @@ namespace DurakCardGame
             const int CardWidth = 80;
             const int CardY = 12;
             const int CardHover = 10;
-            const int defaultHandCount = 6;
+            const int DefaultHandCount = 6;
 
             Player currentPlayer = game.players[game.turnIndex];
             List<Card> hand = currentPlayer.Hand;
@@ -526,10 +599,10 @@ namespace DurakCardGame
                 pbTrumpCard.Enabled = true;
 
                 // Calculate how much space should be between cards
-                if (handCount > defaultHandCount)
+                if (handCount > DefaultHandCount)
                 {
                     spacePerCard = CardWidth / handCount;
-                    cardXModifier = (int)(defaultHandCount * spacePerCard);
+                    cardXModifier = (int)(DefaultHandCount * spacePerCard);
                 }
 
                 // Create a picturebox for each card in the list
@@ -569,6 +642,7 @@ namespace DurakCardGame
                                 DisplayTableBottom();
                                 UpdateHandCounts();
                                 UpdateDeckCount();
+                                UpdateActionLog();
                             };
 
                         };
@@ -683,7 +757,7 @@ namespace DurakCardGame
             List<Label> playerGameNames = new List<Label>();
             List<PictureBox> playerGameIcons = new List<PictureBox>();
             List<PictureBox> playerRoleIcons = new List<PictureBox>();
-            const string roleLocation = "../../../GUI_Images/";
+            const string RoleLocation = "../../../GUI_Images/";
             List<String> roleIcons = new List<String>() { "DefenderIcon.png", "1stAttackerIcon.png", "2ndAttackerIcon.png", "3rdAttackerIcon.png", "BrokenDefenderIcon.png" };
 
             // Ensures that, depending on player number, names and icons are placed right
@@ -717,25 +791,25 @@ namespace DurakCardGame
                 // Figures out the players role and sets their icon
                 if (turnIndex == game.defenderIndex)
                 {
-                    playerRoleIcons[i].ImageLocation = roleLocation + roleIcons[0];
+                    playerRoleIcons[i].ImageLocation = RoleLocation + roleIcons[0];
                 }
                 else if (turnIndex == game.attackerIndex)
                 {
-                    playerRoleIcons[i].ImageLocation = roleLocation + roleIcons[1];
+                    playerRoleIcons[i].ImageLocation = RoleLocation + roleIcons[1];
                 }
                 else if (numPlayers > 2 && turnIndex == game.defenderIndex + 1 || turnIndex == ((game.defenderIndex + 1) - numPlayers))
                 {
-                    playerRoleIcons[i].ImageLocation = roleLocation + roleIcons[2];
+                    playerRoleIcons[i].ImageLocation = RoleLocation + roleIcons[2];
                 }
                 else if (numPlayers > 3 && turnIndex == game.defenderIndex + 2 || turnIndex == ((game.defenderIndex + 2) - numPlayers))
                 {
-                    playerRoleIcons[i].ImageLocation = roleLocation + roleIcons[3];
+                    playerRoleIcons[i].ImageLocation = RoleLocation + roleIcons[3];
                 }
                 
 
                 //if (!game.players[i].CanAttack)
                 //{
-                //    playerRoleIcons[i].ImageLocation = roleLocation + roleIcons[4];
+                //    playerRoleIcons[i].ImageLocation = RoleLocation + roleIcons[4];
                 //}
 
                 turnIndex += 1;
@@ -798,8 +872,8 @@ namespace DurakCardGame
         /// </summary>
         private void UpdateDeckCount()
         {
-            const string trumpSuitLocation = "../../../GUI_Images/Trump";
-            const string pngString = ".png";
+            const string TrumpSuitLocation = "../../../GUI_Images/Trump";
+            const string PngString = ".png";
             int deckCount = game.deck.cards.Count();
             lblDeckCount.Text = deckCount.ToString();
 
@@ -813,8 +887,16 @@ namespace DurakCardGame
             {
                 pbDeck.Visible = true;
                 pbTrumpCard.Visible = false;
-                pbDeck.ImageLocation = trumpSuitLocation + game.trump + pngString;
+                pbDeck.ImageLocation = TrumpSuitLocation + game.trump + PngString;
             }
+        }
+
+        /// <summary>
+        /// Updates the action log for what happened in the round
+        /// </summary>
+        private void UpdateActionLog()
+        {
+            tbActionLog.Lines = game.actionLog.ToArray();
         }
 
         /// <summary>
@@ -828,6 +910,7 @@ namespace DurakCardGame
             if (game.cardsAttack.Count() != 0)
             {
                 game.Pass();
+                UpdateActionLog();
                 DisplayTableTop();
                 DisplayTableBottom();
             }

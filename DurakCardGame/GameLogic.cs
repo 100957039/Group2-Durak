@@ -33,7 +33,8 @@ namespace DurakCardGame
         public List<Card> cardsAttack = new List<Card>();
         // store cards used in signle attack
         public List<Card> cardsDefend = new List<Card>();
-
+        // For storing what happens during a game
+        public List<string> actionLog = new List<string>();
         // based on this value, it will determine if (REVERSE ATTACKE) is active
         public bool reverseAttackActive { get; set; } = false;
 
@@ -75,6 +76,10 @@ namespace DurakCardGame
         {
             // shuffle the cards before the game starts
             deck.Shuffle();
+
+            // Update action log
+            actionLog.Add("Game Start!");
+
             // draw a card from the deck to determine the trump
             // trump = deck.Draw().Suit;
         }
@@ -180,6 +185,12 @@ namespace DurakCardGame
         // only used when the game start, it probably needs to be (private) and executed in startGame()
         public String chooseFirstAttacker()
         {
+            // Update action log
+            actionLog.Add("- The player with the lowest trump card attacks first");
+
+            // Store the lowest trump card for the action log
+            Card cardLowestTrump = new Card("", "", -1, "");
+
             // 15 is a random number just to compare with, it could be a 100 or 1000
             int lowestTrumpCard = 15;
             // store index of the player who has the lowest trump card
@@ -199,6 +210,7 @@ namespace DurakCardGame
                             //Console.WriteLine(card.Rank);
                             lowestTrumpCard = card.Rank;
                             playerIndex = i;
+                            cardLowestTrump = card;
                         }
                     }
                 }
@@ -207,7 +219,16 @@ namespace DurakCardGame
             if (playerIndex == -1)
             {
                 playerIndex = 0;
+
+                // Update action log
+                actionLog.Add("- No one has a trump card");
             }
+            else
+            {
+                // Update action log
+                actionLog.Add("- " + players[playerIndex].Name + " has the " + cardLowestTrump.ToString());
+            }
+
             turnIndex = playerIndex;
             attackerIndex = playerIndex;
             //determin the defender (((((((attacker will not work))))))))))
@@ -221,7 +242,9 @@ namespace DurakCardGame
             {
                 defenderIndex = calculateDefenderIndex;
             }
-            
+
+            // Update action log
+            actionLog.Add("- " + players[playerIndex].Name + " is the first attacker");
 
             // add player to the queue 
             ////player.Count() - playerIndex => take only the player that are after this index
@@ -1359,6 +1382,10 @@ namespace DurakCardGame
             //newlis = lis[3:] + lis[:3] => [3,4,1,2]
             List<Player> playersListAttackerFirstIndex = new List<Player>();
             int fromStartBlah = 0;
+
+            // Updates action log
+            actionLog.Add("- " + players[turnIndex].Name + " ended their turn");
+
             for (int i = 0; i < players.Count()-2; i++)
             {
                 bool exceedRange = i + attackerIndex >= players.Count();
@@ -2080,6 +2107,9 @@ namespace DurakCardGame
                 {
                     ((Human)players[currentPlayerIndex]).SortHand(trump);
                 }
+
+                // Adds action to action log
+                actionLog.Add("- " + players[currentPlayerIndex].Name + " traded " + tempCard.ToString() + " for deck trump " + lastTrumpCardDeck.ToString());
 
                 Console.WriteLine("changed");
                 Console.WriteLine("last card in deck=  " + deck.cards[deck.cards.Count() - 1].Rank + " suit: " + deck.cards[deck.cards.Count() - 1].Suit);
