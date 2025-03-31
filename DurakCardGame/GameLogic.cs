@@ -2074,6 +2074,46 @@ namespace DurakCardGame
             }
         }
 
+        //constantly setting $player.CanAttack$ to true for the player who is two steps far from the attacker starts here
+        //run this function after each time a player plays a card (not efficient) but works
+        //OR ### run this function after each time defender wins or losses efficient but needs mor work (also when defender clicks PASS)
+        // attacker Index changes (might have sub-attacks), use defender index instead
+        // **** refrence should be 3 at least (attacker won, defender won, defender pass, maybe attacker pass)
+        private void EnablePlayerCanAttack()
+        {
+            List<Player> defenderFirst = new List<Player>();
+            // will not be correct if one of the playrs has won
+            // fix (only loop though players who's hand is not empty
+
+            // only players with hand not empty
+            List<Player> playersWithHand = new List<Player>();
+            foreach (Player player in players)
+            {
+                if (player.Hand.Count() != 0)
+                {
+                    playersWithHand.Add(player);
+                }
+            }
+
+
+            // less than 3 means two, no need for that value, because it is only used for sub-aatack
+            if (playersWithHand.Count() >= 3)
+            {
+                // defender first list
+                for (int i = 0; i < playersWithHand.Count(); i++)
+                {
+                    int remainder = defenderIndex + i % playersWithHand.Count();
+                    defenderFirst.Add(playersWithHand[remainder]);
+                }
+
+                // enable player who is -2 steps away from the defender
+                // chaning th value here will change the value also in the players list,
+                // because it's only a reference of that player, not another copy (both point to th same player in memory)
+                defenderFirst[defenderFirst.Count() - 2].CanAttack = true;
+            }
+
+        }
+
         public void SortAllHands()
         {
             foreach (Player player in players)
