@@ -312,7 +312,8 @@ namespace DurakCardGame
                         if (lastCardIndex >= 0)
                         {
                             Card lastAttackedCard = game.cardsAttack[game.cardsAttack.Count() - 1];
-                            if (!game.CanDefendWithThisCard(card, lastAttackedCard))
+                            //if (!game.CanDefendWithThisCard(card, lastAttackedCard))
+                            if (!game.CanDefendWithThisCardReverse(card, lastAttackedCard))
                             {
                                 cardButton.Enabled = false;
                             }

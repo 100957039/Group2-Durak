@@ -342,18 +342,15 @@ namespace DurakCardGame
             const int CardWidth = 80;
             const int CardHeight = 122;
             const int CardY = 12;
-            const int CardHover = 10;
-            const double SpacePerCard = 2.65;
-            const double CardXModifier = 93;
-            const double BaseHandCount = 6;
-            double handCount = hand.Count;
-            int cardXModifier;
+            //int SpacePerCard = 10 / hand.Count;
+            int handCount = hand.Count;
+            int cardXModifier = 0;
             int cardX = 12;
 
 
             // Calculate how much space should be between cards
             // Not working as intended, I'll need to rework the calculation
-            cardXModifier = (int)(CardXModifier - ((handCount - BaseHandCount) * SpacePerCard));
+            
 
             foreach (Card card in hand)
             {
@@ -368,38 +365,16 @@ namespace DurakCardGame
                     SizeMode = PictureBoxSizeMode.StretchImage
                 };
 
-                // Add card click event
-                cardPb.Click += (sender, e) =>
-                {
-
-                    Console.WriteLine(cardPb.Location);
-                    // Add Functions from the Game class
-
-
-                    // If card can be played, Play card
-
-                    
-                };
-
-                // Add mouse hover events
-                cardPb.MouseEnter += (sender, e) =>
-                {
-                    // Moves card slightly up
-                    cardPb.Location = new Point(card.X, card.Y - CardHover);
-                };
-
-                // Mouse Leave Event (Return to original position and restore order if necessary)
-                cardPb.MouseLeave += (sender, e) =>
-                {
-                    // Resets card to default position
-                    cardPb.Location = new Point(card.X, card.Y);
-                };
 
                 pnlHand.Controls.Add(cardPb);
                 cardPb.BringToFront();
 
+                //cardXModifier = cardXModifier + SpacePerCard;
+                //Console.WriteLine("cardXModifier: "+ cardXModifier);
+                //Console.WriteLine("hand: "+ hand.Count);
+                //Console.WriteLine("SpacePerCard: " + SpacePerCard);
                 // Add to card x
-                cardX += cardXModifier;
+                //cardX += cardXModifier;
             }
         }
     }
