@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -292,7 +293,7 @@ namespace DurakCardGame
         {
             int valid = NameValidation();
 
-            if (valid != -1 && valid != 2)
+            if (valid != -1 && valid != -2 && IconValidation())
             {
                 pnlCustomize.Visible = false;
                 pnlGame.Visible = true;
@@ -304,9 +305,13 @@ namespace DurakCardGame
             {
                 DialogResult dialogResult = MessageBox.Show("Player names cannot be blank.", "Error", MessageBoxButtons.OK);
             }
-            else 
+            else if (valid == -2)
             {
                 DialogResult dialogResult = MessageBox.Show("Player names must be unique.", "Error", MessageBoxButtons.OK);
+            }
+            else
+            {
+                DialogResult dialogResult = MessageBox.Show("All players must select an icon.", "Error", MessageBoxButtons.OK);
             }
         }
 
@@ -337,7 +342,7 @@ namespace DurakCardGame
             List<PictureBox> iconList = new List<PictureBox>();
             const string IconLocation = "../../../GUI_Images/Icons/";
             string[] icons = ["Acorn_Boy.jpg", "Beard_Man.jpg", "Inventor.jpg", "Queen.jpg", "Skull_Man.jpg", "Fancy_Man.jpg", "Robot_Knight.jpg"];
-
+            
             const int ArrowWidth = 20;
             const int ArrowHeight = 38;
             Point ArrowLocationL = new Point(7, 47);
@@ -437,7 +442,7 @@ namespace DurakCardGame
         {
             int valid = 0;
             List<String> playerName = new List<String> { tbPlayer1Name.Text, tbPlayer2Name.Text, tbPlayer3Name.Text, tbPlayer4Name.Text };
-            for (int i = 0; i < numPlayers; i++)
+            for (int i = 0; i < numPlayers - numAi; i++)
             {
                 if (string.IsNullOrWhiteSpace(playerName[i]))
                 {
@@ -447,6 +452,26 @@ namespace DurakCardGame
                 else if (playerName.Count != playerName.Distinct().Count())
                 {
                     valid = -2;
+                    return valid;
+                }
+            }
+
+            return valid;
+        }
+
+        /// <summary>
+        /// Ensures that all players have selected an icon
+        /// </summary>
+        /// <returns></returns>
+        private bool IconValidation()
+        {
+            bool valid = true;
+            List<String> selectedIcon = new List<String> { pbPlayer1SelectedIcon.ImageLocation, pbPlayer2SelectedIcon.ImageLocation, pbPlayer3SelectedIcon.ImageLocation, pbPlayer4SelectedIcon.ImageLocation };
+            for (int i = 0; i < numPlayers - numAi; i++)
+            {
+                if (string.IsNullOrWhiteSpace(selectedIcon[i]))
+                {
+                    valid = false;
                     return valid;
                 }
             }
@@ -499,9 +524,11 @@ namespace DurakCardGame
             game.chooseFirstAttacker();
             UpdateActionLog();
             UpdatePlayerLocations();
-            DisplayHand();
             UpdateHandCounts();
             UpdateDeckCount();
+            NextPlayerMessageBox();
+            DisplayHand();
+            
         }
 
         /// <summary>
@@ -579,6 +606,20 @@ namespace DurakCardGame
         }
 
         /// <summary>
+        /// Displays a message box for when multiple human players are player to give players time to hide their cards
+        /// </summary>
+        private void NextPlayerMessageBox()
+        {
+            pnlHand.Controls.Clear();
+            Player player = game.players[game.turnIndex];
+
+            if (player.GetType() == game.typeHuman && (numPlayers - numAi) > 1)
+            {
+                DialogResult dialogResult = MessageBox.Show(player.Name + " is up next.  Hide the screen from the other players.", player.Name + "'s Turn", MessageBoxButtons.OK);
+            }
+        }
+
+        /// <summary>
         /// Gets a players hand and displays it
         /// </summary>
         /// <param name="hand"></param>
@@ -646,12 +687,14 @@ namespace DurakCardGame
                                 game.PlayCardToAttckOrDefendList(card);
                                 game.DetermineDefenderAndAttackerIndex();
                                 UpdatePlayerLocations();
-                                DisplayHand();
                                 DisplayTableTop();
                                 DisplayTableBottom();
                                 UpdateHandCounts();
                                 UpdateDeckCount();
                                 UpdateActionLog();
+                                NextPlayerMessageBox();
+                                DisplayHand();
+                                
                             };
 
                         };
@@ -792,8 +835,6 @@ namespace DurakCardGame
                 {
                     turnIndex -= numPlayers;
                 }
-                Console.WriteLine(game.defenderIndex);
-                Console.WriteLine(game.attackerIndex);
                 playerGameNames[i].Text = game.players[turnIndex].Name;
                 playerGameIcons[i].ImageLocation = game.players[turnIndex].IconLocation;
 
@@ -814,12 +855,12 @@ namespace DurakCardGame
                 {
                     playerRoleIcons[i].ImageLocation = RoleLocation + roleIcons[3];
                 }
-                
 
-                //if (!game.players[i].CanAttack)
-                //{
-                //    playerRoleIcons[i].ImageLocation = RoleLocation + roleIcons[4];
-                //}
+
+                if (!game.players[i].CanAttack)
+                {
+                    playerRoleIcons[i].ImageLocation = RoleLocation + roleIcons[4];
+                }
 
                 turnIndex += 1;
             }
@@ -869,10 +910,28 @@ namespace DurakCardGame
         /// </summary>
         private void UpdateHandCounts()
         {
-            List<Label> playerHandCounts = new List<Label>() { lblPlayer1Cards, lblPlayer2Cards, lblPlayer3Cards, lblPlayer4Cards };
-            for (int i = 0; i < game.players.Count(); i++)
+            List<Label> playerHandCounts = new List<Label>();
+
+            // Ensures that, depending on player number, card counts are placed right
+            if (numPlayers == 2)
             {
-                playerHandCounts[i].Text = (game.players[i].Hand.Count()).ToString();
+                playerHandCounts.AddRange([lblPlayer1Cards, lblPlayer2Cards]);
+            }
+            else
+            {
+                playerHandCounts.AddRange([lblPlayer1Cards, lblPlayer3Cards, lblPlayer2Cards, lblPlayer4Cards]);
+            }
+
+            // Checks where each player is before updating card count
+            int turnIndex = game.turnIndex;
+
+            for (int i = 0; i < numPlayers; i++)
+            {
+                if ((turnIndex) > numPlayers - 1)
+                {
+                    turnIndex -= numPlayers;
+                }
+                playerHandCounts[i].Text = (game.players[turnIndex].Hand.Count()).ToString();
             }
         }
 
@@ -920,8 +979,14 @@ namespace DurakCardGame
             {
                 game.Pass();
                 UpdateActionLog();
+                UpdatePlayerLocations();
                 DisplayTableTop();
                 DisplayTableBottom();
+                UpdateHandCounts();
+                UpdateDeckCount();
+                UpdateActionLog();
+                NextPlayerMessageBox();
+                DisplayHand();
             }
         }
 
