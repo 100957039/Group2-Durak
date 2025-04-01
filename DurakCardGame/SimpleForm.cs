@@ -415,6 +415,7 @@ namespace DurakCardGame
 
         private void buttonStartGame_Click(object sender, EventArgs e)
         {
+
             startGame();
             displayCurrentPlayerHand();
         }
