@@ -92,7 +92,7 @@ namespace DurakCardGame
             Random random = new Random();
             string[] names = ["Acorn Boy", "Beardo", "Tinker", "Regina", "Skully", "Shock", "Knight Bot"];
             const string iconLocation = "../../../GUI_Images/Icons/";
-            string[] icons = ["Acorn_Boy.jpg", "Beard_Man.jpg", "Inventor.jpg", "Queen.jpg", "Skull_Man.jpg", "Surprise.jpg", "Robot_Knight.jpg"];
+            string[] icons = ["Acorn_Boy.jpg", "Beard_Man.jpg", "Inventor.jpg", "Queen.jpg", "Skull_Man.jpg", "Fancy_Man.jpg", "Robot_Knight.jpg"];
             int listLength = names.Length;
 
             int index = random.Next(listLength);
