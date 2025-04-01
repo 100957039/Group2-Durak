@@ -406,6 +406,8 @@ namespace DurakCardGame
             int nextAttackerIndex; // ====== turnIndex
             int nextTurnIndex;
             // if defender 
+            int result = cardsAttack.Count() - cardsDefend.Count();
+            Console.WriteLine("cardsAttack.Count() - cardsDefend.Count() > 1: " + result);
             if (defenderIndex == turnIndex)
             {
                 if (players[turnIndex].Hand.Count() == 0) {
@@ -558,7 +560,33 @@ namespace DurakCardGame
                 //Console.WriteLine(" : " + cardAttackedBy.Rank.ToString() + cardAttackedBy.Suit);
                 bool canStillDefendAgainBlah = canStillDefend(players[defenderIndex].Hand, cardAttackedBy);
                 //Console.WriteLine("can defend: " + canStillDefendAgainBlah);
-                if (!canStillDefendAgainBlah)
+
+                // play other cards when defender losses or refuses to defend
+                if (cardsAttack.Count() - cardsDefend.Count() > 1 ) 
+                {
+                    bool canStillAttackAgain = canStillAttack(players[attackerIndex].Hand);
+                    if (canStillAttackAgain)
+                    {
+                        nextAttackerIndex = attackerIndex;
+                        nextTurnIndex = attackerIndex;
+                        nextDefenderIndex = defenderIndex;
+                    }
+                    else
+                    {
+                        LoserTakeAllCards();
+                        nextAttackerIndex = FindNextAvailablePlayer(defenderIndex);
+                        nextTurnIndex = nextAttackerIndex;
+                        nextDefenderIndex = FindNextAvailablePlayer(nextAttackerIndex);
+                        cardsAttack.Clear();
+                        cardsDefend.Clear();
+                        fillHand();
+                    }
+
+                        
+                    
+                }
+                // 
+                else if (!canStillDefendAgainBlah )
                 {
                     caseNumber = 3;
                     caseInfo = "attcker won, defender can not beat this card: " + cardAttackedBy.Suit + cardAttackedBy.Rank;
@@ -566,11 +594,24 @@ namespace DurakCardGame
                     //Console.WriteLine("reset sub-attack number: " + subAttackNumber);
                     //Console.WriteLine("defender hand: " + string.Join(" , ",players[defenderIndex].Hand.Select(card => card.Rank.ToString() + card.Suit)));
                     //nextTurnIndex = turnIndex + 2;
+
+                    // if attacker still have card could have played
+                    //bool canStillAttackAgain = canStillAttack(players[attackerIndex].Hand);
+
+                    //if (canStillAttackAgain) {
+                    //    nextAttackerIndex = attackerIndex;
+                    //    nextDefenderIndex = defenderIndex;
+                    //    nextTurnIndex = attackerIndex;
+                    //}
+                    //else
+                    //{
+
+                    //}
                     nextTurnIndex = -1; //it will be same as nextAttackerIndex 
 
                     // test defender lost and the attacer still have cards to play starts here
                     bool attackerStillHaveCardsToPlay = canStillAttack(players[attackerIndex].Hand);
-                    if (attackerStillHaveCardsToPlay & cardsAttack.Count() < 6)
+                    if (attackerStillHaveCardsToPlay)
                     {
                         nextAttackerIndex = attackerIndex;
                         nextDefenderIndex = defenderIndex;
@@ -771,24 +812,41 @@ namespace DurakCardGame
             // defender turn (done I think)
             if (isDefender)
             {
-                nextPossibleAttacker = FindNextAvailablePlayer(defenderIndex);
-                nextPossibleTurn = nextPossibleAttacker;
-                nextPossibleDefender = FindNextAvailablePlayer(nextPossibleAttacker);
 
-                //take all the cards
-                foreach (Card card in cardsAttack)
+
+                bool attackerCanStillAttackAgain = canStillAttack(players[attackerIndex].Hand);
+                // means defender lost
+                if (cardsAttack.Count() - cardsDefend.Count() >= 1 & attackerCanStillAttackAgain )
                 {
-                    players[defenderIndex].Hand.Add(card);
+
+                    // defender refuse to defend and attacker have cards to give
+                    nextPossibleAttacker = attackerIndex;
+                    nextPossibleTurn = attackerIndex;
+                    nextPossibleDefender = defenderIndex;
+                   
+                    
                 }
-                foreach (Card card in cardsDefend)
+                else
                 {
-                    players[defenderIndex].Hand.Add(card);
+                    nextPossibleAttacker = FindNextAvailablePlayer(defenderIndex);
+                    nextPossibleTurn = nextPossibleAttacker;
+                    nextPossibleDefender = FindNextAvailablePlayer(nextPossibleAttacker);
+
+                    //take all the cards
+                    foreach (Card card in cardsAttack)
+                    {
+                        players[defenderIndex].Hand.Add(card);
+                    }
+                    foreach (Card card in cardsDefend)
+                    {
+                        players[defenderIndex].Hand.Add(card);
+                    }
+                    // reset the panels
+                    cardsAttack.Clear();
+                    cardsDefend.Clear();
+                    fillHand();
                 }
-                // reset the panels
-                cardsAttack.Clear();
-                cardsDefend.Clear();
-                fillHand();
-                Console.Write("defender refuse to defend");
+                //Console.Write("defender refuse to defend");
             }
             // attacker turn 
             else
