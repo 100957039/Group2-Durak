@@ -1267,7 +1267,7 @@
             // pbPlayer1SelectedIcon
             // 
             pbPlayer1SelectedIcon.BackColor = Color.White;
-            pbPlayer1SelectedIcon.ImageLocation = "../../../GUI_Images/Icons/Surprise.jpg";
+            pbPlayer1SelectedIcon.ImageLocation = "../../../GUI_Images/Icons/Acorn_Boy.jpg";
             pbPlayer1SelectedIcon.Location = new Point(158, 129);
             pbPlayer1SelectedIcon.Name = "pbPlayer1SelectedIcon";
             pbPlayer1SelectedIcon.Size = new Size(80, 80);
@@ -1342,7 +1342,7 @@
             // pbPlayer2SelectedIcon
             // 
             pbPlayer2SelectedIcon.BackColor = Color.White;
-            pbPlayer2SelectedIcon.ImageLocation = "../../../GUI_Images/Icons/Surprise.jpg";
+            pbPlayer2SelectedIcon.ImageLocation = "../../../GUI_Images/Icons/Acorn_Boy.jpg";
             pbPlayer2SelectedIcon.Location = new Point(158, 129);
             pbPlayer2SelectedIcon.Name = "pbPlayer2SelectedIcon";
             pbPlayer2SelectedIcon.Size = new Size(80, 80);
@@ -1417,7 +1417,7 @@
             // pbPlayer3SelectedIcon
             // 
             pbPlayer3SelectedIcon.BackColor = Color.White;
-            pbPlayer3SelectedIcon.ImageLocation = "../../../GUI_Images/Icons/Surprise.jpg";
+            pbPlayer3SelectedIcon.ImageLocation = "../../../GUI_Images/Icons/Acorn_Boy.jpg";
             pbPlayer3SelectedIcon.Location = new Point(158, 129);
             pbPlayer3SelectedIcon.Name = "pbPlayer3SelectedIcon";
             pbPlayer3SelectedIcon.Size = new Size(80, 80);
@@ -1492,7 +1492,7 @@
             // pbPlayer4SelectedIcon
             // 
             pbPlayer4SelectedIcon.BackColor = Color.White;
-            pbPlayer4SelectedIcon.ImageLocation = "../../../GUI_Images/Icons/Surprise.jpg";
+            pbPlayer4SelectedIcon.ImageLocation = "../../../GUI_Images/Icons/Acorn_Boy.jpg";
             pbPlayer4SelectedIcon.Location = new Point(158, 129);
             pbPlayer4SelectedIcon.Name = "pbPlayer4SelectedIcon";
             pbPlayer4SelectedIcon.Size = new Size(80, 80);
@@ -1609,10 +1609,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(1082, 753);
+            Controls.Add(pnlCustomize);
             Controls.Add(pnlMainMenu);
             Controls.Add(pnlOptions);
             Controls.Add(pnlPlayerSelect);
-            Controls.Add(pnlCustomize);
             Controls.Add(pnlGame);
             MaximizeBox = false;
             Name = "DurakGUI";
