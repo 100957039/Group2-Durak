@@ -290,7 +290,9 @@ namespace DurakCardGame
         /// <param name="e"></param>
         private void BtnConfirmNClick(object sender, EventArgs e)
         {
-            if (NameValidation())
+            int valid = NameValidation();
+
+            if (valid != -1 && valid != 2)
             {
                 pnlCustomize.Visible = false;
                 pnlGame.Visible = true;
@@ -298,9 +300,13 @@ namespace DurakCardGame
                 ResetIconPages();
                 GameSetup();
             }
-            else
+            else if (valid == -1)
             {
-                DialogResult dialogResult = MessageBox.Show("Player name cannot be blank.", "Error", MessageBoxButtons.OK);
+                DialogResult dialogResult = MessageBox.Show("Player names cannot be blank.", "Error", MessageBoxButtons.OK);
+            }
+            else 
+            {
+                DialogResult dialogResult = MessageBox.Show("Player names must be unique.", "Error", MessageBoxButtons.OK);
             }
         }
 
@@ -427,15 +433,20 @@ namespace DurakCardGame
         /// Ensures that all players have a proper name
         /// </summary>
         /// <returns></returns>
-        private bool NameValidation()
+        private int NameValidation()
         {
-            bool valid = true;
+            int valid = 0;
             List<String> playerName = new List<String> { tbPlayer1Name.Text, tbPlayer2Name.Text, tbPlayer3Name.Text, tbPlayer4Name.Text };
             for (int i = 0; i < numPlayers; i++)
             {
                 if (string.IsNullOrWhiteSpace(playerName[i]))
                 {
-                    valid = false;
+                    valid = -1;
+                    return valid;
+                }
+                else if (playerName.Count != playerName.Distinct().Count())
+                {
+                    valid = -2;
                     return valid;
                 }
             }
