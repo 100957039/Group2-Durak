@@ -359,8 +359,102 @@ namespace DurakCardGame
                 }
 
 
-                
+
             }
+        }
+
+        // all four hands
+        public void displayAllFourHand()
+        {
+
+            List<Panel> panels = [panelHand, panel1, panel2, panel3];
+            panelHand.Controls.Clear();
+            panelHand.Refresh(); // I dont know what refresh does, I do not think it's needed
+            
+            Player currentPlayer = game.players[game.turnIndex];
+            int xAxis = 0;
+            //String winners = "";
+            for (int i = 0; game.players.Count() > i; i++)
+            {
+                // clear panels
+                panels[i].Controls.Clear();
+                foreach (Card card in game.players[i].Hand)
+                {
+                    //if (currentPlayer.Hand.Count() > 0)
+                    //{
+                    card.X = xAxis;
+
+                    Button cardButton = card.CreateCardButton();
+                    // ******************************************
+                    //Duplicated code, needs not work on it later 
+                    // cardButton.Click += (sender, e) => should be inside this if statement 
+                    // it will not effect anything, but it's not good practice 
+                    
+                    //Duplicated code, needs not work on it later
+                    // ******************************************
+                    cardButton.Click += (sender, e) =>
+                    {
+                        // ckeck if the game ended
+                        bool endGame = game.GameEnded();
+                        if (!endGame)
+                        {
+                            currentPlayer.PlayCard2(card);
+                            game.PlayCardToAttckOrDefendList(card);
+                            game.DetermineDefenderAndAttackerIndex();
+                            displayPlayedCards();
+                            displayCurrentPlayerHand();
+                        };
+                        //panelHand.Controls.Add(cardButton);
+                        xAxis += 75;
+                        // after each card is being played, refresh the panel to display the new cards
+                        //displayPlayedCards();
+                        displayAllFourHand();
+                    };
+                    // if attacker
+                    if (game.turnIndex == i & game.turnIndex == game.attackerIndex)
+                    {
+                        //check if the attacker can use this card to attack
+                        if (game.cardsAttack.Count() != 0 & (!game.CanAttackWithThisCard(card)))
+                        {
+                            cardButton.Enabled = false;
+                        }
+                        panels[i].BackColor = Color.GreenYellow;
+                        // if defender
+                    } else if (game.turnIndex == i & game.turnIndex == game.defenderIndex)
+                    {
+                        int lastCardIndex = game.cardsAttack.Count() - 1;
+                        if (lastCardIndex >= 0)
+                        {
+                            Card lastAttackedCard = game.cardsAttack[game.cardsAttack.Count() - 1];
+                            if (!game.CanDefendWithThisCard(card, lastAttackedCard))
+                            {
+                                cardButton.Enabled = false;
+                            }
+                        }
+                        panels[i].BackColor = Color.Red;
+                    }
+                    // other players
+                    else
+                    {
+                        panels[i].BackColor = Color.White;
+                        cardButton.Enabled = false;
+                    }
+                    panels[i].Controls.Add(cardButton);
+                    //}
+                    xAxis += 75;
+                    // add winners
+                    if (game.players[game.turnIndex].Hand.Count() == 0)
+                    {
+                        textBoxWinners.Text = " " + game.players[game.turnIndex].Name;
+                    }
+
+
+
+                }
+                xAxis = 0;
+
+            }
+            // ends here
         }
 
         private void btnTableTopBg_Click(object sender, EventArgs e)
@@ -417,7 +511,11 @@ namespace DurakCardGame
         {
 
             startGame();
-            displayCurrentPlayerHand();
+            // only one hand
+            //displayCurrentPlayerHand();
+
+            // all four hands
+            displayAllFourHand();
         }
 
         // switch your card if you have 6 of trump with the last trump card in the dexk

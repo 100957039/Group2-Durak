@@ -43,11 +43,14 @@
             textBoxWinners = new TextBox();
             buttonPass = new Button();
             button2 = new Button();
+            panel1 = new Panel();
+            panel2 = new Panel();
+            panel3 = new Panel();
             SuspendLayout();
             // 
             // button1
             // 
-            button1.Location = new Point(179, 30);
+            button1.Location = new Point(174, 12);
             button1.Name = "button1";
             button1.Size = new Size(73, 23);
             button1.TabIndex = 0;
@@ -57,7 +60,7 @@
             // 
             // buttonStartGame
             // 
-            buttonStartGame.Location = new Point(660, 55);
+            buttonStartGame.Location = new Point(660, 12);
             buttonStartGame.Name = "buttonStartGame";
             buttonStartGame.Size = new Size(124, 23);
             buttonStartGame.TabIndex = 1;
@@ -67,7 +70,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(432, 40);
+            button3.Location = new Point(434, 12);
             button3.Name = "button3";
             button3.Size = new Size(97, 23);
             button3.TabIndex = 2;
@@ -77,21 +80,21 @@
             // 
             // panelDefend
             // 
-            panelDefend.Location = new Point(150, 148);
+            panelDefend.Location = new Point(730, 116);
             panelDefend.Name = "panelDefend";
-            panelDefend.Size = new Size(634, 100);
+            panelDefend.Size = new Size(575, 100);
             panelDefend.TabIndex = 3;
             // 
             // panelAttack
             // 
-            panelAttack.Location = new Point(150, 290);
+            panelAttack.Location = new Point(718, 232);
             panelAttack.Name = "panelAttack";
-            panelAttack.Size = new Size(647, 100);
+            panelAttack.Size = new Size(575, 100);
             panelAttack.TabIndex = 4;
             // 
             // panelHand
             // 
-            panelHand.Location = new Point(66, 454);
+            panelHand.Location = new Point(15, 493);
             panelHand.Name = "panelHand";
             panelHand.Size = new Size(899, 126);
             panelHand.TabIndex = 5;
@@ -126,7 +129,7 @@
             // 
             // buttonPlayedCards
             // 
-            buttonPlayedCards.Location = new Point(295, 30);
+            buttonPlayedCards.Location = new Point(291, 12);
             buttonPlayedCards.Name = "buttonPlayedCards";
             buttonPlayedCards.Size = new Size(113, 23);
             buttonPlayedCards.TabIndex = 10;
@@ -168,11 +171,35 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
+            // panel1
+            // 
+            panel1.Location = new Point(15, 41);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(685, 132);
+            panel1.TabIndex = 15;
+            // 
+            // panel2
+            // 
+            panel2.Location = new Point(15, 189);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(682, 130);
+            panel2.TabIndex = 16;
+            // 
+            // panel3
+            // 
+            panel3.Location = new Point(13, 332);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(684, 135);
+            panel3.TabIndex = 17;
+            // 
             // SimpleForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1084, 631);
+            ClientSize = new Size(1317, 631);
+            Controls.Add(panel3);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
             Controls.Add(button2);
             Controls.Add(buttonPass);
             Controls.Add(textBoxWinners);
@@ -211,5 +238,8 @@
         private TextBox textBoxWinners;
         private Button buttonPass;
         private Button button2;
+        private Panel panel1;
+        private Panel panel2;
+        private Panel panel3;
     }
 }

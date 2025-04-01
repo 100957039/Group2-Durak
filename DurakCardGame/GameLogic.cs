@@ -1110,7 +1110,7 @@ namespace DurakCardGame
 
                     // test defender lost and the attacer still have cards to play starts here
                     bool attackerStillHaveCardsToPlay = canStillAttack(players[attackerIndex].Hand);
-                    if (attackerStillHaveCardsToPlay)
+                    if (attackerStillHaveCardsToPlay & cardsAttack.Count() < 6)
                     {
                         nextAttackerIndex = attackerIndex;
                         nextDefenderIndex = defenderIndex;
