@@ -80,16 +80,16 @@
             // 
             // panelDefend
             // 
-            panelDefend.Location = new Point(730, 116);
+            panelDefend.Location = new Point(718, 76);
             panelDefend.Name = "panelDefend";
-            panelDefend.Size = new Size(575, 100);
+            panelDefend.Size = new Size(575, 139);
             panelDefend.TabIndex = 3;
             // 
             // panelAttack
             // 
             panelAttack.Location = new Point(718, 232);
             panelAttack.Name = "panelAttack";
-            panelAttack.Size = new Size(575, 100);
+            panelAttack.Size = new Size(575, 133);
             panelAttack.TabIndex = 4;
             // 
             // panelHand
@@ -101,28 +101,28 @@
             // 
             // textBoxDefenderIndex
             // 
-            textBoxDefenderIndex.Location = new Point(864, 274);
+            textBoxDefenderIndex.Location = new Point(718, 415);
             textBoxDefenderIndex.Name = "textBoxDefenderIndex";
             textBoxDefenderIndex.Size = new Size(155, 23);
             textBoxDefenderIndex.TabIndex = 6;
             // 
             // textBoxttackerIndex
             // 
-            textBoxttackerIndex.Location = new Point(864, 203);
+            textBoxttackerIndex.Location = new Point(718, 386);
             textBoxttackerIndex.Name = "textBoxttackerIndex";
             textBoxttackerIndex.Size = new Size(155, 23);
             textBoxttackerIndex.TabIndex = 7;
             // 
             // textBoxTurn
             // 
-            textBoxTurn.Location = new Point(831, 129);
+            textBoxTurn.Location = new Point(884, 415);
             textBoxTurn.Name = "textBoxTurn";
             textBoxTurn.Size = new Size(188, 23);
             textBoxTurn.TabIndex = 8;
             // 
             // textBoxTrump
             // 
-            textBoxTrump.Location = new Point(831, 71);
+            textBoxTrump.Location = new Point(884, 386);
             textBoxTrump.Name = "textBoxTrump";
             textBoxTrump.Size = new Size(188, 23);
             textBoxTrump.TabIndex = 9;
@@ -139,14 +139,14 @@
             // 
             // textBoxDeckNumber
             // 
-            textBoxDeckNumber.Location = new Point(934, 347);
+            textBoxDeckNumber.Location = new Point(997, 444);
             textBoxDeckNumber.Name = "textBoxDeckNumber";
             textBoxDeckNumber.Size = new Size(100, 23);
             textBoxDeckNumber.TabIndex = 11;
             // 
             // textBoxWinners
             // 
-            textBoxWinners.Location = new Point(778, 409);
+            textBoxWinners.Location = new Point(718, 444);
             textBoxWinners.Name = "textBoxWinners";
             textBoxWinners.Size = new Size(267, 23);
             textBoxWinners.TabIndex = 12;
