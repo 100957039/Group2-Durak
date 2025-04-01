@@ -407,7 +407,7 @@ namespace DurakCardGame
             int nextTurnIndex;
             // if defender 
             int result = cardsAttack.Count() - cardsDefend.Count();
-            Console.WriteLine("cardsAttack.Count() - cardsDefend.Count() > 1: " + result);
+            //Console.WriteLine("cardsAttack.Count() - cardsDefend.Count() > 1: " + result);
             if (defenderIndex == turnIndex)
             {
                 if (players[turnIndex].Hand.Count() == 0) {
@@ -928,7 +928,8 @@ namespace DurakCardGame
                         //multiple attack ##################(for this to work, each player needs to have uniuqe name or ID) ######################
                         //if the second index does not equal the defender name, (it is multiple attack)
                         int maxDistance = players.Select(player => player.Hand.Count() != 0).Count() - 2;
-
+                        Console.WriteLine("gamelogic.cs | maxdistance sub-attack: " + maxDistance);
+                        Console.WriteLine("defender index: " + defenderIndex + " | attacker index: " + attackerIndex);
                         if (maxDistance != subAttackNumber)
                         {
                             //calculateTurnIndex = defenderIndex;
