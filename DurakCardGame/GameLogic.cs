@@ -1107,23 +1107,39 @@ namespace DurakCardGame
                     Console.WriteLine("defender hand: " + string.Join(" , ",players[defenderIndex].Hand.Select(card => card.Rank.ToString() + card.Suit)));
                     //nextTurnIndex = turnIndex + 2;
                     nextTurnIndex = -1; //it will be same as nextAttackerIndex 
-                    foreach (Card card in cardsAttack)
+
+                    // test defender lost and the attacer still have cards to play starts here
+                    bool attackerStillHaveCardsToPlay = canStillAttack(players[attackerIndex].Hand);
+                    if (attackerStillHaveCardsToPlay)
                     {
-                        players[defenderIndex].Hand.Add(card);
-                    }
-                    foreach (Card card in cardsDefend)
-                    {
-                        players[defenderIndex].Hand.Add(card);
+                        nextAttackerIndex = attackerIndex;
+                        nextDefenderIndex = defenderIndex;
+                        nextTurnIndex = attackerIndex;
                     }
 
-                    // if attacker won 
-                    nextAttackerIndex = FindNextAvailablePlayer(defenderIndex);
-                    nextDefenderIndex = FindNextAvailablePlayer(nextAttackerIndex);
-                    nextTurnIndex = nextAttackerIndex;
-                    //clear played cards defence and attack
-                    cardsDefend.Clear();
-                    cardsAttack.Clear();
-                    fillHand();
+                    // test defender lost and the attacer still have cards to play ends here
+
+                    else
+                    {
+                        foreach (Card card in cardsAttack)
+                        {
+                            players[defenderIndex].Hand.Add(card);
+                        }
+                        foreach (Card card in cardsDefend)
+                        {
+                            players[defenderIndex].Hand.Add(card);
+                        }
+
+                        // if attacker won 
+                        nextAttackerIndex = FindNextAvailablePlayer(defenderIndex);
+                        nextDefenderIndex = FindNextAvailablePlayer(nextAttackerIndex);
+                        nextTurnIndex = nextAttackerIndex;
+                        //clear played cards defence and attack
+                        cardsDefend.Clear();
+                        cardsAttack.Clear();
+                        fillHand();
+                    }
+                    
                 }
                 // if attacker loses
                 // attacker = 0 | defender = 1 | => nextAttacker = 1 | next defender = 2
@@ -1189,7 +1205,8 @@ namespace DurakCardGame
             //if (canDefendLastAttack) { }
             //if attack cards = 6 and defender can not defend
             //else if (!canDefendLastAttack) { }
-            
+
+            EnablePlayerCanAttack();
             // test stop attack if 6 cards has been played ends here
 
             turnIndex = nextTurnIndex;
@@ -1405,7 +1422,8 @@ namespace DurakCardGame
 
             bool isDefender = turnIndex == defenderIndex;
             // defender turn (done I think)
-            if (isDefender) {
+            if (isDefender)
+            {
                 nextPossibleAttacker = FindNextAvailablePlayer(defenderIndex);
                 nextPossibleTurn = nextPossibleAttacker;
                 nextPossibleDefender = FindNextAvailablePlayer(nextPossibleAttacker);
@@ -1428,109 +1446,130 @@ namespace DurakCardGame
             // attacker turn 
             else
             {
-                // single attack
-                if (playersListAttackerFirstIndex[1].Name == players[defenderIndex].Name)
+                // ############## new test function starts hre
+                // if cardsAttack less than cardDefend and it's attacker turn, means defender lost
+                // and loser should take all the played cards
+                if (cardsAttack.Count() > cardsDefend.Count())
                 {
-                    // available next sub attack
+                    LoserTakeAllCards();
                     nextPossibleAttacker = FindNextAvailablePlayer(defenderIndex);
-                    
-                    if (players[nextPossibleAttacker].Name != playersListAttackerFirstIndex[0].Name )
+                    nextPossibleDefender = FindNextAvailablePlayer(nextPossibleAttacker);
+                    nextPossibleTurn = nextPossibleAttacker;
+
+                    cardsAttack.Clear();
+                    cardsDefend.Clear();
+                    fillHand();
+                }
+                // regular game and the defender, has not lost yet
+                else
+                {
+                    // ############## new test function ends here
+
+
+                    // single attack
+                    if (playersListAttackerFirstIndex[1].Name == players[defenderIndex].Name)
                     {
-                        bool nextAttackerCanPlay = canStillAttack(players[nextPossibleAttacker].Hand);
-                        subAttackNumber++;
-                        if (nextAttackerCanPlay)
+                        // available next sub attack
+                        nextPossibleAttacker = FindNextAvailablePlayer(defenderIndex);
+
+                        if (players[nextPossibleAttacker].Name != playersListAttackerFirstIndex[0].Name)
                         {
-                            Console.WriteLine("subattack - first can attacl");
-                            nextPossibleDefender = defenderIndex;
-                            nextPossibleTurn = nextPossibleAttacker;
-                        }
-                        else
-                        {
+                            bool nextAttackerCanPlay = canStillAttack(players[nextPossibleAttacker].Hand);
                             subAttackNumber++;
-                            nextPossibleAttacker = FindNextAvailablePlayer(subAttackNumber);
-                            nextAttackerCanPlay = canStillAttack(players[nextPossibleAttacker].Hand);
-                            int maxDistance = players.Select(player => player.Hand.Count() != 0).Count() - 2;
-                            if (maxDistance != subAttackNumber & nextAttackerCanPlay)
+                            if (nextAttackerCanPlay)
                             {
-                                Console.WriteLine("subattack - second can attacl");
+                                Console.WriteLine("subattack - first can attacl");
                                 nextPossibleDefender = defenderIndex;
                                 nextPossibleTurn = nextPossibleAttacker;
                             }
                             else
                             {
-                                nextPossibleAttacker = defenderIndex;
-                                nextPossibleDefender = FindNextAvailablePlayer(nextPossibleAttacker);
-                                nextPossibleTurn = defenderIndex;
-                                cardsAttack.Clear();
-                                cardsDefend.Clear();
-                                fillHand();
-                                subAttackNumber = 0;
+                                subAttackNumber++;
+                                nextPossibleAttacker = FindNextAvailablePlayer(subAttackNumber);
+                                nextAttackerCanPlay = canStillAttack(players[nextPossibleAttacker].Hand);
+                                int maxDistance = players.Select(player => player.Hand.Count() != 0).Count() - 2;
+                                if (maxDistance != subAttackNumber & nextAttackerCanPlay)
+                                {
+                                    Console.WriteLine("subattack - second can attacl");
+                                    nextPossibleDefender = defenderIndex;
+                                    nextPossibleTurn = nextPossibleAttacker;
+                                }
+                                else
+                                {
+                                    nextPossibleAttacker = defenderIndex;
+                                    nextPossibleDefender = FindNextAvailablePlayer(nextPossibleAttacker);
+                                    nextPossibleTurn = defenderIndex;
+                                    cardsAttack.Clear();
+                                    cardsDefend.Clear();
+                                    fillHand();
+                                    subAttackNumber = 0;
+                                }
                             }
-                        }
-                        
-                    }
-                    // no attacker left, means defender will be the next attacker
-                    else
-                    {
-                        nextPossibleAttacker = FindNextAvailablePlayer(defenderIndex);
-                        nextPossibleTurn = nextPossibleAttacker;
-                        nextPossibleDefender = FindNextAvailablePlayer(nextPossibleAttacker);
-                        cardsAttack.Clear();
-                        cardsDefend.Clear();
-                        fillHand();
-                    }
-                }
-                else
-                {
-                    //multiple attack ##################(for this to work, each player needs to have uniuqe name or ID) ######################
-                    //if the second index does not equal the defender name, (it is multiple attack)
-                    int maxDistance = players.Select(player => player.Hand.Count() != 0).Count() - 2;
 
-                    if (maxDistance != subAttackNumber)
-                    {
-                        //calculateTurnIndex = defenderIndex;
-                        Console.WriteLine("first sub attacker refuse to attack. see if there is possibale third attacker" + subAttackNumber);
-                        //subAttackNumber++;
-                        Console.WriteLine("multiple attack");
-                        int originalInOriginalOrder = players.FindIndex(player => player.Name == playersListAttackerFirstIndex[subAttackNumber].Name);
-                        Console.WriteLine(originalInOriginalOrder);
-                        Console.WriteLine("third attacker hand: " + string.Join(" , ", playersListAttackerFirstIndex[subAttackNumber].Hand.Select(card => card.Rank.ToString() + card.Suit)));
-                        nextPossibleAttacker = originalInOriginalOrder;
-                        nextPossibleTurn = originalInOriginalOrder;
-                        nextPossibleDefender = defenderIndex;
-
-                        subAttackNumber++;
-                        Console.WriteLine("sub attack number after incrementing: " + subAttackNumber + " | max allowed increment: " + maxDistance);
-                    }
-                    //single attack (done I think)
-                    else
-                    {
-                        Console.WriteLine("Single attack");
-                        //calculateTurnIndex = currentIndex + 1;
-                        if (players[defenderIndex].Hand.Count() != 0)
-                        {
-                            nextPossibleAttacker = defenderIndex;
-                            nextPossibleTurn = defenderIndex;
-                            nextPossibleDefender = FindNextAvailablePlayer(defenderIndex);
                         }
+                        // no attacker left, means defender will be the next attacker
                         else
                         {
                             nextPossibleAttacker = FindNextAvailablePlayer(defenderIndex);
                             nextPossibleTurn = nextPossibleAttacker;
                             nextPossibleDefender = FindNextAvailablePlayer(nextPossibleAttacker);
+                            cardsAttack.Clear();
+                            cardsDefend.Clear();
+                            fillHand();
                         }
-                        subAttackNumber = 0;
-
-                        //clear panel
-                        cardsDefend.Clear();
-                        cardsAttack.Clear();
-                        fillHand();
                     }
+                    else
+                    {
+                        //multiple attack ##################(for this to work, each player needs to have uniuqe name or ID) ######################
+                        //if the second index does not equal the defender name, (it is multiple attack)
+                        int maxDistance = players.Select(player => player.Hand.Count() != 0).Count() - 2;
+
+                        if (maxDistance != subAttackNumber)
+                        {
+                            //calculateTurnIndex = defenderIndex;
+                            Console.WriteLine("first sub attacker refuse to attack. see if there is possibale third attacker" + subAttackNumber);
+                            //subAttackNumber++;
+                            Console.WriteLine("multiple attack");
+                            int originalInOriginalOrder = players.FindIndex(player => player.Name == playersListAttackerFirstIndex[subAttackNumber].Name);
+                            Console.WriteLine(originalInOriginalOrder);
+                            Console.WriteLine("third attacker hand: " + string.Join(" , ", playersListAttackerFirstIndex[subAttackNumber].Hand.Select(card => card.Rank.ToString() + card.Suit)));
+                            nextPossibleAttacker = originalInOriginalOrder;
+                            nextPossibleTurn = originalInOriginalOrder;
+                            nextPossibleDefender = defenderIndex;
+
+                            subAttackNumber++;
+                            Console.WriteLine("sub attack number after incrementing: " + subAttackNumber + " | max allowed increment: " + maxDistance);
+                        }
+                        //single attack (done I think)
+                        else
+                        {
+                            Console.WriteLine("Single attack");
+                            //calculateTurnIndex = currentIndex + 1;
+                            if (players[defenderIndex].Hand.Count() != 0)
+                            {
+                                nextPossibleAttacker = defenderIndex;
+                                nextPossibleTurn = defenderIndex;
+                                nextPossibleDefender = FindNextAvailablePlayer(defenderIndex);
+                            }
+                            else
+                            {
+                                nextPossibleAttacker = FindNextAvailablePlayer(defenderIndex);
+                                nextPossibleTurn = nextPossibleAttacker;
+                                nextPossibleDefender = FindNextAvailablePlayer(nextPossibleAttacker);
+                            }
+                            subAttackNumber = 0;
+
+                            //clear panel
+                            cardsDefend.Clear();
+                            cardsAttack.Clear();
+                            fillHand();
+                        }
+                    }
+
                 }
             }
             // Sort Cards
             SortAllHands();
-
             turnIndex = nextPossibleTurn;
             attackerIndex = nextPossibleAttacker;
             defenderIndex = nextPossibleDefender;
@@ -2097,12 +2136,13 @@ namespace DurakCardGame
 
 
             // less than 3 means two, no need for that value, because it is only used for sub-aatack
-            if (playersWithHand.Count() >= 3)
+            if (playersWithHand.Count() -1 >= 3)
             {
                 // defender first list
                 for (int i = 0; i < playersWithHand.Count(); i++)
                 {
-                    int remainder = defenderIndex + i % playersWithHand.Count();
+                    int remainder = (defenderIndex + i) % playersWithHand.Count();
+                    Console.WriteLine("remainder: " + remainder);
                     defenderFirst.Add(playersWithHand[remainder]);
                 }
 
@@ -2125,6 +2165,8 @@ namespace DurakCardGame
                 }
             }
         }
+
+        
 
         // ####################################################################
         // if there is time left implement later
