@@ -502,7 +502,8 @@ namespace DurakCardGame
                 //game.Pass(game.turnIndex);
                 refreshTopBottomPanels();
                 displayPlayedCards();
-                displayCurrentPlayerHand();
+                //displayCurrentPlayerHand();
+                displayAllFourHand();
             }
 
         }

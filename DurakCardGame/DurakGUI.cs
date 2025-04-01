@@ -330,7 +330,7 @@ namespace DurakCardGame
             int[] IconLocationY = { 13, 69, 13, 69, 13, 69 };
             List<PictureBox> iconList = new List<PictureBox>();
             const string IconLocation = "../../../GUI_Images/Icons/";
-            string[] icons = ["Acorn_Boy.jpg", "Beard_Man.jpg", "Inventor.jpg", "Queen.jpg", "Skull_Man.jpg", "Surprise.jpg", "Robot_Knight.jpg"];
+            string[] icons = ["Acorn_Boy.jpg", "Beard_Man.jpg", "Inventor.jpg", "Queen.jpg", "Skull_Man.jpg", "Fancy_Man.jpg", "Robot_Knight.jpg"];
 
             const int ArrowWidth = 20;
             const int ArrowHeight = 38;
@@ -364,8 +364,6 @@ namespace DurakCardGame
                     {
                         PictureBox icon = sender as PictureBox;
                         selectedIcon.ImageLocation = icon.ImageLocation;
-                        Console.WriteLine(icon.ImageLocation);
-                        Console.WriteLine(selectedIcon.ImageLocation);
                     };
                 }
                 else
