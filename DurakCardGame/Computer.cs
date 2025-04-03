@@ -30,7 +30,7 @@ namespace DurakCardGame
             Difficulty = difficulty;
         }
 
-        public Card PlayCard(Card opponentCard, int opponentIndex, bool thisComputerAttacking, bool trump)
+        public Card PlayCardHi(Card opponentCard, int opponentIndex, bool thisComputerAttacking, bool trump)
         {
             // opponentHand = [ ace H, 7H, 9S, jack D, 
             // [ ace H, 7H, 9S, j D, q C, 4D, k S, 3H ]

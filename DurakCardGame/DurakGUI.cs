@@ -724,7 +724,11 @@ namespace DurakCardGame
                     // Add to card x
                     cardX += cardXModifier;
                 }
-            }  
+            }
+            else
+            {
+                //game.players[game.turnIndex];
+            }
         }
 
         /// <summary>
