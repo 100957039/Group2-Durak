@@ -843,7 +843,7 @@ namespace DurakCardGame
                 {
                     playerRoleIcons[i].ImageLocation = RoleLocation + roleIcons[0];
                 }
-                else if (turnIndex == game.attackerIndex)
+                else if (turnIndex == game.defenderIndex - 1 || turnIndex == ((game.defenderIndex - 1) + numPlayers))
                 {
                     playerRoleIcons[i].ImageLocation = RoleLocation + roleIcons[1];
                 }

@@ -391,6 +391,9 @@ namespace DurakCardGame
             {
                 players[defenderIndex].Hand.Add(card);
             }
+
+            // Sort hands
+            SortAllHands();
         }
 
        
