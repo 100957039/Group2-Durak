@@ -90,10 +90,10 @@ namespace DurakCardGame
         public int AiCustomization(List<int> usedIndex)
         {
             Random random = new Random();
-            string[] names = ["Acorn Boy", "Beardo", "Tinker", "Regina", "Skully", "Shock", "Knight Bot"];
-            const string iconLocation = "../../../GUI_Images/Icons/";
-            string[] icons = ["Acorn_Boy.jpg", "Beard_Man.jpg", "Inventor.jpg", "Queen.jpg", "Skull_Man.jpg", "Fancy_Man.jpg", "Robot_Knight.jpg"];
-            int listLength = names.Length;
+            string[] icons = ["BitBot", "Chipz", "Cluckles", "Cosmobot", "D.A.V.E", "Drumdrum", "Eggxon", "Geargrim", "Hauntoid", "Jerry", "Nootron", "Phil", "Porktron", "Seal-E", "Reginald", "Waddlebot"];
+            const string iconLocation = "../../../GUI_Images/ComputerIcons/";
+            const string jpg = ".jpg";
+            int listLength = icons.Length;
 
             int index = random.Next(listLength);
 
@@ -101,8 +101,8 @@ namespace DurakCardGame
             {
                 index = random.Next(listLength);
             }
-            Name = names[index];
-            IconLocation = iconLocation + icons[index];
+            Name = icons[index];
+            IconLocation = iconLocation + icons[index] + jpg;
 
             // Returns the index to ensure the same Ai won't be used again in a single game
             return index;
