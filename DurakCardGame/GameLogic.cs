@@ -352,6 +352,29 @@ namespace DurakCardGame
             return playersLeft == numberToStopGame;
         }
 
+        private void PlayerWonAndSwitchTurns()
+        {
+            bool won = players[turnIndex].Hand.Count() == 0 & deck.Count() == 0;
+            if (won)
+            {
+                if (turnIndex == defenderIndex)
+                {
+                    turnIndex = FindNextAvailablePlayer(defenderIndex);
+                    attackerIndex = turnIndex;
+                    defenderIndex = FindNextAvailablePlayer(turnIndex);
+                    cardsAttack.Clear();
+                    cardsDefend.Clear();
+                }
+                // attacker
+                else
+                {
+                    turnIndex = FindNextAvailablePlayer(attackerIndex);
+                    attackerIndex = turnIndex;
+                }
+                
+            }
+        }
+
         public List<Player> CreateListAttackerFirst()
         {
             List<Player> attackerFirst = new List<Player>();
@@ -729,12 +752,14 @@ namespace DurakCardGame
             // defender lost (play cards could have been played
             if (attackCardsMoreThanDefence > 1 & turnIndex == attackerIndex)
             {
+                Console.WriteLine("this one 2");
                 turnIndex = attackerIndex;
 
             }
             // regular attacks or defence
             else
             {
+                Console.WriteLine("this one");
                 if (turnIndex == defenderIndex)
                 {
                     turnIndex = attackerIndex;
@@ -822,6 +847,7 @@ namespace DurakCardGame
             catch (Exception e) {
                 DetermineDefenderAndAttackerIndex();
             }
+            PlayerWonAndSwitchTurns();
         }
 
         // TESTing reverse ends here
