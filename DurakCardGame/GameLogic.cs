@@ -35,16 +35,9 @@ namespace DurakCardGame
         public List<Card> cardsDefend = new List<Card>();
         // For storing what happens during a game
         public List<string> actionLog = new List<string>();
-        // based on this value, it will determine if (REVERSE ATTACKE) is active
-        public bool reverseAttackActive { get; set; } = false;
 
         // multiple attack
-        int subAttackNumber { set; get; } = 0;
-
         int subAttackDistance { set; get; } = 0;
-
-        // 
-        bool gameEnd { get; set; } = false;
 
         // new test
         public int attackerIndex { get; set; } = 0;
@@ -53,16 +46,8 @@ namespace DurakCardGame
         // determine the index of the current player (might be attacker or defender)
         public int turnIndex { get; set; } = 0;
 
-        //difference between players index to go back and forth between the attacker and defender 
-        //usefull if there are other players who can join the attack, otherwise useless
-        public int distanceIndexDiffernceBetweenAttackerDefender { get; set; } = 1;
-
-        // during one attack, who else can attack too
-        public List<Player> CanAlsoAttack = new List<Player>();
-
+        
         public String trump;
-
-        private String Separator = "|";
 
         // For checking if a player is human or Ai
         public Type typeHuman = typeof(Human);
@@ -352,32 +337,11 @@ namespace DurakCardGame
             return playersLeft == numberToStopGame;
         }
 
-        private void PlayerWonAndSwitchTurns()
-        {
-            bool won = players[turnIndex].Hand.Count() == 0 & deck.Count() == 0;
-            if (won)
-            {
-                if (turnIndex == defenderIndex)
-                {
-                    turnIndex = FindNextAvailablePlayer(defenderIndex);
-                    attackerIndex = turnIndex;
-                    defenderIndex = FindNextAvailablePlayer(turnIndex);
-                    cardsAttack.Clear();
-                    cardsDefend.Clear();
-                }
-                // attacker
-                //else
-                //{
-                //    turnIndex = FindNextAvailablePlayer(attackerIndex);
-                //    attackerIndex = turnIndex;
-                //    defenderIndex = FindNextAvailablePlayer(turnIndex);
-                //}
-            }
-        }
-
         // stop attack when it reachs 6 cards
         private void AttackReachMaxCards()
         {
+            //Console.WriteLine("cardsattack: " + cardsAttack.Count() + " | cardsdefende: " + cardsDefend.Count());
+            //Console.WriteLine("turn index: " + turnIndex);
             if (cardsAttack.Count() == 6 & cardsDefend.Count() == 6)
             {
                 // means defender won
@@ -400,27 +364,25 @@ namespace DurakCardGame
                 fillHand();
             }
             // defender lost
-            else if (cardsAttack.Count() == 6 & turnIndex == attackerIndex) 
+            else if (cardsAttack.Count() == 6 & canStillDefend(players[defenderIndex].Hand, cardsAttack[cardsAttack.Count()-1])) 
+            {
+                //LoserTakeAllCards();
+                //cardsAttack.Clear();
+                //cardsDefend.Clear();
+                turnIndex = defenderIndex;
+                //defenderIndex = FindNextAvailablePlayer(turnIndex);
+                //attackerIndex = turnIndex;
+                //fillHand();
+            }
+            else 
             {
                 LoserTakeAllCards();
                 cardsAttack.Clear();
                 cardsDefend.Clear();
-                // check if attcaker does not have cards
-                //int nextPossibleAttaker = 
-                //if (players[defenderIndex].Hand.Count() == 0 & deck.Count() == 0)
-                //{
-                    turnIndex = FindNextAvailablePlayer(defenderIndex);
-                    defenderIndex = FindNextAvailablePlayer(turnIndex);
-                    attackerIndex = turnIndex;
+                turnIndex = FindNextAvailablePlayer(defenderIndex);
+                defenderIndex = FindNextAvailablePlayer(turnIndex);
+                attackerIndex = turnIndex;
                 fillHand();
-                //}
-                // if attacker still have cards
-                //else
-                //{
-                //    turnIndex = F;
-                //    attackerIndex = turnIndex;
-                //    defenderIndex = FindNextAvailablePlayer(turnIndex);
-                //}
             }
             
         }
@@ -448,22 +410,25 @@ namespace DurakCardGame
         public void DetermineDefenderAndAttackerIndex()
         {
             
-            
-            if (turnIndex == defenderIndex | (turnIndex == attackerIndex & cardsAttack.Count() > cardsDefend.Count()+1))
+            if (cardsAttack.Count() == 6)
             {
-                //Console.WriteLine("this one 2");
-                turnIndex = attackerIndex;
-
+                AttackReachMaxCards();
             }
-            // regular attacks or defence
             else
             {
-                turnIndex = defenderIndex;
+                if (turnIndex == defenderIndex | (turnIndex == attackerIndex & cardsAttack.Count() > cardsDefend.Count() + 1))
+                {
+                    //Console.WriteLine("this one 2");
+                    turnIndex = attackerIndex;
+
+                }
+                // regular attacks or defence
+                else
+                {
+                    turnIndex = defenderIndex;
+                }
             }
-            AttackReachMaxCards();
-            // order matter for this function, it should here
-            //AttackReachMaxCards();
-            //PlayerWonAndSwitchTurns();
+            
         }
 
 
@@ -563,75 +528,7 @@ namespace DurakCardGame
         }
         // new TEST START HERE
 
-        public void Pass2()
-        {
-            int totalPlayers = NumberOfPlayer();
-            int maxSubAttack = totalPlayers - 2;
-            //Console.WriteLine("Sub: " + subAttackDistance);
-            //Console.WriteLine("maxSubAttack: " + maxSubAttack);
-            Console.WriteLine("######################################");
-            Console.WriteLine("attacker Index: " + attackerIndex);
-            Console.WriteLine("defender Index: " + defenderIndex);
-            Console.WriteLine("turn index: " + turnIndex);
-            // is defender
-            if (turnIndex == defenderIndex)
-            {
-                turnIndex = attackerIndex;
-            }
-
-            // if attacker
-            else
-            {
-                //Console.WriteLine("case 2");
-                // when defender has lost, attackers can still play cards
-                if (turnIndex == attackerIndex && subAttackDistance == maxSubAttack)
-                {
-                    //Console.WriteLine("case: 1");
-                    // defender lost
-                    bool defenderLost = cardsAttack.Count() > cardsDefend.Count();
-                    if (defenderLost)
-                    {
-                        Console.WriteLine("case: 1");
-                        LoserTakeAllCards();
-                        attackerIndex = FindNextAvailablePlayer(defenderIndex);
-                        turnIndex = attackerIndex;
-                        defenderIndex = FindNextAvailablePlayer(turnIndex);
-                        subAttackDistance = 0;
-                        cardsAttack.Clear();
-                        cardsDefend.Clear();
-                        fillHand();
-                    }
-                    // defender has not lost YET
-                    else
-                    {
-                        Console.WriteLine("case: 2");
-                        attackerIndex = defenderIndex;
-                        turnIndex = attackerIndex;
-                        defenderIndex = FindNextAvailablePlayer(turnIndex);
-                        //Console.WriteLine(":P: " + maxSubAttack);
-                        subAttackDistance = 0;
-                        cardsAttack.Clear();
-                        cardsDefend.Clear();
-                        fillHand();
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("######################################");
-                    Console.WriteLine("case: 3");
-                    int total = defenderIndex + subAttackDistance;
-                    Console.WriteLine("defenderIndex: " + defenderIndex + " | subAttackDistance: " + subAttackDistance);
-                    Console.WriteLine("next Attacker index : " + total);
-                    turnIndex = FindNextAvailablePlayer(defenderIndex + subAttackDistance);
-                    attackerIndex = turnIndex;
-
-                    subAttackDistance++;
-
-                }
-
-            }
-        }
-
+        
         // ############################### helper function to determine the next available player ##########
         // -1 => means no other player is available
         public int FindNextAvailablePlayer(int afterThisIndex)
@@ -692,7 +589,7 @@ namespace DurakCardGame
         //can attck with this card
         public bool CanAttackWithThisCard(Card attackCard)
         {
-            return true;
+            //return true;
             // check cards played in attcak panel
             foreach (Card card in cardsAttack)
             {
@@ -715,15 +612,7 @@ namespace DurakCardGame
         // can defend with this card
         public bool CanDefendWithThisCard(Card defendCard, Card attackCard)
         {
-            return true;
-            // if reverse is active
-            if (reverseAttackActive)
-            {
-                if (attackCard.Rank == defendCard.Rank)
-                {
-                    return true;
-                }
-            }
+            
             // if attack card is trump 
             if (attackCard.Suit == trump) {
                 if ((defendCard.Suit == trump) & (defendCard.Rank > attackCard.Rank))
