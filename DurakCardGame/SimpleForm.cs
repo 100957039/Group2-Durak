@@ -258,11 +258,21 @@ namespace DurakCardGame
                         int lastCardIndex = game.cardsAttack.Count() - 1;
                         if (lastCardIndex >= 0)
                         {
-                            Card lastAttackedCard = game.cardsAttack[game.cardsAttack.Count() - 1];
-                            if (!game.CanDefendWithThisCard(card, lastAttackedCard))
+                            //Card lastAttackedCard = game.cardsAttack[game.cardsAttack.Count() - 1];
+                            //if (!game.CanDefendWithThisCard(card, lastAttackedCard))
+                            //{
+                            //    cardButton.Enabled = false;
+                            //}
+
+                            //test new defence for reverse attack starts here
+                            //Card lastAttackedCard = game.cardsAttack[game.cardsAttack.Count() - 1];
+                            int attackCardIndexToCaompare = game.cardsDefend.Count();
+                            Card attackCardToCaompare = game.cardsAttack[attackCardIndexToCaompare];
+;                            if (!game.CanDefendWithThisCard(card, attackCardToCaompare))
                             {
                                 cardButton.Enabled = false;
                             }
+                            // test new defence for reverse attack ends here
                         }
                         panels[i].BackColor = Color.Red;
                     }
