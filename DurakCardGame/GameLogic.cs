@@ -1384,10 +1384,38 @@ namespace DurakCardGame
                 deck.cards[deck.cards.Count() - 1] = tempCard;
 
                 // Sort player hand if human
-                if(players.GetType() == typeHuman)
-                {
-                    ((Human)players[currentPlayerIndex]).SortHand(trump);
-                }
+                SortAllHands();
+
+                // Adds action to action log
+                actionLog.Add("- " + players[currentPlayerIndex].Name + " traded " + tempCard.ToString() + " for deck trump " + lastTrumpCardDeck.ToString());
+
+                Console.WriteLine("changed");
+                Console.WriteLine("last card in deck=  " + deck.cards[deck.cards.Count() - 1].Rank + " suit: " + deck.cards[deck.cards.Count() - 1].Suit);
+                Console.WriteLine("players new card=  " + players[currentPlayerIndex].Hand[index].Rank + " suit: " + players[currentPlayerIndex].Hand[index].Suit);
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Lets the player take only the Ace of trump if they have the 6 of Trump
+        /// </summary>
+        /// <returns></returns>
+        public bool TakeTrumpAceFromDeck()
+        {
+            Card lastTrumpCardDeck = deck.cards[deck.cards.Count() - 1];
+            Card tempCard;
+            const int ace = 14;
+            int currentPlayerIndex = turnIndex;
+            int index = players[currentPlayerIndex].Hand.FindIndex(card => card.Rank == 6 && card.Suit == trump);
+            if (index != -1 && lastTrumpCardDeck.Rank == ace)
+            {
+                tempCard = players[currentPlayerIndex].Hand[index];
+                players[currentPlayerIndex].Hand[index] = lastTrumpCardDeck;
+                deck.cards[deck.cards.Count() - 1] = tempCard;
+
+                // Sort player hand if human
+                SortAllHands();
 
                 // Adds action to action log
                 actionLog.Add("- " + players[currentPlayerIndex].Name + " traded " + tempCard.ToString() + " for deck trump " + lastTrumpCardDeck.ToString());
@@ -1403,7 +1431,7 @@ namespace DurakCardGame
         //2- reverse attack
         // ####################################################################
 
-        
+
 
 
 

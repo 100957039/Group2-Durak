@@ -369,9 +369,13 @@ namespace DurakCardGame
             {
                 displayCurrentPlayerHand();
             }
+            //if (game.TakeTrumpAceFromDeck())
+            //{
+            //    displayCurrentPlayerHand();
+            //}
         }
 
-        
+
 
 
         //                                    ##############################################
