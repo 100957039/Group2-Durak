@@ -378,6 +378,8 @@ namespace DurakCardGame
         // stop attack when it reachs 6 cards
         private void AttackReachMaxCards()
         {
+            Console.WriteLine("cardsattack: " + cardsAttack.Count() + " | cardsdefende: " + cardsDefend.Count());
+            Console.WriteLine("turn index: " + turnIndex);
             if (cardsAttack.Count() == 6 & cardsDefend.Count() == 6)
             {
                 // means defender won
@@ -400,27 +402,25 @@ namespace DurakCardGame
                 fillHand();
             }
             // defender lost
-            else if (cardsAttack.Count() == 6 & turnIndex == attackerIndex) 
+            else if (cardsAttack.Count() == 6 & canStillDefend(players[defenderIndex].Hand, cardsAttack[cardsAttack.Count()-1])) 
+            {
+                //LoserTakeAllCards();
+                //cardsAttack.Clear();
+                //cardsDefend.Clear();
+                turnIndex = defenderIndex;
+                //defenderIndex = FindNextAvailablePlayer(turnIndex);
+                //attackerIndex = turnIndex;
+                //fillHand();
+            }
+            else 
             {
                 LoserTakeAllCards();
                 cardsAttack.Clear();
                 cardsDefend.Clear();
-                // check if attcaker does not have cards
-                //int nextPossibleAttaker = 
-                //if (players[defenderIndex].Hand.Count() == 0 & deck.Count() == 0)
-                //{
-                    turnIndex = FindNextAvailablePlayer(defenderIndex);
-                    defenderIndex = FindNextAvailablePlayer(turnIndex);
-                    attackerIndex = turnIndex;
+                turnIndex = FindNextAvailablePlayer(defenderIndex);
+                defenderIndex = FindNextAvailablePlayer(turnIndex);
+                attackerIndex = turnIndex;
                 fillHand();
-                //}
-                // if attacker still have cards
-                //else
-                //{
-                //    turnIndex = F;
-                //    attackerIndex = turnIndex;
-                //    defenderIndex = FindNextAvailablePlayer(turnIndex);
-                //}
             }
             
         }
@@ -448,19 +448,25 @@ namespace DurakCardGame
         public void DetermineDefenderAndAttackerIndex()
         {
             
-            
-            if (turnIndex == defenderIndex | (turnIndex == attackerIndex & cardsAttack.Count() > cardsDefend.Count()+1))
+            if (cardsAttack.Count() == 6)
             {
-                //Console.WriteLine("this one 2");
-                turnIndex = attackerIndex;
-
+                AttackReachMaxCards();
             }
-            // regular attacks or defence
             else
             {
-                turnIndex = defenderIndex;
+                if (turnIndex == defenderIndex | (turnIndex == attackerIndex & cardsAttack.Count() > cardsDefend.Count() + 1))
+                {
+                    //Console.WriteLine("this one 2");
+                    turnIndex = attackerIndex;
+
+                }
+                // regular attacks or defence
+                else
+                {
+                    turnIndex = defenderIndex;
+                }
             }
-            AttackReachMaxCards();
+            
             // order matter for this function, it should here
             //AttackReachMaxCards();
             //PlayerWonAndSwitchTurns();
@@ -692,7 +698,7 @@ namespace DurakCardGame
         //can attck with this card
         public bool CanAttackWithThisCard(Card attackCard)
         {
-            return true;
+            //return true;
             // check cards played in attcak panel
             foreach (Card card in cardsAttack)
             {
@@ -715,7 +721,7 @@ namespace DurakCardGame
         // can defend with this card
         public bool CanDefendWithThisCard(Card defendCard, Card attackCard)
         {
-            return true;
+            //return true;
             // if reverse is active
             if (reverseAttackActive)
             {
