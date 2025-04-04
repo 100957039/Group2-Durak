@@ -726,12 +726,27 @@ namespace DurakCardGame
             //int nextDefender;
             //int nextTurn;
 
-            if (turnIndex == defenderIndex) {
-                turnIndex = attackerIndex;
+            
+
+            
+            int attackCardsMoreThanDefence = cardsAttack.Count() - cardsDefend.Count();
+            // defender lost (play cards could have been played
+            if (attackCardsMoreThanDefence > 1 & turnIndex == attackerIndex)
+            {
+                turnIndex = attackerIndex + subAttackDistance;
+
             }
+            // regular attacks or defence
             else
             {
-                turnIndex = defenderIndex;
+                if (turnIndex == defenderIndex)
+                {
+                    turnIndex = attackerIndex;
+                }
+                else
+                {
+                    turnIndex = defenderIndex;
+                }
             }
 
         }
@@ -760,13 +775,46 @@ namespace DurakCardGame
             // is defender
             if (turnIndex == defenderIndex) 
             {
-                LoserTakeAllCards();
-                cardsAttack.Clear();
-                cardsDefend.Clear();
-                turnIndex =  FindNextAvailablePlayer(defenderIndex);
-                defenderIndex = FindNextAvailablePlayer(turnIndex);
-                attackerIndex = turnIndex;
-                fillHand();
+                //LoserTakeAllCards();
+                //cardsAttack.Clear();
+                //cardsDefend.Clear();
+                //turnIndex =  FindNextAvailablePlayer(defenderIndex);
+                //defenderIndex = FindNextAvailablePlayer(turnIndex);
+                //attackerIndex = turnIndex;
+                //fillHand();
+
+                // play cards could have been played
+                // Check for last sub attacker
+                //if (turnIndex == attackerIndex && subAttackDistance == maxSubAttack)
+                //{
+                //    attackerIndex = defenderIndex;
+                //    turnIndex = attackerIndex;
+                //    defenderIndex = FindNextAvailablePlayer(turnIndex);
+                //    Console.WriteLine(":P: " + maxSubAttack);
+                //    subAttackDistance = 0;
+                //    cardsAttack.Clear();
+                //    cardsDefend.Clear();
+                //    fillHand();
+                //}
+                //else
+                //{
+                    //bool stillHaveCardsToAttack = canStillAttack(players[attackerIndex].Hand);
+                    //if (stillHaveCardsToAttack)
+                    //{
+                    //attackerIndex = attackerIndex;
+                    turnIndex = attackerIndex;
+                    //}
+                    // no cards left to give
+                    //else
+                    //{
+                    //    turnIndex = FindNextAvailablePlayer(defenderIndex + subAttackDistance);
+                    //    attackerIndex = turnIndex;
+                    //    subAttackDistance++;
+                    //}
+
+                //}
+
+                
             }
 
             // if attacker
