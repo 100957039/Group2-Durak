@@ -123,7 +123,7 @@ namespace DurakCardGame
             panelHand.Controls.Clear();
             panelHand.Refresh(); // I dont know what refresh does, I do not think it's needed
             Console.WriteLine("    ");
-            Console.WriteLine("game.turnIndex: " + game.turnIndex);
+            //Console.WriteLine("game.turnIndex: " + game.turnIndex);
             Console.WriteLine("    ");
             Player currentPlayer = game.players[game.turnIndex];
             int xAxis = 0;
@@ -232,8 +232,8 @@ namespace DurakCardGame
                         {
                             currentPlayer.PlayCard2(card);
                             game.PlayCardToAttckOrDefendList(card);
-                            //game.DetermineDefenderAndAttackerIndex();
-                            game.ReverseAttack();
+                            game.DetermineDefenderAndAttackerIndex();
+                            //game.ReverseAttack();
                             displayPlayedCards();
                             displayCurrentPlayerHand();
                         };
