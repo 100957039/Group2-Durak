@@ -392,10 +392,23 @@ namespace DurakCardGame
             const int IconsPerPage = 6;
             const int IconSize = 50;
             int[] IconLocationX = { 34, 90, 146, 34, 90, 146 };
-            int[] IconLocationY = { 13, 69, 13, 69, 13, 69 };
+            int[] IconLocationY = { 13, 13, 13, 69, 69, 69 };
             List<PictureBox> iconList = new List<PictureBox>();
             const string IconLocation = "../../../GUI_Images/HumanIcons/";
-            string[] icons = ["Acorn_Boy.jpg", "Beard_Man.jpg", "Inventor.jpg", "Queen.jpg", "Skull_Man.jpg", "Fancy_Man.jpg", "Robot_Knight.jpg"];
+            string[] icons = ["Astronaut1.jpg", "Astronaut2.jpg", "Astronaut3.jpg", "Astronaut4.jpg", "Cat1.jpg", "Cat2.jpg",
+                              "Cat3.jpg", "Clown1.jpg", "Clown2.jpg", "Diver1.jpg", "Diver2.jpg", "Diver3.jpg", "Diver4.jpg",
+                              "Dog1.jpg", "Dog2.jpg", "Dog3.jpg", "Dog4.jpg", "Dog5.jpg", "Flamingo.jpg", "Fred.jpg", "King1.jpg",
+                              "King2.jpg", "King3.jpg", "King4.jpg", "King5.jpg", "King6.jpg", "Man1.jpg", "Man2.jpg", "Man3.jpg",
+                              "Man4.jpg", "Man5.jpg", "Man6.jpg", "Man7.jpg", "Man8.jpg", "Man9.jpg", "Man10.jpg", "Man11.jpg",
+                              "Man12.jpg","Man13.jpg", "Man14.jpg", "Man15.jpg", "Man16.jpg", "Man17.jpg", "Man18.jpg", "Man19.jpg",
+                              "Man20.jpg", "Man21.jpg", "Man22.jpg", "Man23.jpg", "Man24.jpg", "Man25.jpg", "Man26.jpg", "Man27.jpg",
+                              "Man28.jpg", "Mask1.jpg", "Mask2.jpg", "Mask3.jpg", "Mask4.jpg", "Penguin.jpg", "Penguin2.jpg", "Queen1.jpg",
+                              "Queen2.jpg", "Queen3.jpg", "Queen4.jpg", "Queen5.jpg", "Queen6.jpg", "Queen7.jpg", "Seal1.jpg", "Seal2.jpg",
+                              "Skull1.jpg", "Skull2.jpg", "Skull3.jpg", "Woman1.jpg", "Woman2.jpg", "Woman3.jpg", "Woman4.jpg", "Woman5.jpg",
+                              "Woman6.jpg", "Woman7.jpg", "Woman8.jpg", "Woman9.jpg", "Woman10.jpg", "Woman11.jpg", "Woman12.jpg", "Woman13.jpg",
+                              "Woman14.jpg", "Woman15.jpg", "Woman16.jpg", "Woman17.jpg", "Woman18.jpg", "Woman19.jpg", "Woman20.jpg",
+                              "Woman21.jpg", "Woman22.jpg", "Woman23.jpg", "Woman24.jpg", "Woman25.jpg", "Woman26.jpg", "Woman27.jpg",
+                              "Woman28.jpg", "Woman29.jpg","Woman30.jpg", "Woman31.jpg", "Woman32.jpg"];
 
             const int ArrowWidth = 20;
             const int ArrowHeight = 38;
