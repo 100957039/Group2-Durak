@@ -232,7 +232,8 @@ namespace DurakCardGame
                         {
                             currentPlayer.PlayCard2(card);
                             game.PlayCardToAttckOrDefendList(card);
-                            game.DetermineDefenderAndAttackerIndex();
+                            //game.DetermineDefenderAndAttackerIndex();
+                            game.ReverseAttack();
                             displayPlayedCards();
                             displayCurrentPlayerHand();
                         };

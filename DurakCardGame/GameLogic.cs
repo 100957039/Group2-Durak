@@ -36,7 +36,7 @@ namespace DurakCardGame
         // For storing what happens during a game
         public List<string> actionLog = new List<string>();
         // based on this value, it will determine if (REVERSE ATTACKE) is active
-        public bool reverseAttackActive { get; set; } = false;
+        public bool reverseAttackActive { get; set; } = true;
 
         // multiple attack
         int subAttackNumber { set; get; } = 0;
@@ -725,10 +725,6 @@ namespace DurakCardGame
             //int nextAttacker;
             //int nextDefender;
             //int nextTurn;
-
-            
-
-            
             int attackCardsMoreThanDefence = cardsAttack.Count() - cardsDefend.Count();
             // defender lost (play cards could have been played
             if (attackCardsMoreThanDefence > 1 & turnIndex == attackerIndex)
@@ -750,6 +746,85 @@ namespace DurakCardGame
             }
 
         }
+
+
+        // TESTING REVERSE starts here
+        // return only players with hand
+        private List<Player> AvailablePlayers()
+        {
+            List<Player> availablePlayers = new List<Player>();
+            foreach (Player player in players)
+            {
+                if (player.Hand.Count() != 0)
+                {
+                    availablePlayers.Add(player);
+                }
+            }
+            return availablePlayers;
+        }
+        // players with hand attacker is the first one in the list
+        //private List<Player> PlayersAttckerFirst()
+        //{
+        //    List<Player> attackerFirst = new List<Player>();
+        //    List<Player> availablePlayer = AvailablePlayers();
+        //    for (int i = 0; i < availablePlayer.Count(); i++)
+        //    {
+
+        //    }
+        //    return attackerFirst;
+        //}
+        public bool IsReverseAttack()
+        {
+            // if the attacker is before the defender, it could be possibale reverse attack
+            bool reverse = defenderIndex == FindNextAvailablePlayer(attackerIndex);
+            return reverse;
+        }
+        public void ReverseAttack()
+        {
+            Card firstCardAttack = cardsAttack[0];
+            try
+            {
+                //Card firstCardDefend = cardsDefend[0];
+                //  first reverse
+                if (turnIndex == defenderIndex & firstCardAttack.Rank == cardsDefend[0].Rank & cardsAttack.Count() == 1)
+                {
+                    turnIndex = attackerIndex;
+                    attackerIndex = defenderIndex;
+                    defenderIndex = turnIndex;
+
+                    cardsAttack.Add(cardsDefend[0]);
+                    cardsDefend.Clear();
+                }// second reverse
+                else if (cardsAttack.Count() == 2 & cardsAttack[0].Rank == cardsAttack[1].Rank & cardsAttack[1].Rank == cardsDefend[0].Rank)
+                {
+                    turnIndex = attackerIndex;
+                    attackerIndex = defenderIndex;
+                    defenderIndex = turnIndex;
+
+                    cardsAttack.Add(cardsDefend[0]);
+                    cardsDefend.Clear();
+                }
+                //else if (cardsAttack.Count() == 3 & cardsAttack[0].Rank == cardsAttack[1].Rank & cardsAttack[1].Rank == cardsAttack[1].Rank & cards == cardsDefend[0].Rank)
+                //{
+                //    turnIndex = attackerIndex;
+                //    attackerIndex = defenderIndex;
+                //    defenderIndex = turnIndex;
+                //}
+                else if(cardsAttack.Count() > cardsDefend.Count())
+                {
+                    turnIndex = defenderIndex;
+                }
+                else
+                {
+                    DetermineDefenderAndAttackerIndex();
+                }
+            }
+            catch (Exception e) {
+                DetermineDefenderAndAttackerIndex();
+            }
+        }
+
+        // TESTing reverse ends here
 
         private int NumberOfPlayer()
         {
@@ -853,11 +928,25 @@ namespace DurakCardGame
                 }
                 else
                 {
-                    int total = defenderIndex + subAttackDistance;
-                    Console.WriteLine("defenderIndex + subAttackDistance: " + total);
+                    // regular attack
+                    if (FindNextAvailablePlayer(attackerIndex) == defenderIndex)
+                    {
+                        int total = defenderIndex + subAttackDistance;
+                        Console.WriteLine("defenderIndex + subAttackDistance1: " + total);
                     turnIndex = FindNextAvailablePlayer(defenderIndex + subAttackDistance);
-                    attackerIndex = turnIndex;
-                    subAttackDistance++;
+                        attackerIndex = turnIndex;
+                        //subAttackDistance++;
+                    }
+                    // reversed attack + 1 
+                    else
+                    {
+                        int total = defenderIndex + subAttackDistance;
+                        Console.WriteLine("defenderIndex + subAttackDistance2: " + total);
+                        turnIndex = FindNextAvailablePlayer(defenderIndex + subAttackDistance + 1);
+                        attackerIndex = turnIndex;
+                        subAttackDistance++;
+                    }
+
                 }
                 // Check for last sub attacker
 
@@ -1151,6 +1240,14 @@ namespace DurakCardGame
         // can defend with this card
         public bool CanDefendWithThisCard(Card defendCard, Card attackCard)
         {
+            // if reverse is active
+            if (reverseAttackActive)
+            {
+                if (attackCard.Rank == defendCard.Rank)
+                {
+                    return true;
+                }
+            }
             // if attack card is trump 
             if (attackCard.Suit == trump) {
                 if ((defendCard.Suit == trump) & (defendCard.Rank > attackCard.Rank))
