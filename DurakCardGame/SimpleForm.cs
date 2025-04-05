@@ -41,8 +41,8 @@ namespace DurakCardGame
             string playerTwo = "2";
             //List<String> playersList = new List<String> { "1", "2", "3" , "4" };
             //List<String> iconList = new List<String> { "1", "2", "3" , "4" };
-            List<String> playersList = new List<String> { "1", "2" };
-            List<String> iconList = new List<String> { "1", "2" };
+            List<String> playersList = new List<String> { "1" };//, "2" };
+            List<String> iconList = new List<String> { "1" };//, "2" };
             for (int i = 0; i < playersList.Count; i++)
             {
                 game.addPlayer(playersList[i], iconList[i]);
@@ -50,6 +50,7 @@ namespace DurakCardGame
 
             game.addComputer("blah");
             game.addComputer("blah2");
+            game.addComputer("blah3");
         }
 
         //STEP #2
@@ -203,12 +204,13 @@ namespace DurakCardGame
         // all four hands
         public void displayAllFourHand()
         {
-            if (game.ComputerPlayCard())
-            {
-                refreshTopBottomPanels();
-                displayPlayedCards();
-                displayAllFourHand();
-            }
+            //while (game.ComputerPlayCard())
+            ////if ()
+            //{
+            //    refreshTopBottomPanels();
+            //    displayPlayedCards();
+            //    displayAllFourHand();
+            //}
             List<Panel> panels = [panel1, panel2, panel3, panelHand];
             panelHand.Controls.Clear();
             panelHand.Refresh(); // I dont know what refresh does, I do not think it's needed

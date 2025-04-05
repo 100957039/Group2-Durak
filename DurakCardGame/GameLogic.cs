@@ -578,6 +578,7 @@ namespace DurakCardGame
 
             if (isComputer)
             {
+                Console.WriteLine("here");
                 Computer computerPlayer = (Computer)player;
                 List<Card> cardsCanPlay = new List<Card>();
 
@@ -593,10 +594,13 @@ namespace DurakCardGame
                     {
                         if (cardsAttack.Count() == 0)
                         {
+                            Console.WriteLine("first attacker");
+                            //doAction = true;
                             cardsCanPlay.Add(card);
                         }
                         else if (CanAttackWithThisCard(card))
                         {
+                            Console.WriteLine("might not be first");
                             cardsCanPlay.Add(card);
                         }
                     }
@@ -604,9 +608,10 @@ namespace DurakCardGame
                 }
                 if (cardsCanPlay.Count() > 0)
                 {
+                    Console.WriteLine("have cards to play");
                     if (turnIndex == defenderIndex)
                     {
-                        Card bestOption = computerPlayer.ChooseBestCard(cardsCanPlay, true, trump);
+                        Card bestOption = computerPlayer.ChooseBestCard(cardsCanPlay, false, trump);
                         cardsDefend.Add(bestOption);
                         computerPlayer.PlayCard2(bestOption);
                         turnIndex = attackerIndex;
@@ -614,10 +619,63 @@ namespace DurakCardGame
                     }
                     else
                     {
-                        Card bestOption = computerPlayer.ChooseBestCard(cardsCanPlay, true, trump);
-                        cardsAttack.Add(bestOption);
-                        computerPlayer.PlayCard2(bestOption);
-                        turnIndex = defenderIndex;
+                        //Console.WriteLine("attacking ");
+                        
+                            Card bestOption = computerPlayer.ChooseBestCard(cardsCanPlay, true, trump);
+                            cardsAttack.Add(bestOption);
+                            computerPlayer.PlayCard2(bestOption);
+                        //turnIndex = defenderIndex;
+                        // defender lost
+                        if (cardsAttack.Count() > cardsDefend.Count() + 1)
+                        {
+                            // max 6 cards to play
+                            if (cardsAttack.Count() == 6)
+                            {
+                                LoserTakeAllCards();
+                                cardsAttack.Clear();
+                                cardsDefend.Clear();
+                                fillHand();
+                                turnIndex = FindNextAvailablePlayer(defenderIndex);
+                                attackerIndex = turnIndex;
+                                defenderIndex = FindNextAvailablePlayer(turnIndex);
+                            }
+                            else
+                            {
+                                turnIndex = attackerIndex;
+                            }
+                        }
+                        else
+                        {
+                            if (cardsDefend.Count() == 6)
+                            {
+                                cardsDefend.Clear();
+                                cardsAttack.Clear();
+                                fillHand();
+                                if (players[defenderIndex].Hand.Count() != 0)
+                                {
+                                    turnIndex = defenderIndex;
+                                    attackerIndex = turnIndex;
+                                    defenderIndex = FindNextAvailablePlayer(turnIndex);
+                                }
+                                else
+                                {
+                                    turnIndex = FindNextAvailablePlayer(defenderIndex);
+                                    attackerIndex = turnIndex;
+                                    defenderIndex = FindNextAvailablePlayer(turnIndex);
+                                }
+                            }
+                            else
+                            {
+                                turnIndex = defenderIndex;
+                            }
+                        }
+                        //else
+                        //{
+                        //    Card bestOption = computerPlayer.ChooseBestCard(cardsCanPlay, true, trump);
+                        //    cardsAttack.Add(bestOption);
+                        //    computerPlayer.PlayCard2(bestOption);
+                        //    turnIndex = defenderIndex;
+                        //}
                         doAction = true;
                     }
 
@@ -865,6 +923,7 @@ namespace DurakCardGame
             Console.WriteLine("attacker Index: " + attackerIndex);
             Console.WriteLine("defender Index: " + defenderIndex);
             Console.WriteLine("turn index: " + turnIndex);
+            Console.WriteLine("distance: " + subAttackDistance);
             // is defender
             if (turnIndex == defenderIndex) 
             {

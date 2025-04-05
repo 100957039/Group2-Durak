@@ -154,7 +154,7 @@
             // 
             // buttonPass
             // 
-            buttonPass.Location = new Point(997, 504);
+            buttonPass.Location = new Point(997, 493);
             buttonPass.Name = "buttonPass";
             buttonPass.Size = new Size(75, 23);
             buttonPass.TabIndex = 13;
@@ -164,7 +164,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(977, 544);
+            button2.Location = new Point(986, 522);
             button2.Name = "button2";
             button2.Size = new Size(95, 23);
             button2.TabIndex = 14;
@@ -195,12 +195,13 @@
             // 
             // button4
             // 
-            button4.Location = new Point(987, 585);
+            button4.BackColor = SystemColors.ActiveCaption;
+            button4.Location = new Point(934, 551);
             button4.Name = "button4";
-            button4.Size = new Size(75, 23);
+            button4.Size = new Size(163, 68);
             button4.TabIndex = 18;
-            button4.Text = "computer";
-            button4.UseVisualStyleBackColor = true;
+            button4.Text = "computer play card";
+            button4.UseVisualStyleBackColor = false;
             button4.Click += Computer_Play_card;
             // 
             // SimpleForm
