@@ -35,21 +35,22 @@
             btnStart = new Button();
             btnHTP = new Button();
             btnOptions = new Button();
+            btnCredits = new Button();
             btnQuit = new Button();
             pnlPlayerSelect = new Panel();
             lblPlayerSelect = new Label();
             btnPlayerSelectBg = new Button();
-            gbNumAI = new GroupBox();
-            rb0AI = new RadioButton();
-            rb1AI = new RadioButton();
-            rb2AI = new RadioButton();
-            rb3AI = new RadioButton();
-            lblHide2AI = new Label();
-            lblHide3AI = new Label();
             gbNumPlayers = new GroupBox();
             rb2Players = new RadioButton();
             rb3Players = new RadioButton();
             rb4Players = new RadioButton();
+            gbNumAI = new GroupBox();
+            lblHide2AI = new Label();
+            lblHide3AI = new Label();
+            rb0AI = new RadioButton();
+            rb1AI = new RadioButton();
+            rb2AI = new RadioButton();
+            rb3AI = new RadioButton();
             btnBackPS = new Button();
             btnConfirmPS = new Button();
             pnlGame = new Panel();
@@ -140,12 +141,21 @@
             btnConfirmN = new Button();
             pnlOptions = new Panel();
             lblOptions = new Label();
-            btnBack = new Button();
             btnOptionsBg = new Button();
+            groupBox1 = new GroupBox();
+            btnTCTHelp = new Button();
+            rbTCTAce = new RadioButton();
+            rbTCTEnable = new RadioButton();
+            rbTCTDisable = new RadioButton();
+            btnBack = new Button();
+            pnlCredits = new Panel();
+            lblCredits = new Label();
+            button3 = new Button();
+            button6 = new Button();
             pnlMainMenu.SuspendLayout();
             pnlPlayerSelect.SuspendLayout();
-            gbNumAI.SuspendLayout();
             gbNumPlayers.SuspendLayout();
+            gbNumAI.SuspendLayout();
             pnlGame.SuspendLayout();
             pnlDeck.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbDeck).BeginInit();
@@ -174,6 +184,8 @@
             gbPlayer4Customize.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbPlayer4SelectedIcon).BeginInit();
             pnlOptions.SuspendLayout();
+            groupBox1.SuspendLayout();
+            pnlCredits.SuspendLayout();
             SuspendLayout();
             // 
             // pnlMainMenu
@@ -186,6 +198,7 @@
             pnlMainMenu.Controls.Add(btnStart);
             pnlMainMenu.Controls.Add(btnHTP);
             pnlMainMenu.Controls.Add(btnOptions);
+            pnlMainMenu.Controls.Add(btnCredits);
             pnlMainMenu.Controls.Add(btnQuit);
             pnlMainMenu.Location = new Point(0, 0);
             pnlMainMenu.Name = "pnlMainMenu";
@@ -224,7 +237,7 @@
             btnStart.FlatStyle = FlatStyle.Flat;
             btnStart.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnStart.ForeColor = Color.White;
-            btnStart.Location = new Point(461, 334);
+            btnStart.Location = new Point(461, 311);
             btnStart.Name = "btnStart";
             btnStart.Size = new Size(162, 60);
             btnStart.TabIndex = 7;
@@ -239,7 +252,7 @@
             btnHTP.FlatStyle = FlatStyle.Flat;
             btnHTP.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnHTP.ForeColor = Color.White;
-            btnHTP.Location = new Point(401, 414);
+            btnHTP.Location = new Point(401, 391);
             btnHTP.Name = "btnHTP";
             btnHTP.Size = new Size(281, 60);
             btnHTP.TabIndex = 9;
@@ -254,13 +267,28 @@
             btnOptions.FlatStyle = FlatStyle.Flat;
             btnOptions.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnOptions.ForeColor = Color.White;
-            btnOptions.Location = new Point(446, 494);
+            btnOptions.Location = new Point(446, 471);
             btnOptions.Name = "btnOptions";
             btnOptions.Size = new Size(191, 60);
             btnOptions.TabIndex = 8;
             btnOptions.Text = "Options";
             btnOptions.UseVisualStyleBackColor = false;
             btnOptions.Click += BtnOptionsClick;
+            // 
+            // btnCredits
+            // 
+            btnCredits.BackColor = Color.Black;
+            btnCredits.FlatAppearance.BorderSize = 5;
+            btnCredits.FlatStyle = FlatStyle.Flat;
+            btnCredits.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnCredits.ForeColor = Color.White;
+            btnCredits.Location = new Point(452, 551);
+            btnCredits.Name = "btnCredits";
+            btnCredits.Size = new Size(178, 60);
+            btnCredits.TabIndex = 13;
+            btnCredits.Text = "Credits";
+            btnCredits.UseVisualStyleBackColor = false;
+            btnCredits.Click += BtnCreditsClick;
             // 
             // btnQuit
             // 
@@ -269,7 +297,7 @@
             btnQuit.FlatStyle = FlatStyle.Flat;
             btnQuit.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnQuit.ForeColor = Color.White;
-            btnQuit.Location = new Point(461, 574);
+            btnQuit.Location = new Point(461, 631);
             btnQuit.Name = "btnQuit";
             btnQuit.Size = new Size(162, 60);
             btnQuit.TabIndex = 10;
@@ -282,8 +310,8 @@
             pnlPlayerSelect.BackgroundImage = (Image)resources.GetObject("pnlPlayerSelect.BackgroundImage");
             pnlPlayerSelect.Controls.Add(lblPlayerSelect);
             pnlPlayerSelect.Controls.Add(btnPlayerSelectBg);
-            pnlPlayerSelect.Controls.Add(gbNumAI);
             pnlPlayerSelect.Controls.Add(gbNumPlayers);
+            pnlPlayerSelect.Controls.Add(gbNumAI);
             pnlPlayerSelect.Controls.Add(btnBackPS);
             pnlPlayerSelect.Controls.Add(btnConfirmPS);
             pnlPlayerSelect.Location = new Point(0, 0);
@@ -317,15 +345,75 @@
             btnPlayerSelectBg.TabIndex = 14;
             btnPlayerSelectBg.UseVisualStyleBackColor = false;
             // 
+            // gbNumPlayers
+            // 
+            gbNumPlayers.BackColor = Color.Black;
+            gbNumPlayers.Controls.Add(rb2Players);
+            gbNumPlayers.Controls.Add(rb3Players);
+            gbNumPlayers.Controls.Add(rb4Players);
+            gbNumPlayers.Font = new Font("Castellar", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            gbNumPlayers.ForeColor = Color.White;
+            gbNumPlayers.Location = new Point(173, 239);
+            gbNumPlayers.Name = "gbNumPlayers";
+            gbNumPlayers.Size = new Size(282, 376);
+            gbNumPlayers.TabIndex = 30;
+            gbNumPlayers.TabStop = false;
+            gbNumPlayers.Text = "# of Players";
+            // 
+            // rb2Players
+            // 
+            rb2Players.AutoSize = true;
+            rb2Players.BackColor = Color.Transparent;
+            rb2Players.Checked = true;
+            rb2Players.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rb2Players.ForeColor = Color.White;
+            rb2Players.Location = new Point(26, 64);
+            rb2Players.Name = "rb2Players";
+            rb2Players.Size = new Size(217, 41);
+            rb2Players.TabIndex = 16;
+            rb2Players.TabStop = true;
+            rb2Players.Tag = "";
+            rb2Players.Text = "2 Players";
+            rb2Players.UseVisualStyleBackColor = false;
+            rb2Players.Click += Rb2PlayersClick;
+            // 
+            // rb3Players
+            // 
+            rb3Players.AutoSize = true;
+            rb3Players.BackColor = Color.Transparent;
+            rb3Players.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rb3Players.ForeColor = Color.White;
+            rb3Players.Location = new Point(26, 144);
+            rb3Players.Name = "rb3Players";
+            rb3Players.Size = new Size(217, 41);
+            rb3Players.TabIndex = 18;
+            rb3Players.Text = "3 Players";
+            rb3Players.UseVisualStyleBackColor = false;
+            rb3Players.Click += Rb3PlayersClick;
+            // 
+            // rb4Players
+            // 
+            rb4Players.AutoSize = true;
+            rb4Players.BackColor = Color.Transparent;
+            rb4Players.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rb4Players.ForeColor = Color.White;
+            rb4Players.Location = new Point(26, 224);
+            rb4Players.Name = "rb4Players";
+            rb4Players.Size = new Size(217, 41);
+            rb4Players.TabIndex = 20;
+            rb4Players.Text = "4 Players";
+            rb4Players.UseVisualStyleBackColor = false;
+            rb4Players.Click += Rb4PlayersClick;
+            // 
             // gbNumAI
             // 
             gbNumAI.BackColor = Color.Black;
+            gbNumAI.Controls.Add(lblHide2AI);
+            gbNumAI.Controls.Add(lblHide3AI);
             gbNumAI.Controls.Add(rb0AI);
             gbNumAI.Controls.Add(rb1AI);
             gbNumAI.Controls.Add(rb2AI);
             gbNumAI.Controls.Add(rb3AI);
-            gbNumAI.Controls.Add(lblHide2AI);
-            gbNumAI.Controls.Add(lblHide3AI);
             gbNumAI.Font = new Font("Castellar", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             gbNumAI.ForeColor = Color.White;
             gbNumAI.Location = new Point(625, 239);
@@ -334,6 +422,22 @@
             gbNumAI.TabIndex = 31;
             gbNumAI.TabStop = false;
             gbNumAI.Text = "# of AI";
+            // 
+            // lblHide2AI
+            // 
+            lblHide2AI.BackColor = Color.Black;
+            lblHide2AI.Location = new Point(33, 232);
+            lblHide2AI.Name = "lblHide2AI";
+            lblHide2AI.Size = new Size(25, 25);
+            lblHide2AI.TabIndex = 32;
+            // 
+            // lblHide3AI
+            // 
+            lblHide3AI.BackColor = Color.Black;
+            lblHide3AI.Location = new Point(33, 312);
+            lblHide3AI.Name = "lblHide3AI";
+            lblHide3AI.Size = new Size(25, 25);
+            lblHide3AI.TabIndex = 33;
             // 
             // rb0AI
             // 
@@ -395,82 +499,6 @@
             rb3AI.Text = "3 AI";
             rb3AI.UseVisualStyleBackColor = false;
             rb3AI.Click += Rb3AIClick;
-            // 
-            // lblHide2AI
-            // 
-            lblHide2AI.BackColor = Color.Black;
-            lblHide2AI.Location = new Point(33, 232);
-            lblHide2AI.Name = "lblHide2AI";
-            lblHide2AI.Size = new Size(25, 25);
-            lblHide2AI.TabIndex = 32;
-            // 
-            // lblHide3AI
-            // 
-            lblHide3AI.BackColor = Color.Black;
-            lblHide3AI.Location = new Point(33, 312);
-            lblHide3AI.Name = "lblHide3AI";
-            lblHide3AI.Size = new Size(25, 25);
-            lblHide3AI.TabIndex = 33;
-            // 
-            // gbNumPlayers
-            // 
-            gbNumPlayers.BackColor = Color.Black;
-            gbNumPlayers.Controls.Add(rb2Players);
-            gbNumPlayers.Controls.Add(rb3Players);
-            gbNumPlayers.Controls.Add(rb4Players);
-            gbNumPlayers.Font = new Font("Castellar", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            gbNumPlayers.ForeColor = Color.White;
-            gbNumPlayers.Location = new Point(173, 239);
-            gbNumPlayers.Name = "gbNumPlayers";
-            gbNumPlayers.Size = new Size(282, 376);
-            gbNumPlayers.TabIndex = 30;
-            gbNumPlayers.TabStop = false;
-            gbNumPlayers.Text = "# of Players";
-            // 
-            // rb2Players
-            // 
-            rb2Players.AutoSize = true;
-            rb2Players.BackColor = Color.Transparent;
-            rb2Players.Checked = true;
-            rb2Players.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            rb2Players.ForeColor = Color.White;
-            rb2Players.Location = new Point(26, 64);
-            rb2Players.Name = "rb2Players";
-            rb2Players.Size = new Size(217, 41);
-            rb2Players.TabIndex = 16;
-            rb2Players.TabStop = true;
-            rb2Players.Tag = "";
-            rb2Players.Text = "2 Players";
-            rb2Players.UseVisualStyleBackColor = false;
-            rb2Players.Click += Rb2PlayersClick;
-            // 
-            // rb3Players
-            // 
-            rb3Players.AutoSize = true;
-            rb3Players.BackColor = Color.Transparent;
-            rb3Players.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            rb3Players.ForeColor = Color.White;
-            rb3Players.Location = new Point(26, 144);
-            rb3Players.Name = "rb3Players";
-            rb3Players.Size = new Size(217, 41);
-            rb3Players.TabIndex = 18;
-            rb3Players.Text = "3 Players";
-            rb3Players.UseVisualStyleBackColor = false;
-            rb3Players.Click += Rb3PlayersClick;
-            // 
-            // rb4Players
-            // 
-            rb4Players.AutoSize = true;
-            rb4Players.BackColor = Color.Transparent;
-            rb4Players.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            rb4Players.ForeColor = Color.White;
-            rb4Players.Location = new Point(26, 224);
-            rb4Players.Name = "rb4Players";
-            rb4Players.Size = new Size(217, 41);
-            rb4Players.TabIndex = 20;
-            rb4Players.Text = "4 Players";
-            rb4Players.UseVisualStyleBackColor = false;
-            rb4Players.Click += Rb4PlayersClick;
             // 
             // btnBackPS
             // 
@@ -541,7 +569,7 @@
             // 
             // pbDeck
             // 
-            pbDeck.ImageLocation = "../../../GUI_Images/Card_Back.png";
+            pbDeck.ImageLocation = "../../../GUI_Images/DeckImages/Card_Back.png";
             pbDeck.Location = new Point(40, 15);
             pbDeck.Name = "pbDeck";
             pbDeck.Size = new Size(80, 122);
@@ -616,7 +644,7 @@
             // pbAttacker
             // 
             pbAttacker.BackColor = Color.Black;
-            pbAttacker.Image = (Image)resources.GetObject("pbAttacker.Image");
+            pbAttacker.ImageLocation = "../../../GUI_Images/RoleIcons/AttackerIcon.png";
             pbAttacker.Location = new Point(224, 197);
             pbAttacker.Name = "pbAttacker";
             pbAttacker.Size = new Size(30, 30);
@@ -641,7 +669,7 @@
             // pbDefender
             // 
             pbDefender.BackColor = Color.Black;
-            pbDefender.Image = (Image)resources.GetObject("pbDefender.Image");
+            pbDefender.ImageLocation = "../../../GUI_Images/RoleIcons/DefenderIcon.png";
             pbDefender.Location = new Point(828, 469);
             pbDefender.Name = "pbDefender";
             pbDefender.Size = new Size(30, 30);
@@ -1267,7 +1295,7 @@
             // pbPlayer1SelectedIcon
             // 
             pbPlayer1SelectedIcon.BackColor = Color.White;
-            pbPlayer1SelectedIcon.ImageLocation = "../../../GUI_Images/Icons/Acorn_Boy.jpg";
+            pbPlayer1SelectedIcon.ImageLocation = "../../../GUI_Images/HumanIcons/Astronaut1.jpg";
             pbPlayer1SelectedIcon.Location = new Point(158, 129);
             pbPlayer1SelectedIcon.Name = "pbPlayer1SelectedIcon";
             pbPlayer1SelectedIcon.Size = new Size(80, 80);
@@ -1342,7 +1370,7 @@
             // pbPlayer2SelectedIcon
             // 
             pbPlayer2SelectedIcon.BackColor = Color.White;
-            pbPlayer2SelectedIcon.ImageLocation = "../../../GUI_Images/Icons/Acorn_Boy.jpg";
+            pbPlayer2SelectedIcon.ImageLocation = "../../../GUI_Images/HumanIcons/Astronaut1.jpg";
             pbPlayer2SelectedIcon.Location = new Point(158, 129);
             pbPlayer2SelectedIcon.Name = "pbPlayer2SelectedIcon";
             pbPlayer2SelectedIcon.Size = new Size(80, 80);
@@ -1417,7 +1445,7 @@
             // pbPlayer3SelectedIcon
             // 
             pbPlayer3SelectedIcon.BackColor = Color.White;
-            pbPlayer3SelectedIcon.ImageLocation = "../../../GUI_Images/Icons/Acorn_Boy.jpg";
+            pbPlayer3SelectedIcon.ImageLocation = "../../../GUI_Images/HumanIcons/Astronaut1.jpg";
             pbPlayer3SelectedIcon.Location = new Point(158, 129);
             pbPlayer3SelectedIcon.Name = "pbPlayer3SelectedIcon";
             pbPlayer3SelectedIcon.Size = new Size(80, 80);
@@ -1492,7 +1520,7 @@
             // pbPlayer4SelectedIcon
             // 
             pbPlayer4SelectedIcon.BackColor = Color.White;
-            pbPlayer4SelectedIcon.ImageLocation = "../../../GUI_Images/Icons/Acorn_Boy.jpg";
+            pbPlayer4SelectedIcon.ImageLocation = "../../../GUI_Images/HumanIcons/Astronaut1.jpg";
             pbPlayer4SelectedIcon.Location = new Point(158, 129);
             pbPlayer4SelectedIcon.Name = "pbPlayer4SelectedIcon";
             pbPlayer4SelectedIcon.Size = new Size(80, 80);
@@ -1555,8 +1583,9 @@
             pnlOptions.BackColor = SystemColors.Control;
             pnlOptions.BackgroundImage = (Image)resources.GetObject("pnlOptions.BackgroundImage");
             pnlOptions.Controls.Add(lblOptions);
-            pnlOptions.Controls.Add(btnBack);
             pnlOptions.Controls.Add(btnOptionsBg);
+            pnlOptions.Controls.Add(groupBox1);
+            pnlOptions.Controls.Add(btnBack);
             pnlOptions.Location = new Point(0, 0);
             pnlOptions.Name = "pnlOptions";
             pnlOptions.Size = new Size(1082, 753);
@@ -1568,26 +1597,11 @@
             lblOptions.BackColor = Color.Black;
             lblOptions.Font = new Font("Castellar", 48F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblOptions.ForeColor = Color.White;
-            lblOptions.Location = new Point(325, 118);
+            lblOptions.Location = new Point(328, 118);
             lblOptions.Name = "lblOptions";
             lblOptions.Size = new Size(427, 85);
             lblOptions.TabIndex = 12;
             lblOptions.Text = "Options";
-            // 
-            // btnBack
-            // 
-            btnBack.BackColor = Color.Black;
-            btnBack.FlatAppearance.BorderSize = 5;
-            btnBack.FlatStyle = FlatStyle.Flat;
-            btnBack.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnBack.ForeColor = Color.White;
-            btnBack.Location = new Point(476, 601);
-            btnBack.Name = "btnBack";
-            btnBack.Size = new Size(129, 60);
-            btnBack.TabIndex = 10;
-            btnBack.Text = "Back";
-            btnBack.UseVisualStyleBackColor = false;
-            btnBack.Click += BtnBackOClick;
             // 
             // btnOptionsBg
             // 
@@ -1603,6 +1617,148 @@
             btnOptionsBg.TabIndex = 13;
             btnOptionsBg.UseVisualStyleBackColor = false;
             // 
+            // groupBox1
+            // 
+            groupBox1.BackColor = Color.Black;
+            groupBox1.Controls.Add(btnTCTHelp);
+            groupBox1.Controls.Add(rbTCTAce);
+            groupBox1.Controls.Add(rbTCTEnable);
+            groupBox1.Controls.Add(rbTCTDisable);
+            groupBox1.Font = new Font("Copperplate Gothic Light", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            groupBox1.ForeColor = Color.White;
+            groupBox1.Location = new Point(374, 261);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(334, 158);
+            groupBox1.TabIndex = 17;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Trump Card Trading";
+            // 
+            // btnTCTHelp
+            // 
+            btnTCTHelp.BackColor = Color.Black;
+            btnTCTHelp.FlatAppearance.BorderSize = 2;
+            btnTCTHelp.FlatStyle = FlatStyle.Flat;
+            btnTCTHelp.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnTCTHelp.ForeColor = Color.White;
+            btnTCTHelp.Location = new Point(276, 36);
+            btnTCTHelp.Name = "btnTCTHelp";
+            btnTCTHelp.Size = new Size(45, 45);
+            btnTCTHelp.TabIndex = 18;
+            btnTCTHelp.Text = "?";
+            btnTCTHelp.TextAlign = ContentAlignment.TopCenter;
+            btnTCTHelp.UseVisualStyleBackColor = false;
+            btnTCTHelp.Click += BtnTrumpTradeHelp;
+            // 
+            // rbTCTAce
+            // 
+            rbTCTAce.AutoSize = true;
+            rbTCTAce.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rbTCTAce.ForeColor = Color.White;
+            rbTCTAce.Location = new Point(22, 114);
+            rbTCTAce.Name = "rbTCTAce";
+            rbTCTAce.Size = new Size(149, 29);
+            rbTCTAce.TabIndex = 17;
+            rbTCTAce.Text = "Ace Only";
+            rbTCTAce.UseVisualStyleBackColor = true;
+            rbTCTAce.Click += RbTCTAceClick;
+            // 
+            // rbTCTEnable
+            // 
+            rbTCTEnable.AutoSize = true;
+            rbTCTEnable.Checked = true;
+            rbTCTEnable.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rbTCTEnable.ForeColor = Color.White;
+            rbTCTEnable.Location = new Point(22, 36);
+            rbTCTEnable.Name = "rbTCTEnable";
+            rbTCTEnable.Size = new Size(122, 29);
+            rbTCTEnable.TabIndex = 16;
+            rbTCTEnable.TabStop = true;
+            rbTCTEnable.Text = "Enable";
+            rbTCTEnable.UseVisualStyleBackColor = true;
+            rbTCTEnable.Click += RbTCTEnableClick;
+            // 
+            // rbTCTDisable
+            // 
+            rbTCTDisable.AutoSize = true;
+            rbTCTDisable.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rbTCTDisable.ForeColor = Color.White;
+            rbTCTDisable.Location = new Point(22, 75);
+            rbTCTDisable.Name = "rbTCTDisable";
+            rbTCTDisable.Size = new Size(128, 29);
+            rbTCTDisable.TabIndex = 15;
+            rbTCTDisable.Text = "Disable";
+            rbTCTDisable.UseVisualStyleBackColor = true;
+            rbTCTDisable.Click += RbTCTDisableClick;
+            // 
+            // btnBack
+            // 
+            btnBack.BackColor = Color.Black;
+            btnBack.FlatAppearance.BorderSize = 5;
+            btnBack.FlatStyle = FlatStyle.Flat;
+            btnBack.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnBack.ForeColor = Color.White;
+            btnBack.Location = new Point(476, 570);
+            btnBack.Name = "btnBack";
+            btnBack.Size = new Size(129, 60);
+            btnBack.TabIndex = 10;
+            btnBack.Text = "Back";
+            btnBack.UseVisualStyleBackColor = false;
+            btnBack.Click += BtnBackOClick;
+            // 
+            // pnlCredits
+            // 
+            pnlCredits.AutoScroll = true;
+            pnlCredits.BackColor = SystemColors.Control;
+            pnlCredits.BackgroundImage = (Image)resources.GetObject("pnlCredits.BackgroundImage");
+            pnlCredits.Controls.Add(lblCredits);
+            pnlCredits.Controls.Add(button3);
+            pnlCredits.Controls.Add(button6);
+            pnlCredits.Location = new Point(0, 0);
+            pnlCredits.Name = "pnlCredits";
+            pnlCredits.Size = new Size(1082, 753);
+            pnlCredits.TabIndex = 34;
+            pnlCredits.Visible = false;
+            // 
+            // lblCredits
+            // 
+            lblCredits.BackColor = Color.Black;
+            lblCredits.Font = new Font("Castellar", 48F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblCredits.ForeColor = Color.White;
+            lblCredits.Location = new Point(336, 118);
+            lblCredits.Name = "lblCredits";
+            lblCredits.Size = new Size(409, 85);
+            lblCredits.TabIndex = 12;
+            lblCredits.Text = "Credits";
+            // 
+            // button3
+            // 
+            button3.BackColor = Color.Black;
+            button3.FlatAppearance.BorderSize = 5;
+            button3.FlatStyle = FlatStyle.Flat;
+            button3.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button3.ForeColor = Color.White;
+            button3.Location = new Point(476, 570);
+            button3.Name = "button3";
+            button3.Size = new Size(129, 60);
+            button3.TabIndex = 10;
+            button3.Text = "Back";
+            button3.UseVisualStyleBackColor = false;
+            button3.Click += BtnBackOClick;
+            // 
+            // button6
+            // 
+            button6.BackColor = Color.Black;
+            button6.Enabled = false;
+            button6.FlatAppearance.BorderSize = 10;
+            button6.FlatStyle = FlatStyle.Flat;
+            button6.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button6.ForeColor = Color.White;
+            button6.Location = new Point(320, 108);
+            button6.Name = "button6";
+            button6.Size = new Size(441, 107);
+            button6.TabIndex = 13;
+            button6.UseVisualStyleBackColor = false;
+            // 
             // DurakGUI
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -1611,19 +1767,20 @@
             ClientSize = new Size(1082, 753);
             Controls.Add(pnlMainMenu);
             Controls.Add(pnlOptions);
+            Controls.Add(pnlCredits);
             Controls.Add(pnlPlayerSelect);
-            Controls.Add(pnlGame);
             Controls.Add(pnlCustomize);
+            Controls.Add(pnlGame);
             MaximizeBox = false;
             Name = "DurakGUI";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "DurakGUI";
             pnlMainMenu.ResumeLayout(false);
             pnlPlayerSelect.ResumeLayout(false);
-            gbNumAI.ResumeLayout(false);
-            gbNumAI.PerformLayout();
             gbNumPlayers.ResumeLayout(false);
             gbNumPlayers.PerformLayout();
+            gbNumAI.ResumeLayout(false);
+            gbNumAI.PerformLayout();
             pnlGame.ResumeLayout(false);
             pnlDeck.ResumeLayout(false);
             pnlDeck.PerformLayout();
@@ -1658,6 +1815,9 @@
             gbPlayer4Customize.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbPlayer4SelectedIcon).EndInit();
             pnlOptions.ResumeLayout(false);
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            pnlCredits.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -1772,8 +1932,6 @@
         private Label lblPlayer4Icon;
         private PictureBox pbPlayer4SelectedIcon;
         private Panel pnlPlayer4IconSelect;
-        private GroupBox groupBox1;
-        private GroupBox groupBox2;
         private GroupBox groupBox3;
         private Button btnTableBottomBg;
         private Button btnTableTopBg;
@@ -1788,5 +1946,15 @@
         private PictureBox pbAttacker;
         private Button btnDefenderBg;
         private Button btnAttackerBg;
+        private RadioButton rbTCTAce;
+        private RadioButton rbTCTEnable;
+        private RadioButton rbTCTDisable;
+        private GroupBox groupBox1;
+        private Button btnTCTHelp;
+        private Panel pnlCredits;
+        private Label lblCredits;
+        private Button button3;
+        private Button button6;
+        private Button btnCredits;
     }
 }
