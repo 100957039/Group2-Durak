@@ -407,7 +407,7 @@ namespace DurakCardGame
 
         
         // new function to determine next player and support multiple attack and maybe pass as well ENDS HERE
-        public void DetermineDefenderAndAttackerIndex2()
+        public void DetermineDefenderAndAttackerIndex()
         {
             
             if (cardsAttack.Count() == 6)
@@ -433,11 +433,10 @@ namespace DurakCardGame
         }
 
         // test for computer class
-        public void DetermineDefenderAndAttackerIndex()
+        public void DetermineDefenderAndAttackerIndex2()
         {
-            Player player = players[turnIndex];
-            bool isComputer = player.GetType() == typeof(Computer);
-            Console.WriteLine("isComputer: " + isComputer);
+            
+            //Console.WriteLine("isComputer: " + isComputer);
             if (cardsAttack.Count() == 6)
             {
                 AttackReachMaxCards();
@@ -450,13 +449,36 @@ namespace DurakCardGame
                 {
                     //Console.WriteLine("this one 2");
                     // check if attacker is computer 
-                    
+                    Player player = players[attackerIndex];
+                    bool isComputer = player.GetType() == typeof(Computer);
                     if (isComputer)
                     {
-                        Console.WriteLine("case: 1 | " + player.Hand[0].Suit + player.Hand[0].Rank);
-                        cardsDefend.Add(player.Hand[0]);
-                        player.PlayCard(0);
-                        
+                        Console.WriteLine("case: 1 | ");// + player.Hand[0].Suit + player.Hand[0].Rank);
+                        //cardsAttack.Add(player.Hand[0]);
+                        //player.PlayCard(0);
+
+                        Computer computerPlayer = (Computer)player;
+                        List<Card> cardsCanPlay = new List<Card>();
+                        foreach (Card card in computerPlayer.Hand)
+                        {
+                            if (CanAttackWithThisCard(card))
+                            {
+                                cardsCanPlay.Add(card);
+                            }
+                        }
+                        if (cardsCanPlay.Count() > 0)
+                        {
+                            Card bestOption = computerPlayer.ChooseBestCard(cardsCanPlay, true, trump);
+                            cardsAttack.Add(bestOption);
+                            computerPlayer.PlayCard2(bestOption);
+                        }
+                        // not sure of this
+                        else
+                        {
+                            // not sure of this
+                            Pass();
+                        }
+
                     }
                     else
                     {
@@ -468,11 +490,33 @@ namespace DurakCardGame
                 }
                 else if (turnIndex == attackerIndex & cardsAttack.Count() > cardsDefend.Count() + 1)
                 {
+                    Player player = players[defenderIndex];
+                    bool isComputer = player.GetType() == typeof(Computer);
                     if (isComputer)
                     {
                         Console.WriteLine("case: 3");
-                        cardsAttack.Add(player.Hand[0]);
-                        player.PlayCard(0);
+
+                        Computer computerPlayer = (Computer)player;
+                        List<Card> cardsCanPlay = new List<Card>();
+                        foreach (Card card in computerPlayer.Hand)
+                        {
+                            if (CanDefendWithThisCard(card, cardsAttack[cardsAttack.Count() - 1]))
+                            {
+                                cardsCanPlay.Add(card);
+                            }
+                        }
+                        if (cardsCanPlay.Count() > 0)
+                        {
+                            Card bestOption = computerPlayer.ChooseBestCard(cardsCanPlay, false, trump);
+                            cardsDefend.Add(bestOption);
+                            computerPlayer.PlayCard2(bestOption);
+                        }
+                        // not sure of this
+                        else
+                        {
+                            // not sure of this
+                            Pass();
+                        }
 
                     }
                     else
@@ -485,12 +529,32 @@ namespace DurakCardGame
                 else
                 {
                     // check if attacker is computer 
+                    Player player = players[defenderIndex];
+                    bool isComputer = player.GetType() == typeof(Computer);
                     if (isComputer)
                     {
                         Console.WriteLine("case: 5");
-                        cardsAttack.Add(player.Hand[0]);
-                        player.PlayCard(0);
-
+                        Computer computerPlayer = (Computer)player;
+                        List<Card> cardsCanPlay = new List<Card>();
+                        foreach(Card card in computerPlayer.Hand)
+                        {
+                            if (CanDefendWithThisCard(card, cardsAttack[cardsAttack.Count()-1]))
+                            {
+                                cardsCanPlay.Add(card);
+                            }
+                        }
+                        if (cardsCanPlay.Count() > 0)
+                        {
+                            Card bestOption = computerPlayer.ChooseBestCard(cardsCanPlay, false, trump);
+                            cardsDefend.Add(bestOption);
+                            computerPlayer.PlayCard2(bestOption);
+                        }
+                        // not sure of this
+                        else
+                        {
+                            // not sure of this
+                            Pass();
+                        }
                     }
                     else
                     {
@@ -503,6 +567,130 @@ namespace DurakCardGame
 
         }
         // test for computer class
+
+        // computer play card
+        // computer play card
+        public bool ComputerPlayCard()
+        {
+            bool doAction = false;
+            Player player = players[turnIndex];
+            bool isComputer = player.GetType() == typeof(Computer);
+
+            if (isComputer)
+            {
+                Computer computerPlayer = (Computer)player;
+                List<Card> cardsCanPlay = new List<Card>();
+
+                foreach (Card card in computerPlayer.Hand)
+                {
+                    // computer defender
+                    if (turnIndex == defenderIndex)
+                    {
+                        if (CanDefendWithThisCard(card, cardsAttack[cardsAttack.Count() - 1])) { cardsCanPlay.Add(card); }
+                    }
+                    // computer attacker
+                    else
+                    {
+                        if (cardsAttack.Count() == 0)
+                        {
+                            cardsCanPlay.Add(card);
+                        }
+                        else if (CanAttackWithThisCard(card))
+                        {
+                            cardsCanPlay.Add(card);
+                        }
+                    }
+
+                }
+                if (cardsCanPlay.Count() > 0)
+                {
+                    if (turnIndex == defenderIndex)
+                    {
+                        Card bestOption = computerPlayer.ChooseBestCard(cardsCanPlay, true, trump);
+                        cardsDefend.Add(bestOption);
+                        computerPlayer.PlayCard2(bestOption);
+                        turnIndex = attackerIndex;
+                        doAction = true;
+                    }
+                    else
+                    {
+                        Card bestOption = computerPlayer.ChooseBestCard(cardsCanPlay, true, trump);
+                        cardsAttack.Add(bestOption);
+                        computerPlayer.PlayCard2(bestOption);
+                        turnIndex = defenderIndex;
+                        doAction = true;
+                    }
+
+                }
+                // not sure of this
+                else
+                {
+                    // not sure of this
+                    Pass();
+                }
+
+            }
+            return doAction;
+        }
+
+        public void ComputerPlayCard2()
+        {
+            Player player = players[turnIndex];
+            bool isComputer = player.GetType() == typeof(Computer);
+
+            if (isComputer)
+            {
+                Computer computerPlayer = (Computer)player;
+                List<Card> cardsCanPlay = new List<Card>();
+
+                foreach (Card card in computerPlayer.Hand)
+                {
+                    // computer defender
+                    if (turnIndex == defenderIndex)
+                    {
+                        if (CanDefendWithThisCard(card, cardsAttack[cardsAttack.Count() - 1])) { cardsCanPlay.Add(card); }
+                    }
+                    // computer attacker
+                    else
+                    {
+                        if (cardsAttack.Count() == 0)
+                        {
+                            cardsCanPlay.Add(card);
+                        }
+                        else if (CanAttackWithThisCard(card))
+                        {
+                            cardsCanPlay.Add(card);
+                        }
+                    }
+
+                }
+                if (cardsCanPlay.Count() > 0)
+                {
+                    if (turnIndex == defenderIndex)
+                    {
+                        Card bestOption = computerPlayer.ChooseBestCard(cardsCanPlay, true, trump);
+                        cardsDefend.Add(bestOption);
+                        computerPlayer.PlayCard2(bestOption);
+                        turnIndex = attackerIndex;
+                    }
+                    else
+                    {
+                        Card bestOption = computerPlayer.ChooseBestCard(cardsCanPlay, true, trump);
+                        cardsAttack.Add(bestOption);
+                        computerPlayer.PlayCard2(bestOption);
+                        turnIndex = defenderIndex;
+                    }
+
+                }
+                // not sure of this
+                else
+                {
+                    // not sure of this
+                    Pass();
+                }
+
+            }
+        }
 
         private int NumberOfPlayer()
         {
@@ -517,6 +705,159 @@ namespace DurakCardGame
             return counter;
         }
 
+        // new TEST START HERE
+        public void Pass4()
+        {
+            Console.WriteLine("######################################");
+            Console.WriteLine("attacker Index: " + attackerIndex);
+            Console.WriteLine("defender Index: " + defenderIndex);
+            Console.WriteLine("turn index: " + turnIndex);
+            // is defender
+            if (turnIndex == defenderIndex)
+            {
+                // check if attacker is computer 
+                Player player = players[attackerIndex];
+                bool isComputer = player.GetType() == typeof(Computer);
+                if (isComputer)
+                {
+                    Console.WriteLine("case: 1 | ");// + player.Hand[0].Suit + player.Hand[0].Rank);
+                                                    //cardsAttack.Add(player.Hand[0]);
+                                                    //player.PlayCard(0);
+
+                    Computer computerPlayer = (Computer)player;
+                    List<Card> cardsCanPlay = new List<Card>();
+                    foreach (Card card in computerPlayer.Hand)
+                    {
+                        if (CanDefendWithThisCard(card, cardsAttack[cardsAttack.Count() - 1]))
+                        {
+                            cardsCanPlay.Add(card);
+                        }
+                    }
+                    if (cardsCanPlay.Count() > 0)
+                    {
+                        Card bestOption = computerPlayer.ChooseBestCard(cardsCanPlay, true, trump);
+                        cardsAttack.Add(bestOption);
+                        computerPlayer.PlayCard2(bestOption);
+                    }
+                    // not sure of this
+                    else
+                    {
+                        // not sure of this
+                        Pass();
+                    }
+
+                }
+                else
+                {
+                    turnIndex = attackerIndex;
+                }
+            }
+
+            // if attacker
+            else
+            {
+                int totalPlayers = NumberOfPlayer();
+                int maxSubAttack = totalPlayers - 2;
+                // defender lost 
+                if (cardsAttack.Count() > cardsDefend.Count() + 1)
+                {
+                    // if it is the last sub-aatacker
+                    if (maxSubAttack == subAttackDistance)
+                    {
+                        Console.WriteLine("case: 1");
+                        subAttackDistance = 0;
+                        LoserTakeAllCards();
+                        cardsDefend.Clear();
+                        cardsAttack.Clear();
+                        fillHand();
+                        attackerIndex = FindNextAvailablePlayer(defenderIndex);
+                        turnIndex = attackerIndex;
+                        defenderIndex = FindNextAvailablePlayer(attackerIndex);
+                    }
+                    // not the last one
+                    else
+                    {
+                        Console.WriteLine("case: 2");
+                        attackerIndex = FindNextAvailablePlayer(defenderIndex + subAttackDistance);
+                        // check if attacker is computer 
+                        Player player = players[attackerIndex];
+                        bool isComputer = player.GetType() == typeof(Computer);
+                        if (isComputer)
+                        {
+                            Console.WriteLine("case: 1 | ");// + player.Hand[0].Suit + player.Hand[0].Rank);
+                                                            //cardsAttack.Add(player.Hand[0]);
+                                                            //player.PlayCard(0);
+
+                            Computer computerPlayer = (Computer)player;
+                            List<Card> cardsCanPlay = new List<Card>();
+                            foreach (Card card in computerPlayer.Hand)
+                            {
+                                if (CanDefendWithThisCard(card, cardsAttack[cardsAttack.Count() - 1]))
+                                {
+                                    cardsCanPlay.Add(card);
+                                }
+                            }
+                            if (cardsCanPlay.Count() > 0)
+                            {
+                                Card bestOption = computerPlayer.ChooseBestCard(cardsCanPlay, true, trump);
+                                cardsAttack.Add(bestOption);
+                                computerPlayer.PlayCard2(bestOption);
+                            }
+                            // not sure of this
+                            else
+                            {
+                                // not sure of this
+                                Pass();
+                            }
+
+                        }
+                        else
+                        {
+
+                            turnIndex = attackerIndex;
+                        }
+                        subAttackDistance++;
+                    }
+                }
+                //defender not lost yet
+                else
+                {
+                    if (maxSubAttack == subAttackDistance)
+                    {
+
+                        subAttackDistance = 0;
+                        cardsDefend.Clear();
+                        cardsAttack.Clear();
+                        fillHand();
+                        // defender still have cards
+                        if (players[defenderIndex].Hand.Count() != 0)
+                        {
+                            Console.WriteLine("case: 3");
+                            attackerIndex = defenderIndex;
+                            turnIndex = attackerIndex;
+                            defenderIndex = FindNextAvailablePlayer(turnIndex);
+                        }
+                        // no cards left with the defender to  be the next attacker 
+                        else
+                        {
+                            Console.WriteLine("case: 4");
+                            attackerIndex = FindNextAvailablePlayer(defenderIndex);
+                            turnIndex = attackerIndex;
+                            defenderIndex = FindNextAvailablePlayer(turnIndex);
+                        }
+                    }
+                    // not the last one
+                    else
+                    {
+                        Console.WriteLine("case: 5");
+                        attackerIndex = FindNextAvailablePlayer(defenderIndex + subAttackDistance);
+                        turnIndex = attackerIndex;
+                        subAttackDistance++;
+                    }
+                }
+            }
+        }
+        // new TEST START HERE
         // new TEST START HERE
         public void Pass()
         {

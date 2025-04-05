@@ -51,6 +51,7 @@ namespace DurakCardGame
             return card;
         }
 
+
         public void DrawCard(Card card)
         {
             Hand.Add(card);

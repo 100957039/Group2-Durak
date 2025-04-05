@@ -39,14 +39,17 @@ namespace DurakCardGame
         {
             string playerOne = "1";
             string playerTwo = "2";
-            List<String> playersList = new List<String> { "1", "2", "3" };//, "4" };
-            List<String> iconList = new List<String> { "1", "2", "3" }; //, "4" };
+            //List<String> playersList = new List<String> { "1", "2", "3" , "4" };
+            //List<String> iconList = new List<String> { "1", "2", "3" , "4" };
+            List<String> playersList = new List<String> { "1", "2" };
+            List<String> iconList = new List<String> { "1", "2" };
             for (int i = 0; i < playersList.Count; i++)
             {
                 game.addPlayer(playersList[i], iconList[i]);
             }
 
             game.addComputer("blah");
+            game.addComputer("blah2");
         }
 
         //STEP #2
@@ -200,8 +203,13 @@ namespace DurakCardGame
         // all four hands
         public void displayAllFourHand()
         {
-
-            List<Panel> panels = [ panel1, panel2, panel3, panelHand];
+            if (game.ComputerPlayCard())
+            {
+                refreshTopBottomPanels();
+                displayPlayedCards();
+                displayAllFourHand();
+            }
+            List<Panel> panels = [panel1, panel2, panel3, panelHand];
             panelHand.Controls.Clear();
             panelHand.Refresh(); // I dont know what refresh does, I do not think it's needed
             
@@ -223,7 +231,7 @@ namespace DurakCardGame
                     //Duplicated code, needs not work on it later 
                     // cardButton.Click += (sender, e) => should be inside this if statement 
                     // it will not effect anything, but it's not good practice 
-                    
+
                     //Duplicated code, needs not work on it later
                     // ******************************************
                     cardButton.Click += (sender, e) =>
@@ -255,14 +263,15 @@ namespace DurakCardGame
                         }
                         panels[i].BackColor = Color.GreenYellow;
                         // if defender
-                    } else if (game.turnIndex == i & game.turnIndex == game.defenderIndex)
+                    }
+                    else if (game.turnIndex == i & game.turnIndex == game.defenderIndex)
                     {
                         int lastCardIndex = game.cardsAttack.Count() - 1;
                         if (lastCardIndex >= 0)
                         {
                             //int attackCardIndexToCaompare = game.cardsDefend.Count();
                             Card attackCardToCaompare = game.cardsAttack[game.cardsAttack.Count() - 1];
-;                            if (!game.CanDefendWithThisCard(card, attackCardToCaompare))
+                            ; if (!game.CanDefendWithThisCard(card, attackCardToCaompare))
                             {
                                 cardButton.Enabled = false;
                             }
@@ -369,6 +378,14 @@ namespace DurakCardGame
         }
 
 
+        private void Computer_Play_card(object sender, EventArgs e)
+        {
+            game.ComputerPlayCard();
+            refreshTopBottomPanels();
+            displayPlayedCards();
+            displayAllFourHand();
+
+        }
 
 
         //                                    ##############################################
@@ -377,7 +394,7 @@ namespace DurakCardGame
         public void PrintPlayersHand()
         {
             Console.WriteLine("       ");
-            for (int i =0; i < game.players.Count(); i++)
+            for (int i = 0; i < game.players.Count(); i++)
             {
                 // I stole this (string result = String.Join(" ", player.Hand.Select(obj => obj.Rank));) from chatGPT
                 string result = String.Join(" ", game.players[i].Hand.Select(obj => obj.Value + obj.Suit));
@@ -390,6 +407,9 @@ namespace DurakCardGame
         {
             PrintPlayersHand();
         }
+
+
+        
 
 
         public void PrintPlayedCards()
@@ -421,7 +441,8 @@ namespace DurakCardGame
             PrintDefenderCurrentPlayerIndex();
         }
 
-        
+
+
 
 
         //                                    ##############################################

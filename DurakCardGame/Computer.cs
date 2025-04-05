@@ -156,6 +156,7 @@ namespace DurakCardGame
             }
             return bestCard;
         }
+
         /// <summary>
         /// Choose a random name and icon for a Computer player
         /// </summary>

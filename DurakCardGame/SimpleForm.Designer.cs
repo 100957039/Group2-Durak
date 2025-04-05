@@ -46,6 +46,7 @@
             panel1 = new Panel();
             panel2 = new Panel();
             panel3 = new Panel();
+            button4 = new Button();
             SuspendLayout();
             // 
             // button1
@@ -192,11 +193,22 @@
             panel3.Size = new Size(684, 135);
             panel3.TabIndex = 17;
             // 
+            // button4
+            // 
+            button4.Location = new Point(987, 585);
+            button4.Name = "button4";
+            button4.Size = new Size(75, 23);
+            button4.TabIndex = 18;
+            button4.Text = "computer";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += Computer_Play_card;
+            // 
             // SimpleForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1317, 631);
+            Controls.Add(button4);
             Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(panel1);
@@ -241,5 +253,6 @@
         private Panel panel1;
         private Panel panel2;
         private Panel panel3;
+        private Button button4;
     }
 }
