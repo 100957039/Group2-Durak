@@ -39,12 +39,14 @@ namespace DurakCardGame
         {
             string playerOne = "1";
             string playerTwo = "2";
-            List<String> playersList = new List<String> { "1", "2", "3", "4" };
-            List<String> iconList = new List<String> { "1", "2", "3", "4" };
+            List<String> playersList = new List<String> { "1", "2", "3" };//, "4" };
+            List<String> iconList = new List<String> { "1", "2", "3" }; //, "4" };
             for (int i = 0; i < playersList.Count; i++)
             {
                 game.addPlayer(playersList[i], iconList[i]);
             }
+
+            game.addComputer("blah");
         }
 
         //STEP #2
@@ -258,21 +260,12 @@ namespace DurakCardGame
                         int lastCardIndex = game.cardsAttack.Count() - 1;
                         if (lastCardIndex >= 0)
                         {
-                            //Card lastAttackedCard = game.cardsAttack[game.cardsAttack.Count() - 1];
-                            //if (!game.CanDefendWithThisCard(card, lastAttackedCard))
-                            //{
-                            //    cardButton.Enabled = false;
-                            //}
-
-                            //test new defence for reverse attack starts here
-                            //Card lastAttackedCard = game.cardsAttack[game.cardsAttack.Count() - 1];
-                            int attackCardIndexToCaompare = game.cardsDefend.Count();
-                            Card attackCardToCaompare = game.cardsAttack[attackCardIndexToCaompare];
+                            //int attackCardIndexToCaompare = game.cardsDefend.Count();
+                            Card attackCardToCaompare = game.cardsAttack[game.cardsAttack.Count() - 1];
 ;                            if (!game.CanDefendWithThisCard(card, attackCardToCaompare))
                             {
                                 cardButton.Enabled = false;
                             }
-                            // test new defence for reverse attack ends here
                         }
                         panels[i].BackColor = Color.Red;
                     }

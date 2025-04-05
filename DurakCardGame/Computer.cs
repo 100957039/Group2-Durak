@@ -84,6 +84,78 @@ namespace DurakCardGame
             return card;
         }
 
+        // opponentHand = [ ace H, 7H, 9S, jack D, 
+        // [ ace H, 7H, 9S, j D, q C, 4D, k S, 3H ]
+
+        // [ 2S, k C, 5H, 8D, 3C, ace D, 6S, j H ]
+
+        // [ 10C, q S, 3D, j S, 8H, 4C, 7D, ace C ]
+
+        // [ 9C, q D, 2H, 5C, 4H, 6D, 10S, j C ]
+
+        // [ 7S, k H, 3S, ace S, 9D, j D, 5S, 8C ]
+        //COMPUTER
+        //[10H, 3C, j S, 6C, ace D, 8S, 4S, q H]
+        public Card ChooseBestCard(List<Card> cardsCanPlay, bool thisComputerAttacking, string trump)
+        {
+            Card bestCard;
+            List<Card> clubs = new List<Card>();
+            List<Card> hearts = new List<Card>();
+            List<Card> diamond = new List<Card>();
+            List<Card> spades = new List<Card> ();
+
+            foreach (Card card in cardsCanPlay) {
+                if (card.Suit == "C")
+                {
+                    clubs.Add(card);
+                }
+                else if (card.Suit == "H") {
+                    hearts.Add(card);
+                }else if (card.Suit == "D")
+                {
+                    diamond.Add(card);
+                }
+                else
+                {
+                    spades.Add(card);
+                }
+            }
+
+            // attacking 
+            if (thisComputerAttacking)
+            {
+                // attack with low none trump card
+                List<Card> cardsNoTrump = cardsCanPlay.Where(card => card.Suit != trump).ToList();
+                if (cardsNoTrump.Count() != 0)
+                {
+                    bestCard = cardsNoTrump.OrderBy(card => card.Rank).First();
+                }
+                // play trump card
+                else
+                {
+                    bestCard = cardsCanPlay.OrderBy(card=> card.Rank).First();
+                }
+                
+            }
+            // defending 
+            else
+            {
+                // can defend without using trump
+                List<Card> cardsNoTrump = cardsCanPlay.Where(card => card.Suit != trump).ToList();
+                if (cardsNoTrump.Count() != 0)
+                {
+                    bestCard = cardsNoTrump.OrderBy(card => card.Rank).First();
+                }
+                // play trump card
+                else
+                {
+                    bestCard = cardsCanPlay.OrderBy(card => card.Rank).First();
+                }
+
+                // defend with trump
+            }
+            return bestCard;
+        }
         /// <summary>
         /// Choose a random name and icon for a Computer player
         /// </summary>

@@ -407,7 +407,7 @@ namespace DurakCardGame
 
         
         // new function to determine next player and support multiple attack and maybe pass as well ENDS HERE
-        public void DetermineDefenderAndAttackerIndex()
+        public void DetermineDefenderAndAttackerIndex2()
         {
             
             if (cardsAttack.Count() == 6)
@@ -419,6 +419,7 @@ namespace DurakCardGame
                 if (turnIndex == defenderIndex | (turnIndex == attackerIndex & cardsAttack.Count() > cardsDefend.Count() + 1))
                 {
                     //Console.WriteLine("this one 2");
+
                     turnIndex = attackerIndex;
 
                 }
@@ -431,6 +432,77 @@ namespace DurakCardGame
             
         }
 
+        // test for computer class
+        public void DetermineDefenderAndAttackerIndex()
+        {
+            Player player = players[turnIndex];
+            bool isComputer = player.GetType() == typeof(Computer);
+            Console.WriteLine("isComputer: " + isComputer);
+            if (cardsAttack.Count() == 6)
+            {
+                AttackReachMaxCards();
+            }
+            else
+            {
+                //Player player = players[turnIndex];
+                //bool isComputer = player.GetType() == typeof(Computer);
+                if (turnIndex == defenderIndex )
+                {
+                    //Console.WriteLine("this one 2");
+                    // check if attacker is computer 
+                    
+                    if (isComputer)
+                    {
+                        Console.WriteLine("case: 1 | " + player.Hand[0].Suit + player.Hand[0].Rank);
+                        cardsDefend.Add(player.Hand[0]);
+                        player.PlayCard(0);
+                        
+                    }
+                    else
+                    {
+                        Console.WriteLine("case: 2");
+                        turnIndex = attackerIndex;
+                    }
+                    
+
+                }
+                else if (turnIndex == attackerIndex & cardsAttack.Count() > cardsDefend.Count() + 1)
+                {
+                    if (isComputer)
+                    {
+                        Console.WriteLine("case: 3");
+                        cardsAttack.Add(player.Hand[0]);
+                        player.PlayCard(0);
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("case: 4");
+                        turnIndex = attackerIndex;
+                    }
+                }
+                // regular attacks or defence
+                else
+                {
+                    // check if attacker is computer 
+                    if (isComputer)
+                    {
+                        Console.WriteLine("case: 5");
+                        cardsAttack.Add(player.Hand[0]);
+                        player.PlayCard(0);
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("case: 6");
+                        turnIndex = defenderIndex;
+                    }
+                    
+                }
+            }
+
+        }
+        // test for computer class
 
         private int NumberOfPlayer()
         {
