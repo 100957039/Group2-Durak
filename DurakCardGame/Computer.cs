@@ -163,7 +163,7 @@ namespace DurakCardGame
         public int AiCustomization(List<int> usedIndex)
         {
             Random random = new Random();
-            string[] icons = ["BitBot", "Chipz", "Cluckles", "Cosmobot", "D.A.V.E", "Drumdrum", "Eggxon", "Geargrim", "Hauntoid", "Jerry", "Nootron", "Phil", "Porktron", "Seal-E", "Reginald", "Waddlebot"];
+            string[] icons = ["BitBot", "Chipz", "Cluckles", "Cosmobot", "D.A.V.E", "Drumdrum", "Eggxon", "Geargrim", "Hauntoid", "Jerry", "Nootron", "Phil", "Porkinator", "Seal-E", "Reginald", "Waddlebot"];
             const string iconLocation = "../../../GUI_Images/ComputerIcons/";
             const string jpg = ".jpg";
             int listLength = icons.Length;

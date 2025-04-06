@@ -83,10 +83,47 @@ namespace DurakCardGame
         }
 
         /// <summary>
-        /// Returns a string of the card suit and value
+        /// Returns a string of the card suit
         /// </summary>
         /// <returns></returns>
-        public override string ToString()
+        public string SuitToString()
+        {
+            const string Heart = "H";
+            const string Diamond = "D";
+            const string Club = "C";
+            const string Spade = "S";
+            const string HeartWord = "Hearts";
+            const string DiamondWord = "Diamonds";
+            const string ClubWord = "Clubs";
+            const string SpadeWord = "Spades";
+
+            string cardString = "";
+
+            // Checks for the card suit and add the full word
+            switch (Suit)
+            {
+                case Heart:
+                    cardString = HeartWord;
+                    break;
+                case Diamond:
+                    cardString = DiamondWord;
+                    break;
+                case Club:
+                    cardString = ClubWord;
+                    break;
+                case Spade:
+                    cardString = SpadeWord;
+                    break;
+            }
+
+            return cardString;
+        }
+
+        /// <summary>
+        /// Returns a string of the card value
+        /// </summary>
+        /// <returns></returns>
+        public string ValueToString()
         {
             const string Jack = "J";
             const string Queen = "Q";
@@ -96,14 +133,6 @@ namespace DurakCardGame
             const string QueenWord = "Queen";
             const string KingWord = "King";
             const string AceWord = "Ace";
-            const string Heart = "H";
-            const string Diamond = "D";
-            const string Club = "C";
-            const string Spade = "S";
-            const string HeartWord = "Hearts";
-            const string DiamondWord = "Diamonds";
-            const string ClubWord = "Clubs";
-            const string SpadeWord = "Spades";
 
             string cardString = Value;
 
@@ -125,25 +154,16 @@ namespace DurakCardGame
                     break;
             }
 
-            cardString += " of ";
+            return cardString;
+        }
 
-            // Checks for the card suit and add the full word
-            switch (Suit)
-            {
-                case Heart:
-                    cardString += HeartWord;
-                    break;
-                case Diamond:
-                    cardString += DiamondWord;
-                    break;
-                case Club:
-                    cardString += ClubWord;
-                    break;
-                case Spade:
-                    cardString += SpadeWord;
-                    break;
-            }
-
+        /// <summary>
+        /// Returns a string of the card suit and value
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            string cardString = ValueToString() + " of " + SuitToString();
             return cardString;
         }
 
