@@ -149,9 +149,21 @@
             rbTCTDisable = new RadioButton();
             btnBack = new Button();
             pnlCredits = new Panel();
+            pnlCreditsInfo = new Panel();
+            lblCreditsInfo2 = new Label();
             lblCredits = new Label();
-            button3 = new Button();
-            button6 = new Button();
+            btnBackC = new Button();
+            btnCreditsBg = new Button();
+            lblCreditsInfo3 = new Label();
+            lblCreditsInfo4 = new Label();
+            lblCreditsInfo5 = new Label();
+            gbCreditsInfo1 = new GroupBox();
+            gbCreditsInfo2 = new GroupBox();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            label4 = new Label();
+            btnCreditsInfoBg = new Button();
             pnlMainMenu.SuspendLayout();
             pnlPlayerSelect.SuspendLayout();
             gbNumPlayers.SuspendLayout();
@@ -186,6 +198,9 @@
             pnlOptions.SuspendLayout();
             groupBox1.SuspendLayout();
             pnlCredits.SuspendLayout();
+            pnlCreditsInfo.SuspendLayout();
+            gbCreditsInfo1.SuspendLayout();
+            gbCreditsInfo2.SuspendLayout();
             SuspendLayout();
             // 
             // pnlMainMenu
@@ -213,7 +228,7 @@
             lblTitle.Location = new Point(262, 133);
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(560, 128);
-            lblTitle.TabIndex = 12;
+            lblTitle.TabIndex = 6;
             lblTitle.Text = "DURAK";
             // 
             // btnTitle
@@ -227,7 +242,7 @@
             btnTitle.Location = new Point(248, 119);
             btnTitle.Name = "btnTitle";
             btnTitle.Size = new Size(587, 157);
-            btnTitle.TabIndex = 11;
+            btnTitle.TabIndex = 5;
             btnTitle.UseVisualStyleBackColor = false;
             // 
             // btnStart
@@ -240,8 +255,8 @@
             btnStart.Location = new Point(461, 311);
             btnStart.Name = "btnStart";
             btnStart.Size = new Size(162, 60);
-            btnStart.TabIndex = 7;
-            btnStart.Text = "Start";
+            btnStart.TabIndex = 0;
+            btnStart.Text = "&Start";
             btnStart.UseVisualStyleBackColor = false;
             btnStart.Click += BtnStartClick;
             // 
@@ -255,8 +270,8 @@
             btnHTP.Location = new Point(401, 391);
             btnHTP.Name = "btnHTP";
             btnHTP.Size = new Size(281, 60);
-            btnHTP.TabIndex = 9;
-            btnHTP.Text = "How to Play";
+            btnHTP.TabIndex = 1;
+            btnHTP.Text = "&How to Play";
             btnHTP.UseVisualStyleBackColor = false;
             btnHTP.Click += ShowRules;
             // 
@@ -270,8 +285,8 @@
             btnOptions.Location = new Point(446, 471);
             btnOptions.Name = "btnOptions";
             btnOptions.Size = new Size(191, 60);
-            btnOptions.TabIndex = 8;
-            btnOptions.Text = "Options";
+            btnOptions.TabIndex = 2;
+            btnOptions.Text = "&Options";
             btnOptions.UseVisualStyleBackColor = false;
             btnOptions.Click += BtnOptionsClick;
             // 
@@ -285,8 +300,8 @@
             btnCredits.Location = new Point(452, 551);
             btnCredits.Name = "btnCredits";
             btnCredits.Size = new Size(178, 60);
-            btnCredits.TabIndex = 13;
-            btnCredits.Text = "Credits";
+            btnCredits.TabIndex = 3;
+            btnCredits.Text = "&Credits";
             btnCredits.UseVisualStyleBackColor = false;
             btnCredits.Click += BtnCreditsClick;
             // 
@@ -300,8 +315,8 @@
             btnQuit.Location = new Point(461, 631);
             btnQuit.Name = "btnQuit";
             btnQuit.Size = new Size(162, 60);
-            btnQuit.TabIndex = 10;
-            btnQuit.Text = "Quit";
+            btnQuit.TabIndex = 4;
+            btnQuit.Text = "&Quit";
             btnQuit.UseVisualStyleBackColor = false;
             btnQuit.Click += BtnQuitClick;
             // 
@@ -317,7 +332,7 @@
             pnlPlayerSelect.Location = new Point(0, 0);
             pnlPlayerSelect.Name = "pnlPlayerSelect";
             pnlPlayerSelect.Size = new Size(1082, 760);
-            pnlPlayerSelect.TabIndex = 13;
+            pnlPlayerSelect.TabIndex = 3;
             pnlPlayerSelect.Visible = false;
             // 
             // lblPlayerSelect
@@ -328,7 +343,7 @@
             lblPlayerSelect.Location = new Point(187, 74);
             lblPlayerSelect.Name = "lblPlayerSelect";
             lblPlayerSelect.Size = new Size(708, 101);
-            lblPlayerSelect.TabIndex = 13;
+            lblPlayerSelect.TabIndex = 5;
             lblPlayerSelect.Text = "PLAYER SELECT";
             // 
             // btnPlayerSelectBg
@@ -342,7 +357,7 @@
             btnPlayerSelectBg.Location = new Point(174, 53);
             btnPlayerSelectBg.Name = "btnPlayerSelectBg";
             btnPlayerSelectBg.Size = new Size(734, 134);
-            btnPlayerSelectBg.TabIndex = 14;
+            btnPlayerSelectBg.TabIndex = 4;
             btnPlayerSelectBg.UseVisualStyleBackColor = false;
             // 
             // gbNumPlayers
@@ -356,7 +371,7 @@
             gbNumPlayers.Location = new Point(173, 239);
             gbNumPlayers.Name = "gbNumPlayers";
             gbNumPlayers.Size = new Size(282, 376);
-            gbNumPlayers.TabIndex = 30;
+            gbNumPlayers.TabIndex = 0;
             gbNumPlayers.TabStop = false;
             gbNumPlayers.Text = "# of Players";
             // 
@@ -370,7 +385,7 @@
             rb2Players.Location = new Point(26, 64);
             rb2Players.Name = "rb2Players";
             rb2Players.Size = new Size(217, 41);
-            rb2Players.TabIndex = 16;
+            rb2Players.TabIndex = 0;
             rb2Players.TabStop = true;
             rb2Players.Tag = "";
             rb2Players.Text = "2 Players";
@@ -386,7 +401,7 @@
             rb3Players.Location = new Point(26, 144);
             rb3Players.Name = "rb3Players";
             rb3Players.Size = new Size(217, 41);
-            rb3Players.TabIndex = 18;
+            rb3Players.TabIndex = 1;
             rb3Players.Text = "3 Players";
             rb3Players.UseVisualStyleBackColor = false;
             rb3Players.Click += Rb3PlayersClick;
@@ -400,7 +415,7 @@
             rb4Players.Location = new Point(26, 224);
             rb4Players.Name = "rb4Players";
             rb4Players.Size = new Size(217, 41);
-            rb4Players.TabIndex = 20;
+            rb4Players.TabIndex = 2;
             rb4Players.Text = "4 Players";
             rb4Players.UseVisualStyleBackColor = false;
             rb4Players.Click += Rb4PlayersClick;
@@ -419,7 +434,7 @@
             gbNumAI.Location = new Point(625, 239);
             gbNumAI.Name = "gbNumAI";
             gbNumAI.Size = new Size(282, 376);
-            gbNumAI.TabIndex = 31;
+            gbNumAI.TabIndex = 1;
             gbNumAI.TabStop = false;
             gbNumAI.Text = "# of AI";
             // 
@@ -429,7 +444,7 @@
             lblHide2AI.Location = new Point(33, 232);
             lblHide2AI.Name = "lblHide2AI";
             lblHide2AI.Size = new Size(25, 25);
-            lblHide2AI.TabIndex = 32;
+            lblHide2AI.TabIndex = 4;
             // 
             // lblHide3AI
             // 
@@ -437,7 +452,7 @@
             lblHide3AI.Location = new Point(33, 312);
             lblHide3AI.Name = "lblHide3AI";
             lblHide3AI.Size = new Size(25, 25);
-            lblHide3AI.TabIndex = 33;
+            lblHide3AI.TabIndex = 5;
             // 
             // rb0AI
             // 
@@ -448,7 +463,7 @@
             rb0AI.Location = new Point(38, 64);
             rb0AI.Name = "rb0AI";
             rb0AI.Size = new Size(106, 41);
-            rb0AI.TabIndex = 22;
+            rb0AI.TabIndex = 0;
             rb0AI.Text = "0 AI";
             rb0AI.UseVisualStyleBackColor = false;
             rb0AI.Click += Rb0AIClick;
@@ -463,7 +478,7 @@
             rb1AI.Location = new Point(38, 144);
             rb1AI.Name = "rb1AI";
             rb1AI.Size = new Size(106, 41);
-            rb1AI.TabIndex = 24;
+            rb1AI.TabIndex = 1;
             rb1AI.TabStop = true;
             rb1AI.Text = "1 AI";
             rb1AI.UseVisualStyleBackColor = false;
@@ -480,7 +495,7 @@
             rb2AI.Location = new Point(38, 224);
             rb2AI.Name = "rb2AI";
             rb2AI.Size = new Size(106, 41);
-            rb2AI.TabIndex = 26;
+            rb2AI.TabIndex = 2;
             rb2AI.Text = "2 AI";
             rb2AI.UseVisualStyleBackColor = false;
             rb2AI.Click += Rb2AIClick;
@@ -495,7 +510,7 @@
             rb3AI.Location = new Point(38, 304);
             rb3AI.Name = "rb3AI";
             rb3AI.Size = new Size(106, 41);
-            rb3AI.TabIndex = 28;
+            rb3AI.TabIndex = 3;
             rb3AI.Text = "3 AI";
             rb3AI.UseVisualStyleBackColor = false;
             rb3AI.Click += Rb3AIClick;
@@ -510,8 +525,8 @@
             btnBackPS.Location = new Point(60, 635);
             btnBackPS.Name = "btnBackPS";
             btnBackPS.Size = new Size(128, 60);
-            btnBackPS.TabIndex = 8;
-            btnBackPS.Text = "Back";
+            btnBackPS.TabIndex = 3;
+            btnBackPS.Text = "&Back";
             btnBackPS.UseVisualStyleBackColor = false;
             btnBackPS.Click += BtnBackPSClick;
             // 
@@ -525,8 +540,8 @@
             btnConfirmPS.Location = new Point(830, 635);
             btnConfirmPS.Name = "btnConfirmPS";
             btnConfirmPS.Size = new Size(192, 60);
-            btnConfirmPS.TabIndex = 15;
-            btnConfirmPS.Text = "Confirm";
+            btnConfirmPS.TabIndex = 2;
+            btnConfirmPS.Text = "&Confirm";
             btnConfirmPS.UseVisualStyleBackColor = false;
             btnConfirmPS.Click += BtnConfirmPSClick;
             // 
@@ -552,7 +567,7 @@
             pnlGame.Location = new Point(0, 0);
             pnlGame.Name = "pnlGame";
             pnlGame.Size = new Size(1082, 760);
-            pnlGame.TabIndex = 32;
+            pnlGame.TabIndex = 1;
             pnlGame.Visible = false;
             // 
             // pnlDeck
@@ -565,7 +580,7 @@
             pnlDeck.Location = new Point(12, 8);
             pnlDeck.Name = "pnlDeck";
             pnlDeck.Size = new Size(200, 179);
-            pnlDeck.TabIndex = 87;
+            pnlDeck.TabIndex = 0;
             // 
             // pbDeck
             // 
@@ -596,7 +611,7 @@
             lblDeckCount.Location = new Point(146, 140);
             lblDeckCount.Name = "lblDeckCount";
             lblDeckCount.Size = new Size(50, 36);
-            lblDeckCount.TabIndex = 55;
+            lblDeckCount.TabIndex = 1;
             lblDeckCount.Text = "36";
             // 
             // lblDeck
@@ -607,7 +622,7 @@
             lblDeck.Location = new Point(22, 140);
             lblDeck.Name = "lblDeck";
             lblDeck.Size = new Size(120, 36);
-            lblDeck.TabIndex = 56;
+            lblDeck.TabIndex = 0;
             lblDeck.Text = "Deck Remaining";
             lblDeck.TextAlign = ContentAlignment.TopCenter;
             // 
@@ -621,8 +636,8 @@
             btnMenu.Location = new Point(977, 12);
             btnMenu.Name = "btnMenu";
             btnMenu.Size = new Size(93, 42);
-            btnMenu.TabIndex = 73;
-            btnMenu.Text = "Menu";
+            btnMenu.TabIndex = 1;
+            btnMenu.Text = "&Menu";
             btnMenu.UseVisualStyleBackColor = false;
             btnMenu.Click += BtnMenu;
             // 
@@ -636,8 +651,8 @@
             btnRules.Location = new Point(967, 59);
             btnRules.Name = "btnRules";
             btnRules.Size = new Size(103, 42);
-            btnRules.TabIndex = 82;
-            btnRules.Text = "Rules";
+            btnRules.TabIndex = 2;
+            btnRules.Text = "&Rules";
             btnRules.UseVisualStyleBackColor = false;
             btnRules.Click += ShowRules;
             // 
@@ -663,7 +678,7 @@
             btnAttackerBg.Location = new Point(222, 195);
             btnAttackerBg.Name = "btnAttackerBg";
             btnAttackerBg.Size = new Size(34, 34);
-            btnAttackerBg.TabIndex = 91;
+            btnAttackerBg.TabIndex = 8;
             btnAttackerBg.UseVisualStyleBackColor = false;
             // 
             // pbDefender
@@ -688,7 +703,7 @@
             btnDefenderBg.Location = new Point(826, 467);
             btnDefenderBg.Name = "btnDefenderBg";
             btnDefenderBg.Size = new Size(34, 34);
-            btnDefenderBg.TabIndex = 90;
+            btnDefenderBg.TabIndex = 9;
             btnDefenderBg.UseVisualStyleBackColor = false;
             // 
             // lblTableDivider
@@ -706,7 +721,7 @@
             pnlTableTop.Location = new Point(258, 199);
             pnlTableTop.Name = "pnlTableTop";
             pnlTableTop.Size = new Size(566, 146);
-            pnlTableTop.TabIndex = 83;
+            pnlTableTop.TabIndex = 6;
             // 
             // pnlTableBottom
             // 
@@ -714,7 +729,7 @@
             pnlTableBottom.Location = new Point(258, 351);
             pnlTableBottom.Name = "pnlTableBottom";
             pnlTableBottom.Size = new Size(566, 146);
-            pnlTableBottom.TabIndex = 81;
+            pnlTableBottom.TabIndex = 7;
             // 
             // pnlPlayer1
             // 
@@ -734,7 +749,7 @@
             pnlPlayer1.Location = new Point(12, 507);
             pnlPlayer1.Name = "pnlPlayer1";
             pnlPlayer1.Size = new Size(1058, 238);
-            pnlPlayer1.TabIndex = 80;
+            pnlPlayer1.TabIndex = 0;
             // 
             // tbActionLog
             // 
@@ -745,7 +760,7 @@
             tbActionLog.ReadOnly = true;
             tbActionLog.ScrollBars = ScrollBars.Both;
             tbActionLog.Size = new Size(224, 212);
-            tbActionLog.TabIndex = 71;
+            tbActionLog.TabIndex = 2;
             // 
             // pnlHand
             // 
@@ -766,7 +781,7 @@
             btnHandBg.Location = new Point(242, 42);
             btnHandBg.Name = "btnHandBg";
             btnHandBg.Size = new Size(574, 154);
-            btnHandBg.TabIndex = 76;
+            btnHandBg.TabIndex = 5;
             btnHandBg.UseVisualStyleBackColor = false;
             // 
             // pbPlayer1Role
@@ -790,7 +805,7 @@
             btnPlayer1RoleBg.Location = new Point(826, 15);
             btnPlayer1RoleBg.Name = "btnPlayer1RoleBg";
             btnPlayer1RoleBg.Size = new Size(100, 100);
-            btnPlayer1RoleBg.TabIndex = 75;
+            btnPlayer1RoleBg.TabIndex = 6;
             btnPlayer1RoleBg.UseVisualStyleBackColor = false;
             // 
             // lblPlayer1Cards
@@ -801,7 +816,7 @@
             lblPlayer1Cards.Location = new Point(847, 116);
             lblPlayer1Cards.Name = "lblPlayer1Cards";
             lblPlayer1Cards.Size = new Size(60, 34);
-            lblPlayer1Cards.TabIndex = 67;
+            lblPlayer1Cards.TabIndex = 3;
             lblPlayer1Cards.Text = "6";
             lblPlayer1Cards.TextAlign = ContentAlignment.MiddleCenter;
             // 
@@ -825,7 +840,7 @@
             btnPlayer1IconGBg.Location = new Point(937, 15);
             btnPlayer1IconGBg.Name = "btnPlayer1IconGBg";
             btnPlayer1IconGBg.Size = new Size(100, 100);
-            btnPlayer1IconGBg.TabIndex = 85;
+            btnPlayer1IconGBg.TabIndex = 7;
             btnPlayer1IconGBg.UseVisualStyleBackColor = false;
             // 
             // lblPlayer1NameG
@@ -837,7 +852,7 @@
             lblPlayer1NameG.Location = new Point(914, 120);
             lblPlayer1NameG.Name = "lblPlayer1NameG";
             lblPlayer1NameG.Size = new Size(140, 32);
-            lblPlayer1NameG.TabIndex = 68;
+            lblPlayer1NameG.TabIndex = 4;
             lblPlayer1NameG.Text = "Player 1";
             lblPlayer1NameG.TextAlign = ContentAlignment.TopCenter;
             // 
@@ -851,8 +866,8 @@
             btnEndTurn.Location = new Point(857, 175);
             btnEndTurn.Name = "btnEndTurn";
             btnEndTurn.Size = new Size(152, 41);
-            btnEndTurn.TabIndex = 74;
-            btnEndTurn.Text = "End Turn";
+            btnEndTurn.TabIndex = 1;
+            btnEndTurn.Text = "&End Turn";
             btnEndTurn.UseVisualStyleBackColor = false;
             btnEndTurn.Click += BtnEndTurnClick;
             // 
@@ -867,7 +882,7 @@
             btnPlayer1Bg.Location = new Point(0, 0);
             btnPlayer1Bg.Name = "btnPlayer1Bg";
             btnPlayer1Bg.Size = new Size(1058, 238);
-            btnPlayer1Bg.TabIndex = 86;
+            btnPlayer1Bg.TabIndex = 8;
             btnPlayer1Bg.UseVisualStyleBackColor = false;
             // 
             // pnlPlayer2
@@ -883,7 +898,7 @@
             pnlPlayer2.Location = new Point(371, 8);
             pnlPlayer2.Name = "pnlPlayer2";
             pnlPlayer2.Size = new Size(325, 185);
-            pnlPlayer2.TabIndex = 80;
+            pnlPlayer2.TabIndex = 3;
             // 
             // pbPlayer2IconG
             // 
@@ -905,7 +920,7 @@
             btnPlayer2IconGBg.Location = new Point(37, 31);
             btnPlayer2IconGBg.Name = "btnPlayer2IconGBg";
             btnPlayer2IconGBg.Size = new Size(100, 100);
-            btnPlayer2IconGBg.TabIndex = 84;
+            btnPlayer2IconGBg.TabIndex = 2;
             btnPlayer2IconGBg.UseVisualStyleBackColor = false;
             // 
             // lblPlayer2NameG
@@ -916,7 +931,7 @@
             lblPlayer2NameG.Location = new Point(17, 136);
             lblPlayer2NameG.Name = "lblPlayer2NameG";
             lblPlayer2NameG.Size = new Size(140, 32);
-            lblPlayer2NameG.TabIndex = 57;
+            lblPlayer2NameG.TabIndex = 0;
             lblPlayer2NameG.Text = "Player 2";
             lblPlayer2NameG.TextAlign = ContentAlignment.TopCenter;
             // 
@@ -941,7 +956,7 @@
             btnPlayer2RoleBg.Location = new Point(187, 31);
             btnPlayer2RoleBg.Name = "btnPlayer2RoleBg";
             btnPlayer2RoleBg.Size = new Size(100, 100);
-            btnPlayer2RoleBg.TabIndex = 77;
+            btnPlayer2RoleBg.TabIndex = 3;
             btnPlayer2RoleBg.UseVisualStyleBackColor = false;
             // 
             // lblPlayer2Cards
@@ -952,7 +967,7 @@
             lblPlayer2Cards.Location = new Point(208, 132);
             lblPlayer2Cards.Name = "lblPlayer2Cards";
             lblPlayer2Cards.Size = new Size(60, 34);
-            lblPlayer2Cards.TabIndex = 59;
+            lblPlayer2Cards.TabIndex = 1;
             lblPlayer2Cards.Text = "6";
             lblPlayer2Cards.TextAlign = ContentAlignment.MiddleCenter;
             // 
@@ -967,7 +982,7 @@
             btnPlayer2Bg.Location = new Point(0, 0);
             btnPlayer2Bg.Name = "btnPlayer2Bg";
             btnPlayer2Bg.Size = new Size(325, 179);
-            btnPlayer2Bg.TabIndex = 84;
+            btnPlayer2Bg.TabIndex = 4;
             btnPlayer2Bg.UseVisualStyleBackColor = false;
             // 
             // pnlPlayer3
@@ -983,7 +998,7 @@
             pnlPlayer3.Location = new Point(12, 195);
             pnlPlayer3.Name = "pnlPlayer3";
             pnlPlayer3.Size = new Size(200, 304);
-            pnlPlayer3.TabIndex = 80;
+            pnlPlayer3.TabIndex = 4;
             // 
             // pbPlayer3IconG
             // 
@@ -1005,7 +1020,7 @@
             btnPlayer3IconGBg.Location = new Point(49, 15);
             btnPlayer3IconGBg.Name = "btnPlayer3IconGBg";
             btnPlayer3IconGBg.Size = new Size(100, 100);
-            btnPlayer3IconGBg.TabIndex = 79;
+            btnPlayer3IconGBg.TabIndex = 2;
             btnPlayer3IconGBg.UseVisualStyleBackColor = false;
             // 
             // lblPlayer3NameG
@@ -1016,7 +1031,7 @@
             lblPlayer3NameG.Location = new Point(30, 120);
             lblPlayer3NameG.Name = "lblPlayer3NameG";
             lblPlayer3NameG.Size = new Size(140, 32);
-            lblPlayer3NameG.TabIndex = 61;
+            lblPlayer3NameG.TabIndex = 0;
             lblPlayer3NameG.Text = "Player 3";
             lblPlayer3NameG.TextAlign = ContentAlignment.TopCenter;
             // 
@@ -1041,7 +1056,7 @@
             btnPlayer3RoleBg.Location = new Point(49, 161);
             btnPlayer3RoleBg.Name = "btnPlayer3RoleBg";
             btnPlayer3RoleBg.Size = new Size(100, 100);
-            btnPlayer3RoleBg.TabIndex = 78;
+            btnPlayer3RoleBg.TabIndex = 3;
             btnPlayer3RoleBg.UseVisualStyleBackColor = false;
             // 
             // lblPlayer3Cards
@@ -1052,7 +1067,7 @@
             lblPlayer3Cards.Location = new Point(70, 262);
             lblPlayer3Cards.Name = "lblPlayer3Cards";
             lblPlayer3Cards.Size = new Size(60, 34);
-            lblPlayer3Cards.TabIndex = 62;
+            lblPlayer3Cards.TabIndex = 1;
             lblPlayer3Cards.Text = "6";
             lblPlayer3Cards.TextAlign = ContentAlignment.MiddleCenter;
             // 
@@ -1067,7 +1082,7 @@
             btnPlayer3Bg.Location = new Point(0, 0);
             btnPlayer3Bg.Name = "btnPlayer3Bg";
             btnPlayer3Bg.Size = new Size(200, 304);
-            btnPlayer3Bg.TabIndex = 85;
+            btnPlayer3Bg.TabIndex = 4;
             btnPlayer3Bg.UseVisualStyleBackColor = false;
             // 
             // pnlPlayer4
@@ -1083,7 +1098,7 @@
             pnlPlayer4.Location = new Point(870, 195);
             pnlPlayer4.Name = "pnlPlayer4";
             pnlPlayer4.Size = new Size(200, 304);
-            pnlPlayer4.TabIndex = 79;
+            pnlPlayer4.TabIndex = 5;
             // 
             // pbPlayer4IconG
             // 
@@ -1105,7 +1120,7 @@
             btnPlayer4IconGBg.Location = new Point(49, 15);
             btnPlayer4IconGBg.Name = "btnPlayer4IconGBg";
             btnPlayer4IconGBg.Size = new Size(100, 100);
-            btnPlayer4IconGBg.TabIndex = 80;
+            btnPlayer4IconGBg.TabIndex = 2;
             btnPlayer4IconGBg.UseVisualStyleBackColor = false;
             // 
             // lblPlayer4NameG
@@ -1116,7 +1131,7 @@
             lblPlayer4NameG.Location = new Point(30, 120);
             lblPlayer4NameG.Name = "lblPlayer4NameG";
             lblPlayer4NameG.Size = new Size(140, 32);
-            lblPlayer4NameG.TabIndex = 64;
+            lblPlayer4NameG.TabIndex = 0;
             lblPlayer4NameG.Text = "Player 4";
             lblPlayer4NameG.TextAlign = ContentAlignment.TopCenter;
             // 
@@ -1141,7 +1156,7 @@
             btnPlayer4RoleBg.Location = new Point(49, 161);
             btnPlayer4RoleBg.Name = "btnPlayer4RoleBg";
             btnPlayer4RoleBg.Size = new Size(100, 100);
-            btnPlayer4RoleBg.TabIndex = 76;
+            btnPlayer4RoleBg.TabIndex = 3;
             btnPlayer4RoleBg.UseVisualStyleBackColor = false;
             // 
             // lblPlayer4Cards
@@ -1152,7 +1167,7 @@
             lblPlayer4Cards.Location = new Point(70, 262);
             lblPlayer4Cards.Name = "lblPlayer4Cards";
             lblPlayer4Cards.Size = new Size(60, 34);
-            lblPlayer4Cards.TabIndex = 63;
+            lblPlayer4Cards.TabIndex = 1;
             lblPlayer4Cards.Text = "6";
             lblPlayer4Cards.TextAlign = ContentAlignment.MiddleCenter;
             // 
@@ -1167,7 +1182,7 @@
             btnPlayer4Bg.Location = new Point(0, 0);
             btnPlayer4Bg.Name = "btnPlayer4Bg";
             btnPlayer4Bg.Size = new Size(200, 304);
-            btnPlayer4Bg.TabIndex = 86;
+            btnPlayer4Bg.TabIndex = 4;
             btnPlayer4Bg.UseVisualStyleBackColor = false;
             // 
             // btnTableBottomBg
@@ -1181,7 +1196,7 @@
             btnTableBottomBg.Location = new Point(254, 347);
             btnTableBottomBg.Name = "btnTableBottomBg";
             btnTableBottomBg.Size = new Size(574, 154);
-            btnTableBottomBg.TabIndex = 84;
+            btnTableBottomBg.TabIndex = 11;
             btnTableBottomBg.UseVisualStyleBackColor = false;
             // 
             // btnTableTopBg
@@ -1195,7 +1210,7 @@
             btnTableTopBg.Location = new Point(254, 195);
             btnTableTopBg.Name = "btnTableTopBg";
             btnTableTopBg.Size = new Size(574, 154);
-            btnTableTopBg.TabIndex = 85;
+            btnTableTopBg.TabIndex = 10;
             btnTableTopBg.UseVisualStyleBackColor = false;
             // 
             // pnlCustomize
@@ -1218,7 +1233,7 @@
             pnlCustomize.Location = new Point(0, 0);
             pnlCustomize.Name = "pnlCustomize";
             pnlCustomize.Size = new Size(1082, 753);
-            pnlCustomize.TabIndex = 33;
+            pnlCustomize.TabIndex = 4;
             pnlCustomize.Visible = false;
             // 
             // lblCustomize
@@ -1229,7 +1244,7 @@
             lblCustomize.Location = new Point(233, 44);
             lblCustomize.Name = "lblCustomize";
             lblCustomize.Size = new Size(615, 148);
-            lblCustomize.TabIndex = 32;
+            lblCustomize.TabIndex = 7;
             lblCustomize.Text = "PLAYER CUSTOMIZATION";
             lblCustomize.TextAlign = ContentAlignment.TopCenter;
             // 
@@ -1244,7 +1259,7 @@
             btnCustomizeBg.Location = new Point(218, 34);
             btnCustomizeBg.Name = "btnCustomizeBg";
             btnCustomizeBg.Size = new Size(646, 169);
-            btnCustomizeBg.TabIndex = 33;
+            btnCustomizeBg.TabIndex = 6;
             btnCustomizeBg.UseVisualStyleBackColor = false;
             // 
             // gbPlayer1Customize
@@ -1260,7 +1275,7 @@
             gbPlayer1Customize.Location = new Point(13, 220);
             gbPlayer1Customize.Name = "gbPlayer1Customize";
             gbPlayer1Customize.Size = new Size(256, 378);
-            gbPlayer1Customize.TabIndex = 34;
+            gbPlayer1Customize.TabIndex = 0;
             gbPlayer1Customize.TabStop = false;
             gbPlayer1Customize.Text = "Player 1";
             // 
@@ -1270,7 +1285,7 @@
             lblPlayer1NameC.Location = new Point(11, 41);
             lblPlayer1NameC.Name = "lblPlayer1NameC";
             lblPlayer1NameC.Size = new Size(95, 30);
-            lblPlayer1NameC.TabIndex = 22;
+            lblPlayer1NameC.TabIndex = 0;
             lblPlayer1NameC.Text = "Name";
             // 
             // tbPlayer1Name
@@ -1280,7 +1295,7 @@
             tbPlayer1Name.MaxLength = 10;
             tbPlayer1Name.Name = "tbPlayer1Name";
             tbPlayer1Name.Size = new Size(230, 40);
-            tbPlayer1Name.TabIndex = 21;
+            tbPlayer1Name.TabIndex = 1;
             tbPlayer1Name.Text = "Player 1";
             // 
             // lblPlayer1Icon
@@ -1289,7 +1304,7 @@
             lblPlayer1Icon.Location = new Point(11, 129);
             lblPlayer1Icon.Name = "lblPlayer1Icon";
             lblPlayer1Icon.Size = new Size(95, 30);
-            lblPlayer1Icon.TabIndex = 23;
+            lblPlayer1Icon.TabIndex = 2;
             lblPlayer1Icon.Text = "Icon";
             // 
             // pbPlayer1SelectedIcon
@@ -1309,7 +1324,7 @@
             pnlPlayer1IconSelect.Location = new Point(13, 224);
             pnlPlayer1IconSelect.Name = "pnlPlayer1IconSelect";
             pnlPlayer1IconSelect.Size = new Size(230, 132);
-            pnlPlayer1IconSelect.TabIndex = 37;
+            pnlPlayer1IconSelect.TabIndex = 3;
             // 
             // gbPlayer1CustomizeBg
             // 
@@ -1335,7 +1350,7 @@
             gbPlayer2Customize.Location = new Point(280, 220);
             gbPlayer2Customize.Name = "gbPlayer2Customize";
             gbPlayer2Customize.Size = new Size(256, 378);
-            gbPlayer2Customize.TabIndex = 41;
+            gbPlayer2Customize.TabIndex = 1;
             gbPlayer2Customize.TabStop = false;
             gbPlayer2Customize.Text = "Player 2";
             // 
@@ -1345,7 +1360,7 @@
             lblPlayer2NameC.Location = new Point(11, 41);
             lblPlayer2NameC.Name = "lblPlayer2NameC";
             lblPlayer2NameC.Size = new Size(95, 30);
-            lblPlayer2NameC.TabIndex = 22;
+            lblPlayer2NameC.TabIndex = 0;
             lblPlayer2NameC.Text = "Name";
             // 
             // tbPlayer2Name
@@ -1355,7 +1370,7 @@
             tbPlayer2Name.MaxLength = 10;
             tbPlayer2Name.Name = "tbPlayer2Name";
             tbPlayer2Name.Size = new Size(230, 40);
-            tbPlayer2Name.TabIndex = 21;
+            tbPlayer2Name.TabIndex = 1;
             tbPlayer2Name.Text = "Player 2";
             // 
             // lblPlayer2Icon
@@ -1364,7 +1379,7 @@
             lblPlayer2Icon.Location = new Point(11, 129);
             lblPlayer2Icon.Name = "lblPlayer2Icon";
             lblPlayer2Icon.Size = new Size(95, 30);
-            lblPlayer2Icon.TabIndex = 23;
+            lblPlayer2Icon.TabIndex = 2;
             lblPlayer2Icon.Text = "Icon";
             // 
             // pbPlayer2SelectedIcon
@@ -1384,7 +1399,7 @@
             pnlPlayer2IconSelect.Location = new Point(13, 224);
             pnlPlayer2IconSelect.Name = "pnlPlayer2IconSelect";
             pnlPlayer2IconSelect.Size = new Size(230, 132);
-            pnlPlayer2IconSelect.TabIndex = 37;
+            pnlPlayer2IconSelect.TabIndex = 3;
             // 
             // gbPlayer2CustomizeBg
             // 
@@ -1410,7 +1425,7 @@
             gbPlayer3Customize.Location = new Point(547, 220);
             gbPlayer3Customize.Name = "gbPlayer3Customize";
             gbPlayer3Customize.Size = new Size(256, 378);
-            gbPlayer3Customize.TabIndex = 40;
+            gbPlayer3Customize.TabIndex = 2;
             gbPlayer3Customize.TabStop = false;
             gbPlayer3Customize.Text = "Player 3";
             // 
@@ -1420,7 +1435,7 @@
             lblPlayer3NameC.Location = new Point(11, 41);
             lblPlayer3NameC.Name = "lblPlayer3NameC";
             lblPlayer3NameC.Size = new Size(95, 30);
-            lblPlayer3NameC.TabIndex = 22;
+            lblPlayer3NameC.TabIndex = 0;
             lblPlayer3NameC.Text = "Name";
             // 
             // tbPlayer3Name
@@ -1430,7 +1445,7 @@
             tbPlayer3Name.MaxLength = 10;
             tbPlayer3Name.Name = "tbPlayer3Name";
             tbPlayer3Name.Size = new Size(230, 40);
-            tbPlayer3Name.TabIndex = 21;
+            tbPlayer3Name.TabIndex = 1;
             tbPlayer3Name.Text = "Player 3";
             // 
             // lblPlayer3Icon
@@ -1439,7 +1454,7 @@
             lblPlayer3Icon.Location = new Point(11, 129);
             lblPlayer3Icon.Name = "lblPlayer3Icon";
             lblPlayer3Icon.Size = new Size(95, 30);
-            lblPlayer3Icon.TabIndex = 23;
+            lblPlayer3Icon.TabIndex = 2;
             lblPlayer3Icon.Text = "Icon";
             // 
             // pbPlayer3SelectedIcon
@@ -1459,7 +1474,7 @@
             pnlPlayer3IconSelect.Location = new Point(13, 224);
             pnlPlayer3IconSelect.Name = "pnlPlayer3IconSelect";
             pnlPlayer3IconSelect.Size = new Size(230, 132);
-            pnlPlayer3IconSelect.TabIndex = 37;
+            pnlPlayer3IconSelect.TabIndex = 3;
             // 
             // gbPlayer3CustomizeBg
             // 
@@ -1485,7 +1500,7 @@
             gbPlayer4Customize.Location = new Point(814, 220);
             gbPlayer4Customize.Name = "gbPlayer4Customize";
             gbPlayer4Customize.Size = new Size(256, 378);
-            gbPlayer4Customize.TabIndex = 40;
+            gbPlayer4Customize.TabIndex = 3;
             gbPlayer4Customize.TabStop = false;
             gbPlayer4Customize.Text = "Player 4";
             // 
@@ -1495,7 +1510,7 @@
             lblPlayer4NameC.Location = new Point(11, 41);
             lblPlayer4NameC.Name = "lblPlayer4NameC";
             lblPlayer4NameC.Size = new Size(95, 30);
-            lblPlayer4NameC.TabIndex = 22;
+            lblPlayer4NameC.TabIndex = 0;
             lblPlayer4NameC.Text = "Name";
             // 
             // tbPlayer4Name
@@ -1505,7 +1520,7 @@
             tbPlayer4Name.MaxLength = 10;
             tbPlayer4Name.Name = "tbPlayer4Name";
             tbPlayer4Name.Size = new Size(230, 40);
-            tbPlayer4Name.TabIndex = 21;
+            tbPlayer4Name.TabIndex = 1;
             tbPlayer4Name.Text = "Player 4";
             // 
             // lblPlayer4Icon
@@ -1514,7 +1529,7 @@
             lblPlayer4Icon.Location = new Point(11, 129);
             lblPlayer4Icon.Name = "lblPlayer4Icon";
             lblPlayer4Icon.Size = new Size(95, 30);
-            lblPlayer4Icon.TabIndex = 23;
+            lblPlayer4Icon.TabIndex = 2;
             lblPlayer4Icon.Text = "Icon";
             // 
             // pbPlayer4SelectedIcon
@@ -1534,7 +1549,7 @@
             pnlPlayer4IconSelect.Location = new Point(13, 224);
             pnlPlayer4IconSelect.Name = "pnlPlayer4IconSelect";
             pnlPlayer4IconSelect.Size = new Size(230, 132);
-            pnlPlayer4IconSelect.TabIndex = 37;
+            pnlPlayer4IconSelect.TabIndex = 3;
             // 
             // gbPlayer4CustomizeBg
             // 
@@ -1557,8 +1572,8 @@
             btnBackN.Location = new Point(50, 643);
             btnBackN.Name = "btnBackN";
             btnBackN.Size = new Size(128, 60);
-            btnBackN.TabIndex = 9;
-            btnBackN.Text = "Back";
+            btnBackN.TabIndex = 5;
+            btnBackN.Text = "&Back";
             btnBackN.UseVisualStyleBackColor = false;
             btnBackN.Click += BtnBackNClick;
             // 
@@ -1572,8 +1587,8 @@
             btnConfirmN.Location = new Point(852, 643);
             btnConfirmN.Name = "btnConfirmN";
             btnConfirmN.Size = new Size(192, 60);
-            btnConfirmN.TabIndex = 16;
-            btnConfirmN.Text = "Confirm";
+            btnConfirmN.TabIndex = 4;
+            btnConfirmN.Text = "&Confirm";
             btnConfirmN.UseVisualStyleBackColor = false;
             btnConfirmN.Click += BtnConfirmNClick;
             // 
@@ -1589,7 +1604,7 @@
             pnlOptions.Location = new Point(0, 0);
             pnlOptions.Name = "pnlOptions";
             pnlOptions.Size = new Size(1082, 753);
-            pnlOptions.TabIndex = 13;
+            pnlOptions.TabIndex = 1;
             pnlOptions.Visible = false;
             // 
             // lblOptions
@@ -1600,7 +1615,7 @@
             lblOptions.Location = new Point(328, 118);
             lblOptions.Name = "lblOptions";
             lblOptions.Size = new Size(427, 85);
-            lblOptions.TabIndex = 12;
+            lblOptions.TabIndex = 3;
             lblOptions.Text = "Options";
             // 
             // btnOptionsBg
@@ -1614,7 +1629,7 @@
             btnOptionsBg.Location = new Point(314, 108);
             btnOptionsBg.Name = "btnOptionsBg";
             btnOptionsBg.Size = new Size(455, 107);
-            btnOptionsBg.TabIndex = 13;
+            btnOptionsBg.TabIndex = 2;
             btnOptionsBg.UseVisualStyleBackColor = false;
             // 
             // groupBox1
@@ -1629,7 +1644,7 @@
             groupBox1.Location = new Point(374, 261);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(334, 158);
-            groupBox1.TabIndex = 17;
+            groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Trump Card Trading";
             // 
@@ -1643,8 +1658,8 @@
             btnTCTHelp.Location = new Point(276, 36);
             btnTCTHelp.Name = "btnTCTHelp";
             btnTCTHelp.Size = new Size(45, 45);
-            btnTCTHelp.TabIndex = 18;
-            btnTCTHelp.Text = "?";
+            btnTCTHelp.TabIndex = 3;
+            btnTCTHelp.Text = "&?";
             btnTCTHelp.TextAlign = ContentAlignment.TopCenter;
             btnTCTHelp.UseVisualStyleBackColor = false;
             btnTCTHelp.Click += BtnTrumpTradeHelp;
@@ -1657,7 +1672,7 @@
             rbTCTAce.Location = new Point(22, 114);
             rbTCTAce.Name = "rbTCTAce";
             rbTCTAce.Size = new Size(149, 29);
-            rbTCTAce.TabIndex = 17;
+            rbTCTAce.TabIndex = 2;
             rbTCTAce.Text = "Ace Only";
             rbTCTAce.UseVisualStyleBackColor = true;
             rbTCTAce.Click += RbTCTAceClick;
@@ -1671,7 +1686,7 @@
             rbTCTEnable.Location = new Point(22, 36);
             rbTCTEnable.Name = "rbTCTEnable";
             rbTCTEnable.Size = new Size(122, 29);
-            rbTCTEnable.TabIndex = 16;
+            rbTCTEnable.TabIndex = 0;
             rbTCTEnable.TabStop = true;
             rbTCTEnable.Text = "Enable";
             rbTCTEnable.UseVisualStyleBackColor = true;
@@ -1685,7 +1700,7 @@
             rbTCTDisable.Location = new Point(22, 75);
             rbTCTDisable.Name = "rbTCTDisable";
             rbTCTDisable.Size = new Size(128, 29);
-            rbTCTDisable.TabIndex = 15;
+            rbTCTDisable.TabIndex = 1;
             rbTCTDisable.Text = "Disable";
             rbTCTDisable.UseVisualStyleBackColor = true;
             rbTCTDisable.Click += RbTCTDisableClick;
@@ -1697,11 +1712,11 @@
             btnBack.FlatStyle = FlatStyle.Flat;
             btnBack.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnBack.ForeColor = Color.White;
-            btnBack.Location = new Point(476, 570);
+            btnBack.Location = new Point(476, 457);
             btnBack.Name = "btnBack";
             btnBack.Size = new Size(129, 60);
-            btnBack.TabIndex = 10;
-            btnBack.Text = "Back";
+            btnBack.TabIndex = 1;
+            btnBack.Text = "&Back";
             btnBack.UseVisualStyleBackColor = false;
             btnBack.Click += BtnBackOClick;
             // 
@@ -1711,13 +1726,37 @@
             pnlCredits.BackColor = SystemColors.Control;
             pnlCredits.BackgroundImage = (Image)resources.GetObject("pnlCredits.BackgroundImage");
             pnlCredits.Controls.Add(lblCredits);
-            pnlCredits.Controls.Add(button3);
-            pnlCredits.Controls.Add(button6);
+            pnlCredits.Controls.Add(btnCreditsBg);
+            pnlCredits.Controls.Add(pnlCreditsInfo);
+            pnlCredits.Controls.Add(btnCreditsInfoBg);
+            pnlCredits.Controls.Add(btnBackC);
             pnlCredits.Location = new Point(0, 0);
             pnlCredits.Name = "pnlCredits";
             pnlCredits.Size = new Size(1082, 753);
-            pnlCredits.TabIndex = 34;
+            pnlCredits.TabIndex = 2;
             pnlCredits.Visible = false;
+            // 
+            // pnlCreditsInfo
+            // 
+            pnlCreditsInfo.BackColor = Color.Black;
+            pnlCreditsInfo.Controls.Add(gbCreditsInfo1);
+            pnlCreditsInfo.Controls.Add(gbCreditsInfo2);
+            pnlCreditsInfo.Location = new Point(72, 231);
+            pnlCreditsInfo.Name = "pnlCreditsInfo";
+            pnlCreditsInfo.Size = new Size(950, 320);
+            pnlCreditsInfo.TabIndex = 3;
+            // 
+            // lblCreditsInfo2
+            // 
+            lblCreditsInfo2.AutoSize = true;
+            lblCreditsInfo2.BackColor = Color.Black;
+            lblCreditsInfo2.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblCreditsInfo2.ForeColor = Color.White;
+            lblCreditsInfo2.Location = new Point(6, 35);
+            lblCreditsInfo2.Name = "lblCreditsInfo2";
+            lblCreditsInfo2.Size = new Size(172, 25);
+            lblCreditsInfo2.TabIndex = 0;
+            lblCreditsInfo2.Text = "- Julian Qapo";
             // 
             // lblCredits
             // 
@@ -1727,37 +1766,165 @@
             lblCredits.Location = new Point(336, 118);
             lblCredits.Name = "lblCredits";
             lblCredits.Size = new Size(409, 85);
-            lblCredits.TabIndex = 12;
+            lblCredits.TabIndex = 3;
             lblCredits.Text = "Credits";
             // 
-            // button3
+            // btnBackC
             // 
-            button3.BackColor = Color.Black;
-            button3.FlatAppearance.BorderSize = 5;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button3.ForeColor = Color.White;
-            button3.Location = new Point(476, 570);
-            button3.Name = "button3";
-            button3.Size = new Size(129, 60);
-            button3.TabIndex = 10;
-            button3.Text = "Back";
-            button3.UseVisualStyleBackColor = false;
-            button3.Click += BtnBackOClick;
+            btnBackC.BackColor = Color.Black;
+            btnBackC.FlatAppearance.BorderSize = 5;
+            btnBackC.FlatStyle = FlatStyle.Flat;
+            btnBackC.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnBackC.ForeColor = Color.White;
+            btnBackC.Location = new Point(476, 570);
+            btnBackC.Name = "btnBackC";
+            btnBackC.Size = new Size(129, 60);
+            btnBackC.TabIndex = 1;
+            btnBackC.Text = "&Back";
+            btnBackC.UseVisualStyleBackColor = false;
+            btnBackC.Click += BtnBackOClick;
             // 
-            // button6
+            // btnCreditsBg
             // 
-            button6.BackColor = Color.Black;
-            button6.Enabled = false;
-            button6.FlatAppearance.BorderSize = 10;
-            button6.FlatStyle = FlatStyle.Flat;
-            button6.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button6.ForeColor = Color.White;
-            button6.Location = new Point(320, 108);
-            button6.Name = "button6";
-            button6.Size = new Size(441, 107);
-            button6.TabIndex = 13;
-            button6.UseVisualStyleBackColor = false;
+            btnCreditsBg.BackColor = Color.Black;
+            btnCreditsBg.Enabled = false;
+            btnCreditsBg.FlatAppearance.BorderSize = 10;
+            btnCreditsBg.FlatStyle = FlatStyle.Flat;
+            btnCreditsBg.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnCreditsBg.ForeColor = Color.White;
+            btnCreditsBg.Location = new Point(320, 108);
+            btnCreditsBg.Name = "btnCreditsBg";
+            btnCreditsBg.Size = new Size(441, 107);
+            btnCreditsBg.TabIndex = 2;
+            btnCreditsBg.UseVisualStyleBackColor = false;
+            // 
+            // lblCreditsInfo3
+            // 
+            lblCreditsInfo3.AutoSize = true;
+            lblCreditsInfo3.BackColor = Color.Black;
+            lblCreditsInfo3.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblCreditsInfo3.ForeColor = Color.White;
+            lblCreditsInfo3.Location = new Point(6, 66);
+            lblCreditsInfo3.Name = "lblCreditsInfo3";
+            lblCreditsInfo3.Size = new Size(201, 25);
+            lblCreditsInfo3.TabIndex = 1;
+            lblCreditsInfo3.Text = "- Rachel Boden";
+            // 
+            // lblCreditsInfo4
+            // 
+            lblCreditsInfo4.AutoSize = true;
+            lblCreditsInfo4.BackColor = Color.Black;
+            lblCreditsInfo4.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblCreditsInfo4.ForeColor = Color.White;
+            lblCreditsInfo4.Location = new Point(6, 91);
+            lblCreditsInfo4.Name = "lblCreditsInfo4";
+            lblCreditsInfo4.Size = new Size(230, 25);
+            lblCreditsInfo4.TabIndex = 2;
+            lblCreditsInfo4.Text = "- Matthew Wilson";
+            // 
+            // lblCreditsInfo5
+            // 
+            lblCreditsInfo5.AutoSize = true;
+            lblCreditsInfo5.BackColor = Color.Black;
+            lblCreditsInfo5.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblCreditsInfo5.ForeColor = Color.White;
+            lblCreditsInfo5.Location = new Point(6, 116);
+            lblCreditsInfo5.Name = "lblCreditsInfo5";
+            lblCreditsInfo5.Size = new Size(172, 25);
+            lblCreditsInfo5.TabIndex = 3;
+            lblCreditsInfo5.Text = "- Kyle Hosein";
+            // 
+            // gbCreditsInfo1
+            // 
+            gbCreditsInfo1.Controls.Add(lblCreditsInfo2);
+            gbCreditsInfo1.Controls.Add(lblCreditsInfo3);
+            gbCreditsInfo1.Controls.Add(lblCreditsInfo5);
+            gbCreditsInfo1.Controls.Add(lblCreditsInfo4);
+            gbCreditsInfo1.Font = new Font("Copperplate Gothic Light", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            gbCreditsInfo1.ForeColor = Color.White;
+            gbCreditsInfo1.Location = new Point(8, 11);
+            gbCreditsInfo1.Name = "gbCreditsInfo1";
+            gbCreditsInfo1.Size = new Size(257, 284);
+            gbCreditsInfo1.TabIndex = 0;
+            gbCreditsInfo1.TabStop = false;
+            gbCreditsInfo1.Text = "Created By:";
+            // 
+            // gbCreditsInfo2
+            // 
+            gbCreditsInfo2.Controls.Add(label1);
+            gbCreditsInfo2.Controls.Add(label2);
+            gbCreditsInfo2.Controls.Add(label3);
+            gbCreditsInfo2.Controls.Add(label4);
+            gbCreditsInfo2.Font = new Font("Copperplate Gothic Light", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            gbCreditsInfo2.ForeColor = Color.White;
+            gbCreditsInfo2.Location = new Point(277, 11);
+            gbCreditsInfo2.Name = "gbCreditsInfo2";
+            gbCreditsInfo2.Size = new Size(658, 284);
+            gbCreditsInfo2.TabIndex = 1;
+            gbCreditsInfo2.TabStop = false;
+            gbCreditsInfo2.Text = "Resources:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Black;
+            label1.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(6, 35);
+            label1.Name = "label1";
+            label1.Size = new Size(172, 25);
+            label1.TabIndex = 0;
+            label1.Text = "- Julian Qapo";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.BackColor = Color.Black;
+            label2.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(6, 66);
+            label2.Name = "label2";
+            label2.Size = new Size(201, 25);
+            label2.TabIndex = 1;
+            label2.Text = "- Rachel Boden";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = Color.Black;
+            label3.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(6, 116);
+            label3.Name = "label3";
+            label3.Size = new Size(172, 25);
+            label3.TabIndex = 3;
+            label3.Text = "- Kyle Hosein";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.BackColor = Color.Black;
+            label4.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.ForeColor = Color.White;
+            label4.Location = new Point(6, 91);
+            label4.Name = "label4";
+            label4.Size = new Size(230, 25);
+            label4.TabIndex = 2;
+            label4.Text = "- Matthew Wilson";
+            // 
+            // btnCreditsInfoBg
+            // 
+            btnCreditsInfoBg.BackColor = Color.Black;
+            btnCreditsInfoBg.Enabled = false;
+            btnCreditsInfoBg.FlatAppearance.BorderSize = 5;
+            btnCreditsInfoBg.FlatStyle = FlatStyle.Flat;
+            btnCreditsInfoBg.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnCreditsInfoBg.ForeColor = Color.White;
+            btnCreditsInfoBg.Location = new Point(67, 226);
+            btnCreditsInfoBg.Name = "btnCreditsInfoBg";
+            btnCreditsInfoBg.Size = new Size(960, 330);
+            btnCreditsInfoBg.TabIndex = 0;
+            btnCreditsInfoBg.UseVisualStyleBackColor = false;
             // 
             // DurakGUI
             // 
@@ -1818,6 +1985,11 @@
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             pnlCredits.ResumeLayout(false);
+            pnlCreditsInfo.ResumeLayout(false);
+            gbCreditsInfo1.ResumeLayout(false);
+            gbCreditsInfo1.PerformLayout();
+            gbCreditsInfo2.ResumeLayout(false);
+            gbCreditsInfo2.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -1953,8 +2125,20 @@
         private Button btnTCTHelp;
         private Panel pnlCredits;
         private Label lblCredits;
-        private Button button3;
-        private Button button6;
+        private Button btnBackC;
+        private Button btnCreditsBg;
         private Button btnCredits;
+        private Panel pnlCreditsInfo;
+        private Label lblCreditsInfo2;
+        private GroupBox gbCreditsInfo2;
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private Label label4;
+        private GroupBox gbCreditsInfo1;
+        private Label lblCreditsInfo3;
+        private Label lblCreditsInfo5;
+        private Label lblCreditsInfo4;
+        private Button btnCreditsInfoBg;
     }
 }
