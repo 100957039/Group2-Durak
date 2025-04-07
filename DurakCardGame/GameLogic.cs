@@ -869,6 +869,18 @@ namespace DurakCardGame
             }
             return nextAvailablePlayerIndex;
         }
+
+        public int FindCurrentAvailablePlayer(int thisIndex)
+        {
+            int currentAvailablePlayerIndex = thisIndex;
+
+            // Checks if the player selected has already won
+            if (players[currentAvailablePlayerIndex].Hand.Count() == 0 && deck.Count() == 0)
+            {
+                currentAvailablePlayerIndex = FindNextAvailablePlayer(thisIndex);
+            }
+            return currentAvailablePlayerIndex;
+        }
         // ############################## helper function to determine the next available player ends here #####
 
         // ########## add card to cardsAttack or cardsDefend based on turnIndex ##########
@@ -1002,36 +1014,13 @@ namespace DurakCardGame
         /// </summary>
         private void EnablePlayerCanAttack()
         {
-            int numPlayers = NumberOfPlayer();
-
-            switch (numPlayers)
+            if (defenderIndex - 2 < 0)
             {
-                case 2:
-                    foreach (Player player in players)
-                    {
-                        player.CanAttack = true;
-                    }
-                    break;
-                case 3:
-                    if (defenderIndex + 1 > players.Count() -1)
-                    {
-                        players[(defenderIndex + 1) - players.Count()].CanAttack = true;
-                    }
-                    else
-                    {
-                        players[(defenderIndex + 1)].CanAttack = true;
-                    }
-                    break;
-                case 4:
-                    if (defenderIndex + 2 > players.Count() - 1)
-                    {
-                        players[(defenderIndex + 2) - players.Count()].CanAttack = true;
-                    }
-                    else
-                    {
-                        players[(defenderIndex + 2)].CanAttack = true;
-                    }
-                    break;
+                players[(defenderIndex - 2) + players.Count()].CanAttack = true;
+            }
+            else
+            {
+                players[(defenderIndex - 2)].CanAttack = true;
             }
         }
 
