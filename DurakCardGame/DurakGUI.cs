@@ -1,9 +1,11 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Numerics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -31,6 +33,7 @@ namespace DurakCardGame
         int optionTCT = 0;
         int[] iconPage = { 0, 0, 0, 0 };
         string difficulty = "easy";
+        List<Player> resultList = new List<Player>();
 
         // Game variable
         GameLogic game = new GameLogic();
@@ -569,7 +572,7 @@ namespace DurakCardGame
         /// <param name="e"></param>
         private void BtnMenu(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Exit to Main Menu? (Game will not be saved)", "Exit to Menu", MessageBoxButtons.OKCancel);
+            DialogResult dialogResult = MessageBox.Show("Exit to Main Menu?" + Environment.NewLine + "(Game will not be saved)", "Exit to Menu", MessageBoxButtons.OKCancel);
 
             if (dialogResult == DialogResult.OK)
             {
@@ -598,7 +601,6 @@ namespace DurakCardGame
             UpdateDeckCount();
             NextPlayerMessageBox();
             DisplayHand();
-
         }
 
         /// <summary>
@@ -698,7 +700,7 @@ namespace DurakCardGame
 
             if (player.GetType() == game.typeHuman && (numPlayers - numAi) > 1)
             {
-                DialogResult dialogResult = MessageBox.Show(player.Name + " is up next.  Hide the screen from the other players.", player.Name + "'s Turn", MessageBoxButtons.OK);
+                DialogResult dialogResult = MessageBox.Show(player.Name + " is up next."+ Environment.NewLine +"Hide the screen from the other players.", player.Name + "'s Turn", MessageBoxButtons.OK);
             }
         }
 
@@ -810,8 +812,11 @@ namespace DurakCardGame
             }
             else
             {
-                //game.players[game.turnIndex];
+                ComputersTurn();
             }
+
+            // Checks if the game is over
+            IsGameEnded();
         }
 
         /// <summary>
@@ -937,6 +942,31 @@ namespace DurakCardGame
                 }
             }
             return canPlay;
+        }
+
+        /// <summary>
+        /// Lets the computer play a card
+        /// </summary>
+        private async void ComputersTurn()
+        {
+            const int sleep = 1500;
+            UpdatePlayerLocations();
+            DisplayTableTop();
+            DisplayTableBottom();
+            UpdateHandCounts();
+            UpdateDeckCount();
+            UpdateActionLog();
+            await Task.Delay(sleep);
+            game.ComputerPlayCard();
+            DisplayTableTop();
+            DisplayTableBottom();
+            UpdateActionLog();
+            await Task.Delay(sleep);
+            UpdateHandCounts();
+            UpdatePlayerLocations();
+            UpdateDeckCount();
+            NextPlayerMessageBox();
+            DisplayHand();
         }
 
         /// <summary>
@@ -1070,6 +1100,8 @@ namespace DurakCardGame
         private void UpdateActionLog()
         {
             tbActionLog.Lines = game.actionLog.ToArray();
+            tbActionLog.SelectionStart = tbActionLog.Text.Length;
+            tbActionLog.ScrollToCaret();
         }
 
         /// <summary>
@@ -1095,6 +1127,47 @@ namespace DurakCardGame
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private void IsGameEnded()
+        {
+            if (game.GameEnded())
+            {
+                string result =
+                    "--------------------------------" + Environment.NewLine +
+                    "          GAME RESULTS          " + Environment.NewLine + 
+                    "--------------------------------" + Environment.NewLine;
+                List<string> places = new List<string>() { "1st: ", "2nd: ", "3rd: ", "4th: ", "DURAK: " };
+
+                for (int i = 0; i < resultList.Count(); i++)
+                {
+                    if (resultList[i].Hand.Count() <= 0)
+                    {
+                        result += places[i] + resultList[i].Name + Environment.NewLine;
+                    }
+                    else
+                    {
+                        result += places[4] + resultList[i].Name;
+                    }
+                }
+                
+                result += Environment.NewLine + Environment.NewLine + " Play again?";
+                DialogResult dialogResult = MessageBox.Show(result, "Game Results", MessageBoxButtons.YesNo);
+
+                if (dialogResult == DialogResult.Yes)
+                {
+                    GameSetup();
+                }
+                else
+                {
+                    pnlGame.Visible = false;
+                    pnlMainMenu.Visible = true;
+                    pnlMainMenu.BringToFront();
+                }
+            }
+        }
         /// <summary>
         /// Resets the game board panels
         /// </summary>

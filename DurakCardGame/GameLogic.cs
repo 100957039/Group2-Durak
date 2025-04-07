@@ -131,9 +131,6 @@ namespace DurakCardGame
         // only used when the game start, it probably needs to be (private) and executed in startGame()
         public String chooseFirstAttacker()
         {
-            // Update action log
-            actionLog.Add("- The player with the lowest trump card attacks first");
-
             // Store the lowest trump card for the action log
             Card cardLowestTrump = new Card("", "", -1, "");
 
@@ -219,12 +216,51 @@ namespace DurakCardGame
         }
         // test one ends here
 
+        /// <summary>
+        /// Creates a list with the attackers in order at the start of the list and the 
+        ///  defender at the end
+        /// </summary>
+        /// <returns></returns>
+        public List<Player> AttackerFirstList()
+        {
+            List<Player> playerList = new List<Player>();
+            int numPlayers = players.Count;
+
+            // Adds 1st attacker to list
+            if (defenderIndex - 1 < 0) 
+            {
+                playerList.Add(players[numPlayers - 1]);
+            }
+            else
+            {
+                playerList.Add(players[defenderIndex - 1]);
+            }
+
+            // Adds 2nd and 3rd attacker to list if applicable
+            for(int i = 1; i < numPlayers - 1; i++)
+            {
+                if (defenderIndex + i > numPlayers - 1)
+                {
+                    playerList.Add(players[(defenderIndex + i) - numPlayers]);
+                }
+                else
+                {
+                    playerList.Add(players[defenderIndex + i]);
+                }
+            }
+
+            // Adds defender to list
+            playerList.Add(players[defenderIndex]);
+
+            return playerList;
+        }
 
         // fill hand with 6 cards | ##### Done ######
         public void fillHand()
         {
+            List<Player> playerList = AttackerFirstList();
 
-            foreach (Player player in players)
+            foreach (Player player in playerList)
             {
 
                 int howManyCards = player.Hand.Count;
@@ -316,6 +352,9 @@ namespace DurakCardGame
             // insert trump card back to the deck to be the last card
             ////////////################################ might use lines below ####################
             deck.AddCard(trumpCard);
+
+            // Update action log
+            actionLog.Add("- The trump suit is " + trumpCard.SuitToString());
         }
 
 
@@ -334,7 +373,7 @@ namespace DurakCardGame
             // only one left = lost
             int numberToStopGame = 1;
 
-            return playersLeft == numberToStopGame;
+            return playersLeft <= numberToStopGame;
         }
 
         // stop attack when it reachs 6 cards
@@ -383,6 +422,8 @@ namespace DurakCardGame
                 defenderIndex = FindNextAvailablePlayer(turnIndex);
                 attackerIndex = turnIndex;
                 fillHand();
+
+                
             }
             
         }
@@ -614,6 +655,10 @@ namespace DurakCardGame
                         Card bestOption = computerPlayer.ChooseBestCard(cardsCanPlay, false, trump);
                         cardsDefend.Add(bestOption);
                         computerPlayer.PlayCard2(bestOption);
+
+                        // Updates action log
+                        actionLog.Add("- " + players[turnIndex].Name + " played " + bestOption.ToString());
+
                         turnIndex = attackerIndex;
                         doAction = true;
                     }
@@ -621,9 +666,13 @@ namespace DurakCardGame
                     {
                         //Console.WriteLine("attacking ");
                         
-                            Card bestOption = computerPlayer.ChooseBestCard(cardsCanPlay, true, trump);
-                            cardsAttack.Add(bestOption);
-                            computerPlayer.PlayCard2(bestOption);
+                        Card bestOption = computerPlayer.ChooseBestCard(cardsCanPlay, true, trump);
+                        cardsAttack.Add(bestOption);
+                        computerPlayer.PlayCard2(bestOption);
+
+                        // Updates action log
+                        actionLog.Add("- " + players[turnIndex].Name + " played " + bestOption.ToString());
+
                         //turnIndex = defenderIndex;
                         // defender lost
                         if (cardsAttack.Count() > cardsDefend.Count() + 1)
@@ -927,6 +976,9 @@ namespace DurakCardGame
             // is defender
             if (turnIndex == defenderIndex) 
             {
+                // Update action log
+                actionLog.Add("- " + players[defenderIndex].Name + " lost the defence");
+
                 turnIndex = attackerIndex;
             }
 
@@ -935,6 +987,10 @@ namespace DurakCardGame
             {
                 int totalPlayers = NumberOfPlayer();
                 int maxSubAttack = totalPlayers - 2;
+
+                // Update action log
+                actionLog.Add("- " + players[turnIndex].Name + " ended their attack");
+
                 // defender lost 
                 if (cardsAttack.Count() > cardsDefend.Count() +1)
                 {
@@ -1054,6 +1110,9 @@ namespace DurakCardGame
             {
                 cardsAttack.Add(card);
             }
+
+            // Updates action log
+            actionLog.Add("- " + players[turnIndex].Name + " played " + card.ToString());
         }
         // ########## add card to cardsAttack or cardsDefend based on turnIndex ##########
 
@@ -1176,8 +1235,6 @@ namespace DurakCardGame
             }
         }
 
-        
-
         // ####################################################################
         // if there is time left implement later
 
@@ -1197,7 +1254,7 @@ namespace DurakCardGame
                 // Sort player hand if human
                 SortAllHands();
 
-                // Adds action to action log
+                // Updates action log
                 actionLog.Add("- " + players[currentPlayerIndex].Name + " traded " + tempCard.ToString() + " for deck trump " + lastTrumpCardDeck.ToString());
 
                 Console.WriteLine("changed");
@@ -1228,7 +1285,7 @@ namespace DurakCardGame
                 // Sort player hand if human
                 SortAllHands();
 
-                // Adds action to action log
+                // Updates action log
                 actionLog.Add("- " + players[currentPlayerIndex].Name + " traded " + tempCard.ToString() + " for deck trump " + lastTrumpCardDeck.ToString());
 
                 Console.WriteLine("changed");
