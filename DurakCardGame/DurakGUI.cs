@@ -620,7 +620,7 @@ namespace DurakCardGame
             }
             for (int i = 0; i < numAi; i++)
             {
-                game.addComputer(difficulty);
+                game.addComputer(difficulty, playerNames);
             }
 
             // Hide all player panels
@@ -779,7 +779,6 @@ namespace DurakCardGame
                                 UpdateActionLog();
                                 NextPlayerMessageBox();
                                 DisplayHand();
-
                             };
 
                         };
@@ -1013,6 +1012,20 @@ namespace DurakCardGame
                 {
                     playerRoleIcons[i].ImageLocation = RoleLocation + roleIcons[5];
                 }
+                else if (!game.players[turnIndex].CanAttack)
+                {
+                    playerRoleIcons[i].ImageLocation = RoleLocation + roleIcons[4];
+
+                    // Checks if there's 4 players and changes 3rd attacker icon to 2nd attacker icon
+                    if (game.players.Count() > 3 && i - 1 >= 0)
+                    {
+                        playerRoleIcons[i - 1].ImageLocation = RoleLocation + roleIcons[2];
+                    }
+                    else if (game.players.Count() > 3)
+                    {
+                        playerRoleIcons[(i - 1) + game.players.Count()].ImageLocation = RoleLocation + roleIcons[2];
+                    }
+                }
                 else if (turnIndex == game.defenderIndex)
                 {
                     playerRoleIcons[i].ImageLocation = RoleLocation + roleIcons[0];
@@ -1028,11 +1041,6 @@ namespace DurakCardGame
                 else if (numPlayers > 3 && turnIndex == game.defenderIndex + 2 || turnIndex == ((game.defenderIndex + 2) - numPlayers))
                 {
                     playerRoleIcons[i].ImageLocation = RoleLocation + roleIcons[3];
-                }
-
-                if (!game.players[i].CanAttack)
-                {
-                    playerRoleIcons[i].ImageLocation = RoleLocation + roleIcons[4];
                 }
 
                 turnIndex += 1;
@@ -1176,6 +1184,22 @@ namespace DurakCardGame
             pnlHand.Controls.Clear();
             pnlTableTop.Controls.Clear();
             pnlTableBottom.Controls.Clear();
-        }  
+        }
+        
+        /// <summary>
+        /// Get and the previous settings and player names from last application use
+        /// </summary>
+        private void ReadJson()
+        {
+
+        }
+
+        /// <summary>
+        /// Updates the json file with the currect settings and or player names
+        /// </summary>
+        private void SaveJson()
+        { 
+        
+        }
     }
 }

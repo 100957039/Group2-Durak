@@ -14,7 +14,6 @@ namespace DurakCardGame
     internal class Computer : Player
     {
         public string Difficulty { get; set; }
-        public List<IndexCards> IndexCardPlayers {get; set; }
 
         // Constructor for Computer that uses the base class constructor
         // For setting name and icon manually
@@ -160,7 +159,7 @@ namespace DurakCardGame
         /// <summary>
         /// Choose a random name and icon for a Computer player
         /// </summary>
-        public int AiCustomization(List<int> usedIndex)
+        public int AiCustomization(List<int> usedIndex, List<string> playerNames)
         {
             Random random = new Random();
             string[] icons = ["BitBot", "Chipz", "Cluckles", "Cosmobot", "D.A.V.E", "Drumdrum", "Eggxon", "Geargrim", "Hauntoid", "Jerry", "Nootron", "Phil", "Porkinator", "Seal-E", "Sir Stache", "Waddlebot"];
@@ -170,7 +169,7 @@ namespace DurakCardGame
 
             int index = random.Next(listLength);
 
-            while (usedIndex.Contains(index))
+            while (usedIndex.Contains(index) || playerNames.Contains(icons[index]))
             {
                 index = random.Next(listLength);
             }
