@@ -20,7 +20,7 @@ namespace DurakCardGame
             {
                 for (int i = 0; i < values.Length; i++)
                 {
-                    cards.Insert(i, new Card(suit, values[i], ranks[i], "../../../cards/" + values[i] + suit + ".png"));
+                    cards.Insert(i, new Card(suit, values[i], ranks[i], "../../../GUI_Images/cards/" + values[i] + suit + ".png"));
                 }
             }
         }

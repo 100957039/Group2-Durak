@@ -1136,7 +1136,7 @@ namespace DurakCardGame
         }
 
         /// <summary>
-        /// 
+        /// Checks if the games ended and displays the game result
         /// </summary>
         /// <returns></returns>
         private void IsGameEnded()
@@ -1176,6 +1176,7 @@ namespace DurakCardGame
                 }
             }
         }
+
         /// <summary>
         /// Resets the game board panels
         /// </summary>
@@ -1184,22 +1185,6 @@ namespace DurakCardGame
             pnlHand.Controls.Clear();
             pnlTableTop.Controls.Clear();
             pnlTableBottom.Controls.Clear();
-        }
-        
-        /// <summary>
-        /// Get and the previous settings and player names from last application use
-        /// </summary>
-        private void ReadJson()
-        {
-
-        }
-
-        /// <summary>
-        /// Updates the json file with the currect settings and or player names
-        /// </summary>
-        private void SaveJson()
-        { 
-        
         }
     }
 }

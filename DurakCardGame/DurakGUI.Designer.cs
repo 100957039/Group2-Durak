@@ -149,21 +149,18 @@
             rbTCTDisable = new RadioButton();
             btnBack = new Button();
             pnlCredits = new Panel();
-            pnlCreditsInfo = new Panel();
-            lblCreditsInfo2 = new Label();
             lblCredits = new Label();
-            btnBackC = new Button();
             btnCreditsBg = new Button();
+            pnlCreditsInfo = new Panel();
+            gbCreditsInfo = new GroupBox();
+            lblCreditsInfo1 = new Label();
+            lblCreditsInfo2 = new Label();
             lblCreditsInfo3 = new Label();
             lblCreditsInfo4 = new Label();
-            lblCreditsInfo5 = new Label();
-            gbCreditsInfo1 = new GroupBox();
-            gbCreditsInfo2 = new GroupBox();
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
-            label4 = new Label();
+            gbResourceInfo = new GroupBox();
+            lblResourseInfo1 = new Label();
             btnCreditsInfoBg = new Button();
+            btnBackC = new Button();
             pnlMainMenu.SuspendLayout();
             pnlPlayerSelect.SuspendLayout();
             gbNumPlayers.SuspendLayout();
@@ -199,8 +196,8 @@
             groupBox1.SuspendLayout();
             pnlCredits.SuspendLayout();
             pnlCreditsInfo.SuspendLayout();
-            gbCreditsInfo1.SuspendLayout();
-            gbCreditsInfo2.SuspendLayout();
+            gbCreditsInfo.SuspendLayout();
+            gbResourceInfo.SuspendLayout();
             SuspendLayout();
             // 
             // pnlMainMenu
@@ -1736,53 +1733,16 @@
             pnlCredits.TabIndex = 2;
             pnlCredits.Visible = false;
             // 
-            // pnlCreditsInfo
-            // 
-            pnlCreditsInfo.BackColor = Color.Black;
-            pnlCreditsInfo.Controls.Add(gbCreditsInfo1);
-            pnlCreditsInfo.Controls.Add(gbCreditsInfo2);
-            pnlCreditsInfo.Location = new Point(72, 231);
-            pnlCreditsInfo.Name = "pnlCreditsInfo";
-            pnlCreditsInfo.Size = new Size(950, 320);
-            pnlCreditsInfo.TabIndex = 3;
-            // 
-            // lblCreditsInfo2
-            // 
-            lblCreditsInfo2.AutoSize = true;
-            lblCreditsInfo2.BackColor = Color.Black;
-            lblCreditsInfo2.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblCreditsInfo2.ForeColor = Color.White;
-            lblCreditsInfo2.Location = new Point(6, 35);
-            lblCreditsInfo2.Name = "lblCreditsInfo2";
-            lblCreditsInfo2.Size = new Size(172, 25);
-            lblCreditsInfo2.TabIndex = 0;
-            lblCreditsInfo2.Text = "- Julian Qapo";
-            // 
             // lblCredits
             // 
             lblCredits.BackColor = Color.Black;
             lblCredits.Font = new Font("Castellar", 48F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblCredits.ForeColor = Color.White;
-            lblCredits.Location = new Point(336, 118);
+            lblCredits.Location = new Point(336, 84);
             lblCredits.Name = "lblCredits";
             lblCredits.Size = new Size(409, 85);
             lblCredits.TabIndex = 3;
             lblCredits.Text = "Credits";
-            // 
-            // btnBackC
-            // 
-            btnBackC.BackColor = Color.Black;
-            btnBackC.FlatAppearance.BorderSize = 5;
-            btnBackC.FlatStyle = FlatStyle.Flat;
-            btnBackC.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnBackC.ForeColor = Color.White;
-            btnBackC.Location = new Point(476, 570);
-            btnBackC.Name = "btnBackC";
-            btnBackC.Size = new Size(129, 60);
-            btnBackC.TabIndex = 1;
-            btnBackC.Text = "&Back";
-            btnBackC.UseVisualStyleBackColor = false;
-            btnBackC.Click += BtnBackOClick;
             // 
             // btnCreditsBg
             // 
@@ -1792,11 +1752,60 @@
             btnCreditsBg.FlatStyle = FlatStyle.Flat;
             btnCreditsBg.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnCreditsBg.ForeColor = Color.White;
-            btnCreditsBg.Location = new Point(320, 108);
+            btnCreditsBg.Location = new Point(320, 74);
             btnCreditsBg.Name = "btnCreditsBg";
             btnCreditsBg.Size = new Size(441, 107);
             btnCreditsBg.TabIndex = 2;
             btnCreditsBg.UseVisualStyleBackColor = false;
+            // 
+            // pnlCreditsInfo
+            // 
+            pnlCreditsInfo.BackColor = Color.Black;
+            pnlCreditsInfo.Controls.Add(gbCreditsInfo);
+            pnlCreditsInfo.Controls.Add(gbResourceInfo);
+            pnlCreditsInfo.Location = new Point(41, 211);
+            pnlCreditsInfo.Name = "pnlCreditsInfo";
+            pnlCreditsInfo.Size = new Size(1000, 336);
+            pnlCreditsInfo.TabIndex = 3;
+            // 
+            // gbCreditsInfo
+            // 
+            gbCreditsInfo.Controls.Add(lblCreditsInfo1);
+            gbCreditsInfo.Controls.Add(lblCreditsInfo2);
+            gbCreditsInfo.Controls.Add(lblCreditsInfo3);
+            gbCreditsInfo.Controls.Add(lblCreditsInfo4);
+            gbCreditsInfo.Font = new Font("Copperplate Gothic Light", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            gbCreditsInfo.ForeColor = Color.White;
+            gbCreditsInfo.Location = new Point(16, 10);
+            gbCreditsInfo.Name = "gbCreditsInfo";
+            gbCreditsInfo.Size = new Size(242, 314);
+            gbCreditsInfo.TabIndex = 0;
+            gbCreditsInfo.TabStop = false;
+            gbCreditsInfo.Text = "Created By:";
+            // 
+            // lblCreditsInfo1
+            // 
+            lblCreditsInfo1.AutoSize = true;
+            lblCreditsInfo1.BackColor = Color.Black;
+            lblCreditsInfo1.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblCreditsInfo1.ForeColor = Color.White;
+            lblCreditsInfo1.Location = new Point(6, 36);
+            lblCreditsInfo1.Name = "lblCreditsInfo1";
+            lblCreditsInfo1.Size = new Size(172, 25);
+            lblCreditsInfo1.TabIndex = 0;
+            lblCreditsInfo1.Text = "- Julian Qapo";
+            // 
+            // lblCreditsInfo2
+            // 
+            lblCreditsInfo2.AutoSize = true;
+            lblCreditsInfo2.BackColor = Color.Black;
+            lblCreditsInfo2.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblCreditsInfo2.ForeColor = Color.White;
+            lblCreditsInfo2.Location = new Point(6, 65);
+            lblCreditsInfo2.Name = "lblCreditsInfo2";
+            lblCreditsInfo2.Size = new Size(201, 25);
+            lblCreditsInfo2.TabIndex = 1;
+            lblCreditsInfo2.Text = "- Rachel Boden";
             // 
             // lblCreditsInfo3
             // 
@@ -1804,11 +1813,11 @@
             lblCreditsInfo3.BackColor = Color.Black;
             lblCreditsInfo3.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblCreditsInfo3.ForeColor = Color.White;
-            lblCreditsInfo3.Location = new Point(6, 66);
+            lblCreditsInfo3.Location = new Point(6, 123);
             lblCreditsInfo3.Name = "lblCreditsInfo3";
-            lblCreditsInfo3.Size = new Size(201, 25);
-            lblCreditsInfo3.TabIndex = 1;
-            lblCreditsInfo3.Text = "- Rachel Boden";
+            lblCreditsInfo3.Size = new Size(172, 25);
+            lblCreditsInfo3.TabIndex = 3;
+            lblCreditsInfo3.Text = "- Kyle Hosein";
             // 
             // lblCreditsInfo4
             // 
@@ -1816,101 +1825,35 @@
             lblCreditsInfo4.BackColor = Color.Black;
             lblCreditsInfo4.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblCreditsInfo4.ForeColor = Color.White;
-            lblCreditsInfo4.Location = new Point(6, 91);
+            lblCreditsInfo4.Location = new Point(6, 94);
             lblCreditsInfo4.Name = "lblCreditsInfo4";
             lblCreditsInfo4.Size = new Size(230, 25);
             lblCreditsInfo4.TabIndex = 2;
             lblCreditsInfo4.Text = "- Matthew Wilson";
             // 
-            // lblCreditsInfo5
+            // gbResourceInfo
             // 
-            lblCreditsInfo5.AutoSize = true;
-            lblCreditsInfo5.BackColor = Color.Black;
-            lblCreditsInfo5.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblCreditsInfo5.ForeColor = Color.White;
-            lblCreditsInfo5.Location = new Point(6, 116);
-            lblCreditsInfo5.Name = "lblCreditsInfo5";
-            lblCreditsInfo5.Size = new Size(172, 25);
-            lblCreditsInfo5.TabIndex = 3;
-            lblCreditsInfo5.Text = "- Kyle Hosein";
+            gbResourceInfo.Controls.Add(lblResourseInfo1);
+            gbResourceInfo.Font = new Font("Copperplate Gothic Light", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            gbResourceInfo.ForeColor = Color.White;
+            gbResourceInfo.Location = new Point(264, 10);
+            gbResourceInfo.Name = "gbResourceInfo";
+            gbResourceInfo.Size = new Size(720, 314);
+            gbResourceInfo.TabIndex = 1;
+            gbResourceInfo.TabStop = false;
+            gbResourceInfo.Text = "Resources:";
             // 
-            // gbCreditsInfo1
+            // lblResourseInfo1
             // 
-            gbCreditsInfo1.Controls.Add(lblCreditsInfo2);
-            gbCreditsInfo1.Controls.Add(lblCreditsInfo3);
-            gbCreditsInfo1.Controls.Add(lblCreditsInfo5);
-            gbCreditsInfo1.Controls.Add(lblCreditsInfo4);
-            gbCreditsInfo1.Font = new Font("Copperplate Gothic Light", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            gbCreditsInfo1.ForeColor = Color.White;
-            gbCreditsInfo1.Location = new Point(8, 11);
-            gbCreditsInfo1.Name = "gbCreditsInfo1";
-            gbCreditsInfo1.Size = new Size(257, 284);
-            gbCreditsInfo1.TabIndex = 0;
-            gbCreditsInfo1.TabStop = false;
-            gbCreditsInfo1.Text = "Created By:";
-            // 
-            // gbCreditsInfo2
-            // 
-            gbCreditsInfo2.Controls.Add(label1);
-            gbCreditsInfo2.Controls.Add(label2);
-            gbCreditsInfo2.Controls.Add(label3);
-            gbCreditsInfo2.Controls.Add(label4);
-            gbCreditsInfo2.Font = new Font("Copperplate Gothic Light", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            gbCreditsInfo2.ForeColor = Color.White;
-            gbCreditsInfo2.Location = new Point(277, 11);
-            gbCreditsInfo2.Name = "gbCreditsInfo2";
-            gbCreditsInfo2.Size = new Size(658, 284);
-            gbCreditsInfo2.TabIndex = 1;
-            gbCreditsInfo2.TabStop = false;
-            gbCreditsInfo2.Text = "Resources:";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Black;
-            label1.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(6, 35);
-            label1.Name = "label1";
-            label1.Size = new Size(172, 25);
-            label1.TabIndex = 0;
-            label1.Text = "- Julian Qapo";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.BackColor = Color.Black;
-            label2.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.White;
-            label2.Location = new Point(6, 66);
-            label2.Name = "label2";
-            label2.Size = new Size(201, 25);
-            label2.TabIndex = 1;
-            label2.Text = "- Rachel Boden";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.Black;
-            label3.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.White;
-            label3.Location = new Point(6, 116);
-            label3.Name = "label3";
-            label3.Size = new Size(172, 25);
-            label3.TabIndex = 3;
-            label3.Text = "- Kyle Hosein";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.BackColor = Color.Black;
-            label4.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.ForeColor = Color.White;
-            label4.Location = new Point(6, 91);
-            label4.Name = "label4";
-            label4.Size = new Size(230, 25);
-            label4.TabIndex = 2;
-            label4.Text = "- Matthew Wilson";
+            lblResourseInfo1.AutoSize = true;
+            lblResourseInfo1.BackColor = Color.Black;
+            lblResourseInfo1.Font = new Font("Copperplate Gothic Light", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblResourseInfo1.ForeColor = Color.White;
+            lblResourseInfo1.Location = new Point(12, 33);
+            lblResourseInfo1.Name = "lblResourseInfo1";
+            lblResourseInfo1.Size = new Size(674, 256);
+            lblResourseInfo1.TabIndex = 0;
+            lblResourseInfo1.Text = resources.GetString("lblResourseInfo1.Text");
             // 
             // btnCreditsInfoBg
             // 
@@ -1920,11 +1863,26 @@
             btnCreditsInfoBg.FlatStyle = FlatStyle.Flat;
             btnCreditsInfoBg.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnCreditsInfoBg.ForeColor = Color.White;
-            btnCreditsInfoBg.Location = new Point(67, 226);
+            btnCreditsInfoBg.Location = new Point(36, 206);
             btnCreditsInfoBg.Name = "btnCreditsInfoBg";
-            btnCreditsInfoBg.Size = new Size(960, 330);
+            btnCreditsInfoBg.Size = new Size(1010, 346);
             btnCreditsInfoBg.TabIndex = 0;
             btnCreditsInfoBg.UseVisualStyleBackColor = false;
+            // 
+            // btnBackC
+            // 
+            btnBackC.BackColor = Color.Black;
+            btnBackC.FlatAppearance.BorderSize = 5;
+            btnBackC.FlatStyle = FlatStyle.Flat;
+            btnBackC.Font = new Font("Copperplate Gothic Light", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnBackC.ForeColor = Color.White;
+            btnBackC.Location = new Point(476, 579);
+            btnBackC.Name = "btnBackC";
+            btnBackC.Size = new Size(129, 60);
+            btnBackC.TabIndex = 1;
+            btnBackC.Text = "&Back";
+            btnBackC.UseVisualStyleBackColor = false;
+            btnBackC.Click += BtnBackOClick;
             // 
             // DurakGUI
             // 
@@ -1932,12 +1890,12 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(1082, 753);
+            Controls.Add(pnlGame);
             Controls.Add(pnlMainMenu);
             Controls.Add(pnlOptions);
             Controls.Add(pnlCredits);
             Controls.Add(pnlPlayerSelect);
             Controls.Add(pnlCustomize);
-            Controls.Add(pnlGame);
             MaximizeBox = false;
             Name = "DurakGUI";
             StartPosition = FormStartPosition.CenterScreen;
@@ -1986,10 +1944,10 @@
             groupBox1.PerformLayout();
             pnlCredits.ResumeLayout(false);
             pnlCreditsInfo.ResumeLayout(false);
-            gbCreditsInfo1.ResumeLayout(false);
-            gbCreditsInfo1.PerformLayout();
-            gbCreditsInfo2.ResumeLayout(false);
-            gbCreditsInfo2.PerformLayout();
+            gbCreditsInfo.ResumeLayout(false);
+            gbCreditsInfo.PerformLayout();
+            gbResourceInfo.ResumeLayout(false);
+            gbResourceInfo.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -2129,15 +2087,12 @@
         private Button btnCreditsBg;
         private Button btnCredits;
         private Panel pnlCreditsInfo;
+        private Label lblCreditsInfo1;
+        private GroupBox gbResourceInfo;
+        private Label lblResourseInfo1;
+        private GroupBox gbCreditsInfo;
         private Label lblCreditsInfo2;
-        private GroupBox gbCreditsInfo2;
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private Label label4;
-        private GroupBox gbCreditsInfo1;
         private Label lblCreditsInfo3;
-        private Label lblCreditsInfo5;
         private Label lblCreditsInfo4;
         private Button btnCreditsInfoBg;
     }
