@@ -85,6 +85,16 @@ namespace DurakCardGame
 
 
 
+        // delete after testing
+        public void SwitchTrun() {
+            turnIndex = FindNextAvailablePlayer(turnIndex);
+            attackerIndex = turnIndex;
+            defenderIndex = FindNextAvailablePlayer(turnIndex);
+        }
+
+        // delte after testing 
+
+
         //check if the player can still attack
         public bool canStillAttack(List<Card> hand)
         {
@@ -500,13 +510,15 @@ namespace DurakCardGame
                     if (!DefenderNoCards())
                     {
                         Console.WriteLine("Case 1 ------");
-                        turnIndex = FindCurrentAvailablePlayer(attackerIndex);
+                        //turnIndex = FindCurrentAvailablePlayer(attackerIndex);
+                        turnIndex = attackerIndex;
                     }
                 }
                 else if (turnIndex == attackerIndex && cardsAttack.Count() > cardsDefend.Count() + 1)
                 {
                     Console.WriteLine("Case 2 -------");
-                    turnIndex = FindCurrentAvailablePlayer(attackerIndex);
+                    //turnIndex = FindCurrentAvailablePlayer(attackerIndex);
+                    turnIndex = attackerIndex;
                 }
                 // regular attacks or defence
                 else
@@ -533,6 +545,16 @@ namespace DurakCardGame
                 currentAvailablePlayerIndex = FindNextAvailablePlayer(thisIndex);
             }
             return currentAvailablePlayerIndex;
+        }
+
+        private int FindNextAvailableAttacker()
+        {
+            int nextPossibleAttacker = 0;
+            for (int i = 0; i <players.Count(); i++)
+            {
+
+            }
+            return nextPossibleAttacker;
         }
         // test for computer class
 
@@ -754,8 +776,8 @@ namespace DurakCardGame
                 // Update action log
                 actionLog.Add("- " + players[defenderIndex].Name + " lost the defence");
 
-                turnIndex = FindCurrentAvailablePlayer(attackerIndex);
-                //turnIndex = attackerIndex;
+                //turnIndex = FindCurrentAvailablePlayer(attackerIndex);
+                turnIndex = attackerIndex;
             }
 
             // if attacker
