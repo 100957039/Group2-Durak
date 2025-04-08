@@ -216,7 +216,7 @@ namespace DurakCardGame
             List<Panel> panels = [panel1, panel2, panel3, panelHand];
             panelHand.Controls.Clear();
             panelHand.Refresh(); // I dont know what refresh does, I do not think it's needed
-            
+
             Player currentPlayer = game.players[game.turnIndex];
             int xAxis = 0;
             //String winners = "";
@@ -413,7 +413,7 @@ namespace DurakCardGame
         }
 
 
-        
+
 
 
         public void PrintPlayedCards()
@@ -443,6 +443,12 @@ namespace DurakCardGame
         private void button1_Click(object sender, EventArgs e)
         {
             PrintDefenderCurrentPlayerIndex();
+        }
+
+        private void SwitchToTheNExtPlayer(object sender, EventArgs e)
+        {
+            game.SwitchTrun();
+            displayAllFourHand();
         }
 
 
