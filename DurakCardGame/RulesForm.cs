@@ -39,8 +39,11 @@ namespace DurakCardGame
                 pnlPage6,
                 pnlPage7,
                 pnlPage8,
-                //pnlPage9,
-                //pnlPage10,
+                pnlPage9,
+                pnlPage10,
+                pnlPage11,
+                pnlPage12,
+                pnlPage13,
              });
         }
 
@@ -103,7 +106,7 @@ namespace DurakCardGame
         /// </summary>
         public void ShowOptionalRules()
         {
-            const int OptionalRulesPage = 1;
+            const int OptionalRulesPage = 11;
 
             // Hides the current page panel
             pageList[page].Visible = false;

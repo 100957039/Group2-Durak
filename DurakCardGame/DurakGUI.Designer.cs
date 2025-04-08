@@ -1890,12 +1890,12 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(1082, 753);
-            Controls.Add(pnlGame);
             Controls.Add(pnlMainMenu);
             Controls.Add(pnlOptions);
             Controls.Add(pnlCredits);
             Controls.Add(pnlPlayerSelect);
             Controls.Add(pnlCustomize);
+            Controls.Add(pnlGame);
             MaximizeBox = false;
             Name = "DurakGUI";
             StartPosition = FormStartPosition.CenterScreen;

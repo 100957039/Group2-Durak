@@ -34,23 +34,6 @@
             lblHTP = new Label();
             btnHTP = new Button();
             pnlRules = new Panel();
-            pnlPage8 = new Panel();
-            pbPage8Attacker = new PictureBox();
-            btnPage8AttackerBg = new Button();
-            pbPage8Card1 = new PictureBox();
-            pbPage8Card2 = new PictureBox();
-            pbPage8Card3 = new PictureBox();
-            pbPage8Card4 = new PictureBox();
-            pbPage8Card9 = new PictureBox();
-            pbPage8Card10 = new PictureBox();
-            pbPage8Card11 = new PictureBox();
-            btnPage8TableBg = new Button();
-            lblPage8Trump = new Label();
-            pbPage8Trump = new PictureBox();
-            pbPage8Defender = new PictureBox();
-            btnPage8DefenderBg = new Button();
-            lblPage8Text = new Label();
-            lblPage8TextBg = new Button();
             pnlPage1 = new Panel();
             pbCard6H = new PictureBox();
             pbCard7H = new PictureBox();
@@ -85,10 +68,13 @@
             lblPage2Text = new Label();
             btnPage2TextBg = new Button();
             pnlPage3 = new Panel();
-            pbPage3Deck = new PictureBox();
+            pbPage3DeckBack = new PictureBox();
+            pbPage3DeckTrump = new PictureBox();
+            lblPage3DeckText = new Label();
+            lblPage3DeckCount = new Label();
             btnPage3DeckBg = new Button();
-            lblTrumpSuit = new Label();
-            lblPlayerHand = new Label();
+            lblPage3TrumpSuit = new Label();
+            lblPage3PlayerHand = new Label();
             pbPage3Card1 = new PictureBox();
             pbPage3Card2 = new PictureBox();
             pbPage3Card3 = new PictureBox();
@@ -158,25 +144,99 @@
             btnPage7Attacker = new Button();
             lblPage7Text = new Label();
             btnPage7Text = new Button();
-            btnRulesBg = new Button();
-            lblPageNum = new Label();
-            btnPageNumBg = new Button();
-            pbPage8Card5 = new PictureBox();
+            pnlPage8 = new Panel();
+            pbPage8Attacker = new PictureBox();
+            btnPage8AttackerBg = new Button();
             pbPage8Card8 = new PictureBox();
             pbPage8Card7 = new PictureBox();
             pbPage8Card6 = new PictureBox();
+            pbPage8Card5 = new PictureBox();
+            pbPage8Card4 = new PictureBox();
+            pbPage8Card3 = new PictureBox();
+            pbPage8Card2 = new PictureBox();
+            pbPage8Card1 = new PictureBox();
+            pbPage8Card9 = new PictureBox();
+            pbPage8Card10 = new PictureBox();
+            pbPage8Card11 = new PictureBox();
+            btnPage8TableBg = new Button();
+            lblPage8Trump = new Label();
+            pbPage8Trump = new PictureBox();
+            pbPage8Defender = new PictureBox();
+            btnPage8DefenderBg = new Button();
+            lblPage8Text = new Label();
+            lblPage8TextBg = new Button();
+            pnlPage9 = new Panel();
+            pbPage9Attacker = new PictureBox();
+            btnPage9AttackerBg = new Button();
+            btnPage9TableBg = new Button();
+            lblPage9Trump = new Label();
+            pbPage9Trump = new PictureBox();
+            pbPage9Defender = new PictureBox();
+            btnPage9DefenderBg = new Button();
+            lblPage9Text = new Label();
+            btnPage9TextBg = new Button();
+            pnlPage10 = new Panel();
+            pbPage10Attacker = new PictureBox();
+            btnPage10AttackerBg = new Button();
+            btnPage10Table = new Button();
+            lblPage10Trump = new Label();
+            pbPage10Trump = new PictureBox();
+            pbPage10BknDefender = new PictureBox();
+            btnPage10BknDefenderBg = new Button();
+            lblPage10Text = new Label();
+            btnPage10TextBg = new Button();
+            pnlPage11 = new Panel();
+            pbPage11Winner = new PictureBox();
+            btnPage11WinnerBg = new Button();
+            btnPage11Table = new Button();
+            lblPage11Trump = new Label();
+            pbPage11Trump = new PictureBox();
+            pbPage11Attacker = new PictureBox();
+            btnPage11AttackerBg = new Button();
+            lblPage11Text = new Label();
+            btnPage11TextBg = new Button();
+            pnlPage12 = new Panel();
+            lblOptionalRules = new Label();
+            btnOptionRulesBg = new Button();
+            pbPage12DeckBack = new PictureBox();
+            pbPage12DeckTrump = new PictureBox();
+            lblPage12DeckText = new Label();
+            lblPage12DeckCount = new Label();
+            btnPage12DeckBg = new Button();
+            lblPage12Click = new Label();
+            lblPage12Switch = new Label();
+            pbPage12Card1 = new PictureBox();
+            pbPage12Card2 = new PictureBox();
+            pbPage12Card3 = new PictureBox();
+            pbPage12Card4 = new PictureBox();
+            pbPage12Card5 = new PictureBox();
+            pbPage12Card6 = new PictureBox();
+            btnPage12HandBg = new Button();
+            lblPage12Text = new Label();
+            btnPage12TextBg = new Button();
+            pnlPage13 = new Panel();
+            lblPage13OptionalRules = new Label();
+            btnPage13OptionalRulesBg = new Button();
+            pbPage13DeckBack = new PictureBox();
+            pbPage13DeckTrump = new PictureBox();
+            lblPage13DeckText = new Label();
+            lblPage13DeckCount = new Label();
+            btnPage13DeckBg = new Button();
+            lblPage13Click = new Label();
+            lblPage13Switch = new Label();
+            pbPage13Card1 = new PictureBox();
+            pbPage13Card2 = new PictureBox();
+            pbPage13Card3 = new PictureBox();
+            pbPage13Card4 = new PictureBox();
+            pbPage13Card5 = new PictureBox();
+            pbPage13Card6 = new PictureBox();
+            btnPage13HandBg = new Button();
+            lblPage13Text = new Label();
+            btnPage13TextBg = new Button();
+            btnRulesBg = new Button();
+            lblPageNum = new Label();
+            btnPageNumBg = new Button();
             pnlRules.SuspendLayout();
-            pnlPage8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pbPage8Attacker).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbPage8Card1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbPage8Card2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbPage8Card3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbPage8Card4).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbPage8Card9).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbPage8Card10).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbPage8Card11).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbPage8Trump).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbPage8Defender).BeginInit();
             pnlPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbCard6H).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbCard7H).BeginInit();
@@ -195,7 +255,8 @@
             ((System.ComponentModel.ISupportInitialize)pbDefender).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbBrokenDefender).BeginInit();
             pnlPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pbPage3Deck).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage3DeckBack).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage3DeckTrump).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPage3Card1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPage3Card2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPage3Card3).BeginInit();
@@ -238,10 +299,51 @@
             ((System.ComponentModel.ISupportInitialize)pbPage7Defender).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPage7Trump).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPage7Attacker).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbPage8Card5).BeginInit();
+            pnlPage8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbPage8Attacker).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPage8Card8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPage8Card7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPage8Card6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage8Card5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage8Card4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage8Card3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage8Card2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage8Card1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage8Card9).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage8Card10).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage8Card11).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage8Trump).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage8Defender).BeginInit();
+            pnlPage9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbPage9Attacker).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage9Trump).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage9Defender).BeginInit();
+            pnlPage10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbPage10Attacker).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage10Trump).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage10BknDefender).BeginInit();
+            pnlPage11.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbPage11Winner).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage11Trump).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage11Attacker).BeginInit();
+            pnlPage12.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbPage12DeckBack).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage12DeckTrump).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage12Card1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage12Card2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage12Card3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage12Card4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage12Card5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage12Card6).BeginInit();
+            pnlPage13.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbPage13DeckBack).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage13DeckTrump).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage13Card1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage13Card2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage13Card3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage13Card4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage13Card5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage13Card6).BeginInit();
             SuspendLayout();
             // 
             // btnLeft
@@ -311,6 +413,11 @@
             pnlRules.Controls.Add(pnlPage6);
             pnlRules.Controls.Add(pnlPage7);
             pnlRules.Controls.Add(pnlPage8);
+            pnlRules.Controls.Add(pnlPage9);
+            pnlRules.Controls.Add(pnlPage10);
+            pnlRules.Controls.Add(pnlPage11);
+            pnlRules.Controls.Add(pnlPage12);
+            pnlRules.Controls.Add(pnlPage13);
             pnlRules.Controls.Add(btnRulesBg);
             pnlRules.Controls.Add(lblPageNum);
             pnlRules.Controls.Add(btnPageNumBg);
@@ -318,215 +425,6 @@
             pnlRules.Name = "pnlRules";
             pnlRules.Size = new Size(782, 590);
             pnlRules.TabIndex = 0;
-            // 
-            // pnlPage8
-            // 
-            pnlPage8.BackColor = Color.Black;
-            pnlPage8.Controls.Add(pbPage8Attacker);
-            pnlPage8.Controls.Add(btnPage8AttackerBg);
-            pnlPage8.Controls.Add(pbPage8Card8);
-            pnlPage8.Controls.Add(pbPage8Card7);
-            pnlPage8.Controls.Add(pbPage8Card6);
-            pnlPage8.Controls.Add(pbPage8Card5);
-            pnlPage8.Controls.Add(pbPage8Card4);
-            pnlPage8.Controls.Add(pbPage8Card3);
-            pnlPage8.Controls.Add(pbPage8Card2);
-            pnlPage8.Controls.Add(pbPage8Card1);
-            pnlPage8.Controls.Add(pbPage8Card9);
-            pnlPage8.Controls.Add(pbPage8Card10);
-            pnlPage8.Controls.Add(pbPage8Card11);
-            pnlPage8.Controls.Add(btnPage8TableBg);
-            pnlPage8.Controls.Add(lblPage8Trump);
-            pnlPage8.Controls.Add(pbPage8Trump);
-            pnlPage8.Controls.Add(pbPage8Defender);
-            pnlPage8.Controls.Add(btnPage8DefenderBg);
-            pnlPage8.Controls.Add(lblPage8Text);
-            pnlPage8.Controls.Add(lblPage8TextBg);
-            pnlPage8.Location = new Point(72, 92);
-            pnlPage8.Name = "pnlPage8";
-            pnlPage8.Size = new Size(638, 458);
-            pnlPage8.TabIndex = 79;
-            pnlPage8.Visible = false;
-            // 
-            // pbPage8Attacker
-            // 
-            pbPage8Attacker.BackColor = Color.Black;
-            pbPage8Attacker.ImageLocation = "../../../GUI_Images/RoleIcons/1stAttackerIcon.png";
-            pbPage8Attacker.Location = new Point(8, 16);
-            pbPage8Attacker.Name = "pbPage8Attacker";
-            pbPage8Attacker.Size = new Size(67, 67);
-            pbPage8Attacker.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbPage8Attacker.TabIndex = 55;
-            pbPage8Attacker.TabStop = false;
-            // 
-            // btnPage8AttackerBg
-            // 
-            btnPage8AttackerBg.BackColor = Color.Transparent;
-            btnPage8AttackerBg.Enabled = false;
-            btnPage8AttackerBg.FlatAppearance.BorderSize = 4;
-            btnPage8AttackerBg.FlatStyle = FlatStyle.Flat;
-            btnPage8AttackerBg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnPage8AttackerBg.ForeColor = Color.White;
-            btnPage8AttackerBg.Location = new Point(4, 12);
-            btnPage8AttackerBg.Name = "btnPage8AttackerBg";
-            btnPage8AttackerBg.Size = new Size(75, 75);
-            btnPage8AttackerBg.TabIndex = 56;
-            btnPage8AttackerBg.UseVisualStyleBackColor = false;
-            // 
-            // pbPage8Card1
-            // 
-            pbPage8Card1.ImageLocation = "../../../GUI_Images/cards/6H.png";
-            pbPage8Card1.Location = new Point(98, 40);
-            pbPage8Card1.Name = "pbPage8Card1";
-            pbPage8Card1.Size = new Size(65, 102);
-            pbPage8Card1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbPage8Card1.TabIndex = 12;
-            pbPage8Card1.TabStop = false;
-            // 
-            // pbPage8Card2
-            // 
-            pbPage8Card2.ImageLocation = "../../../GUI_Images/cards/6D.png";
-            pbPage8Card2.Location = new Point(152, 40);
-            pbPage8Card2.Name = "pbPage8Card2";
-            pbPage8Card2.Size = new Size(65, 102);
-            pbPage8Card2.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbPage8Card2.TabIndex = 75;
-            pbPage8Card2.TabStop = false;
-            // 
-            // pbPage8Card3
-            // 
-            pbPage8Card3.ImageLocation = "../../../GUI_Images/cards/QS.png";
-            pbPage8Card3.Location = new Point(206, 40);
-            pbPage8Card3.Name = "pbPage8Card3";
-            pbPage8Card3.Size = new Size(65, 102);
-            pbPage8Card3.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbPage8Card3.TabIndex = 76;
-            pbPage8Card3.TabStop = false;
-            // 
-            // pbPage8Card4
-            // 
-            pbPage8Card4.ImageLocation = "../../../GUI_Images/cards/AH.png";
-            pbPage8Card4.Location = new Point(260, 40);
-            pbPage8Card4.Name = "pbPage8Card4";
-            pbPage8Card4.Size = new Size(65, 102);
-            pbPage8Card4.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbPage8Card4.TabIndex = 77;
-            pbPage8Card4.TabStop = false;
-            // 
-            // pbPage8Card9
-            // 
-            pbPage8Card9.ImageLocation = "../../../GUI_Images/cards/9H.png";
-            pbPage8Card9.Location = new Point(98, 161);
-            pbPage8Card9.Name = "pbPage8Card9";
-            pbPage8Card9.Size = new Size(65, 102);
-            pbPage8Card9.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbPage8Card9.TabIndex = 13;
-            pbPage8Card9.TabStop = false;
-            // 
-            // pbPage8Card10
-            // 
-            pbPage8Card10.ImageLocation = "../../../GUI_Images/cards/QD.png";
-            pbPage8Card10.Location = new Point(173, 161);
-            pbPage8Card10.Name = "pbPage8Card10";
-            pbPage8Card10.Size = new Size(65, 102);
-            pbPage8Card10.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbPage8Card10.TabIndex = 70;
-            pbPage8Card10.TabStop = false;
-            // 
-            // pbPage8Card11
-            // 
-            pbPage8Card11.ImageLocation = "../../../GUI_Images/cards/AS.png";
-            pbPage8Card11.Location = new Point(248, 161);
-            pbPage8Card11.Name = "pbPage8Card11";
-            pbPage8Card11.Size = new Size(65, 102);
-            pbPage8Card11.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbPage8Card11.TabIndex = 71;
-            pbPage8Card11.TabStop = false;
-            // 
-            // btnPage8TableBg
-            // 
-            btnPage8TableBg.BackColor = Color.Black;
-            btnPage8TableBg.Enabled = false;
-            btnPage8TableBg.FlatAppearance.BorderSize = 4;
-            btnPage8TableBg.FlatStyle = FlatStyle.Flat;
-            btnPage8TableBg.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnPage8TableBg.ForeColor = Color.White;
-            btnPage8TableBg.Location = new Point(85, 12);
-            btnPage8TableBg.Name = "btnPage8TableBg";
-            btnPage8TableBg.Size = new Size(466, 278);
-            btnPage8TableBg.TabIndex = 69;
-            btnPage8TableBg.UseVisualStyleBackColor = false;
-            // 
-            // lblPage8Trump
-            // 
-            lblPage8Trump.AutoSize = true;
-            lblPage8Trump.Font = new Font("Copperplate Gothic Light", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblPage8Trump.ForeColor = Color.White;
-            lblPage8Trump.Location = new Point(562, 16);
-            lblPage8Trump.Name = "lblPage8Trump";
-            lblPage8Trump.Size = new Size(65, 19);
-            lblPage8Trump.TabIndex = 81;
-            lblPage8Trump.Text = "Trump";
-            // 
-            // pbPage8Trump
-            // 
-            pbPage8Trump.ImageLocation = "../../../GUI_Images/cards/10C.png";
-            pbPage8Trump.Location = new Point(562, 40);
-            pbPage8Trump.Name = "pbPage8Trump";
-            pbPage8Trump.Size = new Size(65, 102);
-            pbPage8Trump.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbPage8Trump.TabIndex = 80;
-            pbPage8Trump.TabStop = false;
-            // 
-            // pbPage8Defender
-            // 
-            pbPage8Defender.BackColor = Color.Black;
-            pbPage8Defender.ImageLocation = "../../../GUI_Images/RoleIcons/DefenderIcon.png";
-            pbPage8Defender.Location = new Point(561, 219);
-            pbPage8Defender.Name = "pbPage8Defender";
-            pbPage8Defender.Size = new Size(67, 67);
-            pbPage8Defender.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbPage8Defender.TabIndex = 67;
-            pbPage8Defender.TabStop = false;
-            // 
-            // btnPage8DefenderBg
-            // 
-            btnPage8DefenderBg.BackColor = Color.Transparent;
-            btnPage8DefenderBg.Enabled = false;
-            btnPage8DefenderBg.FlatAppearance.BorderSize = 4;
-            btnPage8DefenderBg.FlatStyle = FlatStyle.Flat;
-            btnPage8DefenderBg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnPage8DefenderBg.ForeColor = Color.White;
-            btnPage8DefenderBg.Location = new Point(557, 215);
-            btnPage8DefenderBg.Name = "btnPage8DefenderBg";
-            btnPage8DefenderBg.Size = new Size(75, 75);
-            btnPage8DefenderBg.TabIndex = 68;
-            btnPage8DefenderBg.UseVisualStyleBackColor = false;
-            // 
-            // lblPage8Text
-            // 
-            lblPage8Text.AutoSize = true;
-            lblPage8Text.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblPage8Text.ForeColor = Color.White;
-            lblPage8Text.Location = new Point(28, 308);
-            lblPage8Text.Name = "lblPage8Text";
-            lblPage8Text.Size = new Size(579, 126);
-            lblPage8Text.TabIndex = 11;
-            lblPage8Text.Text = resources.GetString("lblPage8Text.Text");
-            // 
-            // lblPage8TextBg
-            // 
-            lblPage8TextBg.BackColor = Color.Black;
-            lblPage8TextBg.Enabled = false;
-            lblPage8TextBg.FlatAppearance.BorderSize = 3;
-            lblPage8TextBg.FlatStyle = FlatStyle.Flat;
-            lblPage8TextBg.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblPage8TextBg.ForeColor = Color.White;
-            lblPage8TextBg.Location = new Point(19, 300);
-            lblPage8TextBg.Name = "lblPage8TextBg";
-            lblPage8TextBg.Size = new Size(600, 142);
-            lblPage8TextBg.TabIndex = 10;
-            lblPage8TextBg.UseVisualStyleBackColor = false;
             // 
             // pnlPage1
             // 
@@ -947,10 +845,13 @@
             // pnlPage3
             // 
             pnlPage3.BackColor = Color.Black;
-            pnlPage3.Controls.Add(pbPage3Deck);
+            pnlPage3.Controls.Add(pbPage3DeckBack);
+            pnlPage3.Controls.Add(pbPage3DeckTrump);
+            pnlPage3.Controls.Add(lblPage3DeckText);
+            pnlPage3.Controls.Add(lblPage3DeckCount);
             pnlPage3.Controls.Add(btnPage3DeckBg);
-            pnlPage3.Controls.Add(lblTrumpSuit);
-            pnlPage3.Controls.Add(lblPlayerHand);
+            pnlPage3.Controls.Add(lblPage3TrumpSuit);
+            pnlPage3.Controls.Add(lblPage3PlayerHand);
             pnlPage3.Controls.Add(pbPage3Card1);
             pnlPage3.Controls.Add(pbPage3Card2);
             pnlPage3.Controls.Add(pbPage3Card3);
@@ -966,15 +867,49 @@
             pnlPage3.TabIndex = 72;
             pnlPage3.Visible = false;
             // 
-            // pbPage3Deck
+            // pbPage3DeckBack
             // 
-            pbPage3Deck.ImageLocation = "../../../GUI_Images/RulesImages/RulesDeck.png";
-            pbPage3Deck.Location = new Point(46, 30);
-            pbPage3Deck.Name = "pbPage3Deck";
-            pbPage3Deck.Size = new Size(130, 116);
-            pbPage3Deck.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbPage3Deck.TabIndex = 13;
-            pbPage3Deck.TabStop = false;
+            pbPage3DeckBack.ImageLocation = "../../../GUI_Images/DeckImages/Card_Back.png";
+            pbPage3DeckBack.Location = new Point(55, 25);
+            pbPage3DeckBack.Name = "pbPage3DeckBack";
+            pbPage3DeckBack.Size = new Size(55, 82);
+            pbPage3DeckBack.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage3DeckBack.TabIndex = 95;
+            pbPage3DeckBack.TabStop = false;
+            // 
+            // pbPage3DeckTrump
+            // 
+            pbPage3DeckTrump.ImageLocation = "../../../GUI_Images/cards/10C.png";
+            pbPage3DeckTrump.Location = new Point(75, 25);
+            pbPage3DeckTrump.Name = "pbPage3DeckTrump";
+            pbPage3DeckTrump.Size = new Size(55, 82);
+            pbPage3DeckTrump.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage3DeckTrump.TabIndex = 94;
+            pbPage3DeckTrump.TabStop = false;
+            // 
+            // lblPage3DeckText
+            // 
+            lblPage3DeckText.BackColor = Color.Transparent;
+            lblPage3DeckText.Font = new Font("Castellar", 7.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPage3DeckText.ForeColor = Color.White;
+            lblPage3DeckText.Location = new Point(36, 113);
+            lblPage3DeckText.Name = "lblPage3DeckText";
+            lblPage3DeckText.Size = new Size(104, 32);
+            lblPage3DeckText.TabIndex = 92;
+            lblPage3DeckText.Text = "Deck Remaining";
+            lblPage3DeckText.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // lblPage3DeckCount
+            // 
+            lblPage3DeckCount.BackColor = Color.Transparent;
+            lblPage3DeckCount.Font = new Font("Castellar", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPage3DeckCount.ForeColor = Color.White;
+            lblPage3DeckCount.Location = new Point(137, 113);
+            lblPage3DeckCount.Name = "lblPage3DeckCount";
+            lblPage3DeckCount.Size = new Size(36, 32);
+            lblPage3DeckCount.TabIndex = 93;
+            lblPage3DeckCount.Text = "24";
+            lblPage3DeckCount.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // btnPage3DeckBg
             // 
@@ -984,33 +919,33 @@
             btnPage3DeckBg.FlatStyle = FlatStyle.Flat;
             btnPage3DeckBg.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnPage3DeckBg.ForeColor = Color.White;
-            btnPage3DeckBg.Location = new Point(42, 26);
+            btnPage3DeckBg.Location = new Point(32, 12);
             btnPage3DeckBg.Name = "btnPage3DeckBg";
-            btnPage3DeckBg.Size = new Size(138, 124);
-            btnPage3DeckBg.TabIndex = 14;
+            btnPage3DeckBg.Size = new Size(146, 138);
+            btnPage3DeckBg.TabIndex = 91;
             btnPage3DeckBg.UseVisualStyleBackColor = false;
             // 
-            // lblTrumpSuit
+            // lblPage3TrumpSuit
             // 
-            lblTrumpSuit.AutoSize = true;
-            lblTrumpSuit.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblTrumpSuit.ForeColor = Color.White;
-            lblTrumpSuit.Location = new Point(186, 69);
-            lblTrumpSuit.Name = "lblTrumpSuit";
-            lblTrumpSuit.Size = new Size(152, 21);
-            lblTrumpSuit.TabIndex = 15;
-            lblTrumpSuit.Text = "<--- Trump Suit";
+            lblPage3TrumpSuit.AutoSize = true;
+            lblPage3TrumpSuit.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPage3TrumpSuit.ForeColor = Color.White;
+            lblPage3TrumpSuit.Location = new Point(181, 58);
+            lblPage3TrumpSuit.Name = "lblPage3TrumpSuit";
+            lblPage3TrumpSuit.Size = new Size(152, 21);
+            lblPage3TrumpSuit.TabIndex = 15;
+            lblPage3TrumpSuit.Text = "<--- Trump Suit";
             // 
-            // lblPlayerHand
+            // lblPage3PlayerHand
             // 
-            lblPlayerHand.AutoSize = true;
-            lblPlayerHand.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblPlayerHand.ForeColor = Color.White;
-            lblPlayerHand.Location = new Point(250, 110);
-            lblPlayerHand.Name = "lblPlayerHand";
-            lblPlayerHand.Size = new Size(144, 42);
-            lblPlayerHand.TabIndex = 16;
-            lblPlayerHand.Text = "Player Hand\r\n            V";
+            lblPage3PlayerHand.AutoSize = true;
+            lblPage3PlayerHand.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPage3PlayerHand.ForeColor = Color.White;
+            lblPage3PlayerHand.Location = new Point(250, 110);
+            lblPage3PlayerHand.Name = "lblPage3PlayerHand";
+            lblPage3PlayerHand.Size = new Size(144, 42);
+            lblPage3PlayerHand.TabIndex = 16;
+            lblPage3PlayerHand.Text = "Player Hand\r\n            V";
             // 
             // pbPage3Card1
             // 
@@ -1843,6 +1778,1103 @@
             btnPage7Text.TabIndex = 10;
             btnPage7Text.UseVisualStyleBackColor = false;
             // 
+            // pnlPage8
+            // 
+            pnlPage8.BackColor = Color.Black;
+            pnlPage8.Controls.Add(pbPage8Attacker);
+            pnlPage8.Controls.Add(btnPage8AttackerBg);
+            pnlPage8.Controls.Add(pbPage8Card8);
+            pnlPage8.Controls.Add(pbPage8Card7);
+            pnlPage8.Controls.Add(pbPage8Card6);
+            pnlPage8.Controls.Add(pbPage8Card5);
+            pnlPage8.Controls.Add(pbPage8Card4);
+            pnlPage8.Controls.Add(pbPage8Card3);
+            pnlPage8.Controls.Add(pbPage8Card2);
+            pnlPage8.Controls.Add(pbPage8Card1);
+            pnlPage8.Controls.Add(pbPage8Card9);
+            pnlPage8.Controls.Add(pbPage8Card10);
+            pnlPage8.Controls.Add(pbPage8Card11);
+            pnlPage8.Controls.Add(btnPage8TableBg);
+            pnlPage8.Controls.Add(lblPage8Trump);
+            pnlPage8.Controls.Add(pbPage8Trump);
+            pnlPage8.Controls.Add(pbPage8Defender);
+            pnlPage8.Controls.Add(btnPage8DefenderBg);
+            pnlPage8.Controls.Add(lblPage8Text);
+            pnlPage8.Controls.Add(lblPage8TextBg);
+            pnlPage8.Location = new Point(72, 92);
+            pnlPage8.Name = "pnlPage8";
+            pnlPage8.Size = new Size(638, 458);
+            pnlPage8.TabIndex = 79;
+            pnlPage8.Visible = false;
+            // 
+            // pbPage8Attacker
+            // 
+            pbPage8Attacker.BackColor = Color.Black;
+            pbPage8Attacker.ImageLocation = "../../../GUI_Images/RoleIcons/1stAttackerIcon.png";
+            pbPage8Attacker.Location = new Point(8, 16);
+            pbPage8Attacker.Name = "pbPage8Attacker";
+            pbPage8Attacker.Size = new Size(67, 67);
+            pbPage8Attacker.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage8Attacker.TabIndex = 55;
+            pbPage8Attacker.TabStop = false;
+            // 
+            // btnPage8AttackerBg
+            // 
+            btnPage8AttackerBg.BackColor = Color.Transparent;
+            btnPage8AttackerBg.Enabled = false;
+            btnPage8AttackerBg.FlatAppearance.BorderSize = 4;
+            btnPage8AttackerBg.FlatStyle = FlatStyle.Flat;
+            btnPage8AttackerBg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPage8AttackerBg.ForeColor = Color.White;
+            btnPage8AttackerBg.Location = new Point(4, 12);
+            btnPage8AttackerBg.Name = "btnPage8AttackerBg";
+            btnPage8AttackerBg.Size = new Size(75, 75);
+            btnPage8AttackerBg.TabIndex = 56;
+            btnPage8AttackerBg.UseVisualStyleBackColor = false;
+            // 
+            // pbPage8Card8
+            // 
+            pbPage8Card8.ImageLocation = "../../../GUI_Images/cards/AD.png";
+            pbPage8Card8.Location = new Point(473, 40);
+            pbPage8Card8.Name = "pbPage8Card8";
+            pbPage8Card8.Size = new Size(65, 102);
+            pbPage8Card8.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage8Card8.TabIndex = 83;
+            pbPage8Card8.TabStop = false;
+            // 
+            // pbPage8Card7
+            // 
+            pbPage8Card7.ImageLocation = "../../../GUI_Images/cards/9S.png";
+            pbPage8Card7.Location = new Point(422, 40);
+            pbPage8Card7.Name = "pbPage8Card7";
+            pbPage8Card7.Size = new Size(65, 102);
+            pbPage8Card7.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage8Card7.TabIndex = 84;
+            pbPage8Card7.TabStop = false;
+            // 
+            // pbPage8Card6
+            // 
+            pbPage8Card6.ImageLocation = "../../../GUI_Images/cards/6S.png";
+            pbPage8Card6.Location = new Point(367, 40);
+            pbPage8Card6.Name = "pbPage8Card6";
+            pbPage8Card6.Size = new Size(65, 102);
+            pbPage8Card6.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage8Card6.TabIndex = 85;
+            pbPage8Card6.TabStop = false;
+            // 
+            // pbPage8Card5
+            // 
+            pbPage8Card5.ImageLocation = "../../../GUI_Images/cards/9D.png";
+            pbPage8Card5.Location = new Point(314, 40);
+            pbPage8Card5.Name = "pbPage8Card5";
+            pbPage8Card5.Size = new Size(65, 102);
+            pbPage8Card5.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage8Card5.TabIndex = 82;
+            pbPage8Card5.TabStop = false;
+            // 
+            // pbPage8Card4
+            // 
+            pbPage8Card4.ImageLocation = "../../../GUI_Images/cards/AH.png";
+            pbPage8Card4.Location = new Point(260, 40);
+            pbPage8Card4.Name = "pbPage8Card4";
+            pbPage8Card4.Size = new Size(65, 102);
+            pbPage8Card4.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage8Card4.TabIndex = 77;
+            pbPage8Card4.TabStop = false;
+            // 
+            // pbPage8Card3
+            // 
+            pbPage8Card3.ImageLocation = "../../../GUI_Images/cards/QS.png";
+            pbPage8Card3.Location = new Point(206, 40);
+            pbPage8Card3.Name = "pbPage8Card3";
+            pbPage8Card3.Size = new Size(65, 102);
+            pbPage8Card3.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage8Card3.TabIndex = 76;
+            pbPage8Card3.TabStop = false;
+            // 
+            // pbPage8Card2
+            // 
+            pbPage8Card2.ImageLocation = "../../../GUI_Images/cards/6D.png";
+            pbPage8Card2.Location = new Point(152, 40);
+            pbPage8Card2.Name = "pbPage8Card2";
+            pbPage8Card2.Size = new Size(65, 102);
+            pbPage8Card2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage8Card2.TabIndex = 75;
+            pbPage8Card2.TabStop = false;
+            // 
+            // pbPage8Card1
+            // 
+            pbPage8Card1.ImageLocation = "../../../GUI_Images/cards/6H.png";
+            pbPage8Card1.Location = new Point(98, 40);
+            pbPage8Card1.Name = "pbPage8Card1";
+            pbPage8Card1.Size = new Size(65, 102);
+            pbPage8Card1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage8Card1.TabIndex = 12;
+            pbPage8Card1.TabStop = false;
+            // 
+            // pbPage8Card9
+            // 
+            pbPage8Card9.ImageLocation = "../../../GUI_Images/cards/9H.png";
+            pbPage8Card9.Location = new Point(98, 161);
+            pbPage8Card9.Name = "pbPage8Card9";
+            pbPage8Card9.Size = new Size(65, 102);
+            pbPage8Card9.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage8Card9.TabIndex = 13;
+            pbPage8Card9.TabStop = false;
+            // 
+            // pbPage8Card10
+            // 
+            pbPage8Card10.ImageLocation = "../../../GUI_Images/cards/QD.png";
+            pbPage8Card10.Location = new Point(173, 161);
+            pbPage8Card10.Name = "pbPage8Card10";
+            pbPage8Card10.Size = new Size(65, 102);
+            pbPage8Card10.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage8Card10.TabIndex = 70;
+            pbPage8Card10.TabStop = false;
+            // 
+            // pbPage8Card11
+            // 
+            pbPage8Card11.ImageLocation = "../../../GUI_Images/cards/AS.png";
+            pbPage8Card11.Location = new Point(248, 161);
+            pbPage8Card11.Name = "pbPage8Card11";
+            pbPage8Card11.Size = new Size(65, 102);
+            pbPage8Card11.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage8Card11.TabIndex = 71;
+            pbPage8Card11.TabStop = false;
+            // 
+            // btnPage8TableBg
+            // 
+            btnPage8TableBg.BackColor = Color.Black;
+            btnPage8TableBg.Enabled = false;
+            btnPage8TableBg.FlatAppearance.BorderSize = 4;
+            btnPage8TableBg.FlatStyle = FlatStyle.Flat;
+            btnPage8TableBg.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPage8TableBg.ForeColor = Color.White;
+            btnPage8TableBg.Location = new Point(85, 12);
+            btnPage8TableBg.Name = "btnPage8TableBg";
+            btnPage8TableBg.Size = new Size(466, 278);
+            btnPage8TableBg.TabIndex = 69;
+            btnPage8TableBg.UseVisualStyleBackColor = false;
+            // 
+            // lblPage8Trump
+            // 
+            lblPage8Trump.AutoSize = true;
+            lblPage8Trump.Font = new Font("Copperplate Gothic Light", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPage8Trump.ForeColor = Color.White;
+            lblPage8Trump.Location = new Point(562, 16);
+            lblPage8Trump.Name = "lblPage8Trump";
+            lblPage8Trump.Size = new Size(65, 19);
+            lblPage8Trump.TabIndex = 81;
+            lblPage8Trump.Text = "Trump";
+            // 
+            // pbPage8Trump
+            // 
+            pbPage8Trump.ImageLocation = "../../../GUI_Images/cards/10C.png";
+            pbPage8Trump.Location = new Point(562, 40);
+            pbPage8Trump.Name = "pbPage8Trump";
+            pbPage8Trump.Size = new Size(65, 102);
+            pbPage8Trump.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage8Trump.TabIndex = 80;
+            pbPage8Trump.TabStop = false;
+            // 
+            // pbPage8Defender
+            // 
+            pbPage8Defender.BackColor = Color.Black;
+            pbPage8Defender.ImageLocation = "../../../GUI_Images/RoleIcons/DefenderIcon.png";
+            pbPage8Defender.Location = new Point(561, 219);
+            pbPage8Defender.Name = "pbPage8Defender";
+            pbPage8Defender.Size = new Size(67, 67);
+            pbPage8Defender.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage8Defender.TabIndex = 67;
+            pbPage8Defender.TabStop = false;
+            // 
+            // btnPage8DefenderBg
+            // 
+            btnPage8DefenderBg.BackColor = Color.Transparent;
+            btnPage8DefenderBg.Enabled = false;
+            btnPage8DefenderBg.FlatAppearance.BorderSize = 4;
+            btnPage8DefenderBg.FlatStyle = FlatStyle.Flat;
+            btnPage8DefenderBg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPage8DefenderBg.ForeColor = Color.White;
+            btnPage8DefenderBg.Location = new Point(557, 215);
+            btnPage8DefenderBg.Name = "btnPage8DefenderBg";
+            btnPage8DefenderBg.Size = new Size(75, 75);
+            btnPage8DefenderBg.TabIndex = 68;
+            btnPage8DefenderBg.UseVisualStyleBackColor = false;
+            // 
+            // lblPage8Text
+            // 
+            lblPage8Text.AutoSize = true;
+            lblPage8Text.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPage8Text.ForeColor = Color.White;
+            lblPage8Text.Location = new Point(28, 308);
+            lblPage8Text.Name = "lblPage8Text";
+            lblPage8Text.Size = new Size(579, 126);
+            lblPage8Text.TabIndex = 11;
+            lblPage8Text.Text = resources.GetString("lblPage8Text.Text");
+            // 
+            // lblPage8TextBg
+            // 
+            lblPage8TextBg.BackColor = Color.Black;
+            lblPage8TextBg.Enabled = false;
+            lblPage8TextBg.FlatAppearance.BorderSize = 3;
+            lblPage8TextBg.FlatStyle = FlatStyle.Flat;
+            lblPage8TextBg.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPage8TextBg.ForeColor = Color.White;
+            lblPage8TextBg.Location = new Point(19, 300);
+            lblPage8TextBg.Name = "lblPage8TextBg";
+            lblPage8TextBg.Size = new Size(600, 142);
+            lblPage8TextBg.TabIndex = 10;
+            lblPage8TextBg.UseVisualStyleBackColor = false;
+            // 
+            // pnlPage9
+            // 
+            pnlPage9.BackColor = Color.Black;
+            pnlPage9.Controls.Add(pbPage9Attacker);
+            pnlPage9.Controls.Add(btnPage9AttackerBg);
+            pnlPage9.Controls.Add(btnPage9TableBg);
+            pnlPage9.Controls.Add(lblPage9Trump);
+            pnlPage9.Controls.Add(pbPage9Trump);
+            pnlPage9.Controls.Add(pbPage9Defender);
+            pnlPage9.Controls.Add(btnPage9DefenderBg);
+            pnlPage9.Controls.Add(lblPage9Text);
+            pnlPage9.Controls.Add(btnPage9TextBg);
+            pnlPage9.Location = new Point(72, 92);
+            pnlPage9.Name = "pnlPage9";
+            pnlPage9.Size = new Size(638, 458);
+            pnlPage9.TabIndex = 80;
+            pnlPage9.Visible = false;
+            // 
+            // pbPage9Attacker
+            // 
+            pbPage9Attacker.BackColor = Color.Black;
+            pbPage9Attacker.ImageLocation = "../../../GUI_Images/RoleIcons/1stAttackerIcon.png";
+            pbPage9Attacker.Location = new Point(8, 16);
+            pbPage9Attacker.Name = "pbPage9Attacker";
+            pbPage9Attacker.Size = new Size(67, 67);
+            pbPage9Attacker.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage9Attacker.TabIndex = 55;
+            pbPage9Attacker.TabStop = false;
+            // 
+            // btnPage9AttackerBg
+            // 
+            btnPage9AttackerBg.BackColor = Color.Transparent;
+            btnPage9AttackerBg.Enabled = false;
+            btnPage9AttackerBg.FlatAppearance.BorderSize = 4;
+            btnPage9AttackerBg.FlatStyle = FlatStyle.Flat;
+            btnPage9AttackerBg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPage9AttackerBg.ForeColor = Color.White;
+            btnPage9AttackerBg.Location = new Point(4, 12);
+            btnPage9AttackerBg.Name = "btnPage9AttackerBg";
+            btnPage9AttackerBg.Size = new Size(75, 75);
+            btnPage9AttackerBg.TabIndex = 56;
+            btnPage9AttackerBg.UseVisualStyleBackColor = false;
+            // 
+            // btnPage9TableBg
+            // 
+            btnPage9TableBg.BackColor = Color.Black;
+            btnPage9TableBg.Enabled = false;
+            btnPage9TableBg.FlatAppearance.BorderSize = 4;
+            btnPage9TableBg.FlatStyle = FlatStyle.Flat;
+            btnPage9TableBg.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPage9TableBg.ForeColor = Color.White;
+            btnPage9TableBg.Location = new Point(85, 12);
+            btnPage9TableBg.Name = "btnPage9TableBg";
+            btnPage9TableBg.Size = new Size(466, 278);
+            btnPage9TableBg.TabIndex = 69;
+            btnPage9TableBg.UseVisualStyleBackColor = false;
+            // 
+            // lblPage9Trump
+            // 
+            lblPage9Trump.AutoSize = true;
+            lblPage9Trump.Font = new Font("Copperplate Gothic Light", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPage9Trump.ForeColor = Color.White;
+            lblPage9Trump.Location = new Point(562, 16);
+            lblPage9Trump.Name = "lblPage9Trump";
+            lblPage9Trump.Size = new Size(65, 19);
+            lblPage9Trump.TabIndex = 71;
+            lblPage9Trump.Text = "Trump";
+            // 
+            // pbPage9Trump
+            // 
+            pbPage9Trump.ImageLocation = "../../../GUI_Images/cards/10C.png";
+            pbPage9Trump.Location = new Point(562, 40);
+            pbPage9Trump.Name = "pbPage9Trump";
+            pbPage9Trump.Size = new Size(65, 102);
+            pbPage9Trump.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage9Trump.TabIndex = 70;
+            pbPage9Trump.TabStop = false;
+            // 
+            // pbPage9Defender
+            // 
+            pbPage9Defender.BackColor = Color.Black;
+            pbPage9Defender.ImageLocation = "../../../GUI_Images/RoleIcons/DefenderIcon.png";
+            pbPage9Defender.Location = new Point(561, 219);
+            pbPage9Defender.Name = "pbPage9Defender";
+            pbPage9Defender.Size = new Size(67, 67);
+            pbPage9Defender.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage9Defender.TabIndex = 67;
+            pbPage9Defender.TabStop = false;
+            // 
+            // btnPage9DefenderBg
+            // 
+            btnPage9DefenderBg.BackColor = Color.Transparent;
+            btnPage9DefenderBg.Enabled = false;
+            btnPage9DefenderBg.FlatAppearance.BorderSize = 4;
+            btnPage9DefenderBg.FlatStyle = FlatStyle.Flat;
+            btnPage9DefenderBg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPage9DefenderBg.ForeColor = Color.White;
+            btnPage9DefenderBg.Location = new Point(557, 215);
+            btnPage9DefenderBg.Name = "btnPage9DefenderBg";
+            btnPage9DefenderBg.Size = new Size(75, 75);
+            btnPage9DefenderBg.TabIndex = 68;
+            btnPage9DefenderBg.UseVisualStyleBackColor = false;
+            // 
+            // lblPage9Text
+            // 
+            lblPage9Text.AutoSize = true;
+            lblPage9Text.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPage9Text.ForeColor = Color.White;
+            lblPage9Text.Location = new Point(28, 308);
+            lblPage9Text.Name = "lblPage9Text";
+            lblPage9Text.Size = new Size(564, 126);
+            lblPage9Text.TabIndex = 11;
+            lblPage9Text.Text = "In the next round, the losing defender is unable to\r\n attack, and the player to their left becomes the\r\n first attacker instead.\r\n\r\nWith two players, the defender becomes the\r\n defender again.";
+            // 
+            // btnPage9TextBg
+            // 
+            btnPage9TextBg.BackColor = Color.Black;
+            btnPage9TextBg.Enabled = false;
+            btnPage9TextBg.FlatAppearance.BorderSize = 3;
+            btnPage9TextBg.FlatStyle = FlatStyle.Flat;
+            btnPage9TextBg.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPage9TextBg.ForeColor = Color.White;
+            btnPage9TextBg.Location = new Point(19, 300);
+            btnPage9TextBg.Name = "btnPage9TextBg";
+            btnPage9TextBg.Size = new Size(600, 142);
+            btnPage9TextBg.TabIndex = 10;
+            btnPage9TextBg.UseVisualStyleBackColor = false;
+            // 
+            // pnlPage10
+            // 
+            pnlPage10.BackColor = Color.Black;
+            pnlPage10.Controls.Add(pbPage10Attacker);
+            pnlPage10.Controls.Add(btnPage10AttackerBg);
+            pnlPage10.Controls.Add(btnPage10Table);
+            pnlPage10.Controls.Add(lblPage10Trump);
+            pnlPage10.Controls.Add(pbPage10Trump);
+            pnlPage10.Controls.Add(pbPage10BknDefender);
+            pnlPage10.Controls.Add(btnPage10BknDefenderBg);
+            pnlPage10.Controls.Add(lblPage10Text);
+            pnlPage10.Controls.Add(btnPage10TextBg);
+            pnlPage10.Location = new Point(72, 92);
+            pnlPage10.Name = "pnlPage10";
+            pnlPage10.Size = new Size(638, 458);
+            pnlPage10.TabIndex = 81;
+            pnlPage10.Visible = false;
+            // 
+            // pbPage10Attacker
+            // 
+            pbPage10Attacker.BackColor = Color.Black;
+            pbPage10Attacker.ImageLocation = "../../../GUI_Images/RoleIcons/1stAttackerIcon.png";
+            pbPage10Attacker.Location = new Point(8, 16);
+            pbPage10Attacker.Name = "pbPage10Attacker";
+            pbPage10Attacker.Size = new Size(67, 67);
+            pbPage10Attacker.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage10Attacker.TabIndex = 55;
+            pbPage10Attacker.TabStop = false;
+            // 
+            // btnPage10AttackerBg
+            // 
+            btnPage10AttackerBg.BackColor = Color.Transparent;
+            btnPage10AttackerBg.Enabled = false;
+            btnPage10AttackerBg.FlatAppearance.BorderSize = 4;
+            btnPage10AttackerBg.FlatStyle = FlatStyle.Flat;
+            btnPage10AttackerBg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPage10AttackerBg.ForeColor = Color.White;
+            btnPage10AttackerBg.Location = new Point(4, 12);
+            btnPage10AttackerBg.Name = "btnPage10AttackerBg";
+            btnPage10AttackerBg.Size = new Size(75, 75);
+            btnPage10AttackerBg.TabIndex = 56;
+            btnPage10AttackerBg.UseVisualStyleBackColor = false;
+            // 
+            // btnPage10Table
+            // 
+            btnPage10Table.BackColor = Color.Black;
+            btnPage10Table.Enabled = false;
+            btnPage10Table.FlatAppearance.BorderSize = 4;
+            btnPage10Table.FlatStyle = FlatStyle.Flat;
+            btnPage10Table.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPage10Table.ForeColor = Color.White;
+            btnPage10Table.Location = new Point(85, 12);
+            btnPage10Table.Name = "btnPage10Table";
+            btnPage10Table.Size = new Size(466, 278);
+            btnPage10Table.TabIndex = 69;
+            btnPage10Table.UseVisualStyleBackColor = false;
+            // 
+            // lblPage10Trump
+            // 
+            lblPage10Trump.AutoSize = true;
+            lblPage10Trump.Font = new Font("Copperplate Gothic Light", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPage10Trump.ForeColor = Color.White;
+            lblPage10Trump.Location = new Point(562, 16);
+            lblPage10Trump.Name = "lblPage10Trump";
+            lblPage10Trump.Size = new Size(65, 19);
+            lblPage10Trump.TabIndex = 71;
+            lblPage10Trump.Text = "Trump";
+            // 
+            // pbPage10Trump
+            // 
+            pbPage10Trump.ImageLocation = "../../../GUI_Images/cards/10C.png";
+            pbPage10Trump.Location = new Point(562, 40);
+            pbPage10Trump.Name = "pbPage10Trump";
+            pbPage10Trump.Size = new Size(65, 102);
+            pbPage10Trump.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage10Trump.TabIndex = 70;
+            pbPage10Trump.TabStop = false;
+            // 
+            // pbPage10BknDefender
+            // 
+            pbPage10BknDefender.BackColor = Color.Black;
+            pbPage10BknDefender.ImageLocation = "../../../GUI_Images/RoleIcons/BrokenDefenderIcon.png";
+            pbPage10BknDefender.Location = new Point(561, 219);
+            pbPage10BknDefender.Name = "pbPage10BknDefender";
+            pbPage10BknDefender.Size = new Size(67, 67);
+            pbPage10BknDefender.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage10BknDefender.TabIndex = 67;
+            pbPage10BknDefender.TabStop = false;
+            // 
+            // btnPage10BknDefenderBg
+            // 
+            btnPage10BknDefenderBg.BackColor = Color.Transparent;
+            btnPage10BknDefenderBg.Enabled = false;
+            btnPage10BknDefenderBg.FlatAppearance.BorderSize = 4;
+            btnPage10BknDefenderBg.FlatStyle = FlatStyle.Flat;
+            btnPage10BknDefenderBg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPage10BknDefenderBg.ForeColor = Color.White;
+            btnPage10BknDefenderBg.Location = new Point(557, 215);
+            btnPage10BknDefenderBg.Name = "btnPage10BknDefenderBg";
+            btnPage10BknDefenderBg.Size = new Size(75, 75);
+            btnPage10BknDefenderBg.TabIndex = 68;
+            btnPage10BknDefenderBg.UseVisualStyleBackColor = false;
+            // 
+            // lblPage10Text
+            // 
+            lblPage10Text.AutoSize = true;
+            lblPage10Text.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPage10Text.ForeColor = Color.White;
+            lblPage10Text.Location = new Point(28, 308);
+            lblPage10Text.Name = "lblPage10Text";
+            lblPage10Text.Size = new Size(582, 105);
+            lblPage10Text.TabIndex = 11;
+            lblPage10Text.Text = "With 3-4 players, a losing defender becomes a\r\n broken defender.\r\n\r\nThe player isn't being attacked, but they can't attack\r\n the defender this round.";
+            // 
+            // btnPage10TextBg
+            // 
+            btnPage10TextBg.BackColor = Color.Black;
+            btnPage10TextBg.Enabled = false;
+            btnPage10TextBg.FlatAppearance.BorderSize = 3;
+            btnPage10TextBg.FlatStyle = FlatStyle.Flat;
+            btnPage10TextBg.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPage10TextBg.ForeColor = Color.White;
+            btnPage10TextBg.Location = new Point(19, 300);
+            btnPage10TextBg.Name = "btnPage10TextBg";
+            btnPage10TextBg.Size = new Size(600, 142);
+            btnPage10TextBg.TabIndex = 10;
+            btnPage10TextBg.UseVisualStyleBackColor = false;
+            // 
+            // pnlPage11
+            // 
+            pnlPage11.BackColor = Color.Black;
+            pnlPage11.Controls.Add(pbPage11Winner);
+            pnlPage11.Controls.Add(btnPage11WinnerBg);
+            pnlPage11.Controls.Add(btnPage11Table);
+            pnlPage11.Controls.Add(lblPage11Trump);
+            pnlPage11.Controls.Add(pbPage11Trump);
+            pnlPage11.Controls.Add(pbPage11Attacker);
+            pnlPage11.Controls.Add(btnPage11AttackerBg);
+            pnlPage11.Controls.Add(lblPage11Text);
+            pnlPage11.Controls.Add(btnPage11TextBg);
+            pnlPage11.Location = new Point(72, 92);
+            pnlPage11.Name = "pnlPage11";
+            pnlPage11.Size = new Size(638, 458);
+            pnlPage11.TabIndex = 82;
+            pnlPage11.Visible = false;
+            // 
+            // pbPage11Winner
+            // 
+            pbPage11Winner.BackColor = Color.Black;
+            pbPage11Winner.ImageLocation = "../../../GUI_Images/RoleIcons/WinnerIcon.png";
+            pbPage11Winner.Location = new Point(8, 16);
+            pbPage11Winner.Name = "pbPage11Winner";
+            pbPage11Winner.Size = new Size(67, 67);
+            pbPage11Winner.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage11Winner.TabIndex = 55;
+            pbPage11Winner.TabStop = false;
+            // 
+            // btnPage11WinnerBg
+            // 
+            btnPage11WinnerBg.BackColor = Color.Transparent;
+            btnPage11WinnerBg.Enabled = false;
+            btnPage11WinnerBg.FlatAppearance.BorderSize = 4;
+            btnPage11WinnerBg.FlatStyle = FlatStyle.Flat;
+            btnPage11WinnerBg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPage11WinnerBg.ForeColor = Color.White;
+            btnPage11WinnerBg.Location = new Point(4, 12);
+            btnPage11WinnerBg.Name = "btnPage11WinnerBg";
+            btnPage11WinnerBg.Size = new Size(75, 75);
+            btnPage11WinnerBg.TabIndex = 56;
+            btnPage11WinnerBg.UseVisualStyleBackColor = false;
+            // 
+            // btnPage11Table
+            // 
+            btnPage11Table.BackColor = Color.Black;
+            btnPage11Table.Enabled = false;
+            btnPage11Table.FlatAppearance.BorderSize = 4;
+            btnPage11Table.FlatStyle = FlatStyle.Flat;
+            btnPage11Table.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPage11Table.ForeColor = Color.White;
+            btnPage11Table.Location = new Point(85, 12);
+            btnPage11Table.Name = "btnPage11Table";
+            btnPage11Table.Size = new Size(466, 278);
+            btnPage11Table.TabIndex = 69;
+            btnPage11Table.UseVisualStyleBackColor = false;
+            // 
+            // lblPage11Trump
+            // 
+            lblPage11Trump.AutoSize = true;
+            lblPage11Trump.Font = new Font("Copperplate Gothic Light", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPage11Trump.ForeColor = Color.White;
+            lblPage11Trump.Location = new Point(562, 16);
+            lblPage11Trump.Name = "lblPage11Trump";
+            lblPage11Trump.Size = new Size(65, 19);
+            lblPage11Trump.TabIndex = 71;
+            lblPage11Trump.Text = "Trump";
+            // 
+            // pbPage11Trump
+            // 
+            pbPage11Trump.ImageLocation = "../../../GUI_Images/DeckImages/TrumpC.png";
+            pbPage11Trump.Location = new Point(562, 40);
+            pbPage11Trump.Name = "pbPage11Trump";
+            pbPage11Trump.Size = new Size(65, 102);
+            pbPage11Trump.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage11Trump.TabIndex = 70;
+            pbPage11Trump.TabStop = false;
+            // 
+            // pbPage11Attacker
+            // 
+            pbPage11Attacker.BackColor = Color.Black;
+            pbPage11Attacker.ImageLocation = "../../../GUI_Images/RoleIcons/1stAttackerIcon.png";
+            pbPage11Attacker.Location = new Point(561, 219);
+            pbPage11Attacker.Name = "pbPage11Attacker";
+            pbPage11Attacker.Size = new Size(67, 67);
+            pbPage11Attacker.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage11Attacker.TabIndex = 67;
+            pbPage11Attacker.TabStop = false;
+            // 
+            // btnPage11AttackerBg
+            // 
+            btnPage11AttackerBg.BackColor = Color.Transparent;
+            btnPage11AttackerBg.Enabled = false;
+            btnPage11AttackerBg.FlatAppearance.BorderSize = 4;
+            btnPage11AttackerBg.FlatStyle = FlatStyle.Flat;
+            btnPage11AttackerBg.Font = new Font("Copperplate Gothic Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPage11AttackerBg.ForeColor = Color.White;
+            btnPage11AttackerBg.Location = new Point(557, 215);
+            btnPage11AttackerBg.Name = "btnPage11AttackerBg";
+            btnPage11AttackerBg.Size = new Size(75, 75);
+            btnPage11AttackerBg.TabIndex = 68;
+            btnPage11AttackerBg.UseVisualStyleBackColor = false;
+            // 
+            // lblPage11Text
+            // 
+            lblPage11Text.AutoSize = true;
+            lblPage11Text.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPage11Text.ForeColor = Color.White;
+            lblPage11Text.Location = new Point(28, 308);
+            lblPage11Text.Name = "lblPage11Text";
+            lblPage11Text.Size = new Size(575, 126);
+            lblPage11Text.TabIndex = 11;
+            lblPage11Text.Text = resources.GetString("lblPage11Text.Text");
+            // 
+            // btnPage11TextBg
+            // 
+            btnPage11TextBg.BackColor = Color.Black;
+            btnPage11TextBg.Enabled = false;
+            btnPage11TextBg.FlatAppearance.BorderSize = 3;
+            btnPage11TextBg.FlatStyle = FlatStyle.Flat;
+            btnPage11TextBg.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPage11TextBg.ForeColor = Color.White;
+            btnPage11TextBg.Location = new Point(19, 300);
+            btnPage11TextBg.Name = "btnPage11TextBg";
+            btnPage11TextBg.Size = new Size(600, 142);
+            btnPage11TextBg.TabIndex = 10;
+            btnPage11TextBg.UseVisualStyleBackColor = false;
+            // 
+            // pnlPage12
+            // 
+            pnlPage12.BackColor = Color.Black;
+            pnlPage12.Controls.Add(lblOptionalRules);
+            pnlPage12.Controls.Add(btnOptionRulesBg);
+            pnlPage12.Controls.Add(pbPage12DeckBack);
+            pnlPage12.Controls.Add(pbPage12DeckTrump);
+            pnlPage12.Controls.Add(lblPage12DeckText);
+            pnlPage12.Controls.Add(lblPage12DeckCount);
+            pnlPage12.Controls.Add(btnPage12DeckBg);
+            pnlPage12.Controls.Add(lblPage12Click);
+            pnlPage12.Controls.Add(lblPage12Switch);
+            pnlPage12.Controls.Add(pbPage12Card1);
+            pnlPage12.Controls.Add(pbPage12Card2);
+            pnlPage12.Controls.Add(pbPage12Card3);
+            pnlPage12.Controls.Add(pbPage12Card4);
+            pnlPage12.Controls.Add(pbPage12Card5);
+            pnlPage12.Controls.Add(pbPage12Card6);
+            pnlPage12.Controls.Add(btnPage12HandBg);
+            pnlPage12.Controls.Add(lblPage12Text);
+            pnlPage12.Controls.Add(btnPage12TextBg);
+            pnlPage12.Location = new Point(72, 92);
+            pnlPage12.Name = "pnlPage12";
+            pnlPage12.Size = new Size(638, 458);
+            pnlPage12.TabIndex = 83;
+            pnlPage12.Visible = false;
+            // 
+            // lblOptionalRules
+            // 
+            lblOptionalRules.AutoSize = true;
+            lblOptionalRules.BackColor = SystemColors.ActiveCaptionText;
+            lblOptionalRules.Font = new Font("Castellar", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblOptionalRules.ForeColor = SystemColors.ButtonHighlight;
+            lblOptionalRules.Location = new Point(357, 2);
+            lblOptionalRules.Name = "lblOptionalRules";
+            lblOptionalRules.Size = new Size(281, 34);
+            lblOptionalRules.TabIndex = 91;
+            lblOptionalRules.Text = "Optional Rules";
+            // 
+            // btnOptionRulesBg
+            // 
+            btnOptionRulesBg.BackColor = Color.Black;
+            btnOptionRulesBg.Enabled = false;
+            btnOptionRulesBg.FlatAppearance.BorderSize = 4;
+            btnOptionRulesBg.FlatStyle = FlatStyle.Flat;
+            btnOptionRulesBg.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnOptionRulesBg.ForeColor = Color.White;
+            btnOptionRulesBg.Location = new Point(351, -4);
+            btnOptionRulesBg.Name = "btnOptionRulesBg";
+            btnOptionRulesBg.Size = new Size(291, 44);
+            btnOptionRulesBg.TabIndex = 92;
+            btnOptionRulesBg.UseVisualStyleBackColor = false;
+            // 
+            // pbPage12DeckBack
+            // 
+            pbPage12DeckBack.ImageLocation = "../../../GUI_Images/DeckImages/Card_Back.png";
+            pbPage12DeckBack.Location = new Point(55, 25);
+            pbPage12DeckBack.Name = "pbPage12DeckBack";
+            pbPage12DeckBack.Size = new Size(55, 82);
+            pbPage12DeckBack.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage12DeckBack.TabIndex = 90;
+            pbPage12DeckBack.TabStop = false;
+            // 
+            // pbPage12DeckTrump
+            // 
+            pbPage12DeckTrump.ImageLocation = "../../../GUI_Images/cards/10C.png";
+            pbPage12DeckTrump.Location = new Point(75, 25);
+            pbPage12DeckTrump.Name = "pbPage12DeckTrump";
+            pbPage12DeckTrump.Size = new Size(55, 82);
+            pbPage12DeckTrump.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage12DeckTrump.TabIndex = 89;
+            pbPage12DeckTrump.TabStop = false;
+            // 
+            // lblPage12DeckText
+            // 
+            lblPage12DeckText.BackColor = Color.Transparent;
+            lblPage12DeckText.Font = new Font("Castellar", 7.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPage12DeckText.ForeColor = Color.White;
+            lblPage12DeckText.Location = new Point(36, 113);
+            lblPage12DeckText.Name = "lblPage12DeckText";
+            lblPage12DeckText.Size = new Size(104, 32);
+            lblPage12DeckText.TabIndex = 87;
+            lblPage12DeckText.Text = "Deck Remaining";
+            lblPage12DeckText.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // lblPage12DeckCount
+            // 
+            lblPage12DeckCount.BackColor = Color.Transparent;
+            lblPage12DeckCount.Font = new Font("Castellar", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPage12DeckCount.ForeColor = Color.White;
+            lblPage12DeckCount.Location = new Point(137, 113);
+            lblPage12DeckCount.Name = "lblPage12DeckCount";
+            lblPage12DeckCount.Size = new Size(36, 32);
+            lblPage12DeckCount.TabIndex = 88;
+            lblPage12DeckCount.Text = "24";
+            lblPage12DeckCount.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // btnPage12DeckBg
+            // 
+            btnPage12DeckBg.BackColor = Color.Black;
+            btnPage12DeckBg.Enabled = false;
+            btnPage12DeckBg.FlatAppearance.BorderSize = 4;
+            btnPage12DeckBg.FlatStyle = FlatStyle.Flat;
+            btnPage12DeckBg.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPage12DeckBg.ForeColor = Color.White;
+            btnPage12DeckBg.Location = new Point(32, 12);
+            btnPage12DeckBg.Name = "btnPage12DeckBg";
+            btnPage12DeckBg.Size = new Size(146, 138);
+            btnPage12DeckBg.TabIndex = 14;
+            btnPage12DeckBg.UseVisualStyleBackColor = false;
+            // 
+            // lblPage12Click
+            // 
+            lblPage12Click.AutoSize = true;
+            lblPage12Click.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPage12Click.ForeColor = Color.White;
+            lblPage12Click.Location = new Point(181, 58);
+            lblPage12Click.Name = "lblPage12Click";
+            lblPage12Click.Size = new Size(228, 21);
+            lblPage12Click.TabIndex = 15;
+            lblPage12Click.Text = "<--- Click Trump Card";
+            // 
+            // lblPage12Switch
+            // 
+            lblPage12Switch.AutoSize = true;
+            lblPage12Switch.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPage12Switch.ForeColor = Color.White;
+            lblPage12Switch.Location = new Point(305, 110);
+            lblPage12Switch.Name = "lblPage12Switch";
+            lblPage12Switch.Size = new Size(256, 42);
+            lblPage12Switch.TabIndex = 16;
+            lblPage12Switch.Text = "6 of Trump will switch\r\n                       V";
+            // 
+            // pbPage12Card1
+            // 
+            pbPage12Card1.ImageLocation = "../../../GUI_Images/cards/6H.png";
+            pbPage12Card1.Location = new Point(99, 174);
+            pbPage12Card1.Name = "pbPage12Card1";
+            pbPage12Card1.Size = new Size(65, 102);
+            pbPage12Card1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage12Card1.TabIndex = 80;
+            pbPage12Card1.TabStop = false;
+            // 
+            // pbPage12Card2
+            // 
+            pbPage12Card2.ImageLocation = "../../../GUI_Images/cards/AH.png";
+            pbPage12Card2.Location = new Point(174, 174);
+            pbPage12Card2.Name = "pbPage12Card2";
+            pbPage12Card2.Size = new Size(65, 102);
+            pbPage12Card2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage12Card2.TabIndex = 82;
+            pbPage12Card2.TabStop = false;
+            // 
+            // pbPage12Card3
+            // 
+            pbPage12Card3.ImageLocation = "../../../GUI_Images/cards/6D.png";
+            pbPage12Card3.Location = new Point(249, 174);
+            pbPage12Card3.Name = "pbPage12Card3";
+            pbPage12Card3.Size = new Size(65, 102);
+            pbPage12Card3.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage12Card3.TabIndex = 83;
+            pbPage12Card3.TabStop = false;
+            // 
+            // pbPage12Card4
+            // 
+            pbPage12Card4.ImageLocation = "../../../GUI_Images/cards/7S.png";
+            pbPage12Card4.Location = new Point(324, 174);
+            pbPage12Card4.Name = "pbPage12Card4";
+            pbPage12Card4.Size = new Size(65, 102);
+            pbPage12Card4.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage12Card4.TabIndex = 84;
+            pbPage12Card4.TabStop = false;
+            // 
+            // pbPage12Card5
+            // 
+            pbPage12Card5.ImageLocation = "../../../GUI_Images/cards/6C.png";
+            pbPage12Card5.Location = new Point(399, 174);
+            pbPage12Card5.Name = "pbPage12Card5";
+            pbPage12Card5.Size = new Size(65, 102);
+            pbPage12Card5.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage12Card5.TabIndex = 85;
+            pbPage12Card5.TabStop = false;
+            // 
+            // pbPage12Card6
+            // 
+            pbPage12Card6.ImageLocation = "../../../GUI_Images/cards/JC.png";
+            pbPage12Card6.Location = new Point(474, 174);
+            pbPage12Card6.Name = "pbPage12Card6";
+            pbPage12Card6.Size = new Size(65, 102);
+            pbPage12Card6.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage12Card6.TabIndex = 86;
+            pbPage12Card6.TabStop = false;
+            // 
+            // btnPage12HandBg
+            // 
+            btnPage12HandBg.BackColor = Color.Black;
+            btnPage12HandBg.Enabled = false;
+            btnPage12HandBg.FlatAppearance.BorderSize = 4;
+            btnPage12HandBg.FlatStyle = FlatStyle.Flat;
+            btnPage12HandBg.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPage12HandBg.ForeColor = Color.White;
+            btnPage12HandBg.Location = new Point(86, 156);
+            btnPage12HandBg.Name = "btnPage12HandBg";
+            btnPage12HandBg.Size = new Size(466, 138);
+            btnPage12HandBg.TabIndex = 81;
+            btnPage12HandBg.UseVisualStyleBackColor = false;
+            // 
+            // lblPage12Text
+            // 
+            lblPage12Text.AutoSize = true;
+            lblPage12Text.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPage12Text.ForeColor = Color.White;
+            lblPage12Text.Location = new Point(28, 308);
+            lblPage12Text.Name = "lblPage12Text";
+            lblPage12Text.Size = new Size(571, 105);
+            lblPage12Text.TabIndex = 11;
+            lblPage12Text.Text = resources.GetString("lblPage12Text.Text");
+            // 
+            // btnPage12TextBg
+            // 
+            btnPage12TextBg.BackColor = Color.Black;
+            btnPage12TextBg.Enabled = false;
+            btnPage12TextBg.FlatAppearance.BorderSize = 3;
+            btnPage12TextBg.FlatStyle = FlatStyle.Flat;
+            btnPage12TextBg.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPage12TextBg.ForeColor = Color.White;
+            btnPage12TextBg.Location = new Point(19, 300);
+            btnPage12TextBg.Name = "btnPage12TextBg";
+            btnPage12TextBg.Size = new Size(600, 142);
+            btnPage12TextBg.TabIndex = 10;
+            btnPage12TextBg.UseVisualStyleBackColor = false;
+            // 
+            // pnlPage13
+            // 
+            pnlPage13.BackColor = Color.Black;
+            pnlPage13.Controls.Add(lblPage13OptionalRules);
+            pnlPage13.Controls.Add(btnPage13OptionalRulesBg);
+            pnlPage13.Controls.Add(pbPage13DeckBack);
+            pnlPage13.Controls.Add(pbPage13DeckTrump);
+            pnlPage13.Controls.Add(lblPage13DeckText);
+            pnlPage13.Controls.Add(lblPage13DeckCount);
+            pnlPage13.Controls.Add(btnPage13DeckBg);
+            pnlPage13.Controls.Add(lblPage13Click);
+            pnlPage13.Controls.Add(lblPage13Switch);
+            pnlPage13.Controls.Add(pbPage13Card1);
+            pnlPage13.Controls.Add(pbPage13Card2);
+            pnlPage13.Controls.Add(pbPage13Card3);
+            pnlPage13.Controls.Add(pbPage13Card4);
+            pnlPage13.Controls.Add(pbPage13Card5);
+            pnlPage13.Controls.Add(pbPage13Card6);
+            pnlPage13.Controls.Add(btnPage13HandBg);
+            pnlPage13.Controls.Add(lblPage13Text);
+            pnlPage13.Controls.Add(btnPage13TextBg);
+            pnlPage13.Location = new Point(72, 92);
+            pnlPage13.Name = "pnlPage13";
+            pnlPage13.Size = new Size(638, 458);
+            pnlPage13.TabIndex = 84;
+            pnlPage13.Visible = false;
+            // 
+            // lblPage13OptionalRules
+            // 
+            lblPage13OptionalRules.AutoSize = true;
+            lblPage13OptionalRules.BackColor = SystemColors.ActiveCaptionText;
+            lblPage13OptionalRules.Font = new Font("Castellar", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPage13OptionalRules.ForeColor = SystemColors.ButtonHighlight;
+            lblPage13OptionalRules.Location = new Point(357, 2);
+            lblPage13OptionalRules.Name = "lblPage13OptionalRules";
+            lblPage13OptionalRules.Size = new Size(281, 34);
+            lblPage13OptionalRules.TabIndex = 91;
+            lblPage13OptionalRules.Text = "Optional Rules";
+            // 
+            // btnPage13OptionalRulesBg
+            // 
+            btnPage13OptionalRulesBg.BackColor = Color.Black;
+            btnPage13OptionalRulesBg.Enabled = false;
+            btnPage13OptionalRulesBg.FlatAppearance.BorderSize = 4;
+            btnPage13OptionalRulesBg.FlatStyle = FlatStyle.Flat;
+            btnPage13OptionalRulesBg.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPage13OptionalRulesBg.ForeColor = Color.White;
+            btnPage13OptionalRulesBg.Location = new Point(351, -4);
+            btnPage13OptionalRulesBg.Name = "btnPage13OptionalRulesBg";
+            btnPage13OptionalRulesBg.Size = new Size(291, 44);
+            btnPage13OptionalRulesBg.TabIndex = 92;
+            btnPage13OptionalRulesBg.UseVisualStyleBackColor = false;
+            // 
+            // pbPage13DeckBack
+            // 
+            pbPage13DeckBack.ImageLocation = "../../../GUI_Images/DeckImages/Card_Back.png";
+            pbPage13DeckBack.Location = new Point(55, 25);
+            pbPage13DeckBack.Name = "pbPage13DeckBack";
+            pbPage13DeckBack.Size = new Size(55, 82);
+            pbPage13DeckBack.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage13DeckBack.TabIndex = 90;
+            pbPage13DeckBack.TabStop = false;
+            // 
+            // pbPage13DeckTrump
+            // 
+            pbPage13DeckTrump.ImageLocation = "../../../GUI_Images/cards/AC.png";
+            pbPage13DeckTrump.Location = new Point(75, 25);
+            pbPage13DeckTrump.Name = "pbPage13DeckTrump";
+            pbPage13DeckTrump.Size = new Size(55, 82);
+            pbPage13DeckTrump.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage13DeckTrump.TabIndex = 89;
+            pbPage13DeckTrump.TabStop = false;
+            // 
+            // lblPage13DeckText
+            // 
+            lblPage13DeckText.BackColor = Color.Transparent;
+            lblPage13DeckText.Font = new Font("Castellar", 7.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPage13DeckText.ForeColor = Color.White;
+            lblPage13DeckText.Location = new Point(36, 113);
+            lblPage13DeckText.Name = "lblPage13DeckText";
+            lblPage13DeckText.Size = new Size(104, 32);
+            lblPage13DeckText.TabIndex = 87;
+            lblPage13DeckText.Text = "Deck Remaining";
+            lblPage13DeckText.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // lblPage13DeckCount
+            // 
+            lblPage13DeckCount.BackColor = Color.Transparent;
+            lblPage13DeckCount.Font = new Font("Castellar", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPage13DeckCount.ForeColor = Color.White;
+            lblPage13DeckCount.Location = new Point(137, 113);
+            lblPage13DeckCount.Name = "lblPage13DeckCount";
+            lblPage13DeckCount.Size = new Size(36, 32);
+            lblPage13DeckCount.TabIndex = 88;
+            lblPage13DeckCount.Text = "24";
+            lblPage13DeckCount.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // btnPage13DeckBg
+            // 
+            btnPage13DeckBg.BackColor = Color.Black;
+            btnPage13DeckBg.Enabled = false;
+            btnPage13DeckBg.FlatAppearance.BorderSize = 4;
+            btnPage13DeckBg.FlatStyle = FlatStyle.Flat;
+            btnPage13DeckBg.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPage13DeckBg.ForeColor = Color.White;
+            btnPage13DeckBg.Location = new Point(32, 12);
+            btnPage13DeckBg.Name = "btnPage13DeckBg";
+            btnPage13DeckBg.Size = new Size(146, 138);
+            btnPage13DeckBg.TabIndex = 14;
+            btnPage13DeckBg.UseVisualStyleBackColor = false;
+            // 
+            // lblPage13Click
+            // 
+            lblPage13Click.AutoSize = true;
+            lblPage13Click.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPage13Click.ForeColor = Color.White;
+            lblPage13Click.Location = new Point(181, 58);
+            lblPage13Click.Name = "lblPage13Click";
+            lblPage13Click.Size = new Size(340, 21);
+            lblPage13Click.TabIndex = 15;
+            lblPage13Click.Text = "<--- Click Trump Card When Ace";
+            // 
+            // lblPage13Switch
+            // 
+            lblPage13Switch.AutoSize = true;
+            lblPage13Switch.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPage13Switch.ForeColor = Color.White;
+            lblPage13Switch.Location = new Point(305, 110);
+            lblPage13Switch.Name = "lblPage13Switch";
+            lblPage13Switch.Size = new Size(256, 42);
+            lblPage13Switch.TabIndex = 16;
+            lblPage13Switch.Text = "6 of Trump will switch\r\n                       V";
+            // 
+            // pbPage13Card1
+            // 
+            pbPage13Card1.ImageLocation = "../../../GUI_Images/cards/6H.png";
+            pbPage13Card1.Location = new Point(99, 174);
+            pbPage13Card1.Name = "pbPage13Card1";
+            pbPage13Card1.Size = new Size(65, 102);
+            pbPage13Card1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage13Card1.TabIndex = 80;
+            pbPage13Card1.TabStop = false;
+            // 
+            // pbPage13Card2
+            // 
+            pbPage13Card2.ImageLocation = "../../../GUI_Images/cards/AH.png";
+            pbPage13Card2.Location = new Point(174, 174);
+            pbPage13Card2.Name = "pbPage13Card2";
+            pbPage13Card2.Size = new Size(65, 102);
+            pbPage13Card2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage13Card2.TabIndex = 82;
+            pbPage13Card2.TabStop = false;
+            // 
+            // pbPage13Card3
+            // 
+            pbPage13Card3.ImageLocation = "../../../GUI_Images/cards/6D.png";
+            pbPage13Card3.Location = new Point(249, 174);
+            pbPage13Card3.Name = "pbPage13Card3";
+            pbPage13Card3.Size = new Size(65, 102);
+            pbPage13Card3.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage13Card3.TabIndex = 83;
+            pbPage13Card3.TabStop = false;
+            // 
+            // pbPage13Card4
+            // 
+            pbPage13Card4.ImageLocation = "../../../GUI_Images/cards/7S.png";
+            pbPage13Card4.Location = new Point(324, 174);
+            pbPage13Card4.Name = "pbPage13Card4";
+            pbPage13Card4.Size = new Size(65, 102);
+            pbPage13Card4.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage13Card4.TabIndex = 84;
+            pbPage13Card4.TabStop = false;
+            // 
+            // pbPage13Card5
+            // 
+            pbPage13Card5.ImageLocation = "../../../GUI_Images/cards/6C.png";
+            pbPage13Card5.Location = new Point(399, 174);
+            pbPage13Card5.Name = "pbPage13Card5";
+            pbPage13Card5.Size = new Size(65, 102);
+            pbPage13Card5.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage13Card5.TabIndex = 85;
+            pbPage13Card5.TabStop = false;
+            // 
+            // pbPage13Card6
+            // 
+            pbPage13Card6.ImageLocation = "../../../GUI_Images/cards/JC.png";
+            pbPage13Card6.Location = new Point(474, 174);
+            pbPage13Card6.Name = "pbPage13Card6";
+            pbPage13Card6.Size = new Size(65, 102);
+            pbPage13Card6.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPage13Card6.TabIndex = 86;
+            pbPage13Card6.TabStop = false;
+            // 
+            // btnPage13HandBg
+            // 
+            btnPage13HandBg.BackColor = Color.Black;
+            btnPage13HandBg.Enabled = false;
+            btnPage13HandBg.FlatAppearance.BorderSize = 4;
+            btnPage13HandBg.FlatStyle = FlatStyle.Flat;
+            btnPage13HandBg.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPage13HandBg.ForeColor = Color.White;
+            btnPage13HandBg.Location = new Point(86, 156);
+            btnPage13HandBg.Name = "btnPage13HandBg";
+            btnPage13HandBg.Size = new Size(466, 138);
+            btnPage13HandBg.TabIndex = 81;
+            btnPage13HandBg.UseVisualStyleBackColor = false;
+            // 
+            // lblPage13Text
+            // 
+            lblPage13Text.AutoSize = true;
+            lblPage13Text.Font = new Font("Copperplate Gothic Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPage13Text.ForeColor = Color.White;
+            lblPage13Text.Location = new Point(28, 308);
+            lblPage13Text.Name = "lblPage13Text";
+            lblPage13Text.Size = new Size(577, 126);
+            lblPage13Text.TabIndex = 11;
+            lblPage13Text.Text = resources.GetString("lblPage13Text.Text");
+            // 
+            // btnPage13TextBg
+            // 
+            btnPage13TextBg.BackColor = Color.Black;
+            btnPage13TextBg.Enabled = false;
+            btnPage13TextBg.FlatAppearance.BorderSize = 3;
+            btnPage13TextBg.FlatStyle = FlatStyle.Flat;
+            btnPage13TextBg.Font = new Font("Castellar", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPage13TextBg.ForeColor = Color.White;
+            btnPage13TextBg.Location = new Point(19, 300);
+            btnPage13TextBg.Name = "btnPage13TextBg";
+            btnPage13TextBg.Size = new Size(600, 142);
+            btnPage13TextBg.TabIndex = 10;
+            btnPage13TextBg.UseVisualStyleBackColor = false;
+            // 
             // btnRulesBg
             // 
             btnRulesBg.BackColor = Color.Black;
@@ -1883,46 +2915,6 @@
             btnPageNumBg.TabIndex = 75;
             btnPageNumBg.UseVisualStyleBackColor = false;
             // 
-            // pbPage8Card5
-            // 
-            pbPage8Card5.ImageLocation = "../../../GUI_Images/cards/9D.png";
-            pbPage8Card5.Location = new Point(314, 40);
-            pbPage8Card5.Name = "pbPage8Card5";
-            pbPage8Card5.Size = new Size(65, 102);
-            pbPage8Card5.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbPage8Card5.TabIndex = 82;
-            pbPage8Card5.TabStop = false;
-            // 
-            // pbPage8Card8
-            // 
-            pbPage8Card8.ImageLocation = "../../../GUI_Images/cards/AD.png";
-            pbPage8Card8.Location = new Point(473, 40);
-            pbPage8Card8.Name = "pbPage8Card8";
-            pbPage8Card8.Size = new Size(65, 102);
-            pbPage8Card8.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbPage8Card8.TabIndex = 83;
-            pbPage8Card8.TabStop = false;
-            // 
-            // pbPage8Card7
-            // 
-            pbPage8Card7.ImageLocation = "../../../GUI_Images/cards/9S.png";
-            pbPage8Card7.Location = new Point(422, 40);
-            pbPage8Card7.Name = "pbPage8Card7";
-            pbPage8Card7.Size = new Size(65, 102);
-            pbPage8Card7.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbPage8Card7.TabIndex = 84;
-            pbPage8Card7.TabStop = false;
-            // 
-            // pbPage8Card6
-            // 
-            pbPage8Card6.ImageLocation = "../../../GUI_Images/cards/6S.png";
-            pbPage8Card6.Location = new Point(367, 40);
-            pbPage8Card6.Name = "pbPage8Card6";
-            pbPage8Card6.Size = new Size(65, 102);
-            pbPage8Card6.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbPage8Card6.TabIndex = 85;
-            pbPage8Card6.TabStop = false;
-            // 
             // RulesForm
             // 
             AcceptButton = btnRight;
@@ -1938,18 +2930,6 @@
             Text = "RulesForm";
             pnlRules.ResumeLayout(false);
             pnlRules.PerformLayout();
-            pnlPage8.ResumeLayout(false);
-            pnlPage8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pbPage8Attacker).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbPage8Card1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbPage8Card2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbPage8Card3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbPage8Card4).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbPage8Card9).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbPage8Card10).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbPage8Card11).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbPage8Trump).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbPage8Defender).EndInit();
             pnlPage1.ResumeLayout(false);
             pnlPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbCard6H).EndInit();
@@ -1971,7 +2951,8 @@
             ((System.ComponentModel.ISupportInitialize)pbBrokenDefender).EndInit();
             pnlPage3.ResumeLayout(false);
             pnlPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pbPage3Deck).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage3DeckBack).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage3DeckTrump).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbPage3Card1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbPage3Card2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbPage3Card3).EndInit();
@@ -2018,10 +2999,57 @@
             ((System.ComponentModel.ISupportInitialize)pbPage7Defender).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbPage7Trump).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbPage7Attacker).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbPage8Card5).EndInit();
+            pnlPage8.ResumeLayout(false);
+            pnlPage8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbPage8Attacker).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbPage8Card8).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbPage8Card7).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbPage8Card6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage8Card5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage8Card4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage8Card3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage8Card2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage8Card1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage8Card9).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage8Card10).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage8Card11).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage8Trump).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage8Defender).EndInit();
+            pnlPage9.ResumeLayout(false);
+            pnlPage9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbPage9Attacker).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage9Trump).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage9Defender).EndInit();
+            pnlPage10.ResumeLayout(false);
+            pnlPage10.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbPage10Attacker).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage10Trump).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage10BknDefender).EndInit();
+            pnlPage11.ResumeLayout(false);
+            pnlPage11.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbPage11Winner).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage11Trump).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage11Attacker).EndInit();
+            pnlPage12.ResumeLayout(false);
+            pnlPage12.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbPage12DeckBack).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage12DeckTrump).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage12Card1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage12Card2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage12Card3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage12Card4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage12Card5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage12Card6).EndInit();
+            pnlPage13.ResumeLayout(false);
+            pnlPage13.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbPage13DeckBack).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage13DeckTrump).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage13Card1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage13Card2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage13Card3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage13Card4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage13Card5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPage13Card6).EndInit();
             ResumeLayout(false);
         }
 
@@ -2068,10 +3096,8 @@
         private Panel pnlPage3;
         private Label lblPage3Text;
         private Button btnPage3TextBg;
-        private PictureBox pbPage3Deck;
-        private Button btnPage3DeckBg;
-        private Label lblPlayerHand;
-        private Label lblTrumpSuit;
+        private Label lblPage3PlayerHand;
+        private Label lblPage3TrumpSuit;
         private Panel pnlPage4;
         private Label lblPage4Text;
         private Button btnPage4TextBg;
@@ -2162,5 +3188,78 @@
         private PictureBox pbPage8Card7;
         private PictureBox pbPage8Card6;
         private PictureBox pbPage8Card5;
+        private Panel pnlPage9;
+        private PictureBox pbPage9Attacker;
+        private Button btnPage9AttackerBg;
+        private Button btnPage9TableBg;
+        private Label lblPage9Trump;
+        private PictureBox pbPage9Trump;
+        private PictureBox pbPage9Defender;
+        private Button btnPage9DefenderBg;
+        private Label lblPage9Text;
+        private Button btnPage9TextBg;
+        private Panel pnlPage10;
+        private PictureBox pbPage10Attacker;
+        private Button btnPage10AttackerBg;
+        private Button btnPage10Table;
+        private Label lblPage10Trump;
+        private PictureBox pbPage10Trump;
+        private PictureBox pbPage10BknDefender;
+        private Button btnPage10BknDefenderBg;
+        private Label lblPage10Text;
+        private Button btnPage10TextBg;
+        private Panel pnlPage11;
+        private PictureBox pbPage11Winner;
+        private Button btnPage11WinnerBg;
+        private Button btnPage11Table;
+        private Label lblPage11Trump;
+        private PictureBox pbPage11Trump;
+        private PictureBox pbPage11Attacker;
+        private Button btnPage11AttackerBg;
+        private Label lblPage11Text;
+        private Button btnPage11TextBg;
+        private Panel pnlPage12;
+        private Button btnPage12DeckBg;
+        private Label lblPage12Click;
+        private Label lblPage12Switch;
+        private PictureBox pbPage12Card1;
+        private PictureBox pbPage12Card2;
+        private PictureBox pbPage12Card3;
+        private PictureBox pbPage12Card4;
+        private PictureBox pbPage12Card5;
+        private PictureBox pbPage12Card6;
+        private Button btnPage12HandBg;
+        private Label lblPage12Text;
+        private Button btnPage12TextBg;
+        private PictureBox pbPage12DeckBack;
+        private PictureBox pbPage12DeckTrump;
+        private Label lblPage12DeckCount;
+        private Label lblPage12DeckText;
+        private Label lblOptionalRules;
+        private Button btnOptionRulesBg;
+        private PictureBox pbPage3DeckBack;
+        private PictureBox pbPage3DeckTrump;
+        private Label lblPage3DeckText;
+        private Label lblPage3DeckCount;
+        private Button btnPage3DeckBg;
+        private Panel pnlPage13;
+        private Label lblPage13OptionalRules;
+        private Button btnPage13OptionalRulesBg;
+        private PictureBox pbPage13DeckBack;
+        private PictureBox pbPage13DeckTrump;
+        private Label lblPage13DeckText;
+        private Label lblPage13DeckCount;
+        private Button btnPage13DeckBg;
+        private Label lblPage13Click;
+        private Label lblPage13Switch;
+        private PictureBox pbPage13Card1;
+        private PictureBox pbPage13Card2;
+        private PictureBox pbPage13Card3;
+        private PictureBox pbPage13Card4;
+        private PictureBox pbPage13Card5;
+        private PictureBox pbPage13Card6;
+        private Button btnPage13HandBg;
+        private Label lblPage13Text;
+        private Button btnPage13TextBg;
     }
 }
