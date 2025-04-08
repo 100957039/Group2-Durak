@@ -36,6 +36,12 @@ namespace DurakCardGame
         // For storing what happens during a game
         public List<string> actionLog = new List<string>();
 
+        // ########### start ########### don not forget to delete
+        private int humanCardNumber = 2;
+        private int computerCardNumber = 1;
+
+        // ########### end ########### don not forget to delete
+
         // multiple attack
         int subAttackDistance { set; get; } = 0;
 
@@ -318,7 +324,7 @@ namespace DurakCardGame
         {
             // draw 6 cards from the deck and add them to the player's hand
             List<Card> hand = new List<Card>();
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < humanCardNumber; i++)
             {
                 hand.Add(deck.Draw());
             }
@@ -334,7 +340,7 @@ namespace DurakCardGame
         {
             // draw 6 cards from the deck and add them to the player's hand
             List<Card> hand = new List<Card>();
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < computerCardNumber; i++)
             {
                 hand.Add(deck.Draw());
             }
@@ -487,25 +493,40 @@ namespace DurakCardGame
                     //Console.WriteLine("this one 2");
                     if (!DefenderNoCards())
                     {
-                        Console.WriteLine("Case 1");
-                        turnIndex = attackerIndex;
+                        Console.WriteLine("Case 1 ------");
+                        turnIndex = FindCurrentAvailablePlayer(attackerIndex);
                     }
                 }
                 else if (turnIndex == attackerIndex && cardsAttack.Count() > cardsDefend.Count() + 1)
                 {
-                    Console.WriteLine("Case 2");
-                    turnIndex = attackerIndex;
+                    Console.WriteLine("Case 2 -------");
+                    turnIndex = FindCurrentAvailablePlayer(attackerIndex);
                 }
                 // regular attacks or defence
                 else
                 {
-                    Console.WriteLine("Case 3 :P");
+                    Console.WriteLine("Case 3 :P -------");
+                    //turnIndex = FindCurrentAvailablePlayer(defenderIndex);
+                    // I dont thing we need to check for the defender because we already have a funtion to check i (if statement)
                     turnIndex = defenderIndex;
                 }
             }
             
         }
 
+
+        public int FindCurrentAvailablePlayer(int thisIndex)
+        {
+            Console.WriteLine("###############################");
+            int currentAvailablePlayerIndex = thisIndex;
+
+            // Checks if the player selected has already won
+            if (players[currentAvailablePlayerIndex].Hand.Count() == 0 )
+            {
+                currentAvailablePlayerIndex = FindNextAvailablePlayer(thisIndex);
+            }
+            return currentAvailablePlayerIndex;
+        }
         // test for computer class
 
         // computer play card
@@ -870,12 +891,13 @@ namespace DurakCardGame
             return nextAvailablePlayerIndex;
         }
 
-        public int FindCurrentAvailablePlayer(int thisIndex)
+        public int FindCurrentAvailablePlayer2(int thisIndex)
         {
+            Console.WriteLine("###############################");
             int currentAvailablePlayerIndex = thisIndex;
 
             // Checks if the player selected has already won
-            if (players[currentAvailablePlayerIndex].Hand.Count() == 0 && deck.Count() == 0)
+            if (players[currentAvailablePlayerIndex].Hand.Count() == 0 & deck.Count() == 0)
             {
                 currentAvailablePlayerIndex = FindNextAvailablePlayer(thisIndex);
             }
