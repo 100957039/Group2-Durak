@@ -37,8 +37,8 @@ namespace DurakCardGame
         public List<string> actionLog = new List<string>();
 
         // ########### start ########### don not forget to delete
-        private int humanCardNumber = 2;
-        private int computerCardNumber = 1;
+        private int humanCardNumber = 6;
+        private int computerCardNumber = 6;
 
         // ########### end ########### don not forget to delete
 
@@ -352,7 +352,7 @@ namespace DurakCardGame
         }
 
         // add a computer to the game ########### DONE #############
-        public void addComputer(String difficulty, List<string> playerNames)
+        public void addComputer(List<string> playerNames)
         {
             // draw 6 cards from the deck and add them to the player's hand
             List<Card> hand = new List<Card>();
@@ -360,7 +360,7 @@ namespace DurakCardGame
             {
                 hand.Add(deck.Draw());
             }
-            players.Add(new Computer(hand, difficulty));
+            players.Add(new Computer(hand));
 
             // Set the name and icon for the computer
             usedAiCustomization.Add(((Computer)players[players.Count - 1]).AiCustomization(usedAiCustomization, playerNames));
@@ -402,12 +402,15 @@ namespace DurakCardGame
             actionLog.Add("- The trump suit is " + trumpCard.SuitToString());
         }
 
-
-        // run this after each turn to check if the game has ended or not
-        // test start attack March 15th
+        /// <summary>
+        /// Checks if the game has ended or not
+        /// </summary>
+        /// <returns></returns>
         public bool GameEnded()
         {
             int playersLeft = 0;
+            bool result;
+
             foreach (Player player in players)
             {
                 if (player.Hand.Count() > 0)
@@ -418,7 +421,16 @@ namespace DurakCardGame
             // only one left = lost
             int numberToStopGame = 1;
 
-            return playersLeft <= numberToStopGame;
+            result = playersLeft <= numberToStopGame;
+
+            // Ensures the defender can defend 1 last time if they still have cards, possibly letting them draw instead of lose
+            if (result && players[defenderIndex].Hand.Count() > 0 && turnIndex == defenderIndex && cardsAttack.Count() > cardsDefend.Count())
+            {
+                Console.WriteLine("Good Luck, Defender");
+                result = false;
+            }
+
+            return result;
         }
 
         // stop attack when it reachs 6 cards

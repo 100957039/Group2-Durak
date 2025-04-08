@@ -32,7 +32,6 @@ namespace DurakCardGame
         int numAi = 1;
         int optionTCT = 0;
         int[] iconPage = { 0, 0, 0, 0 };
-        string difficulty = "easy";
         List<Player> resultList = new List<Player>();
 
         // Game variable
@@ -597,6 +596,7 @@ namespace DurakCardGame
         private void GameSetup()
         {
             game = new GameLogic();
+            game.trumpCardOption = optionTCT;
             ResetGameBoard();
             UpdateActionLog();
             SetupPlayers();
@@ -629,7 +629,7 @@ namespace DurakCardGame
             }
             for (int i = 0; i < numAi; i++)
             {
-                game.addComputer(difficulty, playerNames);
+                game.addComputer(playerNames);
             }
 
             // Hide all player panels
@@ -772,13 +772,12 @@ namespace DurakCardGame
                         // Add card click event
                         cardPb.Click += (sender, e) =>
                         {
-                            // Add Functions from the Game class
-                            // ckeck if the game ended
-                            bool endGame = game.GameEnded();
-                            if (!endGame)
+                            // Checks if the game ended
+                            if (!IsGameEnded())
                             {
                                 currentPlayer.PlayCard2(card);
                                 game.PlayCardToAttckOrDefendList(card);
+                                CheckForWinner(game.turnIndex);
                                 game.DetermineDefenderAndAttackerIndex();
                                 UpdatePlayerLocations();
                                 DisplayTableTop();
@@ -786,10 +785,13 @@ namespace DurakCardGame
                                 UpdateHandCounts();
                                 UpdateDeckCount();
                                 UpdateActionLog();
-                                NextPlayerMessageBox();
-                                DisplayHand();
-                            };
 
+                                if (!IsGameEnded())
+                                {
+                                    NextPlayerMessageBox();
+                                    DisplayHand();
+                                }
+                            };
                         };
 
                         // Add mouse hover events
@@ -822,9 +824,6 @@ namespace DurakCardGame
             {
                 ComputersTurn();
             }
-
-            // Checks if the game is over
-            IsGameEnded();
         }
 
         /// <summary>
@@ -957,24 +956,32 @@ namespace DurakCardGame
         /// </summary>
         private async void ComputersTurn()
         {
-            const int sleep = 1500;
-            UpdatePlayerLocations();
-            DisplayTableTop();
-            DisplayTableBottom();
-            UpdateHandCounts();
-            UpdateDeckCount();
-            UpdateActionLog();
-            await Task.Delay(sleep);
-            game.ComputerPlayCard();
-            DisplayTableTop();
-            DisplayTableBottom();
-            UpdateActionLog();
-            await Task.Delay(sleep);
-            UpdateHandCounts();
-            UpdatePlayerLocations();
-            UpdateDeckCount();
-            NextPlayerMessageBox();
-            DisplayHand();
+            if (!IsGameEnded())
+            {
+                const int sleep = 1500;
+                UpdatePlayerLocations();
+                DisplayTableTop();
+                DisplayTableBottom();
+                UpdateHandCounts();
+                UpdateDeckCount();
+                UpdateActionLog();
+                await Task.Delay(sleep);
+                game.ComputerPlayCard();
+                CheckForWinner(game.turnIndex);
+                DisplayTableTop();
+                DisplayTableBottom();
+                UpdateActionLog();
+                await Task.Delay(sleep);
+                UpdateHandCounts();
+                UpdatePlayerLocations();
+                UpdateDeckCount();
+
+                if (!IsGameEnded())
+                {
+                    NextPlayerMessageBox();
+                    DisplayHand();
+                }
+            } 
         }
 
         /// <summary>
@@ -1145,17 +1152,56 @@ namespace DurakCardGame
         }
 
         /// <summary>
+        /// Checks if a player has won to add them to the results list
+        /// </summary>
+        private void CheckForWinner(int index)
+        {
+            Console.WriteLine("Gui 1: " + resultList.Count() + ", " + (game.players.Count() - 1));
+            // Checks for an empty deck and player hand
+            if (game.players[index].Hand.Count() == 0 && game.deck.cards.Count() == 0)
+            {
+                // Ensures the player hasn't already been added
+                if (!resultList.Contains(game.players[index]))
+                {
+                    resultList.Add(game.players[index]);
+                }
+            }
+            else if (game.players[index].Hand.Count() != 0 && resultList.Count() == (game.players.Count() - 1))
+            {
+                Console.WriteLine("Gui 2: " + resultList.Count() + ", " + (game.players.Count() - 1));
+                // Ensures the player hasn't already been added
+                if (!resultList.Contains(game.players[index]))
+                {
+                    resultList.Add(game.players[index]);
+                }
+            }
+        }
+
+        /// <summary>
         /// Checks if the games ended and displays the game result
         /// </summary>
         /// <returns></returns>
-        private void IsGameEnded()
+        private bool IsGameEnded()
         {
-            if (game.GameEnded())
+            bool gameEnd = game.GameEnded();
+
+            // Checks if the games ended
+            if (gameEnd)
             {
+                // Clears the game board
+                ResetGameBoard();
+
+                // Adds any players not in the list
+                for (int i = 0; i < game.players.Count(); i++)
+                {
+                    CheckForWinner(i);
+                }
+
+                // Formats game results
                 string result =
-                    "--------------------------------" + Environment.NewLine +
-                    "          GAME RESULTS          " + Environment.NewLine + 
-                    "--------------------------------" + Environment.NewLine;
+                    "------------------" + Environment.NewLine +
+                    " GAME RESULTS     " + Environment.NewLine + 
+                    "------------------" + Environment.NewLine;
                 List<string> places = new List<string>() { "1st: ", "2nd: ", "3rd: ", "4th: ", "DURAK: " };
 
                 for (int i = 0; i < resultList.Count(); i++)
@@ -1170,7 +1216,8 @@ namespace DurakCardGame
                     }
                 }
                 
-                result += Environment.NewLine + Environment.NewLine + " Play again?";
+                // Displays game results
+                result += Environment.NewLine + Environment.NewLine + "Play again?";
                 DialogResult dialogResult = MessageBox.Show(result, "Game Results", MessageBoxButtons.YesNo);
 
                 if (dialogResult == DialogResult.Yes)
@@ -1184,6 +1231,8 @@ namespace DurakCardGame
                     pnlMainMenu.BringToFront();
                 }
             }
+
+            return gameEnd;
         }
 
         /// <summary>

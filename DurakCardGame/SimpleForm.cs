@@ -48,11 +48,11 @@ namespace DurakCardGame
                 game.addPlayer(playersList[i], iconList[i]);
             }
 
-            game.addComputer("blah", playersList);
+            game.addComputer(playersList);
 
             game.addPlayer("blah2", "playersList");
 
-            game.addComputer("blah3", playersList);
+            game.addComputer(playersList);
         }
 
         //STEP #2
