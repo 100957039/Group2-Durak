@@ -49,7 +49,9 @@ namespace DurakCardGame
             }
 
             game.addComputer("blah", playersList);
-            game.addComputer("blah2", playersList);
+
+            game.addPlayer("blah2", "playersList");
+
             game.addComputer("blah3", playersList);
         }
 

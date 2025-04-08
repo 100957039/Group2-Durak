@@ -42,6 +42,12 @@ namespace DurakCardGame
 
         // ########### end ########### don not forget to delete
 
+        // trumpCardOption
+        // 0 = take trump card from the deck is Disabled
+        // 1 = you can take trump card
+        // 2 = you can only take the trump card only if it is ACE
+        public int trumpCardOption = 0;
+
         // multiple attack
         int subAttackDistance { set; get; } = 0;
 
@@ -523,6 +529,7 @@ namespace DurakCardGame
             // Checks if the player selected has already won
             if (players[currentAvailablePlayerIndex].Hand.Count() == 0 )
             {
+                Console.WriteLine("the current one has no cards, find the next player");
                 currentAvailablePlayerIndex = FindNextAvailablePlayer(thisIndex);
             }
             return currentAvailablePlayerIndex;
@@ -747,7 +754,8 @@ namespace DurakCardGame
                 // Update action log
                 actionLog.Add("- " + players[defenderIndex].Name + " lost the defence");
 
-                turnIndex = attackerIndex;
+                turnIndex = FindCurrentAvailablePlayer(attackerIndex);
+                //turnIndex = attackerIndex;
             }
 
             // if attacker
@@ -810,7 +818,7 @@ namespace DurakCardGame
                         // Enables attacking again for previous broken defenders
                         EnablePlayerCanAttack();
 
-                        // defender still have cards
+                        // defender still have cards     ##########################################################
                         if (players[defenderIndex].Hand.Count() != 0)
                         {
                             Console.WriteLine("case: 3");
@@ -818,7 +826,7 @@ namespace DurakCardGame
                             turnIndex = attackerIndex;
                             defenderIndex = FindNextAvailablePlayer(turnIndex);
                         }
-                        // no cards left with the defender to  be the next attacker 
+                        // no cards left with the defender to  be the next attacker  ###############################################
                         else
                         {
                             Console.WriteLine("case: 4");
@@ -856,6 +864,7 @@ namespace DurakCardGame
             if (nextAvailablePlayerIndex >= players.Count())
             {
                 nextAvailablePlayerIndex -= players.Count();
+                //nextAvailablePlayerIndex = 0;
             }
             // Checks if the player selected has already won
             if (players[nextAvailablePlayerIndex].Hand.Count() == 0)
