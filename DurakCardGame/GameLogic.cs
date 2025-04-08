@@ -64,6 +64,8 @@ namespace DurakCardGame
         // For checking if a player is human or Ai
         public Type typeHuman = typeof(Human);
 
+        // For checking if the game needs to be ended
+        private const int EndGame = -1;
 
         //######################### GUI variable #############################
         // DO NOT FORGET TO RESET ALL THE VALUES AFTER THE ATTACK IS OVER
@@ -78,15 +80,12 @@ namespace DurakCardGame
 
             // Update action log
             actionLog.Add("Game Start!");
-
-            // draw a card from the deck to determine the trump
-            // trump = deck.Draw().Suit;
+            actionLog.Add("");
         }
 
-
-
         // delete after testing
-        public void SwitchTrun() {
+        public void SwitchTurn()
+        {
             turnIndex = FindNextAvailablePlayer(turnIndex);
             attackerIndex = turnIndex;
             defenderIndex = FindNextAvailablePlayer(turnIndex);
@@ -95,85 +94,68 @@ namespace DurakCardGame
         // delte after testing 
 
 
-        //check if the player can still attack
-        public bool canStillAttack(List<Card> hand)
+        /// <summary>
+        /// Adds a human player to the game
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="icon"></param>
+        public void addPlayer(string name, string icon)
         {
-            bool canAttack = false;
-            foreach (Card card in hand)
+            // draw 6 cards from the deck and add them to the player's hand
+            List<Card> hand = new List<Card>();
+            for (int i = 0; i < humanCardNumber; i++)
             {
-                if (cardsAttack.Any(attackCard => attackCard.Rank == card.Rank))
-                {
-                    return canAttack = true;
-                }
-                if (cardsDefend.Any(attackCard => attackCard.Rank == card.Rank))
-                {
-                    return canAttack = true;
-                }
+                hand.Add(deck.Draw());
             }
-            return canAttack;
+            players.Add(new Human(name, icon, hand));
+
+            // important value for sub-attack
+            // it's two, because winning_defender + first_lossing_attacker = 2
+            // can not attack again at the same turn
         }
 
-        // check if the player has the proper suit to defend
-        public bool canStillDefend(List<Card> hand, Card attackedBy)
+        /// <summary>
+        /// Adds a computer player to the game
+        /// </summary>
+        /// <param name="playerNames"></param>
+        public void addComputer(List<string> playerNames)
         {
-            bool canDefend = false;
-            foreach (Card card in hand)
+            // draw 6 cards from the deck and add them to the player's hand
+            List<Card> hand = new List<Card>();
+            for (int i = 0; i < computerCardNumber; i++)
             {
-                // if the attackedBy is a trump card
-                if (attackedBy.Suit.Equals(trump) && card.Suit.Equals(trump))
-                {
-                    if (attackedBy.Rank < card.Rank)
-                    {
-                        canDefend = true;
-                        break;
-                    }
-                }
-                // if the attackedBy is not trump card
-                else
-                {
-                    //if the defender has higher rank than the played card from the same suit
-                    if (attackedBy.Suit.Equals(card.Suit) && attackedBy.Rank < card.Rank)
-                    {
-                        canDefend = true;
-                        break;
-                        // if the attacker did not play a trump card, and defender can use trump to defend
-                    }
-                    else if (card.Suit == trump)
-                    {
-                        canDefend = true;
-                        break;
-                    }
-                }
+                hand.Add(deck.Draw());
             }
-            return canDefend;
+            players.Add(new Computer(hand));
+
+            // Set the name and icon for the computer
+            usedAiCustomization.Add(((Computer)players[players.Count - 1]).AiCustomization(usedAiCustomization, playerNames));
+
+            // important value for sub-attack
+            // it's two, because winning_defender + first_lossing_attacker = 2
+            // can not attack again at the same turn
         }
 
-        private bool DefenderNoCards()
+        /// <summary>
+        /// Draws the trump card and sets its suit to the trump suit
+        /// </summary>
+        public void determineTrumpCard()
         {
-            bool valid = false;
-            if (players[defenderIndex].Hand.Count() == 0)
-            {
-                if (deck.Count() != 0)
-                {
-                    // Update action log
-                    actionLog.Add("- " + players[defenderIndex].Name + " is out of cards");
-                    actionLog.Add("- " + players[defenderIndex].Name + " won the defence");
+            // after giving each player 6 cards, draw card to set as trump suit
+            Card trumpCard = deck.Draw();
+            // set trump suit
+            trump = trumpCard.Suit;
 
-                    turnIndex = defenderIndex;
-                    attackerIndex = turnIndex;
-                    defenderIndex = FindNextAvailablePlayer(attackerIndex);
-                    cardsAttack.Clear();
-                    cardsDefend.Clear();
-                    fillHand();
-                    valid = true;
-                }
-            }
-            return valid;
+            deck.AddCard(trumpCard);
+
+            // Update action log
+            actionLog.Add("- The trump suit is " + trumpCard.SuitToString());
         }
 
-        // test 1 starts here
-        // choose first attacker base on their hand, who has the lowest trump card
-        // only used when the game start, it probably needs to be (private) and executed in startGame()
+        /// <summary>
+        /// Gets the first attacker for a new game
+        /// </summary>
+        /// <returns></returns>
         public String chooseFirstAttacker()
         {
             // Store the lowest trump card for the action log
@@ -222,7 +204,8 @@ namespace DurakCardGame
             //determin the defender (((((((attacker will not work))))))))))
             int calculateDefenderIndex = playerIndex + 1;
             // if attacker is the last player in the list
-            if (players.Count() <= calculateDefenderIndex) {
+            if (players.Count() <= calculateDefenderIndex)
+            {
                 // the defender will be the first player in the list
                 defenderIndex = 0;
             }
@@ -254,12 +237,11 @@ namespace DurakCardGame
             //foreach (Player player in AttackerQueue)
             //{
             //    names += player.Name + " | ";
-                //Console.WriteLine("game.cs : " + player.Name);
-                //Console.WriteLine(AttackerQueue.ToArray());
+            //Console.WriteLine("game.cs : " + player.Name);
+            //Console.WriteLine(AttackerQueue.ToArray());
             //}
             return "Attack Order: " + names;
         }
-        // test one ends here
 
         /// <summary>
         /// Creates a list with the attackers in order at the start of the list and the 
@@ -300,14 +282,15 @@ namespace DurakCardGame
             return playerList;
         }
 
-        // fill hand with 6 cards | ##### Done ######
+        /// <summary>
+        /// Fills all player hands baack to 6 cards
+        /// </summary>
         public void fillHand()
         {
             List<Player> playerList = AttackerFirstList();
 
             foreach (Player player in playerList)
             {
-
                 int howManyCards = player.Hand.Count;
                 //Console.WriteLine("before loop: " + player.Name + " " + howManyCards.ToString());
                 if (howManyCards < 6)
@@ -334,162 +317,9 @@ namespace DurakCardGame
             SortAllHands();
         }
 
-
-        // add a player to the game ########### DONE #############
-        public void addPlayer(string name, string icon)
-        {
-            // draw 6 cards from the deck and add them to the player's hand
-            List<Card> hand = new List<Card>();
-            for (int i = 0; i < humanCardNumber; i++)
-            {
-                hand.Add(deck.Draw());
-            }
-            players.Add(new Human(name, icon, hand));
-
-            // important value for sub-attack
-            // it's two, because winning_defender + first_lossing_attacker = 2
-            // can not attack again at the same turn
-        }
-
-        // add a computer to the game ########### DONE #############
-        public void addComputer(List<string> playerNames)
-        {
-            // draw 6 cards from the deck and add them to the player's hand
-            List<Card> hand = new List<Card>();
-            for (int i = 0; i < computerCardNumber; i++)
-            {
-                hand.Add(deck.Draw());
-            }
-            players.Add(new Computer(hand));
-
-            // Set the name and icon for the computer
-            usedAiCustomization.Add(((Computer)players[players.Count - 1]).AiCustomization(usedAiCustomization, playerNames));
-
-            // important value for sub-attack
-            // it's two, because winning_defender + first_lossing_attacker = 2
-            // can not attack again at the same turn
-        }
-
-
-        // run this after adding players and computers 
-        // ############## DONE ##############
-        public void determineTrumpCard()
-        {
-            // after giving each player 6 cards, draw card to set as trump suit
-            Card trumpCard = deck.Draw();
-            // set ttrump suit
-            trump = trumpCard.Suit;
-            ////////////################################ might use lines below ####################
-            //if (trumpCard.Suit == "S")
-            //{
-            //    trump = "Spades " + trumpCard.Rank.ToString();
-            //}else if (trumpCard.Suit == "H")
-            //{
-            //    trump = "Hearts " + trumpCard.Rank.ToString();
-            //}else if (trumpCard.Suit == "C")
-            //{
-            //    trump = "Clubs " + trumpCard.Rank.ToString();
-            //}
-            //else
-            //{
-            //    trump = "Diamonds " + trumpCard.Rank.ToString();
-            //}
-            // insert trump card back to the deck to be the last card
-            ////////////################################ might use lines below ####################
-            deck.AddCard(trumpCard);
-
-            // Update action log
-            actionLog.Add("- The trump suit is " + trumpCard.SuitToString());
-        }
-
         /// <summary>
-        /// Checks if the game has ended or not
+        /// Collects all the cards on the table and gives them to the defender
         /// </summary>
-        /// <returns></returns>
-        public bool GameEnded()
-        {
-            int playersLeft = 0;
-            bool result;
-
-            foreach (Player player in players)
-            {
-                if (player.Hand.Count() > 0)
-                {
-                    playersLeft++;
-                }
-            }
-            // only one left = lost
-            int numberToStopGame = 1;
-
-            result = playersLeft <= numberToStopGame;
-
-            // Ensures the defender can defend 1 last time if they still have cards, possibly letting them draw instead of lose
-            if (result && players[defenderIndex].Hand.Count() > 0 && turnIndex == defenderIndex && cardsAttack.Count() > cardsDefend.Count())
-            {
-                Console.WriteLine("Good Luck, Defender");
-                result = false;
-            }
-
-            return result;
-        }
-
-        // stop attack when it reachs 6 cards
-        private void AttackReachMaxCards()
-        {
-            //Console.WriteLine("cardsattack: " + cardsAttack.Count() + " | cardsdefende: " + cardsDefend.Count());
-            //Console.WriteLine("turn index: " + turnIndex);
-            if (cardsAttack.Count() == 6 & cardsDefend.Count() == 6)
-            {
-                // means defender won the defenxe
-                // checks if defender and the deck are out of cards
-                if (players[defenderIndex].Hand.Count() == 0 & deck.Count() == 0)
-                {
-                    turnIndex = FindNextAvailablePlayer(defenderIndex);
-                    defenderIndex = FindNextAvailablePlayer(turnIndex);
-                    attackerIndex = turnIndex;
-                }
-                // if defender still have cards makes them first attacker
-                else
-                {
-                    turnIndex = defenderIndex;
-                    attackerIndex = turnIndex;
-                    defenderIndex = FindNextAvailablePlayer(turnIndex);
-                }
-                cardsDefend.Clear();
-                cardsAttack.Clear();
-                fillHand();
-            }
-            // defender lost
-            //else if (cardsAttack.Count() == 6 & canStillDefend(players[defenderIndex].Hand, cardsAttack[cardsAttack.Count()-1])) 
-            else
-            {
-                //LoserTakeAllCards();
-                //cardsAttack.Clear();
-                //cardsDefend.Clear();
-                turnIndex = defenderIndex;
-                //defenderIndex = FindNextAvailablePlayer(turnIndex);
-                //attackerIndex = turnIndex;
-                //fillHand();
-            }
-
-            // Commented this out since it was auto switching the turn
-
-            //else 
-            //{
-            //    LoserTakeAllCards();
-            //    cardsAttack.Clear();
-            //    cardsDefend.Clear();
-            //    turnIndex = FindNextAvailablePlayer(defenderIndex);
-            //    defenderIndex = FindNextAvailablePlayer(turnIndex);
-            //    attackerIndex = turnIndex;
-            //    fillHand();
-            //}
-            
-        }
-
-        //two steps back to activate the player to be able to attack again after one lost,
-        // join as subattacker after two rounds
-
         public void LoserTakeAllCards()
         {
             foreach (Card card in cardsAttack)
@@ -505,45 +335,295 @@ namespace DurakCardGame
             SortAllHands();
         }
 
-        
-        // new function to determine next player and support multiple attack and maybe pass as well ENDS HERE
+        /// <summary>
+        /// Checks if the defender is out of cards
+        /// </summary>
+        /// <returns></returns>
+        private bool DefenderNoCards()
+        {
+            int indexCheck1 = 0;
+
+            bool valid = false;
+
+            if (players[defenderIndex].Hand.Count() == 0)
+            {
+                // Update action log
+                actionLog.Add("- " + players[defenderIndex].Name + " is out of cards");
+                actionLog.Add("- " + players[defenderIndex].Name + " won the defence");
+
+                if (deck.Count() != 0)
+                {
+                    Console.WriteLine("Check 1");
+                    turnIndex = defenderIndex;
+                    attackerIndex = turnIndex;
+
+                    indexCheck1 = FindNextAvailablePlayer(attackerIndex);
+
+                    // Checks if the game should end before switching turn
+                    if (indexCheck1 != EndGame)
+                    {
+                        defenderIndex = indexCheck1;
+                        cardsAttack.Clear();
+                        cardsDefend.Clear();
+                        fillHand();
+                        valid = true;
+                    }
+                    else
+                    {
+                        GameEnded();
+                    }
+                }
+            }
+            return valid;
+        }
+
+        /// <summary>
+        /// Changes the turn if defender has defended against 6 cards
+        /// </summary>
+        private void MaxAttackReached()
+        {
+            int indexCheck1 = 0;
+            int indexCheck2 = 0;
+
+            subAttackDistance = 0;
+            cardsDefend.Clear();
+            cardsAttack.Clear();
+            fillHand();
+
+            // Enables attacking again for previous broken defenders
+            EnablePlayerCanAttack();
+            
+            // If the defender still has cards
+            if (players[defenderIndex].Hand.Count() != 0)
+            {
+                Console.WriteLine("Max Case 1");
+                attackerIndex = defenderIndex;
+                turnIndex = attackerIndex;
+
+                indexCheck1 = FindNextAvailablePlayer(turnIndex);
+
+                // Checks if the game should end before switching turn
+                if (indexCheck1 != EndGame)
+                {
+                    defenderIndex = indexCheck1;
+                }
+            }
+            // Defender is out of cards and won
+            else
+            {
+                Console.WriteLine("Max Case 2");
+
+                indexCheck1 = FindNextAvailablePlayer(defenderIndex);
+                indexCheck2 = FindNextAvailablePlayer(indexCheck1);
+
+                // Checks if the game should end before switching turn
+                if (indexCheck1 != EndGame && indexCheck2 != EndGame)
+                {
+                    attackerIndex = indexCheck1;
+                    turnIndex = attackerIndex;
+                    defenderIndex = indexCheck2;
+                }
+                else
+                {
+                    GameEnded();
+                }
+            }
+
+            // Update action log
+            actionLog.Add("");
+            actionLog.Add("- Next Round");
+            actionLog.Add("- " + players[turnIndex].Name + " is the first attacker");
+        }
+
+        /// <summary>
+        /// Determines the index of the attacker and defender after a card is played
+        /// </summary>
         public void DetermineDefenderAndAttackerIndex()
         {
-            
-            if (cardsAttack.Count() == 6)
+            // Checks if max attack has been reached without the defender losing
+            if (cardsAttack.Count() == 6 && cardsAttack.Count() == 6 && players[defenderIndex].CanAttack)
             {
-                //AttackReachMaxCards();
+                // Max attack has been reached, next round
+                MaxAttackReached();
+
+                actionLog.Add("Max cards has been reached");
+                actionLog.Add("Defender won the round");
             }
             else
             {
+                // If it's the defenders turn
                 if (turnIndex == defenderIndex)
                 {
-                    //Console.WriteLine("this one 2");
+                    // If the defender isn't out of cards switch the turn to attacker
                     if (!DefenderNoCards())
                     {
                         Console.WriteLine("Case 1 ------");
-                        //turnIndex = FindCurrentAvailablePlayer(attackerIndex);
                         turnIndex = attackerIndex;
                     }
                 }
+                // If it's the attackers turn and the defender lost, switch it back to them
                 else if (turnIndex == attackerIndex && cardsAttack.Count() > cardsDefend.Count() + 1)
                 {
                     Console.WriteLine("Case 2 -------");
                     //turnIndex = FindCurrentAvailablePlayer(attackerIndex);
                     turnIndex = attackerIndex;
                 }
-                // regular attacks or defence
+                // If it's the attackers turn and the defender hasn't lost
                 else
                 {
-                    Console.WriteLine("Case 3 :P -------");
-                    //turnIndex = FindCurrentAvailablePlayer(defenderIndex);
-                    // I dont thing we need to check for the defender because we already have a funtion to check i (if statement)
+                    Console.WriteLine("Case 3 -------");
                     turnIndex = defenderIndex;
                 }
             }
-            
         }
 
+        private void FindAvailableAttacker()
+        {
+            List<Player> playerWithHandList = PlayersWithHand();
+            int maxAllowedSubAttack = playerWithHandList.Count() - 2;
+            int indexCheck1 = 0;
+            int indexCheck2 = 0;
+
+            // reach the final attacker
+            if (maxAllowedSubAttack == subAttackDistance)
+            {
+                subAttackDistance = 0;
+                // defender lost
+                if (cardsAttack.Count() > cardsDefend.Count())
+                {
+                    LoserTakeAllCards();
+                    cardsDefend.Clear();
+                    cardsDefend.Clear();
+                    fillHand();
+
+                    indexCheck1 = FindNextAvailablePlayer(defenderIndex);
+                    indexCheck2 = FindNextAvailablePlayer(indexCheck1);
+
+                    if (indexCheck1 != EndGame && indexCheck2 != EndGame)
+                    {
+                        turnIndex = indexCheck1;
+                        attackerIndex = turnIndex;
+                        defenderIndex = indexCheck2;
+                    }
+                    else
+                    {
+                        GameEnded();
+                    }
+                }
+                // defender won
+                else
+                {
+                    cardsDefend.Clear();
+                    cardsAttack.Clear();
+                    fillHand();
+                    // defender has no cards left and deck is empty
+                    if (players[defenderIndex].Hand.Count() == 0 & deck.Count() == 0)
+                    {
+
+                        indexCheck1 = FindNextAvailablePlayer(defenderIndex);
+                        indexCheck2 = FindNextAvailablePlayer(indexCheck1);
+
+                        if (indexCheck1 != EndGame && indexCheck2 != EndGame)
+                        {
+                            turnIndex = indexCheck1;
+                            attackerIndex = turnIndex;
+                            defenderIndex = indexCheck2;
+                        }
+                        else
+                        {
+                            GameEnded();
+                        }
+                    }
+                    // still have cards or the deck is not empty
+                    else
+                    {
+                        indexCheck1 = FindNextAvailablePlayer(turnIndex);
+
+                        if (indexCheck1 != EndGame)
+                        {
+                            turnIndex = defenderIndex;
+                            attackerIndex = turnIndex;
+                            defenderIndex = indexCheck1;
+                        }
+                        else
+                        {
+                            GameEnded();
+                        } 
+                    }
+                }
+            }
+            // not the final attacker
+            else
+            {
+                string nextAvailableAttackerName = "";
+                for (int i = 0; i < players.Count(); i++)
+                {
+                    Console.WriteLine("1- subdistance: " + subAttackDistance + " | i: " + i + " | player.count: " + players.Count());
+                    if (players[(defenderIndex + i + subAttackDistance) % players.Count()].Hand.Count() != 0 & (defenderIndex + i + subAttackDistance) != defenderIndex)
+                    {
+                        Console.WriteLine("2- subdistance: " + subAttackDistance + " | i: " + i + " | player.count: " + players.Count());
+                        Console.WriteLine("(i + subAttackDistance) % players.Count()" + (i + subAttackDistance) % players.Count());
+                        turnIndex = defenderIndex + i + subAttackDistance;
+                        attackerIndex = turnIndex;
+                        subAttackDistance++;
+                        break;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Finds the next available player who still has cards bassed on the current index
+        /// </summary>
+        /// <param name="afterThisIndex"></param>
+        /// <returns></returns>
+        public int FindNextAvailablePlayer(int afterThisIndex)
+        {
+            int nextAvailablePlayerIndex = afterThisIndex + 1;
+
+            // Checks if the index is greater than list length and loops it back to start
+            if (nextAvailablePlayerIndex >= players.Count())
+            {
+                nextAvailablePlayerIndex -= players.Count();
+                Console.WriteLine("here");
+                //nextAvailablePlayerIndex = 0;
+            }
+            // Checks if the player selected has already won or can't attack
+            if (players[nextAvailablePlayerIndex].Hand.Count() == 0 || !players[nextAvailablePlayerIndex].CanAttack && PlayersWithHand().Count() > 2)
+            {
+                Console.WriteLine("here 2");
+                for (int i = 0; i < players.Count(); i++)
+                {
+                    Console.WriteLine("Next Index: " + nextAvailablePlayerIndex);
+
+                    nextAvailablePlayerIndex++;
+
+                    // Ensures index isn't out of range
+                    if (nextAvailablePlayerIndex > (players.Count() - 1))
+                    {
+                        nextAvailablePlayerIndex -= players.Count();
+                    }
+
+                    // Checks if the player selected hasn't won
+                    if (players[nextAvailablePlayerIndex].Hand.Count() != 0 && players[nextAvailablePlayerIndex].CanAttack || PlayersWithHand().Count() <= 2)
+                    {
+                        //Console.WriteLine("here ");
+                        Console.WriteLine("Player 1: " + players[0].Name + " Cards: " + players[0].Hand.Count());
+                        Console.WriteLine("Player 2: " + players[1].Name + " Cards: " + players[1].Hand.Count());
+                        Console.WriteLine("Player 3: " + players[2].Name + " Cards: " + players[2].Hand.Count());
+                        Console.WriteLine("Player 4: " + players[3].Name + " Cards: " + players[3].Hand.Count());
+                        Console.WriteLine("found the next: " + nextAvailablePlayerIndex + " | old was: " + afterThisIndex);
+                        break;
+                    }
+                }
+                // Sets the index to -1 if it's looped back to original index
+                if (nextAvailablePlayerIndex == afterThisIndex)
+                {
+                    nextAvailablePlayerIndex = -1;
+                }
+            }
+            return nextAvailablePlayerIndex;
+        }
 
         public int FindCurrentAvailablePlayer(int thisIndex)
         {
@@ -559,39 +639,45 @@ namespace DurakCardGame
             return currentAvailablePlayerIndex;
         }
 
-        private int FindNextAvailableAttacker()
+        public int FindCurrentAvailablePlayer2(int thisIndex)
         {
-            int nextPossibleAttacker = 0;
-            for (int i = 0; i <players.Count(); i++)
+            Console.WriteLine("###############################");
+            int currentAvailablePlayerIndex = thisIndex;
+
+            // Checks if the player selected has already won
+            if (players[currentAvailablePlayerIndex].Hand.Count() == 0 & deck.Count() == 0)
             {
-
+                currentAvailablePlayerIndex = FindNextAvailablePlayer(thisIndex);
             }
-            return nextPossibleAttacker;
+            return currentAvailablePlayerIndex;
         }
-        // test for computer class
 
-        // computer play card
-        // computer play card
+        // Test for computer class
         public bool ComputerPlayCard()
         {
             bool doAction = false;
             Player player = players[turnIndex];
             bool isComputer = player.GetType() == typeof(Computer);
 
+            // Ensures the player is a Computer
             if (isComputer)
             {
                 Console.WriteLine("here");
                 Computer computerPlayer = (Computer)player;
                 List<Card> cardsCanPlay = new List<Card>();
 
+                int indexCheck1 = 0;
+                int indexCheck2 = 0;
+
+                // Checks through all the cards in the Computers hand
                 foreach (Card card in computerPlayer.Hand)
                 {
-                    // computer defender
+                    // Finds the cards the computer can play as the defender
                     if (turnIndex == defenderIndex)
                     {
                         if (CanDefendWithThisCard(card, cardsAttack[cardsAttack.Count() - 1])) { cardsCanPlay.Add(card); }
                     }
-                    // computer attacker
+                    // Finds the cards the computer can play as the attacker
                     else
                     {
                         if (cardsAttack.Count() == 0)
@@ -606,11 +692,149 @@ namespace DurakCardGame
                             cardsCanPlay.Add(card);
                         }
                     }
-
                 }
+
+                // Checks if the computer is able to play a card
                 if (cardsCanPlay.Count() > 0)
                 {
                     Console.WriteLine("have cards to play");
+                    // Computer defends with card
+                    if (turnIndex == defenderIndex)
+                    {
+                        Card bestOption = computerPlayer.ChooseBestCard(cardsCanPlay, false, trump);
+                        cardsDefend.Add(bestOption);
+                        computerPlayer.PlayCard2(bestOption);
+                        
+                        // Updates action log
+                        actionLog.Add("- " + players[turnIndex].Name + " played " + bestOption.ToString());
+                        
+                        DetermineDefenderAndAttackerIndex();
+                        doAction = true;
+                    }
+                    // Computer attacks with card
+                    else
+                    {
+                        //Console.WriteLine("attacking ");
+
+                        Card bestOption = computerPlayer.ChooseBestCard(cardsCanPlay, true, trump);
+                        cardsAttack.Add(bestOption);
+                        computerPlayer.PlayCard2(bestOption);
+
+                        // Updates action log
+                        actionLog.Add("- " + players[turnIndex].Name + " played " + bestOption.ToString());
+
+                        DetermineDefenderAndAttackerIndex();
+
+                        //turnIndex = defenderIndex;
+                        // defender lost
+                        //if (cardsAttack.Count() > cardsDefend.Count() + 1)
+                        //{
+                        //    // max 6 cards to play
+                        //    if (cardsAttack.Count() == 6)
+                        //    {
+                        //        LoserTakeAllCards();
+                        //        cardsAttack.Clear();
+                        //        cardsDefend.Clear();
+                        //        fillHand();
+                        //        turnIndex = FindNextAvailablePlayer(defenderIndex);
+                        //        attackerIndex = turnIndex;
+                        //        defenderIndex = FindNextAvailablePlayer(turnIndex);
+                        //    }
+                        //    else
+                        //    {
+                        //        turnIndex = attackerIndex;
+                        //    }
+                        //}
+                        //else
+                        //{
+                        //    if (cardsDefend.Count() == 6)
+                        //    {
+                        //        cardsDefend.Clear();
+                        //        cardsAttack.Clear();
+                        //        fillHand();
+                        //        if (players[defenderIndex].Hand.Count() != 0)
+                        //        {
+                        //            turnIndex = defenderIndex;
+                        //            attackerIndex = turnIndex;
+                        //            defenderIndex = FindNextAvailablePlayer(turnIndex);
+                        //        }
+                        //        else
+                        //        {
+                        //            turnIndex = FindNextAvailablePlayer(defenderIndex);
+                        //            attackerIndex = turnIndex;
+                        //            defenderIndex = FindNextAvailablePlayer(turnIndex);
+                        //        }
+                        //    }
+                        //    else
+                        //    {
+                        //        turnIndex = defenderIndex;
+                        //    }
+                        //}
+                        doAction = true;
+                    }
+                }
+                else
+                {
+                    if (players[turnIndex].Hand.Count() == 0)
+                    {
+                        Pass();
+                    }
+                    else
+                    {
+                        Pass();
+                    }
+                }
+            }
+            return doAction;
+        }
+
+        /// <summary>
+        /// Initialtes a turn for a computer player
+        /// </summary>
+        /// <returns></returns>
+        public bool ComputerPlayCard2()
+        {
+            bool doAction = false;
+            Player player = players[turnIndex];
+            bool isComputer = player.GetType() == typeof(Computer);
+
+            // Ensures the player is a Computer
+            if (isComputer)
+            {
+                Console.WriteLine("here");
+                Computer computerPlayer = (Computer)player;
+                List<Card> cardsCanPlay = new List<Card>();
+
+                // Checks through all the cards in the Computers hand
+                foreach (Card card in computerPlayer.Hand)
+                {
+                    // Finds the cards the computer can play as the defender
+                    if (turnIndex == defenderIndex)
+                    {
+                        if (CanDefendWithThisCard(card, cardsAttack[cardsAttack.Count() - 1])) { cardsCanPlay.Add(card); }
+                    }
+                    // Finds the cards the computer can play as the attacker
+                    else
+                    {
+                        if (cardsAttack.Count() == 0)
+                        {
+                            Console.WriteLine("first attacker");
+                            //doAction = true;
+                            cardsCanPlay.Add(card);
+                        }
+                        else if (CanAttackWithThisCard(card))
+                        {
+                            Console.WriteLine("might not be first");
+                            cardsCanPlay.Add(card);
+                        }
+                    }
+                }
+
+                // Checks if the computer is able to play a card
+                if (cardsCanPlay.Count() > 0)
+                {
+                    Console.WriteLine("have cards to play");
+                    // Computer defends with card
                     if (turnIndex == defenderIndex)
                     {
                         Card bestOption = computerPlayer.ChooseBestCard(cardsCanPlay, false, trump);
@@ -623,6 +847,7 @@ namespace DurakCardGame
                         turnIndex = attackerIndex;
                         doAction = true;
                     }
+                    // Computer attacks with card
                     else
                     {
                         //Console.WriteLine("attacking ");
@@ -696,85 +921,13 @@ namespace DurakCardGame
                     // not sure of this
                     Pass();
                 }
-
             }
             return doAction;
         }
 
-        public void ComputerPlayCard2()
-        {
-            Player player = players[turnIndex];
-            bool isComputer = player.GetType() == typeof(Computer);
-
-            if (isComputer)
-            {
-                Computer computerPlayer = (Computer)player;
-                List<Card> cardsCanPlay = new List<Card>();
-
-                foreach (Card card in computerPlayer.Hand)
-                {
-                    // computer defender
-                    if (turnIndex == defenderIndex)
-                    {
-                        if (CanDefendWithThisCard(card, cardsAttack[cardsAttack.Count() - 1])) { cardsCanPlay.Add(card); }
-                    }
-                    // computer attacker
-                    else
-                    {
-                        if (cardsAttack.Count() == 0)
-                        {
-                            cardsCanPlay.Add(card);
-                        }
-                        else if (CanAttackWithThisCard(card))
-                        {
-                            cardsCanPlay.Add(card);
-                        }
-                    }
-
-                }
-                if (cardsCanPlay.Count() > 0)
-                {
-                    if (turnIndex == defenderIndex)
-                    {
-                        Card bestOption = computerPlayer.ChooseBestCard(cardsCanPlay, true, trump);
-                        cardsDefend.Add(bestOption);
-                        computerPlayer.PlayCard2(bestOption);
-                        turnIndex = attackerIndex;
-                    }
-                    else
-                    {
-                        Card bestOption = computerPlayer.ChooseBestCard(cardsCanPlay, true, trump);
-                        cardsAttack.Add(bestOption);
-                        computerPlayer.PlayCard2(bestOption);
-                        turnIndex = defenderIndex;
-                    }
-
-                }
-                // not sure of this
-                else
-                {
-                    // not sure of this
-                    Pass();
-                }
-
-            }
-        }
-
-        private int NumberOfPlayer()
-        {
-            int counter = 0;
-            foreach(Player player in players)
-            {
-                if (player.Hand.Count() != 0)
-                {
-                    counter++;
-                }
-            }
-            return counter;
-        }
-
-        // new TEST START HERE
-        // new TEST START HERE
+        /// <summary>
+        /// Passes the turn to the next player
+        /// </summary>
         public void Pass()
         {
             Console.WriteLine("######################################");
@@ -782,8 +935,192 @@ namespace DurakCardGame
             Console.WriteLine("defender Index: " + defenderIndex);
             Console.WriteLine("turn index: " + turnIndex);
             Console.WriteLine("distance: " + subAttackDistance);
+
+            // For seeing if the game needs to end
+            int indexCheck1 = 0;
+            int indexCheck2 = 0;
+
             // is defender
             if (turnIndex == defenderIndex) 
+            {
+                // Update action log
+                actionLog.Add("- " + players[defenderIndex].Name + " lost the defence");
+
+                // Sets the defender to can't attack
+                players[defenderIndex].CanAttack = false;
+
+                //turnIndex = FindCurrentAvailablePlayer(attackerIndex);
+                turnIndex = attackerIndex;
+            }
+
+            // if attacker
+            else
+            {
+                int totalPlayers = PlayersWithHand().Count();
+                int maxSubAttack = totalPlayers - 2;
+
+                // Subtracts 1 from max sub attack if 1 of the attackers can't attack
+                for (int i = 0; i < players.Count(); i++)
+                {
+                    if (i != defenderIndex && !players[i].CanAttack)
+                    {
+                        maxSubAttack--;
+                        Console.WriteLine("Max Sub: " + maxSubAttack);
+                    }
+                }
+
+
+                // Update action log
+                actionLog.Add("- " + players[turnIndex].Name + " ended their attack");
+
+                // Defender lost
+                if (cardsAttack.Count() > cardsDefend.Count())
+                {
+                    // All attackers have passed, Defender lost
+                    if (maxSubAttack <= subAttackDistance)
+                    {
+                        Console.WriteLine("case: 1");
+                        subAttackDistance = 0;
+                        LoserTakeAllCards();
+                        cardsDefend.Clear();
+                        cardsAttack.Clear();
+                        fillHand();
+
+                        // Enables attacking again for previous broken defenders
+                        EnablePlayerCanAttack();
+
+                        indexCheck1 = FindNextAvailablePlayer(defenderIndex);
+                        indexCheck2 = FindNextAvailablePlayer(indexCheck1);
+
+                        // Checks if the game should end before switching turn
+                        if (indexCheck1 != EndGame && indexCheck2 != EndGame)
+                        {
+                            attackerIndex = indexCheck1;
+                            turnIndex = attackerIndex;
+                            defenderIndex = indexCheck2;
+
+                            // Update action log
+                            actionLog.Add("");
+                            actionLog.Add("- Next Round");
+                            actionLog.Add("- " + players[turnIndex].Name + " is the first attacker");
+                        }
+                        else
+                        {
+                            GameEnded();
+                        } 
+                    }
+                    // not the last one
+                    else
+                    {
+                        Console.WriteLine("case: 2");
+
+                        indexCheck1 = FindNextAvailablePlayer(defenderIndex + subAttackDistance);
+
+                        // Checks if the game should end before switching turn
+                        if (indexCheck1 != EndGame)
+                        {
+                            attackerIndex = indexCheck1;
+                            turnIndex = attackerIndex;
+                            subAttackDistance++;
+                        }
+                        else
+                        {
+                            GameEnded();
+                        }
+                    }
+                }
+                // Defender hasn't lost yet
+                else
+                {
+                    // All attackers have passed, Defender won
+                    if (maxSubAttack <= subAttackDistance)
+                    {
+                        subAttackDistance = 0;
+                        cardsDefend.Clear();
+                        cardsAttack.Clear();
+                        fillHand();
+
+                        // Enables attacking again for previous broken defenders
+                        EnablePlayerCanAttack();
+
+                        // defender still have cards     ##########################################################
+                        if (players[defenderIndex].Hand.Count() != 0)
+                        {
+                            Console.WriteLine("case: 3");
+                            attackerIndex = defenderIndex;
+                            turnIndex = attackerIndex;
+
+                            indexCheck1 = FindNextAvailablePlayer(turnIndex);
+
+                            // Checks if the game should end before switching turn
+                            if (indexCheck1 != EndGame)
+                            {
+                                defenderIndex = indexCheck1;
+                            }
+                            else
+                            {
+                                GameEnded();
+                            }
+                        }
+                        // no cards left with the defender to be the next attacker  ###############################################
+                        else
+                        {
+                            Console.WriteLine("case: 4");
+
+                            indexCheck1 = FindNextAvailablePlayer(defenderIndex);
+                            indexCheck2 = FindNextAvailablePlayer(indexCheck1);
+
+                            // Checks if the game should end before switching turn
+                            if (indexCheck1 != EndGame && indexCheck2 != EndGame)
+                            {
+                                attackerIndex = indexCheck1;
+                                turnIndex = attackerIndex;
+                                defenderIndex = indexCheck2;
+                            }
+                            else
+                            {
+                                GameEnded();
+                            }
+                        }
+
+                        // Update action log
+                        actionLog.Add("");
+                        actionLog.Add("- Next Round");
+                        actionLog.Add("- " + players[turnIndex].Name + " is the first attacker");
+                    }
+                    // not the last one
+                    else
+                    {
+                        Console.WriteLine("case: 5");
+
+                        indexCheck1 = FindNextAvailablePlayer(defenderIndex + subAttackDistance);
+
+                        // Checks if the game should end before switching turn
+                        if(indexCheck1 != EndGame)
+                        {
+                            attackerIndex = indexCheck1;
+                            turnIndex = attackerIndex;
+                            subAttackDistance++;
+                        }
+                        else
+                        {
+                            GameEnded();
+                        }
+                    }
+                }
+            }
+        }
+
+        // Original pass function
+        public void Pass2()
+        {
+            Console.WriteLine("######################################");
+            Console.WriteLine("attacker Index: " + attackerIndex);
+            Console.WriteLine("defender Index: " + defenderIndex);
+            Console.WriteLine("turn index: " + turnIndex);
+            Console.WriteLine("distance: " + subAttackDistance);
+            // is defender
+            if (turnIndex == defenderIndex)
             {
                 // Update action log
                 actionLog.Add("- " + players[defenderIndex].Name + " lost the defence");
@@ -795,7 +1132,7 @@ namespace DurakCardGame
             // if attacker
             else
             {
-                int totalPlayers = NumberOfPlayer();
+                int totalPlayers = PlayersWithHand().Count();
                 int maxSubAttack = totalPlayers - 2;
 
                 // Update action log
@@ -885,129 +1222,30 @@ namespace DurakCardGame
                 }
             }
         }
-        // new TEST START HERE
 
-
-        // ############################### helper function to determine the next available player ##########
-        // -1 => means no other player is available
-        public int FindNextAvailablePlayer(int afterThisIndex)
+        // get all players with hand
+        private List<Player> PlayersWithHand()
         {
-            int nextAvailablePlayerIndex = afterThisIndex + 1;
-
-            // Checks if the index is greater than list length and loops it back to start
-            if (nextAvailablePlayerIndex >= players.Count())
+            List<Player> allPlayers = new List<Player>();
+            if (deck.cards.Count() > 0)
             {
-                nextAvailablePlayerIndex -= players.Count();
-                Console.WriteLine("here");
-                //nextAvailablePlayerIndex = 0;
-            }
-            // Checks if the player selected has already won
-            if (players[nextAvailablePlayerIndex].Hand.Count() == 0)
-            {
-                Console.WriteLine("here 2");
-                for (int i = 0; i < players.Count(); i++)
+                foreach (Player player in players)
                 {
-                    
-                    // Checks if the player selected hasn't won
-                    if (players[(i + nextAvailablePlayerIndex) % players.Count()].Hand.Count() != 0)
+                    if (player.Hand.Count() != 0)
                     {
-                        //Console.WriteLine("here ");
-                        nextAvailablePlayerIndex = i + nextAvailablePlayerIndex;
-                        Console.WriteLine("found the next: " + nextAvailablePlayerIndex + " | old was: " + afterThisIndex);
-                        break;
-                    }
-                    
-                }
-                // Sets the index to -1 if it's looped back to original index
-                if (nextAvailablePlayerIndex == afterThisIndex)
-                {
-                    nextAvailablePlayerIndex = -1;
-                }
-
-            }
-            return nextAvailablePlayerIndex;
-        }
-
-
-        public int FindNextAvailablePlayer2(int afterThisIndex)
-        {
-            int nextAvailablePlayerIndex = afterThisIndex + 1;
-
-            // Checks if the index is greater than list length and loops it back to start
-            if (nextAvailablePlayerIndex >= players.Count())
-            {
-                nextAvailablePlayerIndex -= players.Count();
-                //nextAvailablePlayerIndex = 0;
-            }
-            // Checks if the player selected has already won
-            if (players[nextAvailablePlayerIndex].Hand.Count() == 0)
-            {
-                int fromStartIndex = 0;
-                for (int i = 0; i < players.Count(); i++)
-                {
-                    // Checks if the index is greater than list length and loops it back to start
-                    if (i + nextAvailablePlayerIndex < players.Count())
-                    {
-                        // Checks if the player selected hasn't won
-                        if (players[i + nextAvailablePlayerIndex].Hand.Count() != 0)
-                        {
-                            nextAvailablePlayerIndex = i + nextAvailablePlayerIndex; break;
-                        }
-                    }
-                    else
-                    {
-                        if (players[fromStartIndex].Hand.Count() != 0)
-                        {
-                            nextAvailablePlayerIndex = fromStartIndex; break;
-                        }
-                        fromStartIndex++;
+                        allPlayers.Add(player);
                     }
                 }
-                // Sets the index to -1 if it's looped back to original index
-                if (nextAvailablePlayerIndex == afterThisIndex)
-                {
-                    nextAvailablePlayerIndex = -1;
-                }
-
             }
-            return nextAvailablePlayerIndex;
+            
+            return allPlayers;
         }
 
-        public int FindCurrentAvailablePlayer2(int thisIndex)
-        {
-            Console.WriteLine("###############################");
-            int currentAvailablePlayerIndex = thisIndex;
-
-            // Checks if the player selected has already won
-            if (players[currentAvailablePlayerIndex].Hand.Count() == 0 & deck.Count() == 0)
-            {
-                currentAvailablePlayerIndex = FindNextAvailablePlayer(thisIndex);
-            }
-            return currentAvailablePlayerIndex;
-        }
-        // ############################## helper function to determine the next available player ends here #####
-
-        // ########## add card to cardsAttack or cardsDefend based on turnIndex ##########
-        //                   this will help make the GUI code shorter I guess
-        public void PlayCardToAttckOrDefendList(Card card)
-        {
-            bool isDefender = turnIndex == defenderIndex;
-            if (isDefender)
-            {
-                cardsDefend.Add(card);
-            }
-            else
-            {
-                cardsAttack.Add(card);
-            }
-
-            // Updates action log
-            actionLog.Add("- " + players[turnIndex].Name + " played " + card.ToString());
-        }
-        // ########## add card to cardsAttack or cardsDefend based on turnIndex ##########
-
-        
-        //can attck with this card
+        /// <summary>
+        /// Checks if a players card can be used to attack
+        /// </summary>
+        /// <param name="attackCard"></param>
+        /// <returns></returns>
         public bool CanAttackWithThisCard(Card attackCard)
         {
             //return true;
@@ -1030,10 +1268,14 @@ namespace DurakCardGame
             return false;
         }
 
-        // can defend with this card
+        /// <summary>
+        /// Checks if a players card can be used to defend
+        /// </summary>
+        /// <param name="defendCard"></param>
+        /// <param name="attackCard"></param>
+        /// <returns></returns>
         public bool CanDefendWithThisCard(Card defendCard, Card attackCard)
         {
-            
             // if attack card is trump 
             if (attackCard.Suit == trump) {
                 if ((defendCard.Suit == trump) & (defendCard.Rank > attackCard.Rank))
@@ -1072,45 +1314,57 @@ namespace DurakCardGame
             }
         }
 
-        //constantly setting $player.CanAttack$ to true for the player who is two steps far from the attacker starts here
-        //run this function after each time a player plays a card (not efficient) but works
-        //OR ### run this function after each time defender wins or losses efficient but needs mor work (also when defender clicks PASS)
-        // attacker Index changes (might have sub-attacks), use defender index instead
-        // **** refrence should be 3 at least (attacker won, defender won, defender pass, maybe attacker pass)
-        private void EnablePlayerCanAttack2()
+        /// <summary>
+        /// Moves a played card to the attack list or defend list depending on who played it
+        /// </summary>
+        /// <param name="card"></param>
+        public void PlayCardToAttckOrDefendList(Card card)
         {
-            List<Player> defenderFirst = new List<Player>();
-            // will not be correct if one of the playrs has won
-            // fix (only loop though players who's hand is not empty
+            bool isDefender = turnIndex == defenderIndex;
+            if (isDefender)
+            {
+                cardsDefend.Add(card);
+            }
+            else
+            {
+                cardsAttack.Add(card);
+            }
 
-            // only players with hand not empty
-            List<Player> playersWithHand = new List<Player>();
+            // Updates action log
+            actionLog.Add("- " + players[turnIndex].Name + " played " + card.ToString());
+        }
+
+        /// <summary>
+        /// Checks if the game has ended or not
+        /// </summary>
+        /// <returns></returns>
+        public bool GameEnded()
+        {
+            int playersLeft = 0;
+            bool result;
+
             foreach (Player player in players)
             {
-                if (player.Hand.Count() != 0)
+                if (player.Hand.Count() > 0)
                 {
-                    playersWithHand.Add(player);
+                    playersLeft++;
                 }
             }
+            Console.WriteLine("Players Left: " + playersLeft);
 
+            // only one left = lost
+            int numberToStopGame = 1;
 
-            // less than 3 means two, no need for that value, because it is only used for sub-aatack
-            if (playersWithHand.Count() -1 >= 3)
+            result = playersLeft <= numberToStopGame;
+
+            // Ensures the defender can defend 1 last time if they still have cards, possibly letting them draw instead of lose
+            if (result && players[defenderIndex].Hand.Count() > 0 && turnIndex == defenderIndex && cardsAttack.Count() > cardsDefend.Count())
             {
-                // defender first list
-                for (int i = 0; i < playersWithHand.Count(); i++)
-                {
-                    int remainder = (defenderIndex + i) % playersWithHand.Count();
-                    //Console.WriteLine("remainder: " + remainder);
-                    defenderFirst.Add(playersWithHand[remainder]);
-                }
-
-                // enable player who is -2 steps away from the defender
-                // chaning th value here will change the value also in the players list,
-                // because it's only a reference of that player, not another copy (both point to th same player in memory)
-                defenderFirst[defenderFirst.Count() - 2].CanAttack = true;
+                Console.WriteLine("Good Luck, Defender");
+                result = false;
             }
 
+            return result;
         }
 
         /// <summary>
@@ -1118,16 +1372,27 @@ namespace DurakCardGame
         /// </summary>
         private void EnablePlayerCanAttack()
         {
-            if (defenderIndex - 2 < 0)
+            if (PlayersWithHand().Count() == 2)
             {
-                players[(defenderIndex - 2) + players.Count()].CanAttack = true;
+                players[defenderIndex].CanAttack = true;
             }
             else
             {
-                players[(defenderIndex - 2)].CanAttack = true;
+                if (defenderIndex - 2 < 0)
+                {
+                    players[(defenderIndex - 2) + players.Count()].CanAttack = true;
+                }
+                else
+                {
+                    players[(defenderIndex - 2)].CanAttack = true;
+                }
             }
+            
         }
 
+        /// <summary>
+        /// Sorts all human players hands
+        /// </summary>
         public void SortAllHands()
         {
             foreach (Player player in players)
@@ -1140,10 +1405,10 @@ namespace DurakCardGame
             }
         }
 
-        // ####################################################################
-        // if there is time left implement later
-
-        //1- take trump card from the deck if you have (6 of trump)
+        /// <summary>
+        /// If player has 6 of trump, switches it with the deck trump card
+        /// </summary>
+        /// <returns></returns>
         public bool TakeTrumpCardFromDeck()
         {
             Card lastTrumpCardDeck = deck.cards[deck.cards.Count() - 1];
@@ -1200,15 +1465,5 @@ namespace DurakCardGame
             }
             return false;
         }
-
-        //2- reverse attack
-        // ####################################################################
-
-
-
-
-
-
-
     }
 }

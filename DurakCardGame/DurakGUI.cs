@@ -252,6 +252,10 @@ namespace DurakCardGame
         /// <param name="e"></param>
         private void Rb4PlayersClick(object sender, EventArgs e)
         {
+            // Remove
+            numAi = 4;
+            //
+
             numPlayers = 4;
             rb2AI.Enabled = true;
             lblHide2AI.Visible = false;
@@ -596,6 +600,7 @@ namespace DurakCardGame
         private void GameSetup()
         {
             game = new GameLogic();
+            resultList.Clear();
             game.trumpCardOption = optionTCT;
             ResetGameBoard();
             UpdateActionLog();
@@ -958,13 +963,15 @@ namespace DurakCardGame
         {
             if (!IsGameEnded())
             {
-                const int sleep = 1500;
+                //const int sleep = 1500;
+                const int sleep = 100;
                 UpdatePlayerLocations();
                 DisplayTableTop();
                 DisplayTableBottom();
                 UpdateHandCounts();
                 UpdateDeckCount();
                 UpdateActionLog();
+                CheckForWinner(game.turnIndex);
                 await Task.Delay(sleep);
                 game.ComputerPlayCard();
                 CheckForWinner(game.turnIndex);
@@ -1028,7 +1035,7 @@ namespace DurakCardGame
                 {
                     playerRoleIcons[i].ImageLocation = RoleLocation + roleIcons[5];
                 }
-                else if (!game.players[turnIndex].CanAttack)
+                else if (!game.players[turnIndex].CanAttack && numPlayers > 2 && turnIndex != game.defenderIndex)
                 {
                     playerRoleIcons[i].ImageLocation = RoleLocation + roleIcons[4];
 
@@ -1146,8 +1153,11 @@ namespace DurakCardGame
                 UpdateHandCounts();
                 UpdateDeckCount();
                 UpdateActionLog();
-                NextPlayerMessageBox();
-                DisplayHand();
+                if(!IsGameEnded())
+                {
+                    NextPlayerMessageBox();
+                    DisplayHand();
+                }
             }
         }
 
@@ -1156,7 +1166,6 @@ namespace DurakCardGame
         /// </summary>
         private void CheckForWinner(int index)
         {
-            Console.WriteLine("Gui 1: " + resultList.Count() + ", " + (game.players.Count() - 1));
             // Checks for an empty deck and player hand
             if (game.players[index].Hand.Count() == 0 && game.deck.cards.Count() == 0)
             {
@@ -1164,14 +1173,18 @@ namespace DurakCardGame
                 if (!resultList.Contains(game.players[index]))
                 {
                     resultList.Add(game.players[index]);
+
+                    // Updates the action log with winning players
+                    game.actionLog.Add("- " + game.players[index].Name + " has won");
+                    Console.WriteLine("- " + game.players[index].Name + " has won");
                 }
             }
             else if (game.players[index].Hand.Count() != 0 && resultList.Count() == (game.players.Count() - 1))
             {
-                Console.WriteLine("Gui 2: " + resultList.Count() + ", " + (game.players.Count() - 1));
                 // Ensures the player hasn't already been added
                 if (!resultList.Contains(game.players[index]))
                 {
+                    Console.WriteLine("Add Durak?");
                     resultList.Add(game.players[index]);
                 }
             }
@@ -1206,18 +1219,20 @@ namespace DurakCardGame
 
                 for (int i = 0; i < resultList.Count(); i++)
                 {
-                    if (resultList[i].Hand.Count() <= 0)
+                    if (resultList[i].Hand.Count() == 0)
                     {
                         result += places[i] + resultList[i].Name + Environment.NewLine;
                     }
                     else
                     {
-                        result += places[4] + resultList[i].Name;
+                        result += places[4] + resultList[i].Name + Environment.NewLine;
                     }
+
+                    Console.WriteLine(result);
                 }
                 
                 // Displays game results
-                result += Environment.NewLine + Environment.NewLine + "Play again?";
+                result += Environment.NewLine + "Play again?";
                 DialogResult dialogResult = MessageBox.Show(result, "Game Results", MessageBoxButtons.YesNo);
 
                 if (dialogResult == DialogResult.Yes)
