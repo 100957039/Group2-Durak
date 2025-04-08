@@ -71,7 +71,8 @@ namespace DurakCardGame
             {
                 childForms.FirstOrDefault()!.Close();
             }
-            Form rules = new RulesForm();
+            RulesForm rules = new RulesForm();
+            
             rules.Show();
         }
 
@@ -152,7 +153,15 @@ namespace DurakCardGame
         /// <param name="e"></param>
         private void BtnTrumpTradeHelp(object sender, EventArgs e)
         {
+            List<RulesForm> childForms = Application.OpenForms.OfType<RulesForm>().ToList();
+            if (childForms.Count() == 1)
+            {
+                childForms.FirstOrDefault()!.Close();
+            }
+            RulesForm rules = new RulesForm();
 
+            rules.ShowOptionalRules();
+            rules.Show();
         }
 
         /// <summary>

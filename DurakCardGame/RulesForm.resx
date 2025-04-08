@@ -117,6 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="lblPage8Text.Text" xml:space="preserve">
+    <value>If the defender can’t or chooses not to play a card 
+ and ends their turn, they lose the defence.
+
+The attackers are allowed to give the defender 
+ whatever cards they could have played, and the 
+ defender takes all cards on the table.</value>
+  </data>
+  <data name="lblPage5Text.Text" xml:space="preserve">
+    <value>For all other attacks, the attackers can only play a 
+ card that matches a value already on the table.
+
+If an attacker has no cards to play, they must end 
+ their turn, passing to the next attacker.
+</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

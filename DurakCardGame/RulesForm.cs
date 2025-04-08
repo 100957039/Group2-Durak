@@ -34,11 +34,11 @@ namespace DurakCardGame
                 pnlPage1,
                 pnlPage2,
                 pnlPage3,
-                //pnlPage4,
-                //pnlPage5,
-                //pnlPage6,
-                //pnlPage7,
-                //pnlPage8,
+                pnlPage4,
+                pnlPage5,
+                pnlPage6,
+                pnlPage7,
+                pnlPage8,
                 //pnlPage9,
                 //pnlPage10,
              });
@@ -63,6 +63,9 @@ namespace DurakCardGame
                 page += pageList.Count();
             }
 
+            // Changes the page number
+            lblPageNum.Text = (page + 1).ToString();
+
             // Shows the new panel page
             pageList[page].Visible = true;
             pageList[page].BringToFront();
@@ -86,6 +89,30 @@ namespace DurakCardGame
             {
                 page -= pageList.Count();
             }
+
+            // Changes the page number
+            lblPageNum.Text = (page + 1).ToString();
+
+            // Shows the new panel page
+            pageList[page].Visible = true;
+            pageList[page].BringToFront();
+        }
+
+        /// <summary>
+        /// Sets the rules page to the optional rules page
+        /// </summary>
+        public void ShowOptionalRules()
+        {
+            const int OptionalRulesPage = 1;
+
+            // Hides the current page panel
+            pageList[page].Visible = false;
+
+            // Changes the page number
+            page = OptionalRulesPage;
+
+            // Changes the page number
+            lblPageNum.Text = (page + 1).ToString();
 
             // Shows the new panel page
             pageList[page].Visible = true;
