@@ -853,10 +853,49 @@ namespace DurakCardGame
         }
         // new TEST START HERE
 
-        
+
         // ############################### helper function to determine the next available player ##########
         // -1 => means no other player is available
         public int FindNextAvailablePlayer(int afterThisIndex)
+        {
+            int nextAvailablePlayerIndex = afterThisIndex + 1;
+
+            // Checks if the index is greater than list length and loops it back to start
+            if (nextAvailablePlayerIndex >= players.Count())
+            {
+                nextAvailablePlayerIndex -= players.Count();
+                Console.WriteLine("here");
+                //nextAvailablePlayerIndex = 0;
+            }
+            // Checks if the player selected has already won
+            if (players[nextAvailablePlayerIndex].Hand.Count() == 0)
+            {
+                Console.WriteLine("here 2");
+                for (int i = 0; i < players.Count(); i++)
+                {
+                    
+                    // Checks if the player selected hasn't won
+                    if (players[(i + nextAvailablePlayerIndex) % players.Count()].Hand.Count() != 0)
+                    {
+                        //Console.WriteLine("here ");
+                        nextAvailablePlayerIndex = i + nextAvailablePlayerIndex;
+                        Console.WriteLine("found the next: " + nextAvailablePlayerIndex + " | old was: " + afterThisIndex);
+                        break;
+                    }
+                    
+                }
+                // Sets the index to -1 if it's looped back to original index
+                if (nextAvailablePlayerIndex == afterThisIndex)
+                {
+                    nextAvailablePlayerIndex = -1;
+                }
+
+            }
+            return nextAvailablePlayerIndex;
+        }
+
+
+        public int FindNextAvailablePlayer2(int afterThisIndex)
         {
             int nextAvailablePlayerIndex = afterThisIndex + 1;
 
