@@ -40,12 +40,14 @@ namespace DurakCardGame
             List<Card> diamond = new List<Card>();
             List<Card> spades = new List<Card> ();
 
-            foreach (Card card in cardsCanPlay) {
+            foreach (Card card in cardsCanPlay) 
+            {
                 if (card.Suit == "C")
                 {
                     clubs.Add(card);
                 }
-                else if (card.Suit == "H") {
+                else if (card.Suit == "H") 
+                {
                     hearts.Add(card);
                 }else if (card.Suit == "D")
                 {
@@ -82,13 +84,11 @@ namespace DurakCardGame
                 {
                     bestCard = cardsNoTrump.OrderBy(card => card.Rank).First();
                 }
-                // play trump card
+                // defend with trump
                 else
                 {
                     bestCard = cardsCanPlay.OrderBy(card => card.Rank).First();
                 }
-
-                // defend with trump
             }
             return bestCard;
         }

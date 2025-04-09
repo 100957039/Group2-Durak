@@ -447,7 +447,7 @@ namespace DurakCardGame
 
         private void SwitchToTheNExtPlayer(object sender, EventArgs e)
         {
-            game.SwitchTurn();
+            //game.SwitchTurn();
             displayAllFourHand();
         }
 

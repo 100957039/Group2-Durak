@@ -252,10 +252,6 @@ namespace DurakCardGame
         /// <param name="e"></param>
         private void Rb4PlayersClick(object sender, EventArgs e)
         {
-            // Remove
-            numAi = 4;
-            //
-
             numPlayers = 4;
             rb2AI.Enabled = true;
             lblHide2AI.Visible = false;
@@ -963,8 +959,7 @@ namespace DurakCardGame
         {
             if (!IsGameEnded())
             {
-                //const int sleep = 1500;
-                const int sleep = 100;
+                const int sleep = 1500;
                 UpdatePlayerLocations();
                 DisplayTableTop();
                 DisplayTableBottom();
@@ -973,6 +968,13 @@ namespace DurakCardGame
                 UpdateActionLog();
                 CheckForWinner(game.turnIndex);
                 await Task.Delay(sleep);
+
+                // Checks if the deck is empty before letting computer take trump
+                if (game.deck.cards.Count() > 0)
+                {
+                    PbTrumpCardClick(null, null);
+                }
+                
                 game.ComputerPlayCard();
                 CheckForWinner(game.turnIndex);
                 DisplayTableTop();
@@ -1031,11 +1033,7 @@ namespace DurakCardGame
                 int handCount = game.players[turnIndex].Hand.Count();
 
                 // Figures out the players role and sets their icon
-                if (handCount == 0 && game.deck.cards.Count() == 0)
-                {
-                    playerRoleIcons[i].ImageLocation = RoleLocation + roleIcons[5];
-                }
-                else if (!game.players[turnIndex].CanAttack && numPlayers > 2 && turnIndex != game.defenderIndex)
+                if (!game.players[turnIndex].CanAttack && numPlayers > 2 && turnIndex != game.defenderIndex)
                 {
                     playerRoleIcons[i].ImageLocation = RoleLocation + roleIcons[4];
 
@@ -1064,6 +1062,12 @@ namespace DurakCardGame
                 else if (numPlayers > 3 && turnIndex == game.defenderIndex + 2 || turnIndex == ((game.defenderIndex + 2) - numPlayers))
                 {
                     playerRoleIcons[i].ImageLocation = RoleLocation + roleIcons[3];
+                }
+
+                // Sets players icon to winner
+                if (handCount == 0 && game.deck.cards.Count() == 0)
+                {
+                    playerRoleIcons[i].ImageLocation = RoleLocation + roleIcons[5];
                 }
 
                 turnIndex += 1;
@@ -1176,7 +1180,6 @@ namespace DurakCardGame
 
                     // Updates the action log with winning players
                     game.actionLog.Add("- " + game.players[index].Name + " has won");
-                    Console.WriteLine("- " + game.players[index].Name + " has won");
                 }
             }
             else if (game.players[index].Hand.Count() != 0 && resultList.Count() == (game.players.Count() - 1))
@@ -1184,7 +1187,6 @@ namespace DurakCardGame
                 // Ensures the player hasn't already been added
                 if (!resultList.Contains(game.players[index]))
                 {
-                    Console.WriteLine("Add Durak?");
                     resultList.Add(game.players[index]);
                 }
             }
