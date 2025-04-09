@@ -341,6 +341,89 @@ namespace DurakCardGame
         /// <returns></returns>
         private bool DefenderNoCards()
         {
+            bool valid = false;
+            int indexCheck1 = 0;
+            int indexCheck2 = 0;
+
+            if (players[defenderIndex].Hand.Count() == 0)
+            {
+                if (deck.Count() != 0)
+                {
+                    // Update action log
+                    actionLog.Add("- " + players[defenderIndex].Name + " is out of cards");
+                    actionLog.Add("- " + players[defenderIndex].Name + " won the defence");
+
+                    turnIndex = defenderIndex;
+                    attackerIndex = turnIndex;
+                    indexCheck1 = FindNextAvailablePlayer(attackerIndex);
+
+                    // Checks if the game should end before switching turn
+                    if (indexCheck1 != EndGame)
+                    {
+                        defenderIndex = indexCheck1;
+                        cardsAttack.Clear();
+                        cardsDefend.Clear();
+                        fillHand();
+                    }
+                    else
+                    {
+                        GameEnded();
+                    }
+                    valid = true;
+                }
+                else
+                {
+                    // defender lost
+                    if (cardsAttack.Count() > cardsDefend.Count())
+                    {
+                        LoserTakeAllCards();
+                        cardsDefend.Clear();
+                        cardsAttack.Clear();
+                        fillHand();
+
+                        indexCheck1 = FindNextAvailablePlayer(defenderIndex);
+                        indexCheck2 = FindNextAvailablePlayer(turnIndex);
+
+                        if (indexCheck1 != EndGame && indexCheck2 != EndGame)
+                        {
+                            turnIndex = indexCheck1;
+                            attackerIndex = turnIndex;
+                            defenderIndex = indexCheck2;
+                        }
+                        else
+                        {
+                            GameEnded();
+                        }
+                        valid = true;
+                    }
+                    // defender won
+                    else
+                    {
+                        indexCheck1 = FindNextAvailablePlayer(defenderIndex);
+                        indexCheck2 = FindNextAvailablePlayer(turnIndex);
+
+                        if (indexCheck1 != EndGame && indexCheck2 != EndGame)
+                        {
+                            turnIndex = indexCheck1;
+                            attackerIndex = turnIndex;
+                            defenderIndex = indexCheck2;
+                            cardsAttack.Clear();
+                            cardsDefend.Clear();
+                            fillHand();
+                        }
+                        else
+                        {
+                            GameEnded();
+                        }
+                        valid = true;
+                    }
+                }
+            }
+            return valid;
+        }
+
+        private bool DefenderNoCards2()
+        {
             int indexCheck1 = 0;
 
             bool valid = false;
@@ -430,6 +513,9 @@ namespace DurakCardGame
             }
 
             // Update action log
+            actionLog.Add("- Max cards has been reached");
+            actionLog.Add("- Defender won the round");
+
             actionLog.Add("");
             actionLog.Add("- Next Round");
             actionLog.Add("- " + players[turnIndex].Name + " is the first attacker");
@@ -441,13 +527,10 @@ namespace DurakCardGame
         public void DetermineDefenderAndAttackerIndex()
         {
             // Checks if max attack has been reached without the defender losing
-            if (cardsAttack.Count() == 6 && cardsAttack.Count() == 6 && players[defenderIndex].CanAttack)
+            if (cardsAttack.Count() == 6 && cardsDefend.Count() == 6 && players[defenderIndex].CanAttack)
             {
                 // Max attack has been reached, next round
                 MaxAttackReached();
-
-                actionLog.Add("Max cards has been reached");
-                actionLog.Add("Defender won the round");
             }
             else
             {
@@ -608,10 +691,6 @@ namespace DurakCardGame
                     if (players[nextAvailablePlayerIndex].Hand.Count() != 0 && players[nextAvailablePlayerIndex].CanAttack || PlayersWithHand().Count() <= 2)
                     {
                         //Console.WriteLine("here ");
-                        Console.WriteLine("Player 1: " + players[0].Name + " Cards: " + players[0].Hand.Count());
-                        Console.WriteLine("Player 2: " + players[1].Name + " Cards: " + players[1].Hand.Count());
-                        Console.WriteLine("Player 3: " + players[2].Name + " Cards: " + players[2].Hand.Count());
-                        Console.WriteLine("Player 4: " + players[3].Name + " Cards: " + players[3].Hand.Count());
                         Console.WriteLine("found the next: " + nextAvailablePlayerIndex + " | old was: " + afterThisIndex);
                         break;
                     }
@@ -1343,24 +1422,31 @@ namespace DurakCardGame
             int playersLeft = 0;
             bool result;
 
-            foreach (Player player in players)
+            if (deck.cards.Count() == 0)
             {
-                if (player.Hand.Count() > 0)
+                foreach (Player player in players)
                 {
-                    playersLeft++;
+                    if (player.Hand.Count() > 0)
+                    {
+                        playersLeft++;
+                    }
+                }
+                Console.WriteLine("Players Left: " + playersLeft);
+
+                // only one left = lost
+                int numberToStopGame = 1;
+
+                result = playersLeft <= numberToStopGame;
+
+                // Ensures the defender can defend 1 last time if they still have cards, possibly letting them draw instead of lose
+                if (result && players[defenderIndex].Hand.Count() > 0 && turnIndex == defenderIndex && cardsAttack.Count() > cardsDefend.Count())
+                {
+                    Console.WriteLine("Good Luck, Defender");
+                    result = false;
                 }
             }
-            Console.WriteLine("Players Left: " + playersLeft);
-
-            // only one left = lost
-            int numberToStopGame = 1;
-
-            result = playersLeft <= numberToStopGame;
-
-            // Ensures the defender can defend 1 last time if they still have cards, possibly letting them draw instead of lose
-            if (result && players[defenderIndex].Hand.Count() > 0 && turnIndex == defenderIndex && cardsAttack.Count() > cardsDefend.Count())
+            else
             {
-                Console.WriteLine("Good Luck, Defender");
                 result = false;
             }
 
