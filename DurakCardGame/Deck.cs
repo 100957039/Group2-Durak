@@ -13,8 +13,8 @@ namespace DurakCardGame
         public Deck()
         {
             string[] suits = { "H", "D", "C", "S" };
-            string[] values = { "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
-            int[] ranks = { 6, 7, 8, 9, 10, 11, 12, 13, 14 };
+            string[] values = { "6", "7", "8", "9" }; //, "10", "J", "Q", "K", "A" };
+            int[] ranks = { 6, 7, 8, 9 }; //, 10, 11, 12, 13, 14 };
 
             foreach (string suit in suits)
             {
