@@ -13,6 +13,10 @@ namespace DurakCardGame
         {
         }
 
+        /// <summary>
+        /// Sorts the players cards by Suit and value, putting trump cards last
+        /// </summary>
+        /// <param name="trump"></param>
         public void SortHand(string trump)
         {
             // A little convoluted but it works :P

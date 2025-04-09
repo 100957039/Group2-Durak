@@ -5,18 +5,6 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-
-// how it works 
-// 1- add player => will automatically get 6 cards
-// 2- after adding player RUN (determinTrumpCard()) to determin the TRUMP card and place it at the bottom of the deck
-// 3- after determining the TRUMP card, RUN (chooseFirstAttacker()) whoever has the lowest trump card
-// 4- RUN (GameEnded()) if TRUE, game ends, if not => step 5
-// 5- check if list variable |cardsAttack| is empty => can attack else RUN (canStillAttack())
-
-
-// IMPORTANT NOTES
-// 1- after each attack, DO NOT FORGET To chnage the DEFENDER index to the next defender
-
 namespace DurakCardGame
 {
     internal class GameLogic
@@ -36,28 +24,15 @@ namespace DurakCardGame
         // For storing what happens during a game
         public List<string> actionLog = new List<string>();
 
-        // ########### start ########### don not forget to delete
-        private int humanCardNumber = 6;
-        private int computerCardNumber = 6;
-
-        // ########### end ########### don not forget to delete
-
-        // trumpCardOption
-        // 0 = take trump card from the deck is Disabled
-        // 1 = you can take trump card
-        // 2 = you can only take the trump card only if it is ACE
-        public int trumpCardOption = 0;
-
         // multiple attack
         int subAttackDistance { set; get; } = 0;
 
-        // new test
+        // Indexes
         public int attackerIndex { get; set; } = 0;
         // this will always be the attacker 
         public int defenderIndex { get; set; } = 0;
         // determine the index of the current player (might be attacker or defender)
         public int turnIndex { get; set; } = 0;
-
         
         public String trump;
 
@@ -66,12 +41,6 @@ namespace DurakCardGame
 
         // For checking if the game needs to be ended
         private const int EndGame = -1;
-
-        //######################### GUI variable #############################
-        // DO NOT FORGET TO RESET ALL THE VALUES AFTER THE ATTACK IS OVER
-        public int AttackerXAxis { get; set; } = 0;
-        public int DefenderXAxis { get; set; } = 0;
-        // DO NOT FORGET TO RESET ALL THE VALUES AFTER THE ATTACK IS OVER
 
         public GameLogic()
         {
@@ -92,7 +61,7 @@ namespace DurakCardGame
         {
             // draw 6 cards from the deck and add them to the player's hand
             List<Card> hand = new List<Card>();
-            for (int i = 0; i < humanCardNumber; i++)
+            for (int i = 0; i < 6; i++)
             {
                 hand.Add(deck.Draw());
             }
@@ -111,7 +80,7 @@ namespace DurakCardGame
         {
             // draw 6 cards from the deck and add them to the player's hand
             List<Card> hand = new List<Card>();
-            for (int i = 0; i < computerCardNumber; i++)
+            for (int i = 0; i < 6; i++)
             {
                 hand.Add(deck.Draw());
             }
@@ -135,7 +104,7 @@ namespace DurakCardGame
             // set trump suit
             trump = trumpCard.Suit;
 
-            deck.AddCard(trumpCard);
+            deck.cards.Add(trumpCard);
 
             // Update action log
             actionLog.Add("- The trump suit is " + trumpCard.SuitToString());
@@ -267,14 +236,14 @@ namespace DurakCardGame
                     {
                         //Console.WriteLine("before loop: " + (6 - howManyCards).ToString());
                         // check how many cards are left in the deck to break the inner loop
-                        if (deck.Count() < 1)
+                        if (deck.cards.Count() < 1)
                         {
                             break;
                         }
                         player.Hand.Add(deck.Draw());  
                     }
                     // check how many cards are left in the deck to break the outter loop
-                    if (deck.Count() < 1)
+                    if (deck.cards.Count() < 1)
                     {
                         break;
                     }
@@ -400,7 +369,7 @@ namespace DurakCardGame
                     if (players[defenderIndex].Hand.Count() == 0)
                     {
                         // no cards left (defender won the game)
-                        if (deck.Count() == 0)
+                        if (deck.cards.Count() == 0)
                         {
                             Console.WriteLine("What about you?");
                             EnablePlayerCanAttack();
@@ -547,7 +516,7 @@ namespace DurakCardGame
                     {
                         Card bestOption = computerPlayer.ChooseBestCard(cardsCanPlay, false, trump);
                         cardsDefend.Add(bestOption);
-                        computerPlayer.PlayCard2(bestOption);
+                        computerPlayer.PlayCard(bestOption);
                         
                         // Updates action log
                         actionLog.Add("- " + players[turnIndex].Name + " played " + bestOption.ToString());
@@ -570,7 +539,7 @@ namespace DurakCardGame
                         else
                         {
                             cardsAttack.Add(bestOption);
-                            computerPlayer.PlayCard2(bestOption);
+                            computerPlayer.PlayCard(bestOption);
 
                             // Updates action log
                             actionLog.Add("- " + players[turnIndex].Name + " played " + bestOption.ToString());

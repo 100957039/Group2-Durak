@@ -15,13 +15,6 @@ using static System.Windows.Forms.DataFormats;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
-/* 
- * The different screens are made of seperate panels, the easiest
- *  way to work with them is by using the Document Outline.
- *  
- * On the DurakGUI Form go View -> Other Windows -> Document Outline
- *  or hit CTRL + ALT + T.
- */
 
 namespace DurakCardGame
 {
@@ -597,7 +590,6 @@ namespace DurakCardGame
         {
             game = new GameLogic();
             resultList.Clear();
-            game.trumpCardOption = optionTCT;
             ResetGameBoard();
             UpdateActionLog();
             SetupPlayers();
@@ -776,7 +768,7 @@ namespace DurakCardGame
                             // Checks if the game ended
                             if (!IsGameEnded())
                             {
-                                currentPlayer.PlayCard2(card);
+                                currentPlayer.PlayCard(card);
                                 game.PlayCardToAttckOrDefendList(card);
                                 CheckForWinner(game.turnIndex);
                                 game.DetermineDefenderAndAttackerIndex();

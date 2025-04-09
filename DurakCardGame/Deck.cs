@@ -16,6 +16,7 @@ namespace DurakCardGame
             string[] values = { "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
             int[] ranks = { 6, 7, 8, 9, 10, 11, 12, 13, 14 };
 
+            // Inserts 1 of each card into the deck
             foreach (string suit in suits)
             {
                 for (int i = 0; i < values.Length; i++)
@@ -25,6 +26,9 @@ namespace DurakCardGame
             }
         }
 
+        /// <summary>
+        /// Shuffles the cards in the deck
+        /// </summary>
         public void Shuffle()
         {
             Random random = new Random();
@@ -39,22 +43,15 @@ namespace DurakCardGame
             //cards = new List<Card>(cardList);
         }
 
+        /// <summary>
+        /// Removes and returns the top card from the deck
+        /// </summary>
+        /// <returns></returns>
         public Card Draw()
         {
             Card card = cards[0];
             cards.RemoveAt(0);
             return card;
-        }
-
-        public int Count()
-        {
-            return cards.Count;
-        }
-
-        // to be able to add Trump card to the back of the deck
-        public void AddCard(Card card)
-        {
-            cards.Add(card);
         }
     }
 }
