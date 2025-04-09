@@ -711,9 +711,8 @@ namespace DurakCardGame
         /// <returns></returns>
         public int FindNextAvailablePlayer(int afterThisIndex)
         {
-            Console.WriteLine("Next 1: " + afterThisIndex);
             int nextAvailablePlayerIndex = afterThisIndex + 1;
-            Console.WriteLine("Next 2: " + nextAvailablePlayerIndex);
+
             // Checks if the index is greater than list length and loops it back to start
             if (nextAvailablePlayerIndex >= players.Count())
             {
@@ -727,8 +726,6 @@ namespace DurakCardGame
                 Console.WriteLine("here 2");
                 for (int i = 0; i < players.Count(); i++)
                 {
-                    Console.WriteLine("Next Index: " + nextAvailablePlayerIndex);
-
                     nextAvailablePlayerIndex++;
 
                     // Ensures index isn't out of range
@@ -741,7 +738,6 @@ namespace DurakCardGame
                     if (players[nextAvailablePlayerIndex].Hand.Count() != 0 && players[nextAvailablePlayerIndex].CanAttack || PlayersWithHand().Count() <= 2)
                     {
                         //Console.WriteLine("here ");
-                        Console.WriteLine("Player: " + players[i].Name + "Can Attack: " + players[i].CanAttack);
                         Console.WriteLine("found the next: " + nextAvailablePlayerIndex + " | old was: " + afterThisIndex);
                         break;
                     }
@@ -749,13 +745,9 @@ namespace DurakCardGame
                 // Sets the index to -1 if it's looped back to original index
                 if (nextAvailablePlayerIndex == afterThisIndex)
                 {
-                    Console.WriteLine("Why");
                     nextAvailablePlayerIndex = -1;
                 }
             }
-            Console.WriteLine("Defender: " + players[defenderIndex].Name + "Cards: " + players[defenderIndex].Hand.Count());
-            Console.WriteLine("Attacker: " + players[attackerIndex].Name + "Cards: " + players[attackerIndex].Hand.Count());
-            Console.WriteLine("Next: " + players[nextAvailablePlayerIndex].Name + "Cards: " + players[nextAvailablePlayerIndex].Hand.Count());
 
             return nextAvailablePlayerIndex;
         }
