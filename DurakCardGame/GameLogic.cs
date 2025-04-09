@@ -347,12 +347,12 @@ namespace DurakCardGame
 
             if (players[defenderIndex].Hand.Count() == 0)
             {
+                // Update action log
+                actionLog.Add("- " + players[defenderIndex].Name + " is out of cards");
+                actionLog.Add("- " + players[defenderIndex].Name + " won the defence");
+
                 if (deck.Count() != 0)
                 {
-                    // Update action log
-                    actionLog.Add("- " + players[defenderIndex].Name + " is out of cards");
-                    actionLog.Add("- " + players[defenderIndex].Name + " won the defence");
-
                     cardsAttack.Clear();
                     cardsDefend.Clear();
                     fillHand();
@@ -378,51 +378,29 @@ namespace DurakCardGame
                 }
                 else
                 {
-                    // defender lost
-                    if (cardsAttack.Count() > cardsDefend.Count())
+                    // defender won game
+                    cardsAttack.Clear();
+                    cardsDefend.Clear();
+                    fillHand();
+
+                    indexCheck1 = FindNextAvailablePlayer(defenderIndex);
+                    indexCheck2 = FindNextAvailablePlayer(turnIndex);
+
+                    if (indexCheck1 != EndGame && indexCheck2 != EndGame)
                     {
-                        LoserTakeAllCards();
-                        cardsDefend.Clear();
-                        cardsAttack.Clear();
-                        fillHand();
+                        turnIndex = indexCheck1;
+                        attackerIndex = turnIndex;
+                        defenderIndex = indexCheck2;
 
-                        indexCheck1 = FindNextAvailablePlayer(defenderIndex);
-                        indexCheck2 = FindNextAvailablePlayer(turnIndex);
-
-                        if (indexCheck1 != EndGame && indexCheck2 != EndGame)
-                        {
-                            turnIndex = indexCheck1;
-                            attackerIndex = turnIndex;
-                            defenderIndex = indexCheck2;
-                        }
-                        else
-                        {
-                            GameEnded();
-                        }
-                        valid = true;
+                        actionLog.Add("");
+                        actionLog.Add("- Next Round");
+                        actionLog.Add("- " + players[turnIndex].Name + " is the first attacker");
                     }
-                    // defender won
                     else
                     {
-                        cardsAttack.Clear();
-                        cardsDefend.Clear();
-                        fillHand();
-
-                        indexCheck1 = FindNextAvailablePlayer(defenderIndex);
-                        indexCheck2 = FindNextAvailablePlayer(turnIndex);
-
-                        if (indexCheck1 != EndGame && indexCheck2 != EndGame)
-                        {
-                            turnIndex = indexCheck1;
-                            attackerIndex = turnIndex;
-                            defenderIndex = indexCheck2;
-                        }
-                        else
-                        {
-                            GameEnded();
-                        }
-                        valid = true;
+                        GameEnded();
                     }
+                    valid = true;
                 }
             }
             return valid;
